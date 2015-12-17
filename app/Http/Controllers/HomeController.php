@@ -91,7 +91,7 @@ class HomeController extends Controller {
             // return error message
             $data['error'] = $e->getMessage();
             //return redirect('/invoice/op');
-            return('error');
+            return($data['error']);
         }
 	}
 
