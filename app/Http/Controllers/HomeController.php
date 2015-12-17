@@ -61,9 +61,6 @@ class HomeController extends Controller {
 	public function invoice_saving()
 	{		
 		$input = \Input::all();
-		try {
-            // start transcact
-            \DB::beginTransaction();
 		$invoice = new Invoice;
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
@@ -78,19 +75,12 @@ class HomeController extends Controller {
 		$invoice->amount=$input['amount'];
 		$invoice->doc_no_2=$input['doc_no_2'];
 		$invoice->tgl_input=$date;
-		$invoice->status='1';
+		$invoice->status="1";
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
 		return redirect('/invoice/op');
-		 } catch (\Exception $e) {
-            // rollback transact
-            \DB::rollback();
 
-            // return error message
-            $data['error'] = $e->getMessage();
-            return redirect('/invoice/op');
-        }
 	}
 
 	public function invoice_user_list()
