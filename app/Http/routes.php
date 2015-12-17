@@ -15,7 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
 Route::get('invoice/input', 'HomeController@invoice_add');
-Route::post('invoice/save', 'HomeController@invoice_save');
+Route::post('invoice/saving', 'HomeController@invoice_save');
 Route::get('invoice/user/list', 'HomeController@invoice_user_list');
 Route::get('invoice/user/reject/list', 'HomeController@invoice_user_reject_list');
 Route::get('invoice/checked/user/{id}', 'HomeController@invoice_checked_user');

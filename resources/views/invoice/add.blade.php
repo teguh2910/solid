@@ -9,7 +9,7 @@
         <div class="panel-heading"><center> <font face='calibri'>&nbsp;INPUT INVOICE</b></font></center></div>
         <div class="panel-body">
           
-        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/invoice/save') }}">
+        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/invoice/saving') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
