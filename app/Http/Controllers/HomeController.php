@@ -101,7 +101,9 @@ class HomeController extends Controller {
 		$invoice->status="2";
 		$invoice->tgl_terima_user=$date;
 		$invoice->save();
-		return view('home');
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully checked');
+		return redirect('invoice/user/list');
 	}
 
 	public function invoice_pending_user($id)
@@ -142,7 +144,7 @@ class HomeController extends Controller {
 		$invoice->remark=$input['remark'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully created');
+        \Session::flash('flash_message','Invoice was successfully reject');
 		return redirect('/invoice/user/list');
 	}
 
@@ -160,7 +162,7 @@ class HomeController extends Controller {
 		$invoice->remark_act=$input['remark'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully created');
+        \Session::flash('flash_message','Invoice was successfully reject');
 		return redirect('home');
 	}
 
@@ -205,7 +207,9 @@ class HomeController extends Controller {
 		$invoice->status="4";
 		$invoice->tgl_terima_finance=$date;
 		$invoice->save();
-		return view('home');
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully finish');
+		return redirect('/invoice/fa/list');
 	}
 
 	public function invoice_rtp_list()
@@ -248,8 +252,8 @@ class HomeController extends Controller {
 		$invoice->user=$user->name;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('home');
+        \Session::flash('flash_message','Invoice was successfully checked');
+		return redirect('invoice/pending/list');
 	}
 
 	public function upload_master(){
@@ -296,21 +300,22 @@ class HomeController extends Controller {
 	{
 		$input = \Input::all();
 		$user = new User;
-
 		$pwd1 = $input['password'];
 		$pwd2 = $input['password1'];
 		if ($pwd1 == $pwd2) {
-        $name = $input['name'];
-        $user->password = bcrypt($input['password']);
-        $user->email = $input['email'];
-        $user->name = $input['name'];
-        $user->role = $input['role'];
-        $user->dept_code = $input['dept_code'];
-        $user->save();
-        \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully created');
-        return redirect('home');
+        	$name = $input['name'];
+        	$user->password = bcrypt($input['password']);
+        	$user->email = $input['email'];
+        	$user->name = $input['name'];
+        	$user->role = $input['role'];
+        	$user->dept_code = $input['dept_code'];
+        	$user->save();
+        	\Session::flash('flash_type','alert-success');
+        	\Session::flash('flash_message','User was successfully created');
+        	return redirect('user/view');
 		} else {
+			\Session::flash('flash_type','alert-danger');
+	        \Session::flash('flash_message','Combination password is wrong, please repeat the process');
 			return redirect('user/crate');
 		}
 		
@@ -328,7 +333,7 @@ class HomeController extends Controller {
     {
         Invoice::destroy($id);
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully deleted');
+        \Session::flash('flash_message','Invoice was successfully deleted');
         return redirect('/invoice/op');
     }
     
@@ -339,7 +344,7 @@ class HomeController extends Controller {
         $user->password = $password;
         $user->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully deleted');
+        \Session::flash('flash_message','User password was successfully reset to "aiia"');
         return redirect('user/view');
     }
 
@@ -361,7 +366,7 @@ class HomeController extends Controller {
         $user->dept_code = $input['dept_code'];
         $user->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully created');
+        \Session::flash('flash_message','User was successfully updated');
         return redirect('user/view');
 	}
 

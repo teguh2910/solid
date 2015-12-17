@@ -71,19 +71,19 @@
 				</ul>
 				@elseif (Auth::user()->role == "4")
 				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
+					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
 				</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
@@ -106,7 +106,17 @@
 			</div>
 		</div>
 	</nav>
-
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				@if ( Session::has('flash_message') )
+					<div class="alert {{ Session::get('flash_type') }}">
+						{{ Session::get('flash_message') }}
+					</div>
+				@endif
+			</div>
+		</div>
+	</div>
 	@yield('content')
 	<div class="col-md-10col-md-offset-1">
     	<div>
