@@ -58,8 +58,8 @@ class HomeController extends Controller {
 		return view('invoice.add');
 	}
 
-	public function invoice_save()
-	{
+	public function invoice_saving()
+	{		
 		$input = \Input::all();
 		$invoice = new Invoice;
 		date_default_timezone_set('Asia/Jakarta');
@@ -80,6 +80,7 @@ class HomeController extends Controller {
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
 		return redirect('/invoice/op');
+
 	}
 
 	public function invoice_user_list()
