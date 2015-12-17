@@ -5,13 +5,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>LIST INVOICE (USER)</big></big></big></b></font>
+            <font face='calibri'><b><big><big><big>INVOICE LIST</big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
-                    <tr class='warning'>
+                    <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
-                        <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
+                        <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
                         <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
                         <th><center><small><font face='calibri'>TGL TERIMA</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
@@ -28,7 +28,15 @@
                 @foreach ($invoice as $invoice)
                 <tr>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->dept_code }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                    @if ($invoice->dept_code == '1')
+                        Purchasing
+                    @elseif ($invoice->dept_code == '2')
+                        General Affair
+                    @elseif ($invoice->dept_code == '3')
+                        BOD
+                    @endif
+                    </font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
@@ -43,7 +51,7 @@
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                             <a href="{{ url('invoice/pending/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
-                                <font face='calibri'><b>Pending</b></font>
+                                <font face='calibri'><b>Reject</b></font>
                             </a>
                         </center>
                         

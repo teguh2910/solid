@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>F&A Document App</title>
+	<title>SOLID App beta version</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -28,68 +28,70 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">F&A Document App</a>
+				<a class="navbar-brand">
+					<big><big><font face='calibri'><big>S</big>OLID App</font></big></big> 
+					<small><small><small>beta version</small></small></small>
+				</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if (Auth::guest())
 				@elseif (Auth::user()->role == "1")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}"><font face='calibri'>Home</font></a></li>
+					<li><a href="{{ url('/invoice/user/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/user/list') }}"><font face='calibri'>Invoice List (User)</font></a></li>
+					<li><a href="{{ url('/invoice/user/reject/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'>Invoice Pending</font></a></li>
+					<li><a href="{{ url('/invoice/op/user') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/invoice/rtp/user') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "2")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}"><font face='calibri'>Home</font></a></li>
+					<li><a href="{{ url('/invoice/act/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/act/list') }}"><font face='calibri'>Invoice List (Act)</font></a></li>
+					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "3")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}"><font face='calibri'>Home</font></a></li>
+					<li><a href="{{ url('/invoice/fa/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/fa/list') }}"><font face='calibri'>Invoice List (Finance)</font></a></li>
+					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/fa/rtp_list') }}"><font face='calibri'>Invoice Ready to Pay</font></a></li>
+					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "4")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}"><font face='calibri'>Home</font></a></li>
+					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/master/upload') }}"><font face='calibri'>Upload Invoice</font></a></li>
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/add') }}"><font face='calibri'>Input Invoice</font></a></li>
+					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
 				</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">
-							<button class='btn btn-primary btn-sm'>
-								<font face='calibri'>
-								LOGIN
-							</font>
-							</button>
-						</a></li>
-						<li><a href="{{ url('/user/create') }}">
-							<button class='btn btn-info btn-sm'>
-							<font face='calibri'>
-							REGISTER
-						</font>
-					</button>
-						</a></li>
+						
 					@else
 						<li>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><font face='calibri'><b>{{ Auth::user()->name }}</b></font></a>
 						</li>
 						<li>
 							<a href="{{ url('/auth/logout') }}">
@@ -106,9 +108,20 @@
 	</nav>
 
 	@yield('content')
-
+	<div class="col-md-10col-md-offset-1">
+    	<div>
+    		<center><font face='calibri'>SOLID App (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by MAP, MIS Dept)</font></center>
+        </div>
+	</div>
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+<head>
+<style>
+body {
+    background-color:lightyellow;
+}
+</style>
+</head>

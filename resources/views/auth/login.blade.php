@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
+			<div class="panel panel-success">
+				<div class="panel-heading"><marquee>Welcome to SOLID App (AISIN Operational Invoice Document)</marquee></div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -22,16 +22,16 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
+							<label class="col-md-4 control-label"><font face='calibri'>E-Mail Address</font></label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+								<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" required>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
+							<label class="col-md-4 control-label"><font face='calibri'>Password</font></label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="password" required>
+								<input type="password" class="form-control" name="password" placeholder="Password" required>
 							</div>
 						</div>
 
@@ -47,7 +47,7 @@
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Login</button>
+								<button type="submit" class="btn btn-primary"><font face='calibri'><b>LOGIN</b></font></button>
 
 								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
 							</div>

@@ -33,34 +33,5 @@ class WelcomeController extends Controller {
 		return view('welcome');
 	}
 
-	public function user_create()
-	{
-		return view('user.create');
-	}
-
-	public function save_create()
-	{
-		$input = \Input::all();
-		$user = new User;
-
-		$pwd1 = $input['password'];
-		$pwd2 = $input['password1'];
-		if ($pwd1 == $pwd2) {
-        $name = $input['name'];
-        $user->password = bcrypt($input['password']);
-        $user->email = $input['email'];
-        $user->name = $input['name'];
-        $user->role = $input['role'];
-        $user->dept_code = $input['dept_code'];
-        $user->save();
-        \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully created');
-        return redirect('home');
-		} else {
-			return redirect('user/crate');
-		}
-		
-	}
-
 
 }

@@ -23,9 +23,10 @@ class Invoice extends Model {
     					'tgl_terima'=>$key[3],
     					'doc_no'=>$key[4],
     					'doc_date'=>$key[5],
-    					'curr'=>$key[6],
-    					'amount'=>$key[7],
-    					'doc_no_2'=>$key[8],
+                        'due_date'=>$key[6],
+    					'curr'=>$key[7],
+    					'amount'=>$key[8],
+    					'doc_no_2'=>$key[9],
     					'status'=>'1',
     				]);
     			}

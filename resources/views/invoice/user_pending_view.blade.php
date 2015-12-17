@@ -5,11 +5,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>LIST INVOICE</big></big></big></b></font>
+            <a href="{{ url('invoice/user/list') }}"><button class='btn btn-info btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+            <br/>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
-                    <tr class='warning'>
+                    <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
                         <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
                         <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
@@ -26,7 +27,15 @@
                 @foreach ($invoice as $invoice)
                 <tr>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->dept_code }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                    @if ($invoice->dept_code == '1')
+                        Purchasing
+                    @elseif ($invoice->dept_code == '2')
+                        General Affair
+                    @elseif ($invoice->dept_code == '3')
+                        BOD
+                    @endif
+                    </font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
@@ -40,15 +49,14 @@
             </table>
         </div>
     </div>
-</div>
-
-<div class="col-md-7 col-md-offset-2">
+    <div class="col-md-7 col-md-offset-2">
     <div class="panel-body">
         <div class="panel panel-default">
+            <div class="panel-warning"><div class="panel-heading">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/pending/user/save') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <br/><div class="form-group" id="gr-pending">
-                    <label class="col-md-4 control-label"><font face='calibri'><b>Pending Reason</b></font></label>
+                    <label class="col-md-4 control-label"><font face='calibri'>Reject Reason</font></label>
                     <div class="col-md-6">
                         <textarea name='remark' class="form-control" id='remark' required></textarea>
                         <input type='hidden' name='id' value='{{ $invoice->id }}'>
@@ -63,8 +71,12 @@
                 </div>
             </form>
         </div>
+        </div></div>
     </div>
 </div>
+
+</div>
+
 
 @if (count($invoice) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
@@ -81,5 +93,4 @@
     });
 </script>
 @endif
-<br/>
 @endsection

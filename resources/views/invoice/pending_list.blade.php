@@ -5,11 +5,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE PENDING</big></big></big></b></font>
+            <font face='calibri'><b><big><big><big>INVOICE REJECT</big></big></big></b>
+            <br/><b>LIST INVOICE REJECT FROM USER</b>
+            </font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
-                    <tr class='warning'>
+                    <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
                         <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
                         <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
@@ -20,7 +22,7 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>REMARK</font></small></center></th>
+                        <th><center><small><font face='calibri'>REASON</font></small></center></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -29,7 +31,15 @@
                 @foreach ($invoice as $invoice)
                 <tr>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->dept_code }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                    @if ($invoice->dept_code == '1')
+                        Purchasing
+                    @elseif ($invoice->dept_code == '2')
+                        General Affair
+                    @elseif ($invoice->dept_code == '3')
+                        BOD
+                    @endif
+                    </font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>

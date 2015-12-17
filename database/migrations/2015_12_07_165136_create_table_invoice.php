@@ -25,15 +25,13 @@ class CreateTableInvoice extends Migration {
 			$table->string('curr');
 			$table->decimal('amount', 17, 2);
 			$table->string('doc_no_2');
-			$table->string('user_acc');
+			$table->dateTime('tgl_input');
 			$table->string('user');
 			$table->dateTime('tgl_terima_user');
 			$table->string('remark');
 			$table->string('status');
-			$table->string('act_acc');
 			$table->string('act');
 			$table->dateTime('tgl_terima_act');
-			$table->string('finance_acc');
 			$table->string('finance');
 			$table->dateTime('tgl_terima_finance');
 			$table->timestamps();

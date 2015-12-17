@@ -17,6 +17,7 @@ Route::get('home', 'HomeController@index');
 Route::get('invoice/add', 'HomeController@invoice_add');
 Route::post('invoice/save', 'HomeController@invoice_save');
 Route::get('invoice/user/list', 'HomeController@invoice_user_list');
+Route::get('invoice/user/reject/list', 'HomeController@invoice_user_reject_list');
 Route::get('invoice/checked/user/{id}', 'HomeController@invoice_checked_user');
 Route::get('invoice/pending/user/{id}', 'HomeController@invoice_pending_user');
 Route::get('invoice/pending/act/{id}', 'HomeController@invoice_pending_act');
@@ -29,11 +30,22 @@ Route::get('invoice/checked/act/{id}', 'HomeController@invoice_checked_act');
 Route::get('invoice/fa/list', 'HomeController@invoice_fa_list');
 Route::get('invoice/checked/fa/{id}', 'HomeController@invoice_checked_fa');
 Route::get('invoice/fa/rtp_list', 'HomeController@invoice_rtp_list');
+Route::get('invoice/rtp', 'HomeController@invoice_rtp_list');
+Route::get('invoice/op', 'HomeController@invoice_op_list');
 Route::get('master/upload', 'HomeController@upload_master');
 Route::post('master/upload','HomeController@Upload');
+Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
+Route::get('invoice/op/user', 'HomeController@invoice_op_user');
+Route::get('invoice/delete/{id}', 'HomeController@invoice_delete');
+Route::get('invoice/detail/{id}', 'HomeController@invoice_detail');
 
-Route::get('user/create', 'WelcomeController@user_create');
-Route::post('user/save_create', 'WelcomeController@save_create');
+Route::get('user/create', 'HomeController@user_create');
+Route::get('user/view', 'HomeController@user_view');
+Route::post('user/save_create', 'HomeController@save_create');
+Route::get('user/edit/{id}', 'HomeController@user_edit');
+Route::get('user/delete/{id}', 'HomeController@user_delete');
+Route::get('user/reset/{id}', 'HomeController@user_reset');
+Route::post('user/save_edit', 'HomeController@save_edit');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

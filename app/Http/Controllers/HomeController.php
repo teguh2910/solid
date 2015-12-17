@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Invoice;
 use App\CsvHelper;
+use App\User;
 class HomeController extends Controller {
 
 	/*
@@ -31,7 +32,25 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$user =\Auth::user();
+		if ($user->role == "1") {
+			$user =\Auth::user();
+			$invoice = Invoice::where('status','1')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.user_list', compact('invoice'));
+		} else if ($user->role == "2") {
+			$invoice = Invoice::where('status','2')->get();
+			return view('invoice.act_list', compact('invoice'));
+		} else if ($user->role == "3"){
+			$invoice = Invoice::where('status','3')->get();
+		return view('invoice.fa_list', compact('invoice'));
+		} else if ($user->role == "4"){
+			$invoice = Invoice::where('status','!=','4')->get();
+			return view('invoice.op_list', compact('invoice'));
+		} else {
+			return redirect('auth/logout') ;
+		}
 	}
 
 	public function invoice_add()
@@ -43,6 +62,8 @@ class HomeController extends Controller {
 	{
 		$input = \Input::all();
 		$invoice = new Invoice;
+		date_default_timezone_set('Asia/Jakarta');
+		$date = date('Y-m-d H:i:s');
 		$invoice->no_penerimaan=$input['no_penerimaan'];
 		$invoice->dept_code=$input['dept_code'];
 		$invoice->vendor=$input['vendor'];
@@ -53,11 +74,12 @@ class HomeController extends Controller {
 		$invoice->curr=$input['curr'];
 		$invoice->amount=$input['amount'];
 		$invoice->doc_no_2=$input['doc_no_2'];
+		$invoice->tgl_input=$date;
 		$invoice->status="1";
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('home');
+		return redirect('/master/upload');
 	}
 
 	public function invoice_user_list()
@@ -75,7 +97,7 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
-		$invoice->user=$user->name;
+		$invoice->user=$user->id;
 		$invoice->status="2";
 		$invoice->tgl_terima_user=$date;
 		$invoice->save();
@@ -89,6 +111,14 @@ class HomeController extends Controller {
 						->where('dept_code',$user->dept_code)
 						->where('status','1')->get();
 		return view('invoice.user_pending_view', compact('invoice'));
+	}
+
+	public function invoice_detail($id)
+	{
+		$user =\Auth::user();
+		$invoice = Invoice::where('id',$id)
+						->get();
+		return view('invoice.invoice_detail', compact('invoice'));
 	}
 
 	public function invoice_pending_act($id)
@@ -107,13 +137,13 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
 		$invoice->status="5";
-		$invoice->user=$user->name;
+		$invoice->user=$user->id;
 		$invoice->tgl_pending_user=$date;
 		$invoice->remark=$input['remark'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('home');
+		return redirect('/invoice/user/list');
 	}
 
 	public function invoice_pending_act_save()
@@ -124,8 +154,8 @@ class HomeController extends Controller {
 		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="1";
-		$invoice->act=$user->name;
+		$invoice->status="6";
+		$invoice->act=$user->id;
 		$invoice->tgl_pending_act=$date;
 		$invoice->remark_act=$input['remark'];
 		$invoice->save();
@@ -152,7 +182,7 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
-		$invoice->act=$user->name;
+		$invoice->act=$user->id;
 		$invoice->status="3";
 		$invoice->tgl_terima_act=$date;
 		$invoice->save();
@@ -171,7 +201,7 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
-		$invoice->finance=$user->name;
+		$invoice->finance=$user->id;
 		$invoice->status="4";
 		$invoice->tgl_terima_finance=$date;
 		$invoice->save();
@@ -184,15 +214,38 @@ class HomeController extends Controller {
 		return view('invoice.rtp_list', compact('invoice'));
 	}
 
+	public function invoice_op_list()
+	{
+		$invoice = Invoice::where('status','!=','4')->get();
+		return view('invoice.op_list', compact('invoice'));
+	}
+
+	public function invoice_rtp_user()
+	{
+		$user =\Auth::user();
+		$invoice = Invoice::where('status','4')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.rtp_list', compact('invoice'));
+	}
+
+	public function invoice_op_user()
+	{
+		$user =\Auth::user();
+		$invoice = Invoice::where('status','!=','4')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.op_list', compact('invoice'));
+	}
+
 	public function invoice_pending_user_checked($id)
 	{
 		$invoice = Invoice::findOrFail($id);
 		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="2";
+		$invoice->status="1";
 		$invoice->user=$user->name;
-		$invoice->tgl_terima_user=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
@@ -218,8 +271,99 @@ class HomeController extends Controller {
 				\Session::flash('flash_type','alert-danger');
 				\Session::flash('flash_message','No data update');
 			}
-		return redirect('home') ;
+		return redirect('/master/upload') ;
 
 	}
+
+	public function invoice_user_reject_list()
+	{
+		$invoice = Invoice::where('status','6')->get();
+		return view('invoice.user_reject_list', compact('invoice'));
+	}
+
+	public function user_create()
+	{
+		return view('user.create');
+	}
+
+	public function user_view()
+	{
+		$user = User::all();
+		return view('user.view', compact('user'));
+	}
+
+	public function save_create()
+	{
+		$input = \Input::all();
+		$user = new User;
+
+		$pwd1 = $input['password'];
+		$pwd2 = $input['password1'];
+		if ($pwd1 == $pwd2) {
+        $name = $input['name'];
+        $user->password = bcrypt($input['password']);
+        $user->email = $input['email'];
+        $user->name = $input['name'];
+        $user->role = $input['role'];
+        $user->dept_code = $input['dept_code'];
+        $user->save();
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','User was successfully created');
+        return redirect('home');
+		} else {
+			return redirect('user/crate');
+		}
+		
+	}
+
+	public function user_delete($id)
+    {
+        User::destroy($id);
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','User was successfully deleted');
+        return redirect('user/view');
+    }
+
+    public function invoice_delete($id)
+    {
+        Invoice::destroy($id);
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','User was successfully deleted');
+        return redirect('/invoice/op');
+    }
+    
+    public function user_reset($id)
+    {
+        $password = bcrypt('aiia');
+        $user = User::findOrFail($id);
+        $user->password = $password;
+        $user->save();
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','User was successfully deleted');
+        return redirect('user/view');
+    }
+
+    public function user_edit($id)
+    {
+        $user = User::where('id',$id)
+        			->get();
+		return view('user.edit', compact('user'));
+    }
+
+    public function save_edit()
+	{
+		$input = \Input::all();
+		$id = $input['id'];
+		$user = User::findOrFail($id);
+		$user->email = $input['email'];
+        $user->name = $input['name'];
+        $user->role = $input['role'];
+        $user->dept_code = $input['dept_code'];
+        $user->save();
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','User was successfully created');
+        return redirect('user/view');
+	}
+
 
 }
