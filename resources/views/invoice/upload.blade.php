@@ -46,7 +46,7 @@
       <div class="panel panel-success">
         <div class="panel-heading"><center><font face='calibri'>CREATE INVOICE</font></center></div>
         <div class="panel-body">
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/save') }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
