@@ -74,10 +74,7 @@
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>UPLOAD INVOICE</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/input') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
+					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
