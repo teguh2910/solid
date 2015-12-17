@@ -78,18 +78,20 @@ class HomeController extends Controller {
 		$invoice->amount=$input['amount'];
 		$invoice->doc_no_2=$input['doc_no_2'];
 		$invoice->tgl_input=$date;
-		$invoice->status="1";
+		$invoice->status='1';
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('/invoice/op');
+		//return redirect('/invoice/op');
+		return('ok');
 		 } catch (\Exception $e) {
             // rollback transact
             \DB::rollback();
 
             // return error message
             $data['error'] = $e->getMessage();
-            return redirect('/invoice/op');
+            //return redirect('/invoice/op');
+            return('error');
         }
 	}
 
