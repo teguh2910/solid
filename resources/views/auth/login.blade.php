@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-success">
-				<div class="panel-heading"><marquee>Welcome to SOLID App (AISIN Operational Invoice Document)</marquee></div>
+				<div class="panel-heading"><marquee  behavior="alternate">Welcome to SOLID App (AISIN Operational Invoice Document)</marquee></div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">

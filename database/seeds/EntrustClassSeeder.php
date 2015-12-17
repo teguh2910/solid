@@ -40,7 +40,9 @@ class EntrustClassSeeder extends Seeder {
 	        User::firstOrCreate([
 	            'name'       => 'Administrator',
 	            'email'      => 'administrator@aiia.co.id',
-	            'password'   => bcrypt('P@ssw0rd'),
+	            'password'   => bcrypt('aiia'),
+	            'role'=>'4',
+            	'dept_code'=>'3'
 	        ]);
 		}
 
