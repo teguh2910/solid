@@ -79,7 +79,7 @@ class HomeController extends Controller {
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('/master/upload');
+		return redirect('/invoice/op');
 	}
 
 	public function invoice_user_list()
