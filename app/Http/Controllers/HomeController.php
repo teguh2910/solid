@@ -82,16 +82,14 @@ class HomeController extends Controller {
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully created');
-		//return redirect('/invoice/op');
-		return('ok');
+		return redirect('/invoice/op');
 		 } catch (\Exception $e) {
             // rollback transact
             \DB::rollback();
 
             // return error message
             $data['error'] = $e->getMessage();
-            //return redirect('/invoice/op');
-            return($data['error']);
+            return redirect('/invoice/op');
         }
 	}
 
