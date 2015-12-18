@@ -55,16 +55,22 @@
                     <td bgcolor='#FFFFFF'><font face='calibri'>
                     @if ($invoice->status=="1")
                         Waiting User
+                        <br/>( {{$invoice->tgl_input}} )
                     @elseif ($invoice->status=="2")
                         Approve User
+                        <br/>( {{$invoice->tgl_terima_user}} )
                     @elseif ($invoice->status=="3")
                         Approve Accounting
+                        <br/>( {{$invoice->tgl_terima_act}} )
                     @elseif ($invoice->status=="4")
                         Ready To Pay
+                        <br/>( {{$invoice->tgl_terima_finance}} )
                     @elseif ($invoice->status=="5")
                         Reject User
+                        <br/>( {{$invoice->tgl_pending_user}} )
                     @elseif ($invoice->status=="6")
                         Reject Accounting
+                        <br/>( {{$invoice->tgl_pending_act}} )
                     @elseif ($invoice->status=="7")
                         Reject Finance
                     @endif

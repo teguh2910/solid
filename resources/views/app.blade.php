@@ -41,9 +41,6 @@
 					<li><a href="{{ url('/invoice/user/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/user/reject/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/op/user') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">

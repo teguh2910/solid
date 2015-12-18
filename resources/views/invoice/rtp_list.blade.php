@@ -20,6 +20,7 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
+                        <th><center><small><font face='calibri'>READY TO PAY</font></small></center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,11 +45,12 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima_finance }}</font></center></td>
                 </tr>
                 @endforeach
             @else
                 <tr bgcolor='#FFFFFF'>
-                    <td colspan="10"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
                 </tbody>

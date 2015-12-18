@@ -5,8 +5,21 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE LIST</big></big></big></b></font>
-        	<div class="clearfix">&nbsp;</div>
+            <ul class="nav nav-tabs">
+               <li role="presentation" class="active">
+                    <a>
+                        <big><big><big><font face='calibri'><b>INVOICE LIST
+                        <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="{{ url('/invoice/user/reject/list') }}">
+                        <font face='calibri'><b>INVOICE REJECT
+                            <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
                     <tr class='success'>

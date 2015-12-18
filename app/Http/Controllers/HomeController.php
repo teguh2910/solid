@@ -2,6 +2,12 @@
 use App\Invoice;
 use App\CsvHelper;
 use App\User;
+use DB;
+use Illuminate\Support\Collection; 
+use Illuminate\Http\Request;
+use Config;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 class HomeController extends Controller {
 
 	/*
@@ -35,10 +41,16 @@ class HomeController extends Controller {
 		$user =\Auth::user();
 		if ($user->role == "1") {
 			$user =\Auth::user();
+			$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        	$result = new Collection($queries);
+        	$queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        	$result2 = new Collection($queries2);
 			$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
-		return view('invoice.user_list', compact('invoice'));
+		return view('invoice.user_list', compact('invoice','result','result2'));
 		} else if ($user->role == "2") {
 			$invoice = Invoice::where('status','2')->get();
 			return view('invoice.act_list', compact('invoice'));
@@ -86,10 +98,16 @@ class HomeController extends Controller {
 	public function invoice_user_list()
 	{
 		$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
 		$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
-		return view('invoice.user_list', compact('invoice'));
+		return view('invoice.user_list', compact('invoice','result','result2'));
 	}
 
 	public function invoice_checked_user($id)
@@ -307,8 +325,18 @@ class HomeController extends Controller {
 
 	public function invoice_user_reject_list()
 	{
-		$invoice = Invoice::where('status','6')->get();
-		return view('invoice.user_reject_list', compact('invoice'));
+		$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
+		
+		$invoice = Invoice::where('status','6')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.user_reject_list', compact('invoice','result','result2'));
 	}
 
 	public function user_create()
