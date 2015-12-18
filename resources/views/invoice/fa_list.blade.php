@@ -49,6 +49,9 @@
                             <a href="{{ url('invoice/checked/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Finish this invoice?')">
                                 <font face='calibri'><b>Finish</b></font>
                             </a>
+                            <a href="{{ url('invoice/reject/fa/'.$invoice->id) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to Reject this invoice?')">
+                                <font face='calibri'><b>Reject</b></font>
+                            </a>
                         </center>
                     </td>
                 </tr>

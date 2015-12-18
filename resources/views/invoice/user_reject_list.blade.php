@@ -21,6 +21,7 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
+                        <th><center><small><font face='calibri'>REJECT REASON</font></small></center></th>
                         <th><center><small><font face='calibri'>MENU</font></small></center></th>
                     </tr>
                 </thead>
@@ -46,10 +47,14 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark_act }}</font></center></td>
                     <td bgcolor='#FFFFFF'>
                         <center>
                             <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
                                 <font face='calibri'><b>Checked</b></font>
+                            </a>
+                            <a href="{{ url('invoice/reject/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
+                                <font face='calibri'><b>Reject</b></font>
                             </a>
                         </center>
                         

@@ -5,9 +5,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE REJECT</big></big></big></b>
-            <br/><b>LIST INVOICE REJECT FROM USER</b>
-            </font>
+            <a href="{{ url('/invoice/fa/list') }}"><button class='btn btn-info btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+            <br/>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -22,12 +21,9 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>REJECT REASON</font></small></center></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-            @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
@@ -48,26 +44,39 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark }}</font></center></td>
-                    <td bgcolor='#FFFFFF'>
-                        <center>
-                            <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
-                                <font face='calibri'><b>Checked</b></font>
-                            </a>
-                        </center>
-                    </td>
-                </tr>
-                @endforeach
-            @else
-                <tr bgcolor='#FFFFFF'>
-                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
-                </tr>
-            @endif
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="col-md-7 col-md-offset-2">
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-warning"><div class="panel-heading">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/reject/fa/save') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <br/><div class="form-group" id="gr-pending">
+                    <label class="col-md-4 control-label"><font face='calibri'>Reject Reason</font></label>
+                    <div class="col-md-6">
+                        <textarea name='remark' class="form-control" id='remark' required></textarea>
+                        <input type='hidden' name='id' value='{{ $invoice->id }}'>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="form-group" id="gr-button">
+                    <div class="col-md-6 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font></button>
+                        <button type="reset" id="gr-reset" class="btn btn-danger btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div></div>
+    </div>
 </div>
+
+</div>
+
 
 @if (count($invoice) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
@@ -84,5 +93,4 @@
     });
 </script>
 @endif
-<br/>
 @endsection

@@ -65,6 +65,8 @@
                         Reject User
                     @elseif ($invoice->status=="6")
                         Reject Accounting
+                    @elseif ($invoice->status=="7")
+                        Reject Finance
                     @endif
                     </font></td>
                      @if (Auth::user()->role == "4")

@@ -116,6 +116,25 @@ class HomeController extends Controller {
 		return view('invoice.user_pending_view', compact('invoice'));
 	}
 
+	public function invoice_reject_user($id)
+	{
+		$user =\Auth::user();
+		$invoice = Invoice::where('id',$id)
+						->where('dept_code',$user->dept_code)
+						->where('status','6')->get();
+		return view('invoice.user_reject_view', compact('invoice'));
+	}
+
+	public function invoice_reject_fa($id)
+	{
+		$invoice = Invoice::findOrFail($id);
+		$invoice->status="7";
+		$invoice->save();
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully reject');
+		return redirect('invoice/fa/list');
+	}
+
 	public function invoice_detail($id)
 	{
 		$user =\Auth::user();
@@ -175,7 +194,11 @@ class HomeController extends Controller {
 
 	public function invoice_act_list()
 	{
-		$invoice = Invoice::where('status','2')->get();
+		$invoice = Invoice::where ( function ($q) {
+                $q->where('status','2')
+                    ->orWhere('status','7');
+                })
+				->get();
 		return view('invoice.act_list', compact('invoice'));
 	}
 
@@ -189,7 +212,9 @@ class HomeController extends Controller {
 		$invoice->status="3";
 		$invoice->tgl_terima_act=$date;
 		$invoice->save();
-		return view('home');
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully approve');
+		return redirect('invoice/act/list');
 	}
 
 	public function invoice_fa_list()
