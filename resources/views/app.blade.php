@@ -10,13 +10,12 @@
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dropzone.css') }}" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
-
-   	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	
+	<script src="{{asset('/js/dropzone.js')}}" type="text/javascript"></script>
+   	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
    	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('/js/dropzone.js')}}" type="text/javascript"></script>
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<nav class="navbar navbar-default">
