@@ -42,6 +42,10 @@
                         General Affair
                     @elseif ($invoice->dept_code == '3')
                         BOD
+                    @elseif ($invoice->dept_code == '5')
+                        MIS
+                    @elseif ($invoice->dept_code == '6')
+                        HRD
                     @endif
                     </font></center></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>

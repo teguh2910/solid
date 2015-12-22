@@ -60,9 +60,11 @@
               <label class="col-md-2 control-label"><font face='calibri'>Department</font></label>
               <div class="col-md-9">
                <select class="form-control" name="dept_code" id="dept_code">
-                     <option value="1">Purchasing</option>
-                     <option value="2">General Affair</option>
-                     <option value="3">BOD</option>
+                      <option value="1">Purchasing</option>
+                      <option value="2">General Affair</option>
+                      <option value="3">BOD</option>
+                      <option value="5">MIS</option>
+                      <option value="6">HRD</option>
                 </select>
               </div>
             </div>

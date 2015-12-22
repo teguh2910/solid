@@ -26,6 +26,8 @@
                      <option value="1">Purchasing</option>
                      <option value="2">General Affair</option>
                      <option value="3">BOD</option>
+                     <option value="5">MIS</option>
+                     <option value="6">HRD</option>
                 </select>
               </div>
             </div>

@@ -17,9 +17,12 @@ class Invoice extends Model {
     		try {
     			foreach ($array_data as $value) {
     				$key=explode(';',$value);
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('d-F-Y H:i:s');
+                    
     				self::create([
     					'no_penerimaan'=>$key[0],
-    					'dept_code'=>$key[1],
+    					'dept_code'=>'2',
     					'vendor'=>$key[2],
     					'tgl_terima'=>$key[3],
     					'doc_no'=>$key[4],
@@ -29,6 +32,7 @@ class Invoice extends Model {
     					'amount'=>$key[8],
     					'doc_no_2'=>$key[9],
     					'status'=>'1',
+                        'tgl_input'=>$date,
     				]);
     			}
     			return 1;

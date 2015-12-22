@@ -32,6 +32,10 @@
                         BOD
                     @elseif ($user->dept_code == '4')
                         Finance & Accounting
+                    @elseif ($user->dept_code == '5')
+                        MIS
+                    @elseif ($user->dept_code == '6')
+                        HRD
                     @endif
                     </font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>
