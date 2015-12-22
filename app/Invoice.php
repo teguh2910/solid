@@ -19,10 +19,20 @@ class Invoice extends Model {
     				$key=explode(';',$value);
                     date_default_timezone_set('Asia/Jakarta');
                     $date = date('d-F-Y H:i:s');
-                    
+                    if ($key[1]=="PUR" or $key[1]=="EXM"){
+                        $dept="1";
+                    } elseif ($key[1]=="GAF"){
+                        $dept="2";
+                    } elseif ($key[1]=="MTE" or $key[1]=="PPC" or $key[1]=="FIN"){
+                        $dept="3";
+                    } elseif ($key[1]=="MIS"){
+                        $dept="5";
+                    } elseif ($key[1]=="HRD"){
+                        $dept="6";
+                    }
     				self::create([
     					'no_penerimaan'=>$key[0],
-    					'dept_code'=>'2',
+    					'dept_code'=>$dept,
     					'vendor'=>$key[2],
     					'tgl_terima'=>$key[3],
     					'doc_no'=>$key[4],

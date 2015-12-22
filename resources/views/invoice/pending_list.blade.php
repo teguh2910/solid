@@ -52,7 +52,7 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark }} <br/> ({{$invoice->tgl_pending_user}})</font></center></td>
                     <td bgcolor='#FFFFFF'>
                         <center>
                             <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">

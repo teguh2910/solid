@@ -19,7 +19,7 @@
                     </a>
                 </li>
             </ul>
-                <br/><b>LIST INVOICE REJECT FROM ACCOUNTING</b></font>
+                <br/><font face='calibri'><b>LIST INVOICE REJECT FROM ACCOUNTING</b></font></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -64,7 +64,7 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark_act }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark_act }}<br/> ({{$invoice->tgl_pending_act}})</font></center></td>
                     <td bgcolor='#FFFFFF'>
                         <center>
                             <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
@@ -80,7 +80,7 @@
                 @endforeach
             @else
                 <tr bgcolor='#FFFFFF'>
-                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
                 </tbody>

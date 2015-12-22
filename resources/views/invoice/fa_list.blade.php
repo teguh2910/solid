@@ -50,8 +50,8 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
                     <td bgcolor='#FFFFFF'>
                         <center>
-                            <a href="{{ url('invoice/checked/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Finish this invoice?')">
-                                <font face='calibri'><b>Finish</b></font>
+                            <a href="{{ url('invoice/checked/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                                <font face='calibri'><b>Checked</b></font>
                             </a>
                             <a href="{{ url('invoice/reject/fa/'.$invoice->id) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to Reject this invoice?')">
                                 <font face='calibri'><b>Reject</b></font>

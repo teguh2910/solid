@@ -56,7 +56,16 @@
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
+                    <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<td bgcolor='red'>";
+                    } else {
+                        echo"<td bgcolor='#FFFFFF'>";
+                    }
+                    ?>
+                    <font face='calibri'>
                     @if ($invoice->status=="1")
                         Waiting User
                         <br/>( {{$invoice->tgl_input}} )
