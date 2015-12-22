@@ -56,7 +56,11 @@ class HomeController extends Controller {
 			return view('invoice.act_list', compact('invoice'));
 		} else if ($user->role == "3"){
 			$invoice = Invoice::where('status','3')->get();
-		return view('invoice.fa_list', compact('invoice'));
+			$queries = DB::select('select count(id) as a from invoice where status="3"');
+        	$result = new Collection($queries);
+        	$queries2 = DB::select('select count(id) as b from invoice where status="4"');
+        	$result2 = new Collection($queries2);
+		return view('invoice.fa_list', compact('invoice','result','result2'));
 		} else if ($user->role == "4"){
 			$invoice = Invoice::where('status','!=','4')->get();
 			return view('invoice.op_list', compact('invoice'));
@@ -238,7 +242,25 @@ class HomeController extends Controller {
 	public function invoice_fa_list()
 	{
 		$invoice = Invoice::where('status','3')->get();
-		return view('invoice.fa_list', compact('invoice'));
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="3"');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="4"');
+        $result2 = new Collection($queries2);
+		return view('invoice.fa_list', compact('invoice','result','result2'));
+	}
+
+	public function invoice_fa_finish_list()
+	{
+		$invoice = Invoice::where('status','4')->get();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="3"');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="4"');
+        $result2 = new Collection($queries2);
+		return view('invoice.fa_finish_list', compact('invoice','result','result2'));
 	}
 
 	public function invoice_checked_fa($id)
@@ -252,26 +274,41 @@ class HomeController extends Controller {
 		$invoice->tgl_terima_finance=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully finish');
+        \Session::flash('flash_message','Invoice was successfully checked');
 		return redirect('/invoice/fa/list');
+	}
+
+	public function invoice_finish_fa($id)
+	{
+		$user =\Auth::user();
+		date_default_timezone_set('Asia/Jakarta');
+		$date = date('Y-m-d H:i:s');
+		$invoice = Invoice::findOrFail($id);
+		$invoice->finance=$user->id;
+		$invoice->status="8";
+		$invoice->tgl_terima_finance=$date;
+		$invoice->save();
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully finish');
+		return redirect('/invoice/fa/finish/list');
 	}
 
 	public function invoice_rtp_list()
 	{
-		$invoice = Invoice::where('status','4')->get();
+		$invoice = Invoice::where('status','8')->get();
 		return view('invoice.rtp_list', compact('invoice'));
 	}
 
 	public function invoice_op_list()
 	{
-		$invoice = Invoice::where('status','!=','4')->get();
+		$invoice = Invoice::where('status','!=','8')->get();
 		return view('invoice.op_list', compact('invoice'));
 	}
 
 	public function invoice_rtp_user()
 	{
 		$user =\Auth::user();
-		$invoice = Invoice::where('status','4')
+		$invoice = Invoice::where('status','8')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.rtp_list', compact('invoice'));
@@ -280,7 +317,7 @@ class HomeController extends Controller {
 	public function invoice_op_user()
 	{
 		$user =\Auth::user();
-		$invoice = Invoice::where('status','!=','4')
+		$invoice = Invoice::where('status','!=','8')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.op_list', compact('invoice'));

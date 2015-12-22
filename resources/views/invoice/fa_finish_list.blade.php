@@ -5,7 +5,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE ON PROGRESS</big></big></big></b></font>
+            <ul class="nav nav-tabs">
+               <li role="presentation">
+                    <a href="{{ url('/invoice/fa/list') }}">
+                        <font face='calibri'><b>INVOICE CHECKED LIST 
+                        </span></b></font>
+                    </a>
+                </li>
+                <li role="presentation" class="active">
+                    <a>
+                        <big><big><big><font face='calibri'><b>INVOICE FINISH LIST 
+                        </span></b></font></big></big></big>
+                    </a>
+                </li>
+            </ul>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -20,21 +33,14 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>STATUS</font></small></center></th>
-                        @if (Auth::user()->role == "4")
-                        <th></th>
-                        @else
-                        @endif
-                        
+                        <th><center><small><font face='calibri'>MENU</font></small></center></th>
                     </tr>
                 </thead>
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
-                        {{ $invoice->no_penerimaan }}
-                    </font></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
@@ -46,64 +52,27 @@
                         MIS
                     @elseif ($invoice->dept_code == '6')
                         HRD
-                    @endif
-                    </font></center></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    @endif</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->amount }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <?php 
-                    date_default_timezone_set('Asia/Jakarta');
-                    $date = date('Y-m-d');
-                    if ($invoice->due_date < $date) {
-                        echo"<td bgcolor='red'>";
-                    } else {
-                        echo"<td bgcolor='#FFFFFF'>";
-                    }
-                    ?>
-                    <font face='calibri'>
-                    @if ($invoice->status=="1")
-                        Waiting User
-                        <br/>( {{$invoice->tgl_input}} )
-                    @elseif ($invoice->status=="2")
-                        Approve User
-                        <br/>( {{$invoice->tgl_terima_user}} )
-                    @elseif ($invoice->status=="3")
-                        Approve Accounting
-                        <br/>( {{$invoice->tgl_terima_act}} )
-                    @elseif ($invoice->status=="4")
-                        Checked Finance
-                        <br/>( {{$invoice->tgl_terima_finance}} )
-                    @elseif ($invoice->status=="5")
-                        Reject User
-                        <br/>( {{$invoice->tgl_pending_user}} )
-                    @elseif ($invoice->status=="6")
-                        Reject Accounting
-                        <br/>( {{$invoice->tgl_pending_act}} )
-                    @elseif ($invoice->status=="7")
-                        Reject Finance
-                    @endif
-                    </font></td>
-                     @if (Auth::user()->role == "4")
-                        <td><center><a href="{{ url('invoice/delete/'.$invoice->id) }}" class="btn btn-danger btn-xs"
-                            onclick="return confirm('Are you sure to delete this invoice?')">
-                                <i class="glyphicon glyphicon-trash"></i>
-                        </a></center></td>
-                    @else
-                    @endif
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    <td bgcolor='#FFFFFF'>
+                        <center>
+                            <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                                <font face='calibri'><b>Finish</b></font>
+                            </a>
+                        </center>
+                    </td>
                 </tr>
                 @endforeach
             @else
                 <tr bgcolor='#FFFFFF'>
-                    @if (Auth::user()->role == "4")
-                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
-                    @else
                     <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
-                    @endif
                 </tr>
             @endif
                 </tbody>
