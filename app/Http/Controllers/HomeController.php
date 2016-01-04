@@ -62,7 +62,7 @@ class HomeController extends Controller {
         	$result2 = new Collection($queries2);
 		return view('invoice.fa_list', compact('invoice','result','result2'));
 		} else if ($user->role == "4"){
-			$invoice = Invoice::where('status','!=','4')->get();
+			$invoice = Invoice::where('status','<','4')->get();
 			return view('invoice.op_list', compact('invoice'));
 		} else {
 			return redirect('auth/logout') ;
