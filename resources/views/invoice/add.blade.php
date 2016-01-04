@@ -6,7 +6,7 @@
    <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-success">
-        <div class="panel-heading"><center> <font face='calibri'>&nbsp;INPUT INVOICE</b></font></center></div>
+        <div class="panel-heading"><center> <font face='calibri'>&nbsp;<b>INPUT INVOICE</b></b></font></center></div>
         <div class="panel-body">
           
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/invoice/saving') }}">

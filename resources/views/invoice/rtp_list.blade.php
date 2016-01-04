@@ -41,14 +41,14 @@
                         HRD
                     @endif
                     </font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima_finance }}</font></center></td>
                 </tr>
                 @endforeach

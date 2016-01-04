@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="panel panel-success">
-                <div class="panel-heading"><center><font face='calibri'>IMPORT DATA</font></center></div>
+                <div class="panel-heading"><center><font face='calibri'><b>IMPORT DATA</b></font></center></div>
                 <div class="panel-body">
             
             {!! Form::open(['class' => 'form-horizontal', 'files' => true]) !!}
@@ -44,7 +44,7 @@
 
     <div class="col-md-8">
       <div class="panel panel-success">
-        <div class="panel-heading"><center><font face='calibri'>CREATE INVOICE</font></center></div>
+        <div class="panel-heading"><center><font face='calibri'><b>CREATE INVOICE</b></font></center></div>
         <div class="panel-body">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -87,7 +87,7 @@
 						
 					@else
 						<li>
-							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><font face='calibri'><b>{{ Auth::user()->name }}</b></font></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class='glyphicon glyphicon-user'></i> <font face='calibri'><b>{{ Auth::user()->name }}</b></font></a>
 						</li>
 						<li>
 							<a href="{{ url('/auth/logout') }}">
@@ -116,7 +116,7 @@
 	@yield('content')
 	<div class="col-md-10col-md-offset-1">
     	<div>
-    		<center><font face='calibri'>SOLID App (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by MAP, MIS Dept)</font></center>
+    		<center><font face='calibri'>SOLID (AISIN Operational Invoice Document) App ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by MAP, MIS Dept)</font></center>
         </div>
 	</div>
 	<!-- Scripts -->
