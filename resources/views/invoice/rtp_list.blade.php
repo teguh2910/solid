@@ -27,8 +27,8 @@
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -40,7 +40,7 @@
                     @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
+                    </font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no }}</font></td>

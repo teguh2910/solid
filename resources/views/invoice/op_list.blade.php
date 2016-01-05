@@ -35,7 +35,7 @@
                     <td bgcolor='#FFFFFF'><font face='calibri'>
                         {{ $invoice->no_penerimaan }}
                     </font></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -47,7 +47,7 @@
                     @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
+                    </font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
@@ -65,7 +65,7 @@
                         echo"<td bgcolor='#FFFFFF'>";
                     }
                     ?>
-                    <font face='calibri'>
+                    <font face='calibri'><center>
                     @if ($invoice->status=="1")
                         Waiting User
                         <br/>( {{$invoice->tgl_input}} )
@@ -87,7 +87,7 @@
                     @elseif ($invoice->status=="7")
                         Reject Finance
                     @endif
-                    </font></td>
+                    </center></font></td>
                      @if (Auth::user()->role == "4")
                         <td><center><a href="{{ url('invoice/delete/'.$invoice->id) }}" class="btn btn-danger btn-xs"
                             onclick="return confirm('Are you sure to delete this invoice?')">

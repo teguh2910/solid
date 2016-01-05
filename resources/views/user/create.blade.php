@@ -6,16 +6,16 @@
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-success">
-        <div class="panel-heading"><center> <font face='calibri'>&nbsp;User Registration</b></font></center></div>
+        <div class="panel-heading"><center> <font face='calibri'>&nbsp;<b>USER REGISTRATION</b></font></center></div>
+        <div class="panel-warning"><div class="panel-heading">
         <div class="panel-body">
-          
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/user/save_create') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
               <label class="col-md-4 control-label"><font face='calibri'>Name</font></label>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="name" id="name" required>
+                <input type="text" class="form-control" name="name" id="name" autofocus required>
               </div>
             </div>
 
@@ -77,7 +77,7 @@
               </div>
             </div>
           </form>
-
+        </div></div>
         </div>
       </div>
     </div>

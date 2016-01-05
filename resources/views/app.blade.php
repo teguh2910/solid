@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SOLID App beta version</title>
+	<title>SOLID beta version</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -28,8 +28,8 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					<big><big><font face='calibri'><big>S</big>OLID App</font></big></big> 
-					<small><small><small>beta version</small></small></small>
+					<big><big><font face='calibri'><b><big>S</big>OLID </b></font></big></big> 
+					<small><small><span class='label label-default'>beta version</span></small></small>
 				</a>
 			</div>
 
@@ -116,7 +116,7 @@
 	@yield('content')
 	<div class="col-md-10col-md-offset-1">
     	<div>
-    		<center><font face='calibri'>SOLID (AISIN Operational Invoice Document) App ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by MAP, MIS Dept)</font></center>
+    		<center><font face='calibri'>SOLID (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by Merio, MIS Dept)</font></center>
         </div>
 	</div>
 	<!-- Scripts -->
@@ -127,7 +127,7 @@
 <head>
 <style>
 body {
-    background-color:lightyellow;
+    background-color:pink;
 }
 </style>
 </head>

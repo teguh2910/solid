@@ -6,16 +6,16 @@
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-success">
-        <div class="panel-heading"><center> <font face='calibri'>&nbsp;Update Profile User</b></font></center></div>
+        <div class="panel-heading"><center> <font face='calibri'>&nbsp;<b>UPDATE DATA USER</b></font></center></div>
+        <div class="panel-warning"><div class="panel-heading">
         <div class="panel-body">
-          
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/user/save_edit') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @foreach ($user as $user)
             <div class="form-group">
               <label class="col-md-4 control-label"><font face='calibri'>Name</font></label>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" required>
+                <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" autofocus required>
                 <input type="hidden" class="form-control" name="id" id="id" value="{{$user->id}}" required>
               </div>
             </div>
@@ -65,7 +65,7 @@
               </div>
             </div>
           </form>
-
+        </div></div>
         </div>
       </div>
     </div>

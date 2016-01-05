@@ -5,6 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+            <font face='calibri'><b><big><big><big>DATA USER</big></big></big></b></font><br/>
             <a href="{{ url('user/create') }}"><button class='btn btn-primary btn-sm'><font face='calibri'><b>CREATE USER</b></font></button></a>
             <br/>
         	<div class="clearfix">&nbsp;</div>
