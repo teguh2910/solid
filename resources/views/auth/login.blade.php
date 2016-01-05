@@ -5,7 +5,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<div class="panel panel-default">
+			<div class="panel panel-warning">
 				<div class="panel-heading"><marquee  behavior="alternate">Welcome to SOLID (AISIN Operational Invoice Document)</marquee></div>
 				<div class="panel-info"><div class="panel-heading">
 				<div class="panel-body">

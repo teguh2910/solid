@@ -126,8 +126,9 @@
 </html>
 <head>
 <style>
-body {
-    background-color:pink;
+body{
+background-image: url('{{ asset("img/school.png") }}');
+background-repeat: repeat-x repeat-y;
 }
 </style>
 </head>
