@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-.textglow{ text-align:center; font-size:30px; color:grey; animation:blur .75s ease-out infinite; text-shadow:0px 0px 5px #fff, 0px 0px 7px #fff; }
+.textglow{ text-align:center; font-size:30px; color:grey; animation:blur .90s ease-out infinite; text-shadow:0px 0px 5px #fff, 0px 0px 7px #fff; }
 @keyframes blur{ from{ text-shadow:0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 50px #fff, 0px 0px 50px #fff, 0px 0px 50px #7B96B8, 0px 0px 150px #7B96B8, 0px 10px 100px #7B96B8, 0px 10px 100px #7B96B8, 0px 10px 100px #7B96B8, 0px 10px 100px #7B96B8, 0px -10px 100px #7B96B8, 0px -10px 100px #7B96B8;} }
 </style>
 <br/><br/>
@@ -14,7 +14,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-warning">
 				<div class="panel-heading"><font face='calibri'><b><center>LOGIN TO YOUR ACCOUNT</center></b></font></div>
-				<div class="panel-info"><div class="panel-heading">
+				<div class="panel-success"><div class="panel-heading">
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">

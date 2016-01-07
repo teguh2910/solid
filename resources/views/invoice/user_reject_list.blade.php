@@ -8,18 +8,18 @@
             <ul class="nav nav-tabs">
                <li role="presentation">
                     <a href="{{ url('invoice/user/list') }}">
-                        <font face='calibri'><b>INVOICE LIST
+                        <font face='calibri' color='grey'><b>INVOICE LIST
                         <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                     </a>
                 </li>
                 <li role="presentation" class="active">
                     <a>
-                        <big><big><big><font face='calibri'><b>INVOICE REJECT
+                        <big><big><big><font face='calibri' color='grey'><b>INVOICE REJECT
                             <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font></big></big></big>
                     </a>
                 </li>
             </ul>
-                <br/><font face='calibri'><b>LIST INVOICE REJECT FROM ACCOUNTING</b></font></font>
+                <br/><font face='calibri' color='grey'><b>LIST INVOICE REJECT FROM ACCOUNTING</b></font></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -41,9 +41,9 @@
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                <tr class='warning'>
+                    <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -55,19 +55,19 @@
                     @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->remark_act }}<br/> ({{$invoice->tgl_pending_act}})</font></center></td>
-                    <td bgcolor='#FFFFFF'>
+                    </font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->remark_act }}<br/> <small>( {{$invoice->tgl_pending_act}} )</small></font></td>
+                    <td>
                         <center>
-                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                             <a href="{{ url('invoice/reject/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
@@ -79,7 +79,7 @@
                 </tr>
                 @endforeach
             @else
-                <tr bgcolor='#FFFFFF'>
+                <tr class='warning'>
                     <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif

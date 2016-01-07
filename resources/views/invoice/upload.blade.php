@@ -51,14 +51,14 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>No Penerimaan</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>No Penerimaan</b></font></label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Department</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Department</b></font></label>
               <div class="col-md-9">
                <select class="form-control" name="dept_code" id="dept_code">
                       <option value="1">Purchasing</option>
@@ -71,56 +71,56 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Vendor</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Vendor</b></font></label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="vendor" id="vendor" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Tanggal Terima</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Tanggal Terima</b></font></label>
               <div class="col-md-9">
                 <input type="date" class="form-control" name="tgl_terima" id="tgl_terima" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>DOC No.</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>DOC No.</b></font></label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="doc_no" id="doc_no" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>DOC Date</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>DOC Date</b></font></label>
               <div class="col-md-9">
                 <input type="date" class="form-control" name="doc_date" id="doc_date" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Due Date</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Due Date</b></font></label>
               <div class="col-md-9">
                 <input type="date" class="form-control" name="due_date" id="due_date" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Curr</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Curr</b></font></label>
               <div class="col-md-9">
                 <input type="text" class="form-control" name="curr" id="curr" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>Amount</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>Amount</b></font></label>
               <div class="col-md-9">
-                <input type="number" class="form-control" name="amount" id="amount" required>
+                <input type="text" class="form-control" name="amount" id="amount" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'>DOC No.</font></label>
+              <label class="col-md-2 control-label"><font face='calibri'><b>DOC No.</b></font></label>
               <div class="col-md-9">
                 <input type="number" class="form-control" name="doc_no_2" id="doc_no_2">
               </div>

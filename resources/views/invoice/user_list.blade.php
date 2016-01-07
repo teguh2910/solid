@@ -8,13 +8,13 @@
             <ul class="nav nav-tabs">
                <li role="presentation" class="active">
                     <a>
-                        <big><big><big><font face='calibri'><b>INVOICE LIST
+                        <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST
                         <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                     </a>
                 </li>
                 <li role="presentation">
                     <a href="{{ url('/invoice/user/reject/list') }}">
-                        <font face='calibri'><b>INVOICE REJECT
+                        <font face='calibri' color='grey'><b>INVOICE REJECT
                             <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                     </a>
                 </li>
@@ -39,9 +39,9 @@
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                <tr class='warning'>
+                    <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -53,18 +53,18 @@
                     @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td bgcolor='#FFFFFF'>
+                    </font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td>
                         <center>
-                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                             <a href="{{ url('invoice/pending/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">

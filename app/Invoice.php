@@ -18,7 +18,7 @@ class Invoice extends Model {
     			foreach ($array_data as $value) {
     				$key=explode(';',$value);
                     date_default_timezone_set('Asia/Jakarta');
-                    $date = date('d-F-Y H:i:s');
+                    $date = date('Y-m-d H:i:s');
                     if ($key[1]=="PUR" or $key[1]=="EXM"){
                         $dept="1";
                     } elseif ($key[1]=="GAF"){

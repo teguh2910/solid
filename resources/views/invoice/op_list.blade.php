@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE ON PROGRESS</big></big></big></b></font>
+            <font face='calibri' color="grey"><b><big><big><big>INVOICE ON PROGRESS</big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -32,10 +32,10 @@
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
+                    <td class='warning'><font face='calibri'>
                         {{ $invoice->no_penerimaan }}
                     </font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
+                    <td class='warning'><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -48,44 +48,44 @@
                         HRD
                     @endif
                     </font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->vendor }}</font></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->amount }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td class='warning'><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td class='warning'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td class='warning'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td class='warning'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td class='warning'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td class='warning'><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td class='warning'><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td class='warning'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <?php 
                     date_default_timezone_set('Asia/Jakarta');
                     $date = date('Y-m-d');
                     if ($invoice->due_date < $date) {
                         echo"<td bgcolor='red'>";
                     } else {
-                        echo"<td bgcolor='#FFFFFF'>";
+                        echo"<td class='warning'>";
                     }
                     ?>
                     <font face='calibri'><center>
                     @if ($invoice->status=="1")
-                        Waiting User
-                        <br/>( {{$invoice->tgl_input}} )
+                        <b>Waiting User</b>
+                        <br/><small>( {{$invoice->tgl_input}} )</small>
                     @elseif ($invoice->status=="2")
-                        Approve User
-                        <br/>( {{$invoice->tgl_terima_user}} )
+                        <b>Approve User</b>
+                        <br/><small>( {{$invoice->tgl_terima_user}} )</small>
                     @elseif ($invoice->status=="3")
-                        Approve Accounting
-                        <br/>( {{$invoice->tgl_terima_act}} )
+                        <b>Approve Accounting</b>
+                        <br/><small>( {{$invoice->tgl_terima_act}} )</small>
                     @elseif ($invoice->status=="4")
-                        Checked Finance
-                        <br/>( {{$invoice->tgl_terima_finance}} )
+                        <b>Checked Finance</b>
+                        <br/><small>( {{$invoice->tgl_terima_finance}} )</small>
                     @elseif ($invoice->status=="5")
-                        Reject User
-                        <br/>( {{$invoice->tgl_pending_user}} )
+                        <b>Reject User</b>
+                        <br/><small>( {{$invoice->tgl_pending_user}} )</small>
                     @elseif ($invoice->status=="6")
-                        Reject Accounting
-                        <br/>( {{$invoice->tgl_pending_act}} )
+                        <b>Reject Accounting</b>
+                        <br/><small>( {{$invoice->tgl_pending_act}} )</small>
                     @elseif ($invoice->status=="7")
-                        Reject Finance
+                        <b>Reject Finance</b>
                     @endif
                     </center></font></td>
                      @if (Auth::user()->role == "4")
@@ -98,7 +98,7 @@
                 </tr>
                 @endforeach
             @else
-                <tr bgcolor='#FFFFFF'>
+                <tr class='warning'>
                     @if (Auth::user()->role == "4")
                     <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                     @else
