@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>INVOICE LIST</big></big></big></b></font>
+            <font face='calibri' color='grey'><b><big><big><big>INVOICE LIST</big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
@@ -20,15 +20,24 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>MENU</font></small></center></th>
+                        <th><center><small><font face='calibri'></font></small></center></th>
                     </tr>
                 </thead>
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<tr class='danger'>";
+                    } else {
+                        echo"<tr class='warning'>";
+                    }
+                    $no_penerimaan=$invoice->no_penerimaan;
+                ?>
+                    <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -40,18 +49,18 @@
                      @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    </font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td bgcolor='#FFFFFF'>
                         <center>
-                            <a href="{{ url('invoice/checked/act/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Approve this invoice?')">
+                            <a href="{{ url('invoice/checked/act/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to approve invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                                 <font face='calibri'><b>Approve</b></font>
                             </a>
                             <a href="{{ url('invoice/pending/act/'.$invoice->id) }}" class="btn btn-danger btn-xs">

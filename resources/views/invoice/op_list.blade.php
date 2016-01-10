@@ -31,11 +31,19 @@
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr>
-                    <td class='warning'><font face='calibri'>
+                <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<tr class='danger'>";
+                    } else {
+                        echo"<tr class='warning'>";
+                    }
+                    ?>
+                    <td><font face='calibri'>
                         {{ $invoice->no_penerimaan }}
                     </font></td>
-                    <td class='warning'><font face='calibri'>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -48,14 +56,14 @@
                         HRD
                     @endif
                     </font></td>
-                    <td class='warning'><font face='calibri'>{{ $invoice->vendor }}</font></td>
-                    <td class='warning'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td class='warning'><font face='calibri'>{{ $invoice->doc_no }}</font></td>
-                    <td class='warning'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td class='warning'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td class='warning'><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td class='warning'><font face='calibri'>{{ $invoice->amount }}</font></td>
-                    <td class='warning'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <?php 
                     date_default_timezone_set('Asia/Jakarta');
                     $date = date('Y-m-d');
@@ -90,7 +98,7 @@
                     </center></font></td>
                      @if (Auth::user()->role == "4")
                         <td><center><a href="{{ url('invoice/delete/'.$invoice->id) }}" class="btn btn-danger btn-xs"
-                            onclick="return confirm('Are you sure to delete this invoice?')">
+                            onclick="return confirm('Are you sure to delete invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                         </a></center></td>
                     @else

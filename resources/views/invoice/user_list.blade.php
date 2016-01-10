@@ -33,13 +33,21 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>MENU</font></small></center></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr class='warning'>
+                    <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<tr class='danger'>";
+                    } else {
+                        echo"<tr class='warning'>";
+                    }
+                    ?>
                     <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
                     <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
@@ -64,7 +72,7 @@
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td>
                         <center>
-                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                             <a href="{{ url('invoice/pending/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
@@ -76,7 +84,7 @@
                 </tr>
                 @endforeach
             @else
-                <tr bgcolor='#FFFFFF'>
+                <tr class='warning'>
                     <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif

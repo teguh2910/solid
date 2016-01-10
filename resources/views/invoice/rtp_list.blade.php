@@ -49,7 +49,7 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td><center><font face='calibri'><b>{{ $invoice->tgl_terima_finance }}</b></font></center></td>
+                    <td><center><small><font face='calibri'><b>{{ $invoice->tgl_terima_finance }}</b></font></small></center></td>
                 </tr>
                 @endforeach
             @else

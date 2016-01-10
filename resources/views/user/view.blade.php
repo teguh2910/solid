@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri'><b><big><big><big>DATA USER</big></big></big></b></font><br/>
+            <font face='calibri' color='grey'><b><big><big><big>DATA USER</big></big></big></b></font><br/>
             <a href="{{ url('user/create') }}"><button class='btn btn-primary btn-sm'><font face='calibri'><b>CREATE USER</b></font></button></a>
             <br/>
         	<div class="clearfix">&nbsp;</div>
@@ -16,15 +16,15 @@
                         <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
                         <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
                         <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
-                        <th><center><small><font face='calibri'>MENU</font></small></center></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach ($user as $user)
-                <tr>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $user->name }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ $user->email }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
+                <tr class='warning'>
+                    <td><font face='calibri'>{{ $user->name }}</font></td>
+                    <td><font face='calibri'>{{ $user->email }}</font></td>
+                    <td><font face='calibri'>
                     @if ($user->dept_code == '1')
                         Purchasing
                     @elseif ($user->dept_code == '2')
@@ -39,7 +39,7 @@
                         HRD
                     @endif
                     </font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>
+                    <td><font face='calibri'>
                     @if ($user->role == '1')
                         User
                     @elseif ($user->role == '2')
@@ -50,7 +50,7 @@
                         Cashier
                     @endif
                     </font></td>
-                    <td bgcolor='#FFFFFF'><center>
+                    <td><center>
                         <a href="{{ url('user/edit/'.$user->id) }}" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>
                         </a>

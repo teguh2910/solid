@@ -30,8 +30,8 @@
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr class='warning'>
-                    <td><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td><center><font face='calibri'>
+                    <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -43,19 +43,19 @@
                     @elseif ($invoice->dept_code == '6')
                         HRD
                     @endif
-                    </font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
+                    </font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
                     <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
                     <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice->remark }} <br/> ({{$invoice->tgl_pending_user}})</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'><small><b>{{ $invoice->remark }}</b> <br/>( {{$invoice->tgl_pending_user}} )</small></font></td>
                     <td>
                         <center>
-                            <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Checked this invoice?')">
+                            <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                         </center>

@@ -8,10 +8,8 @@
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/dropzone.css') }}" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 	
-	<script src="{{asset('/js/dropzone.js')}}" type="text/javascript"></script>
    	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
    	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
@@ -28,8 +26,13 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
+					@if (Auth::guest())
+					<big>W</big>elcome to <big><big><font face='calibri'><b><big>S</big>OLID </b></font></big></big> 
+					<small><small><span class='label label-default'>beta version</span></small></small>
+					@else 
 					<big><big><font face='calibri'><b><big>S</big>OLID </b></font></big></big> 
 					<small><small><span class='label label-default'>beta version</span></small></small>
+					@endif
 				</a>
 			</div>
 
@@ -84,7 +87,9 @@
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-						
+					<ul class="nav navbar-nav">
+						<li><a href="//172.18.3.7/sinta/public"><button class='btn btn-warning btn-sm'><font face='calibri'>&nbsp;<b>NEED HELP ?</b></font></button></a></li>
+					</ul>
 					@else
 						<li>
 							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class='glyphicon glyphicon-user'></i> <font face='calibri'><b>{{ Auth::user()->name }}</b></font></a>
@@ -116,12 +121,13 @@
 	@yield('content')
 	<div class="col-md-10col-md-offset-1">
     	<div>
-    		<center><font face='calibri'>SOLID (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by Merio, MIS Dept)</font></center>
+    		<center>
+    			<font face='calibri'>
+    				SOLID (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by Merio, MIS Dept)
+    			</font>
+    		</center>
         </div>
 	</div>
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
 <head>

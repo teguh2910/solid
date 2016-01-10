@@ -13,7 +13,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @foreach ($user as $user)
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>Name</font></label>
+              <label class="col-md-4 control-label"><font face='calibri'><b>Name</b></font></label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" autofocus required>
                 <input type="hidden" class="form-control" name="id" id="id" value="{{$user->id}}" required>
@@ -21,14 +21,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>E-Mail Address</font></label>
+              <label class="col-md-4 control-label"><font face='calibri'><b>E-Mail Address</b></font></label>
               <div class="col-md-6">
                 <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>Department</font></label>
+              <label class="col-md-4 control-label"><font face='calibri'><b>Department</b></font></label>
               <div class="col-md-6">
                 <select class="form-control" name="dept_code" id="dept_code">
                     <option value="1">Purchasing</option>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>Access Role</font></label>
+              <label class="col-md-4 control-label"><font face='calibri'><b>Access Role</b></font></label>
               <div class="col-md-6">
                 <select class="form-control" name="role" id="role">
                      <option value="1">User</option>

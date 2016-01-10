@@ -5,7 +5,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-        	<div class="clearfix">&nbsp;</div>
+        	<a href="{{ url('home') }}"><button class='btn btn-info btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+            <br/>
+            <div class="clearfix">&nbsp;</div>
                 <table class="table table-striped table-bordered">
                 <thead>
                     <tr class='success'>
@@ -23,9 +25,17 @@
                 </thead>
                 <tbody>
                 @foreach ($invoice as $invoice)
-                <tr>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->no_penerimaan }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>
+                <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<tr class='danger'>";
+                    } else {
+                        echo"<tr class='warning'>";
+                    }
+                    ?>
+                    <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
+                    <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
                         Purchasing
                     @elseif ($invoice->dept_code == '2')
@@ -36,15 +46,15 @@
                         MIS
                     @elseif ($invoice->dept_code == '6')
                         HRD
-                    @endif</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->vendor }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no }}</font></center></td>
+                    @endif</font></td>
+                    <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
+                    <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->amount }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
+                    <td><font face='calibri'>{{ $invoice->curr }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                 </tr>
                 </tbody>
             </table>
@@ -59,7 +69,7 @@
                 <br/><div class="form-group" id="gr-pending">
                     <label class="col-md-4 control-label"><font face='calibri'><b>Reject Reason</b></font></label>
                     <div class="col-md-6">
-                        <textarea name='remark' class="form-control" id='remark' required></textarea>
+                        <textarea name='remark' class="form-control" id='remark' autofocus required></textarea>
                         <input type='hidden' name='id' value='{{ $invoice->id }}'>
                         @endforeach
                     </div>

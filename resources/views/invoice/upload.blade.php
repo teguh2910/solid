@@ -4,9 +4,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <div class="panel panel-success">
+            <div class="panel panel-warning">
             <div class="panel-heading"><center><font face='calibri'><b>IMPORT DATA</b></font></center></div>
-            <div class="panel-warning"><div class="panel-heading">
+            <div class="panel-info"><div class="panel-heading">
             <div class="panel-body">
             {!! Form::open(['class' => 'form-horizontal', 'files' => true]) !!}
             <div class="form-group">
@@ -43,9 +43,9 @@
         </div>
 
     <div class="col-md-8">
-      <div class="panel panel-success">
+      <div class="panel panel-warning">
         <div class="panel-heading"><center><font face='calibri'><b>CREATE INVOICE</b></font></center></div>
-        <div class="panel-warning"><div class="panel-heading">
+        <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -53,7 +53,7 @@
             <div class="form-group">
               <label class="col-md-2 control-label"><font face='calibri'><b>No Penerimaan</b></font></label>
               <div class="col-md-9">
-                <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" required>
+                <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" autofocus required>
               </div>
             </div>
 
@@ -129,7 +129,7 @@
             <div class="form-group">
               <div class="col-md-9 col-md-offset-2">
                 <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
+                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font>
                 </button>
                 <button type="reset" class="btn btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
