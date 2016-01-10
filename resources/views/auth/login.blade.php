@@ -12,18 +12,12 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
-			<div class="carousel slide" id="carousel-718875">
-				<ol class="carousel-indicators">
-					<li class="active" data-slide-to="0" data-target="#carousel-718875"></li>
-					<li data-slide-to="1" data-target="#carousel-718875"></li>					
-				</ol>
-				<div class="carousel-inner">
+				<div>
 					<div class="item active">
 						<center>
-							<img alt="Carousel Bootstrap First" src="{{ asset('img/bg.jpg') }}" width='80%' class="img-thumbnail img-rounded img-responsive">
+							<img src="{{ asset('img/bg.jpg') }}" width='80%' class="img-thumbnail img-rounded img-responsive">
 						</center>
-					</div>
-				</div> 
+				</div>
 			</div>
 		</div>
 		<div class="col-md-5">
