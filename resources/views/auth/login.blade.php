@@ -15,7 +15,7 @@
 				<div>
 					<div class="item active">
 						<center>
-							<img src="{{ asset('img/bg.jpg') }}" width='80%' class="img-thumbnail img-rounded img-responsive">
+							<img src="{{ asset('img/bg.JPG') }}" width='80%' class="img-thumbnail img-rounded img-responsive">
 						</center>
 				</div>
 			</div>
