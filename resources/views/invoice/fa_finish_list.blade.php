@@ -1,7 +1,5 @@
 @extends('app')
 @section('content')
-<script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/js/dataTables.bootstrap.js')}}"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">

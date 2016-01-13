@@ -119,12 +119,15 @@
 		</div>
 	</div>
 	@yield('content')
-	<div class="col-md-10col-md-offset-1">
+	<div class="col-md-10 col-md-offset-1">
     	<div>
     		<center>
-    			<font face='calibri'>
+    			<ol class="breadcrumb">
+  <li><a><font face='calibri' color='grey'>
     				SOLID (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by Merio, MIS Dept)
-    			</font>
+    			</font></a></li>
+</ol>
+
     		</center>
         </div>
 	</div>
