@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-
+<br/>
 
 @if (count($user) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
