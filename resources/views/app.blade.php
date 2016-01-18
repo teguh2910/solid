@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SOLID beta version</title>
+	<title>SOLID</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -27,11 +27,9 @@
 				</button>
 				<a class="navbar-brand">
 					@if (Auth::guest())
-					<big>W</big>elcome to <big><big><font face='calibri'><b><big>S</big>OLID </b></font></big></big> 
-					<small><small><span class='label label-default'>beta version</span></small></small>
+					<big><font face='calibri'>Welcome to</font> </big><big><big><font face='istanbul'><b>SOLID</b></font></big></big> 
 					@else 
-					<big><big><font face='calibri'><b><big>S</big>OLID </b></font></big></big> 
-					<small><small><span class='label label-default'>beta version</span></small></small>
+					<big><big><font face='istanbul'><b><big>S</big>OLID </b></font></big></big> 
 					@endif
 				</a>
 			</div>
@@ -91,8 +89,35 @@
 						<li><a href="//172.18.3.7/sinta/public"><button class='btn btn-warning btn-sm'><font face='calibri'>&nbsp;<b>NEED HELP ?</b></font></button></a></li>
 					</ul>
 					@else
-						<li>
-							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class='glyphicon glyphicon-user'></i> <font face='calibri'><b>{{ Auth::user()->name }}</b></font></a>
+						<?php
+							date_default_timezone_set('Asia/Jakarta');
+							$time = date('H');
+							if ($time > 0 and $time <= 12) {
+								$par="Good Morning";
+							}	
+							elseif ($time > 12 and $time <= 15) {
+								$par="Good Afternoon";
+							}
+							elseif ($time > 15 and $time <= 21) {
+								$par="Good Night";
+							}
+							else {
+								$par="Good Night";
+							} 
+
+						?>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								<font face='calibri'>{{$par}}, <b>{{ Auth::user()->name }}</b></font>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="{{ url('/edit_password') }}">
+										<font face='calibri'>CHANGE PASSWORD</font>
+									</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="{{ url('/auth/logout') }}">
@@ -123,11 +148,11 @@
     	<div>
     		<center>
     			<ol class="breadcrumb">
-  <li><a><font face='calibri' color='grey'>
-    				SOLID (AISIN Operational Invoice Document) ©2015 All Rights Reserved by PT. Aisin Indonesia Automotive (Developed by Merio, MIS Dept)
-    			</font></a></li>
-</ol>
-
+  				<li>
+  					<font face='istanbul' color='grey'>
+  					SOLID</font> <font face='calibri' color='grey'>(AISIN Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
+    			</font></li>
+				</ol>
     		</center>
         </div>
 	</div>

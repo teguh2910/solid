@@ -52,7 +52,7 @@
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="11"><center><font face='calibri'>No record to.. display</font></center></td>
                 </tr>
             @endif
                 </tbody>

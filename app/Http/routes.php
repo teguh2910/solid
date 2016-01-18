@@ -44,6 +44,8 @@ Route::get('invoice/reject/user/{id}', 'HomeController@invoice_reject_user');
 Route::get('invoice/reject/fa/{id}', 'HomeController@invoice_reject_fa');
 
 Route::get('user/create', 'HomeController@user_create');
+Route::get('edit_password', 'HomeController@edit_password');
+Route::post('save_edit_password', 'HomeController@save_edit_password');
 Route::get('user/view', 'HomeController@user_view');
 Route::post('user/save_create', 'HomeController@save_create');
 Route::get('user/edit/{id}', 'HomeController@user_edit');

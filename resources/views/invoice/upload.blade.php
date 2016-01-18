@@ -12,7 +12,6 @@
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <!-- <input id="file" type="file" name="file" class="btn btn-file"></input> -->
                     <div style="position:relative;">
                             <a class='btn btn-info btn-sm' href='javascript:;'>
                                 <font face='calibri'><b>CHOOSE FILE</b></font>

@@ -356,8 +356,7 @@ class HomeController extends Controller {
 				\Session::flash('flash_type','alert-danger');
 				\Session::flash('flash_message','No data update');
 			}
-		return redirect('/master/upload') ;
-
+		return redirect('/master/upload');
 	}
 
 	public function invoice_user_reject_list()
@@ -374,11 +373,6 @@ class HomeController extends Controller {
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.user_reject_list', compact('invoice','result','result2'));
-	}
-
-	public function user_create()
-	{
-		return view('user.create');
 	}
 
 	public function user_view()
@@ -443,7 +437,8 @@ class HomeController extends Controller {
     {
         $user = User::where('id',$id)
         			->get();
-		return view('user.edit', compact('user'));
+        $user_all = User::all();
+		return view('user.edit', compact('user','user_all'));
     }
 
     public function save_edit()
@@ -461,5 +456,45 @@ class HomeController extends Controller {
         return redirect('user/view');
 	}
 
+	public function edit_password()
+	{
+		return view('user.edit_password');
+	}
+
+	public function save_edit_password()
+	{
+	
+            $input = \Input::all();
+            $pwd1=$input['password1'];
+            $pwd2=$input['password2'];
+            $pwd3=$input['password3'];
+            $pwd4=bcrypt($pwd1);
+            $pwd5=bcrypt($pwd2);
+            $pwd6=bcrypt($pwd3);
+            $user =\Auth::user();
+          	if ($pwd1 == NULL or $pwd2 == NULL or $pwd3 == NULL){
+          		\Session::flash('flash_type','alert-danger');
+        		\Session::flash('flash_message','Error, there columns that you have not fill');
+          		return redirect('edit_password');
+          	} else {
+            	if (\Hash::check($pwd1, $user->password)){
+            		if ($pwd2 == $pwd3) {
+        				$user->password=$pwd6;
+        				$user->save();
+        				\Session::flash('flash_type','alert-success');
+ 				       \Session::flash('flash_message','Password was successfully updated');
+        				return redirect('/') ;
+		            } else {
+        		    	\Session::flash('flash_type','alert-danger');
+        				\Session::flash('flash_message','Error, your administrator password incorrect');
+          		       	return redirect('edit_password');
+            		}
+            	} else {
+            		\Session::flash('flash_type','alert-danger');
+        			\Session::flash('flash_message','Error, your new password combination do not match');
+          		    return redirect('edit_password');
+            	}
+        	}
+	}
 
 }
