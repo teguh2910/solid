@@ -27,9 +27,9 @@
 				</button>
 				<a class="navbar-brand">
 					@if (Auth::guest())
-					<big><font face='calibri'>Welcome to</font> </big><big><big><font face='istanbul'><b>SOLID</b></font></big></big> 
+					<big><font face='calibri'>Welcome to</font> </big><big><big><font face='calibri'><b>SOLID</b></font></big></big> 
 					@else 
-					<big><big><font face='istanbul'><b><big>S</big>OLID </b></font></big></big> 
+					<big><big><font face='calibri'><b><big>SOLID</big></b></font></big></big> 
 					@endif
 				</a>
 			</div>
@@ -95,10 +95,10 @@
 							if ($time > 0 and $time <= 12) {
 								$par="Good Morning";
 							}	
-							elseif ($time > 12 and $time <= 15) {
+							elseif ($time > 12 and $time <= 17) {
 								$par="Good Afternoon";
 							}
-							elseif ($time > 15 and $time <= 21) {
+							elseif ($time > 17 and $time <= 21) {
 								$par="Good Night";
 							}
 							else {
@@ -149,8 +149,8 @@
     		<center>
     			<ol class="breadcrumb">
   				<li>
-  					<font face='istanbul' color='grey'>
-  					SOLID</font> <font face='calibri' color='grey'>(AISIN Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
+  					<font face='calibri' color='grey'>
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(AISIN Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
     			</font></li>
 				</ol>
     		</center>

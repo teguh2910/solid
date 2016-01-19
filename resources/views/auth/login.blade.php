@@ -4,7 +4,7 @@
 <br/>
 <center>
 	<big><big><big><big><big>
-		<font face='istanbul' color='grey'><b>SOLID</font><font face='calibri' color='grey'> (AISIN Operational Invoice Document)</b></font>
+		<font face='calibri' color='grey'><b>SOLID</font><font face='calibri' color='grey'> (AISIN Operational Invoice Document)</b></font>
 	</big></big></big></big></big>
 </center>
 <br/><br/>
