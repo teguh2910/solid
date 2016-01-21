@@ -76,7 +76,7 @@
                         <b>Waiting User</b>
                         <br/><small>( {{$invoice->tgl_input}} )</small>
                     @elseif ($invoice->status=="2")
-                        <b>Approve User</b>
+                        <b>Checked User</b>
                         <br/><small>( {{$invoice->tgl_terima_user}} )</small>
                     @elseif ($invoice->status=="3")
                         <b>Approve Accounting</b>

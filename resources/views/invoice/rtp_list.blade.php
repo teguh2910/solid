@@ -24,7 +24,7 @@
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr class='warning'>
+                <tr class='info'>
                     <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
                     <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')

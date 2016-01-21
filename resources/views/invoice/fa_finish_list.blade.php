@@ -7,13 +7,13 @@
                <li role="presentation">
                     <a href="{{ url('/invoice/fa/list') }}">
                         <font face='calibri' color='grey'><b>INVOICE CHECKED LIST 
-                        </span></b></font>
+                        <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                     </a>
                 </li>
                 <li role="presentation" class="active">
                     <a>
                         <big><big><big><font face='calibri' color='grey'><b>INVOICE FINISH LIST 
-                        </span></b></font></big></big></big>
+                        <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font></big></big></big>
                     </a>
                 </li>
             </ul>
@@ -78,7 +78,7 @@
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="11"><center><font face='calibri'><b>No record to display</b></font></center></td>
                 </tr>
             @endif
                 </tbody>

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SOLID</title>
+	<title>SOLID v1.0</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -27,9 +27,14 @@
 				</button>
 				<a class="navbar-brand">
 					@if (Auth::guest())
-					<big><font face='calibri'>Welcome to</font> </big><big><big><font face='calibri'><b>SOLID</b></font></big></big> 
+					<big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
+						<font face='calibri'>Welcome to</font> </big><big><big><font face='calibri'><b>SOLID</b> 
+						<small><small><small><small><small>v1.0</small></small></small></small></small></font></big></big> 
 					@else 
-					<big><big><font face='calibri'><b><big>SOLID</big></b></font></big></big> 
+					<big><big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
+						<big><font face='calibri'><b>SOLID</b> 
+						<small><small><small><small><small>v1.0</small></small></small></small></small>
+					</font></big></big></big> 
 					@endif
 				</a>
 			</div>
@@ -38,13 +43,19 @@
 				@if (Auth::guest())
 				@elseif (Auth::user()->role == "1")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/user/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
+					<li><a href="{{ url('/invoice/user/list') }}">
+							<font face='calibri'><b>INVOICE LIST</b></font>
+					</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/op/user') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
+					<li><a href="{{ url('/invoice/op/user') }}">
+							<font face='calibri'><b>INVOICE ON PROGRESS</b></font>
+					</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/rtp/user') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
+					<li><a href="{{ url('/invoice/rtp/user') }}">
+							<font face='calibri'><b>INVOICE READY TO PAY</b></font>
+					</a></li>
 				</ul>
 				@elseif (Auth::user()->role == "2")
 				<ul class="nav navbar-nav">
@@ -68,7 +79,7 @@
 				</ul>
 				@elseif (Auth::user()->role == "4")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>DATA USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
@@ -150,7 +161,7 @@
     			<ol class="breadcrumb">
   				<li>
   					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(AISIN Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
     			</font></li>
 				</ol>
     		</center>

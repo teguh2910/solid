@@ -6,7 +6,7 @@
         <div class="col-md-4">
             <div class="panel panel-warning">
             <div class="panel-heading"><center><font face='calibri'><b>IMPORT DATA</b></font></center></div>
-            <div class="panel-info"><div class="panel-heading">
+            <div class="panel-success"><div class="panel-heading">
             <div class="panel-body">
             {!! Form::open(['class' => 'form-horizontal', 'files' => true]) !!}
             <div class="form-group">
@@ -43,8 +43,8 @@
 
     <div class="col-md-8">
       <div class="panel panel-warning">
-        <div class="panel-heading"><center><font face='calibri'><b>CREATE INVOICE</b></font></center></div>
-        <div class="panel-info"><div class="panel-heading">
+        <div class="panel-heading"><center><font face='calibri'><b>MANUAL INPUT</b></font></center></div>
+        <div class="panel-success"><div class="panel-heading">
         <div class="panel-body">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
