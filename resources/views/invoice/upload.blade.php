@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -79,7 +80,12 @@
             <div class="form-group">
               <label class="col-md-2 control-label"><font face='calibri'><b>Tanggal Terima</b></font></label>
               <div class="col-md-9">
-                <input type="date" class="form-control" name="tgl_terima" id="tgl_terima" required>
+                <div class='input-group date mypicker' id='en_date'>
+                  <input type='text' class="form-control" name="tgl_terima" id="tgl_terima" readonly/>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                </div>
               </div>
             </div>
 
@@ -93,14 +99,24 @@
             <div class="form-group">
               <label class="col-md-2 control-label"><font face='calibri'><b>DOC Date</b></font></label>
               <div class="col-md-9">
-                <input type="date" class="form-control" name="doc_date" id="doc_date" required>
+                <div class='input-group date mypicker' id='en_date'>
+                  <input type='text' class="form-control" name="doc_date" id="doc_date"  readonly/>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                </div>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-2 control-label"><font face='calibri'><b>Due Date</b></font></label>
               <div class="col-md-9">
-                <input type="date" class="form-control" name="due_date" id="due_date" required>
+                <div class='input-group date mypicker' id='en_date'>
+                  <input type='text' class="form-control" name="due_date" id="due_date"  readonly/>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                </div>
               </div>
             </div>
 
@@ -142,4 +158,15 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $('.mypicker').datepicker({
+            format: "yyyy-m-d",
+            autoclose: true,
+            orientation: 'top auto',
+        });
+
+    });
+</script>
 @endsection

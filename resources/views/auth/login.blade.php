@@ -1,21 +1,10 @@
 @extends('app')
 
 @section('content')
-<br/>
-<center><big><big>
-	<font face='calibri' color='grey'>
-		<marquee direction="left" scrollamount="4" onmouseover="this.stop();" onmouseout="this.start();" width="15%">
-			SALAM AKU PRIMA !! 
-		</marquee> 
-		<marquee direction="right" scrollamount="4" width="15%" onmouseover="this.stop();" onmouseout="this.start();">
-			CHAMPION !!
-		</marquee>
-	</font>
-</big></big></center>			
 <center>
-	<big><big><big><big><big>
+	<big><big><big><big>
 		<font face='calibri' color='grey'><b>SOLID</font><font face='calibri' color='grey'> (Aisin Operational Invoice Document)</b></font>
-	</big></big></big></big></big>
+	</big></big></big></big>
 </center>
 <br/><br/>
 <div class="container-fluid">
@@ -30,7 +19,7 @@
 		<div class="col-md-4">
 			<center>
 			<div class="panel panel-success">
-				<div class="panel-heading"><big><big><big><font face='calibri'><b><center>SIGN IN</center></b></font></big></big></big></div>
+				<div class="panel-heading"><big><big><big><font face='calibri'><b><center>LOG IN</center></b></font></big></big></big></div>
 				<div class="panel-info"><div class="panel-heading">
 				<div class="panel-body">
 					@if (count($errors) > 0)

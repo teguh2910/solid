@@ -26,16 +26,10 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					@if (Auth::guest())
-					<big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
-						<font face='calibri'>Welcome to</font> </big><big><big><font face='calibri'><b>SOLID</b> 
-						<small><small><small><small><small>v1.0</small></small></small></small></small></font></big></big> 
-					@else 
-					<big><big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
-						<big><font face='calibri'><b>SOLID</b> 
+					<big><big><i class='glyphicon glyphicon-tasks'></i>
+						<big><font face='calibri'><big><b>SOLID</b></big> 
 						<small><small><small><small><small>v1.0</small></small></small></small></small>
-					</font></big></big></big> 
-					@endif
+					</font></big></big></big>
 				</a>
 			</div>
 
@@ -133,8 +127,7 @@
 						<li>
 							<a href="{{ url('/auth/logout') }}">
 								<button class="btn btn-danger btn-sm">
-									<span class='glyphicon glyphicon-off'></span> 
-									<font face='calibri'><b>LOGOUT</b></font>
+									<big><span class='glyphicon glyphicon-off'></span></big> 
 								</button>
 							</a>
 						</li>

@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-7 col-md-offset-3">
 			<div class="panel panel-warning">
-				<div class="panel-heading"><center><font face='calibri'><span class='glyphicon glyphicon-lock'></span>&nbsp;&nbsp; <big><b>CHANGE PASSWORD</b></big></font></center></div>
+				<div class="panel-heading"><center><span class='glyphicon glyphicon-lock'></span><font face='calibri'>&nbsp;&nbsp; <b>CHANGE PASSWORD</b></font></center></div>
 				<div class="panel-success"><div class="panel-heading">
 				<div class="panel-body">
 					

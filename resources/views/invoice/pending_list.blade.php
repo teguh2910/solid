@@ -27,7 +27,15 @@
                 <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
-                <tr class='warning'>
+                <?php 
+                    date_default_timezone_set('Asia/Jakarta');
+                    $date = date('Y-m-d');
+                    if ($invoice->due_date < $date) {
+                        echo"<tr class='danger'>";
+                    } else {
+                        echo"<tr class='info'>";
+                    }
+                    ?>
                     <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
                     <td><font face='calibri'>
                     @if ($invoice->dept_code == '1')
@@ -51,7 +59,7 @@
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td><font face='calibri'><small><b>{{ $invoice->remark }}</b> <br/>( {{$invoice->tgl_pending_user}} )</small></font></td>
-                    <td>
+                    <td class='warning'>
                         <center>
                             <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                                 <font face='calibri'><b>Checked</b></font>
@@ -62,7 +70,7 @@
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="12"><center><font face='calibri'><b>No record to display</b></font></center></td>
                 </tr>
             @endif
                 </tbody>

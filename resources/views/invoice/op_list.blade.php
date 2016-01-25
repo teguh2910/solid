@@ -35,7 +35,7 @@
                     if ($invoice->due_date < $date) {
                         echo"<tr class='danger'>";
                     } else {
-                        echo"<tr class='warning'>";
+                        echo"<tr class='info'>";
                     }
                     ?>
                     <td><font face='calibri'>
