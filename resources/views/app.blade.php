@@ -27,9 +27,9 @@
 				</button>
 				<a class="navbar-brand">
 					<big><big><i class='glyphicon glyphicon-tasks'></i>
-						<big><font face='calibri'><big><b>SOLID</b></big> 
+						<font face='calibri'><big><b>SOLID</b></big> 
 						<small><small><small><small><small>v1.0</small></small></small></small></small>
-					</font></big></big></big>
+					</font></big></big>
 				</a>
 			</div>
 

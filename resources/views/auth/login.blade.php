@@ -2,9 +2,9 @@
 
 @section('content')
 <center>
-	<big><big><big><big>
-		<font face='calibri' color='grey'><b>SOLID</font><font face='calibri' color='grey'> (Aisin Operational Invoice Document)</b></font>
-	</big></big></big></big>
+	<big><big><big><big><big>
+		<font face='calibri' color='grey'><small>Welcome</small><br/>SOLID (Aisin Operational Invoice Document)</font>
+	</big></big></big></big></big>
 </center>
 <br/><br/>
 <div class="container-fluid">
@@ -18,9 +18,9 @@
 		</div>
 		<div class="col-md-4">
 			<center>
-			<div class="panel panel-success">
-				<div class="panel-heading"><big><big><big><font face='calibri'><b><center>LOG IN</center></b></font></big></big></big></div>
-				<div class="panel-info"><div class="panel-heading">
+			<div class="panel panel-warning">
+				<div class="panel-heading"><big><big><big><center><font face='calibri'><b>LOG IN</b></font></center></big></big></big></div>
+				<div class="panel-success"><div class="panel-heading">
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -46,7 +46,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-1 col-md-offset-0">
-								<button type="submit" class="btn btn-primary"><big><font face='calibri'><b>LOGIN</b></font></big></button>
+								<button type="submit" class="btn btn-primary"><big><font face='calibri'>LOGIN</font></big></button>
 							</div>
 						</div>
 					</form>
