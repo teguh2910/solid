@@ -26,10 +26,10 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					<big><big><i class='glyphicon glyphicon-tasks'></i>
-						<font face='calibri'><big><b>SOLID</b></big> 
-						<small><small><small><small><small>v1.0</small></small></small></small></small>
-					</font></big></big>
+					<big><font color='grey'><i class='glyphicon glyphicon-tasks'></i></font></big>
+					&nbsp;
+					<big><font face='calibri' color='grey'><big><b>SOLID</b></big><small><small><small>
+					v.1.0.1</small></small></small></font></big>
 				</a>
 			</div>
 
