@@ -3,7 +3,7 @@
 @section('content')
 <center>
 	<big><big><big>
-		<font face='calibri' color='grey'><b><small>WELCOME</small><br/>SOLID (Aisin Operational Invoice Document)</b></font>
+		<font face='calibri' color='grey'><b><big>WELCOME</big><br/>SOLID (Aisin Operational Invoice Document)</b></font>
 	</big></big></big>
 </center>
 <br/><br/>
@@ -32,21 +32,25 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-0 control-label"></label>
-							<div class="col-md-12">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
-							</div>
+							<div class='input-group'>
+                  				<input type='email' class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required/>
+                    			<span class="input-group-addon">
+                      				<span class="glyphicon glyphicon-envelope"></span>
+                      			</span>
+                			</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-0 control-label"></label>
-							<div class="col-md-12">
-								<input type="password" class="form-control" name="password" placeholder="Password" required>
-							</div>
+							<div class='input-group'>
+                  				<input type='password' class="form-control" name="password" placeholder="Password" required/>
+                    			<span class="input-group-addon">
+                      				<span class="glyphicon glyphicon-lock"></span>
+                      			</span>
+                			</div>
 						</div>
 						<div class="form-group">
-							<div class="col-md-1 col-md-offset-0">
-								<button type="submit" class="btn btn-primary"><big><font face='calibri'>LOGIN</font></big></button>
+							<div class="col-md-4 col-md-offset-9">
+								<button type="submit" class="btn btn-primary"><big><font face='calibri'><b>LOGIN</b></font></big></button>
 							</div>
 						</div>
 					</form>
@@ -58,5 +62,5 @@
 		</div>
 	</div>
 </div>
-<br/><br/><br/>
+<br/><br/>
 @endsection

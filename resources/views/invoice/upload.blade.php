@@ -4,7 +4,7 @@
 <script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="panel panel-warning">
             <div class="panel-heading"><center><font face='calibri'><b>IMPORT DATA</b></font></center></div>
             <div class="panel-success"><div class="panel-heading">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="panel panel-warning">
         <div class="panel-heading"><center><font face='calibri'><b>MANUAL INPUT</b></font></center></div>
         <div class="panel-success"><div class="panel-heading">
@@ -51,15 +51,15 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>No Penerimaan</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>No Penerimaan</b></font></label>
+              <div class="col-md-7">
                 <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" autofocus required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Department</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Department</b></font></label>
+              <div class="col-md-7">
                <select class="form-control" name="dept_code" id="dept_code">
                       <option value="1">Purchasing</option>
                       <option value="2">General Affair</option>
@@ -71,15 +71,15 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Vendor</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Vendor</b></font></label>
+              <div class="col-md-8">
                 <input type="text" class="form-control" name="vendor" id="vendor" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Tanggal Terima</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Tanggal Terima</b></font></label>
+              <div class="col-md-5">
                 <div class='input-group date mypicker' id='en_date'>
                   <input type='text' class="form-control" name="tgl_terima" id="tgl_terima" readonly/>
                     <span class="input-group-addon">
@@ -90,15 +90,15 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>DOC No.</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>DOC No.</b></font></label>
+              <div class="col-md-7">
                 <input type="text" class="form-control" name="doc_no" id="doc_no" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>DOC Date</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>DOC Date</b></font></label>
+              <div class="col-md-5">
                 <div class='input-group date mypicker' id='en_date'>
                   <input type='text' class="form-control" name="doc_date" id="doc_date"  readonly/>
                     <span class="input-group-addon">
@@ -109,8 +109,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Due Date</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Due Date</b></font></label>
+              <div class="col-md-5">
                 <div class='input-group date mypicker' id='en_date'>
                   <input type='text' class="form-control" name="due_date" id="due_date"  readonly/>
                     <span class="input-group-addon">
@@ -121,28 +121,28 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Curr</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Curr</b></font></label>
+              <div class="col-md-5">
                 <input type="text" class="form-control" name="curr" id="curr" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>Amount</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Amount</b></font></label>
+              <div class="col-md-7">
                 <input type="text" class="form-control" name="amount" id="amount" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-2 control-label"><font face='calibri'><b>DOC No.</b></font></label>
-              <div class="col-md-9">
+              <label class="col-md-3 control-label"><font face='calibri'><b>DOC No.</b></font></label>
+              <div class="col-md-7">
                 <input type="number" class="form-control" name="doc_no_2" id="doc_no_2">
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-9 col-md-offset-2">
+              <div class="col-md-9 col-md-offset-3">
                 <button type="submit" class="btn btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font>
                 </button>

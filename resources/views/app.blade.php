@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SOLID v1.0</title>
+	<title>SOLID v1.0.1</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -154,7 +154,7 @@
     			<ol class="breadcrumb">
   				<li>
   					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by MIS Department)
     			</font></li>
 				</ol>
     		</center>

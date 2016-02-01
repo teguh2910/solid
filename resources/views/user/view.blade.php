@@ -81,21 +81,21 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Username</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Username</font></label>
               <div class="col-md-8">
                 <input type="text" class="form-control" name="name" id="name" autofocus required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>E-Mail Address</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>E-Mail Address</font></label>
               <div class="col-md-8">
                 <input type="email" class="form-control" name="email" id="email" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Department</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Department</font></label>
               <div class="col-md-8">
                 <select class="form-control" name="dept_code" id="dept_code">
                      <option value="1">Purchasing</option>
@@ -109,7 +109,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Access Role</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Access Role</font></label>
               <div class="col-md-8">
                 <select class="form-control" name="role" id="role">
                      <option value="1">User</option>
@@ -121,14 +121,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Password</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Password</font></label>
               <div class="col-md-8">
                 <input type="password" class="form-control" name="password" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Confirm Password</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Confirm Password</font></label>
               <div class="col-md-8">
                 <input type="password" class="form-control" name="password1" required>
               </div>
