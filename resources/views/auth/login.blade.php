@@ -2,11 +2,11 @@
 
 @section('content')
 <center>
-	<big><big><big>
-		<font face='calibri' color='grey'><b><big>WELCOME</big><br/>SOLID (Aisin Operational Invoice Document)</b></font>
-	</big></big></big>
+	<div class="login-logo">
+        <font color='grey'>WELCOME</font><br/>
+        <font color='grey'><b>SOLID</b> (Aisin Operational Invoice Document)</font>
+    </div>
 </center>
-<br/><br/>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
@@ -30,27 +30,17 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+						<div class="form-group has-feedback">
+            				<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
+            				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          				</div>
+          				<div class="form-group has-feedback">
+            				<input type="password" class="form-control" name="password" placeholder="Password" required>
+            				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          				</div>
 						<div class="form-group">
-							<div class='input-group'>
-                  				<input type='email' class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required/>
-                    			<span class="input-group-addon">
-                      				<span class="glyphicon glyphicon-envelope"></span>
-                      			</span>
-                			</div>
-						</div>
-
-						<div class="form-group">
-							<div class='input-group'>
-                  				<input type='password' class="form-control" name="password" placeholder="Password" required/>
-                    			<span class="input-group-addon">
-                      				<span class="glyphicon glyphicon-lock"></span>
-                      			</span>
-                			</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-4 col-md-offset-9">
-								<button type="submit" class="btn btn-primary"><big><font face='calibri'><b>LOGIN</b></font></big></button>
+							<div class="col-md-4 col-md-offset-8">
+								<button type="submit" class="btn btn-primary btn-block btn-flat"><b>LOG IN</b></button>
 							</div>
 						</div>
 					</form>

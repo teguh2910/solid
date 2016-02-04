@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <font face='calibri' color='grey'><b><big><big><big>INVOICE READY TO PAY</big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
