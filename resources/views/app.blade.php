@@ -5,10 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>SOLID v1.0.1</title>
+	<title>SOLID v1.0.2</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 	
    	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
@@ -29,8 +31,7 @@
 				<a class="navbar-brand">
 					<big><font color='grey'><i class='glyphicon glyphicon-tasks'></i></font></big>
 					&nbsp;
-					<big><font face='calibri' color='grey'><big><b>SOLID</b></big><small><small><small>
-					v.1.0.1</small></small></small></font></big>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small>v1.0.2</small></small></span>
 				</a>
 			</div>
 
