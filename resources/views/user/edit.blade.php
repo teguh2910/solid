@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri' color='grey'><b><big><big><big>DATA USER</big></big></big></b></font><br/>
+            <font face='calibri' color='grey'><b><big><big><big><big>DATA USER</big></big></big></big></b></font><br/>
             <button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#myModal">
                 <font face='calibri'><b>CREATE USER</b></font>
             </button>
@@ -13,7 +13,7 @@
                 <table class="table table-striped table-bordered">
                 <thead>
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>NAME</font></small></center></th>
+                        <th><center><small><font face='calibri'>USERNAME</font></small></center></th>
                         <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
                         <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
                         <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                 @foreach ($user_all as $user_all)
-                <tr class='warning'>
+                <tr class='info'>
                     <td><font face='calibri'>{{ $user_all->name }}</font></td>
                     <td><font face='calibri'>{{ $user_all->email }}</font></td>
                     <td><font face='calibri'>
@@ -82,7 +82,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Name</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>Username</b></font></label>
               <div class="col-md-8">
                 <input type="text" class="form-control" name="name" id="name" autofocus required>
               </div>
@@ -157,13 +157,13 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-success">
         <div class="panel-heading"><center> <font face='calibri'>&nbsp;<b>UPDATE DATA USER</b></font></center></div>
-        <div class="panel-warning"><div class="panel-heading">
+        <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/user/save_edit') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @foreach ($user as $user)
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'><b>Name</b></font></label>
+              <label class="col-md-4 control-label"><font face='calibri'><b>Username</b></font></label>
               <div class="col-md-6">
                 <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" autofocus required>
                 <input type="hidden" class="form-control" name="id" id="id" value="{{$user->id}}" required>

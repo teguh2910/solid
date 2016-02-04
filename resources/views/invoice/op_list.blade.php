@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <font face='calibri' color="grey"><b><big><big><big>INVOICE ON PROGRESS</big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -35,7 +35,7 @@
                     if ($invoice->due_date < $date) {
                         echo"<tr class='danger'>";
                     } else {
-                        echo"<tr class='warning'>";
+                        echo"<tr class='info'>";
                     }
                     ?>
                     <td><font face='calibri'>
@@ -74,22 +74,22 @@
                     <font face='calibri'><center>
                     @if ($invoice->status=="1")
                         <b>Waiting User</b>
-                        <br/><small>( {{$invoice->tgl_input}} )</small>
+                        <br/><small>{{$invoice->tgl_input}}</small>
                     @elseif ($invoice->status=="2")
                         <b>Checked User</b>
-                        <br/><small>( {{$invoice->tgl_terima_user}} )</small>
+                        <br/><small>{{$invoice->tgl_terima_user}}</small>
                     @elseif ($invoice->status=="3")
                         <b>Approve Accounting</b>
-                        <br/><small>( {{$invoice->tgl_terima_act}} )</small>
+                        <br/><small>{{$invoice->tgl_terima_act}}</small>
                     @elseif ($invoice->status=="4")
                         <b>Checked Finance</b>
-                        <br/><small>( {{$invoice->tgl_terima_finance}} )</small>
+                        <br/><small>{{$invoice->tgl_terima_finance}}</small>
                     @elseif ($invoice->status=="5")
                         <b>Reject User</b>
-                        <br/><small>( {{$invoice->tgl_pending_user}} )</small>
+                        <br/><small>{{$invoice->tgl_pending_user}}</small>
                     @elseif ($invoice->status=="6")
                         <b>Reject Accounting</b>
-                        <br/><small>( {{$invoice->tgl_pending_act}} )</small>
+                        <br/><small>{{$invoice->tgl_pending_act}}</small>
                     @elseif ($invoice->status=="7")
                         <b>Reject Finance</b>
                     @endif

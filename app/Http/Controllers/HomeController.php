@@ -52,7 +52,10 @@ class HomeController extends Controller {
 							->get();
 		return view('invoice.user_list', compact('invoice','result','result2'));
 		} else if ($user->role == "2") {
-			$invoice = Invoice::where('status','2')->get();
+			$invoice = Invoice::where ( function ($q) {
+                $q->where('status','2')
+                    ->orWhere('status','7');
+                })->get();
 			return view('invoice.act_list', compact('invoice'));
 		} else if ($user->role == "3"){
 			$invoice = Invoice::where('status','3')->get();
@@ -168,7 +171,10 @@ class HomeController extends Controller {
 	public function invoice_pending_act($id)
 	{
 		$invoice = Invoice::where('id',$id)
-						->where('status','2')->get();
+						->where ( function ($q) {
+                			$q->where('status','2')
+                    		->orWhere('status','7');
+                			})->get();
 		return view('invoice.act_pending_view', compact('invoice'));
 	}
 

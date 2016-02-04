@@ -30,7 +30,7 @@
                     if ($invoice->due_date < $date) {
                         echo"<tr class='danger'>";
                     } else {
-                        echo"<tr class='warning'>";
+                        echo"<tr class='info'>";
                     }
                     $no_penerimaan=$invoice->no_penerimaan;
                 ?>
@@ -56,7 +56,7 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td bgcolor='#FFFFFF'>
+                    <td class='warning'>
                         <center>
                             <a href="{{ url('invoice/checked/act/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to approve invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                                 <font face='calibri'><b>Approve</b></font>

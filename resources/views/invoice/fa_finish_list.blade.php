@@ -43,7 +43,7 @@
                     if ($invoice->due_date < $date) {
                         echo"<tr class='danger'>";
                     } else {
-                        echo"<tr class='warning'>";
+                        echo"<tr class='info'>";
                     }
                     ?>
                     <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
@@ -67,7 +67,7 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td>
+                    <td class='warning'>
                         <center>
                             <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Finish invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                 <font face='calibri'><b>Finish</b></font>

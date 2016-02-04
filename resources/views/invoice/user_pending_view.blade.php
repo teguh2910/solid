@@ -51,23 +51,23 @@
             </table>
         </div>
     </div>
-    <div class="col-md-7 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-3">
     <div class="panel-body">
         <div class="panel panel-default">
-            <div class="panel-warning"><div class="panel-heading">
+            <div class="panel-success"><div class="panel-heading">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/pending/user/save') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <br/><div class="form-group" id="gr-pending">
-                    <label class="col-md-4 control-label"><font face='calibri'><b>Reject Reason</b></font></label>
-                    <div class="col-md-6">
+                    <label class="col-md-3 control-label"><font face='calibri'><b>Reject Reason</b></font></label>
+                    <div class="col-md-8">
                         <textarea name='remark' class="form-control" id='remark' autofocus required></textarea>
                         <input type='hidden' name='id' value='{{ $invoice->id }}'>
                         @endforeach
                     </div>
                 </div>
                 <div class="form-group" id="gr-button">
-                    <div class="col-md-6 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font></button>
+                    <div class="col-md-8 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font></button>
                         <button type="reset" id="gr-reset" class="btn btn-danger btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
                     </div>
                 </div>

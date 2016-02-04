@@ -1,23 +1,12 @@
 @extends('app')
 
 @section('content')
-<br/>
-<center><big><big>
-	<font face='calibri' color='grey'>
-		<marquee direction="left" scrollamount="4" onmouseover="this.stop();" onmouseout="this.start();" width="15%">
-			SALAM AKU PRIMA !! 
-		</marquee> 
-		<marquee direction="right" scrollamount="4" width="15%" onmouseover="this.stop();" onmouseout="this.start();">
-			CHAMPION !!
-		</marquee>
-	</font>
-</big></big></center>			
 <center>
-	<big><big><big><big><big>
-		<font face='calibri' color='grey'><b>SOLID</font><font face='calibri' color='grey'> (Aisin Operational Invoice Document)</b></font>
-	</big></big></big></big></big>
+	<div class="login-logo">
+        <font color='grey'>WELCOME</font><br/>
+        <font color='grey'><b>SOLID</b> (Aisin Operational Invoice Document)</font>
+    </div>
 </center>
-<br/><br/>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
@@ -30,7 +19,7 @@
 		<div class="col-md-4">
 			<center>
 			<div class="panel panel-success">
-				<div class="panel-heading"><big><big><big><font face='calibri'><b><center>SIGN IN</center></b></font></big></big></big></div>
+				<div class="panel-heading"><big><big><big><center><font face='calibri'><b>LOG IN</b></font></center></big></big></big></div>
 				<div class="panel-info"><div class="panel-heading">
 				<div class="panel-body">
 					@if (count($errors) > 0)
@@ -41,23 +30,17 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+						<div class="form-group has-feedback">
+            				<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
+            				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          				</div>
+          				<div class="form-group has-feedback">
+            				<input type="password" class="form-control" name="password" placeholder="Password" required>
+            				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          				</div>
 						<div class="form-group">
-							<label class="col-md-0 control-label"></label>
-							<div class="col-md-12">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-0 control-label"></label>
-							<div class="col-md-12">
-								<input type="password" class="form-control" name="password" placeholder="Password" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-md-1 col-md-offset-0">
-								<button type="submit" class="btn btn-primary"><big><font face='calibri'><b>LOGIN</b></font></big></button>
+							<div class="col-md-4 col-md-offset-8">
+								<button type="submit" class="btn btn-primary btn-block btn-flat"><b>LOG IN</b></button>
 							</div>
 						</div>
 					</form>
@@ -69,5 +52,5 @@
 		</div>
 	</div>
 </div>
-<br/><br/><br/>
+<br/><br/>
 @endsection

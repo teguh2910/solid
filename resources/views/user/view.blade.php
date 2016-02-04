@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri' color='grey'><b><big><big><big>DATA USER</big></big></big></b></font><br/>
+            <font face='calibri' color='grey'><b><big><big><big><big>DATA USER</big></big></big></big></b></font><br/>
             <button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#myModal">
                 <font face='calibri'><b>CREATE USER</b></font>
             </button>
@@ -12,7 +12,7 @@
                 <table class="table table-striped table-bordered">
                 <thead>
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>NAME</font></small></center></th>
+                        <th><center><small><font face='calibri'>USERNAME</font></small></center></th>
                         <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
                         <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
                         <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                 @foreach ($user as $user)
-                <tr class='warning'>
+                <tr class='info'>
                     <td><font face='calibri'>{{ $user->name }}</font></td>
                     <td><font face='calibri'>{{ $user->email }}</font></td>
                     <td><font face='calibri'>
@@ -55,11 +55,11 @@
                                 <i class="glyphicon glyphicon-pencil"></i>
                         </a>
                         <a href="{{ url('user/reset/'.$user->id) }}" class="btn btn-info btn-xs"
-                            onclick="return confirm('Are you sure to reset password this user to aiia?')">
+                            onclick="return confirm('Are you sure to reset password username \'{{$user->name}}\' to aiia?')">
                                 <i class="glyphicon glyphicon-refresh"></i>
                         </a>
                         <a href="{{ url('user/delete/'.$user->id) }}" class="btn btn-danger btn-xs"
-                            onclick="return confirm('Are you sure to delete this user?')">
+                            onclick="return confirm('Are you sure to delete username \'{{$user->name}}\' ?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                         </a></center>
                     </td>
@@ -81,21 +81,21 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Name</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Username</font></label>
               <div class="col-md-8">
                 <input type="text" class="form-control" name="name" id="name" autofocus required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>E-Mail Address</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>E-Mail Address</font></label>
               <div class="col-md-8">
                 <input type="email" class="form-control" name="email" id="email" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Department</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Department</font></label>
               <div class="col-md-8">
                 <select class="form-control" name="dept_code" id="dept_code">
                      <option value="1">Purchasing</option>
@@ -109,7 +109,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Access Role</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Access Role</font></label>
               <div class="col-md-8">
                 <select class="form-control" name="role" id="role">
                      <option value="1">User</option>
@@ -121,14 +121,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Password</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Password</font></label>
               <div class="col-md-8">
                 <input type="password" class="form-control" name="password" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Confirm Password</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'>Confirm Password</font></label>
               <div class="col-md-8">
                 <input type="password" class="form-control" name="password1" required>
               </div>

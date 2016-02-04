@@ -4,10 +4,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SOLID v1.0s</title>
+
+	<title>SOLID v1.0.2</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 	
    	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
@@ -26,16 +29,9 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					@if (Auth::guest())
-					<big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
-						<font face='calibri'>Welcome to</font> </big><big><big><font face='calibri'><b>SOLID</b> 
-						<small><small><small><small><small>v1.0</small></small></small></small></small></font></big></big> 
-					@else 
-					<big><big><i class='glyphicon glyphicon-tasks'></i>&nbsp;
-						<big><font face='calibri'><b>SOLID</b> 
-						<small><small><small><small><small>v1.0</small></small></small></small></small>
-					</font></big></big></big> 
-					@endif
+					<big><font color='grey'><i class='glyphicon glyphicon-tasks'></i></font></big>
+					&nbsp;
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small>v1.0.2</small></small></span>
 				</a>
 			</div>
 
@@ -133,8 +129,7 @@
 						<li>
 							<a href="{{ url('/auth/logout') }}">
 								<button class="btn btn-danger btn-sm">
-									<span class='glyphicon glyphicon-off'></span> 
-									<font face='calibri'><b>LOGOUT</b></font>
+									<big><span class='glyphicon glyphicon-off'></span></big> 
 								</button>
 							</a>
 						</li>
@@ -161,7 +156,7 @@
     			<ol class="breadcrumb">
   				<li>
   					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by Merio, MIS Department)
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by MIS Department)
     			</font></li>
 				</ol>
     		</center>
