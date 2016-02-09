@@ -18,7 +18,7 @@
                 </li>
             </ul>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -69,7 +69,7 @@
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td class='warning'>
                         <center>
-                            <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to Finish invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
+                            <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-flat btn-xs" onclick="return confirm('Are you sure to Finish invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                 <font face='calibri'><b>Finish</b></font>
                             </a>
                         </center>

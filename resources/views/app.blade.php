@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>SOLID v1.0.2</title>
+	<title>SOLID v1.0.3</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -29,9 +29,8 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					<big><font color='grey'><i class='glyphicon glyphicon-tasks'></i></font></big>
-					&nbsp;
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small>v1.0.2</small></small></span>
+					<font color='grey'><i class='glyphicon glyphicon-tasks'></i></font>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.0.3</small></small></small></span>
 				</a>
 			</div>
 
@@ -93,7 +92,11 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 					<ul class="nav navbar-nav">
-						<li><a href="//172.18.3.7/sinta/public"><button class='btn btn-warning btn-sm'><font face='calibri'>&nbsp;<b>NEED HELP ?</b></font></button></a></li>
+						<li><a href="//172.18.3.7/sinta/public">
+							<button class="btn btn-primary btn-flat btn-sm">
+							<i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Need Help?
+						</button>
+                  	</a></li>
 					</ul>
 					@else
 						<?php
@@ -120,7 +123,7 @@
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li>
-									<a href="{{ url('/edit_password') }}">
+									<a  data-toggle="modal" data-target="#changePassword">
 										<font face='calibri'>CHANGE PASSWORD</font>
 									</a>
 								</li>
@@ -128,8 +131,8 @@
 						</li>
 						<li>
 							<a href="{{ url('/auth/logout') }}">
-								<button class="btn btn-danger btn-sm">
-									<big><span class='glyphicon glyphicon-off'></span></big> 
+								<button class="btn bg-maroon btn-flat btn-sm">
+									<div ><span class='glyphicon glyphicon-off'></span></div>
 								</button>
 							</a>
 						</li>
@@ -149,7 +152,50 @@
 			</div>
 		</div>
 	</div>
+
 	@yield('content')
+	<div id="changePassword" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-info">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><font face='calibri'><b>CHANGE PASSWORD</b></font></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/save_edit_password') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"><font face='calibri'>Current Password</font></label>
+              <div class="col-md-6">
+                <input type="password" class="form-control" name="password1" id="password1" autofocus required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label"><font face='calibri'>New Password</font></label>
+              <div class="col-md-6">
+                <input type="password" class="form-control" name="password2" id="password2" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label"><font face='calibri'>Confirm New Password</font></label>
+              <div class="col-md-6">
+                <input type="password" class="form-control" name="password3" id="password3" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary btn-flat">
+                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>UPDATE</b></font>
+                </button>
+              </div>
+            </div>
+          </form>
+                </div>
+            </div>
+        </div>
+    </div>
 	<div class="col-md-10 col-md-offset-1">
     	<div>
     		<center>
@@ -164,6 +210,7 @@
 	</div>
 </body>
 </html>
+
 <head>
 <style>
 body{
