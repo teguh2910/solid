@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri' color="grey"><b><big><big><big>INVOICE ON PROGRESS</big></big></big></b></font>
+            <font face='calibri' color="grey"><b><big><big><big><span class='label label-info'>INVOICE ON PROGRESS</span></big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered">
                 <thead>
@@ -71,6 +71,7 @@
                         echo"<td class='warning'>";
                     }
                     ?>
+                    <a href="{{ url('invoice/approval/detail/'.$invoice->id) }}">
                     <font face='calibri'><center>
                     @if ($invoice->status=="1")
                         <b>Waiting User</b>
@@ -93,18 +94,25 @@
                     @elseif ($invoice->status=="7")
                         <b>Reject Finance</b>
                     @endif
-                    </center></font></td>
+                    </center></font></a></td>
                      @if (Auth::user()->role == "4")
-                        <td><center><a href="{{ url('invoice/delete/'.$invoice->id) }}" class="btn btn-danger btn-xs"
-                            onclick="return confirm('Are you sure to delete invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
-                                <i class="glyphicon glyphicon-trash"></i>
-                        </a></center></td>
+                        <td class='warning'>
+                            <center>
+                                <a href="{{ url('invoice/update/'.$invoice->id) }}" class="btn btn-info btn-flat btn-xs">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a> 
+                                <a href="{{ url('invoice/delete/'.$invoice->id) }}" class="btn btn-danger btn-flat btn-xs"
+                                onclick="return confirm('Are you sure to delete invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </center>
+                        </td>
                     @else
                     @endif
                 </tr>
                 @endforeach
             @else
-                <tr class='warning'>
+                <tr class='info'>
                     @if (Auth::user()->role == "4")
                     <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                     @else

@@ -17,9 +17,11 @@
                     </a>
                 </li>
             </ul>
-                <br/><font face='calibri' color='grey'><b>LIST INVOICE REJECT FROM ACCOUNTING</b></font></font>
+                <br/><font face='calibri' color='grey'>
+                <big><span class='label label-info'><b>LIST INVOICE REJECT FROM ACCOUNTING</b></span></big>
+            </font>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -70,13 +72,13 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td><font face='calibri'><small><b>{{ $invoice->remark_act }}</b><br/> ( {{$invoice->tgl_pending_act}} )</small></font></td>
+                    <td><font face='calibri'><small><b>{{ $invoice->remark_act }}</b><br/>{{$invoice->tgl_pending_act}}</small></font></td>
                     <td class='warning'>
                         <center>
-                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
+                            <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-info btn-flat btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
-                            <a href="{{ url('invoice/reject/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
+                            <a href="{{ url('invoice/reject/user/'.$invoice->id) }}" class="btn btn-danger btn-flat btn-xs">
                                 <font face='calibri'><b>Reject</b></font>
                             </a>
                         </center>

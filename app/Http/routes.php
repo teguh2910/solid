@@ -42,6 +42,9 @@ Route::get('invoice/delete/{id}', 'HomeController@invoice_delete');
 Route::get('invoice/detail/{id}', 'HomeController@invoice_detail');
 Route::get('invoice/reject/user/{id}', 'HomeController@invoice_reject_user');
 Route::get('invoice/reject/fa/{id}', 'HomeController@invoice_reject_fa');
+Route::get('invoice/update/{id}', 'HomeController@invoice_update');
+Route::post('invoice/update/save', 'HomeController@invoice_update_save');
+Route::get('invoice/approval/detail/{id}', 'HomeController@invoice_approval_detail');
 
 Route::get('user/create', 'HomeController@user_create');
 Route::get('edit_password', 'HomeController@edit_password');

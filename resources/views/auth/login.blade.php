@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+
 <center>
 	<div class="login-logo">
         <font color='grey'>WELCOME</font><br/>
@@ -10,10 +11,10 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7">
-					<div class="item active">
-						<center>
-							<img src="{{ asset('img/bg.JPG') }}" width='75%' class="img-thumbnail img-responsive">
-						</center>
+			<div class="item active">
+				<center>
+					<img src="{{ asset('img/bg.JPG') }}" width='75%' class="img-responsive img-thumbnail">
+				</center>
 			</div>
 		</div>
 		<div class="col-md-4">
@@ -24,7 +25,7 @@
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Pft!</strong> invalid E-Mail Address or Password<br>
+							<strong>Pft,</strong> invalid E-Mail Address or Password<br>
 						</div>
 					@endif
 
@@ -39,8 +40,8 @@
             				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
           				</div>
 						<div class="form-group">
-							<div class="col-md-4 col-md-offset-8">
-								<button type="submit" class="btn btn-primary btn-block btn-flat"><b>LOG IN</b></button>
+							<div class="col-md-4 col-md-offset-9">
+								<button type="submit" class="btn btn-primary btn-flat"><b>LOG IN</b></button>
 							</div>
 						</div>
 					</form>
