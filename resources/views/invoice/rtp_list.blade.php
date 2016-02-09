@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri' color='grey'><b><big><big><big>INVOICE READY TO PAY</big></big></big></b></font>
+            <font face='calibri' color='grey'><b><big><big><big><span class='label label-info'>INVOICE READY TO PAY</span></big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered">
                 <thead>

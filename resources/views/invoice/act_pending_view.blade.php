@@ -3,10 +3,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-        	<a href="{{ url('home') }}"><button class='btn btn-info btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+        	<a href="{{ url('home') }}"><button class='btn btn-info btn-flat btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
             <br/>
             <div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -29,7 +29,7 @@
                     if ($invoice->due_date < $date) {
                         echo"<tr class='danger'>";
                     } else {
-                        echo"<tr class='warning'>";
+                        echo"<tr class='info'>";
                     }
                     ?>
                     <td><font face='calibri'>{{ $invoice->no_penerimaan }}</font></td>
@@ -74,8 +74,8 @@
                 </div>
                 <div class="form-group" id="gr-button">
                     <div class="col-md-8 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font></button>
-                        <button type="reset" id="gr-reset" class="btn btn-danger btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
+                        <button type="submit" class="btn btn-primary btn-flat btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font></button>
+                        <button type="reset" id="gr-reset" class="btn btn-danger btn-flat btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
                     </div>
                 </div>
             </form>

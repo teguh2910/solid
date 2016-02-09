@@ -481,7 +481,7 @@ class HomeController extends Controller {
           	if ($pwd1 == NULL or $pwd2 == NULL or $pwd3 == NULL){
           		\Session::flash('flash_type','alert-danger');
         		\Session::flash('flash_message','Error, there columns that you have not fill');
-          		return redirect('edit_password');
+          		return redirect('/');
           	} else {
             	if (\Hash::check($pwd1, $user->password)){
             		if ($pwd2 == $pwd3) {
@@ -493,14 +493,46 @@ class HomeController extends Controller {
 		            } else {
         		    	\Session::flash('flash_type','alert-danger');
         				\Session::flash('flash_message','Error, your administrator password incorrect');
-          		       	return redirect('edit_password');
+          		       	return redirect('/');
             		}
             	} else {
             		\Session::flash('flash_type','alert-danger');
         			\Session::flash('flash_message','Error, your new password combination do not match');
-          		    return redirect('edit_password');
+          		    return redirect('/');
             	}
         	}
+	}
+
+	public function invoice_update($id)
+	{
+		$invoice = Invoice::where('id',$id)->get();
+		return view('invoice.invoice_update', compact('invoice'));
+	}
+
+	public function invoice_update_save()
+	{
+		$input = \Input::all();
+		$id = $input['id'];
+		$invoice = Invoice::findOrFail($id);
+		$invoice->no_penerimaan = $input['no_penerimaan'];
+		$invoice->dept_code = $input['dept_code'];
+		$invoice->vendor = $input['vendor'];
+		$invoice->tgl_terima = $input['tgl_terima'];
+		$invoice->doc_no = $input['doc_no'];
+		$invoice->doc_date = $input['doc_date'];
+		$invoice->due_date = $input['due_date'];
+		$invoice->curr = $input['curr'];
+		$invoice->amount = $input['amount'];
+		$invoice->doc_no_2 = $input['doc_no_2'];
+        $invoice->save();
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Invoice was successfully updated');
+        return redirect('invoice/op');
+	}
+	public function invoice_approval_detail($id)
+	{
+		$invoice = Invoice::where('id',$id)->get();
+		return view('invoice.invoice_approval_detail', compact('invoice'));
 	}
 
 }

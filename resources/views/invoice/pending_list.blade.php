@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-md-12">
             <font face='calibri' color='grey'><b><big><big><big>INVOICE REJECT</big></big></big></b>
-            <br/><b>LIST INVOICE REJECT FROM USER</b>
+            <br/><big><span class='label label-info'><b>LIST INVOICE REJECT FROM USER</b></span></big>
             </font>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -58,10 +58,10 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td><font face='calibri'><small><b>{{ $invoice->remark }}</b> <br/>( {{$invoice->tgl_pending_user}} )</small></font></td>
+                    <td><font face='calibri'><small><b>{{ $invoice->remark }}</b> <br/>{{$invoice->tgl_pending_user}}</small></font></td>
                     <td class='warning'>
                         <center>
-                            <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
+                            <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-flat btn-info btn-xs" onclick="return confirm('Are you sure to checked invoice with no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                                 <font face='calibri'><b>Checked</b></font>
                             </a>
                         </center>
@@ -69,7 +69,7 @@
                 </tr>
                 @endforeach
             @else
-                <tr class='warning'>
+                <tr class='info'>
                     <td colspan="12"><center><font face='calibri'><b>No record to display</b></font></center></td>
                 </tr>
             @endif
