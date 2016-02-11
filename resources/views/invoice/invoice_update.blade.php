@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ url('/invoice/op') }}"><button class='btn btn-info btn-sm btn-flat'><font face='calibri'><b>BACK</b></font></button></a>
+            <a href="{{ url('/invoice/op') }}"><button class='btn btn-info btn-sm btn-flat'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
             <br/>
           <div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered">
