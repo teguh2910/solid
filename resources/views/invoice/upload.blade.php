@@ -32,7 +32,7 @@
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary btn-flat">
-                  <span class='glyphicon glyphicon-import'></span> <font face='calibri'><b>IMPORT</b></font>
+                  <span class='glyphicon glyphicon-upload'></span> <font face='calibri'><b>IMPORT</b></font>
                 </button>
               </div>
             </div>

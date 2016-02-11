@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>SOLID v1.0.3</title>
+	<title>SOLID v1.1</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -29,8 +29,8 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand">
-					<font color='grey'><i class='glyphicon glyphicon-tasks'></i></font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.0.3</small></small></small></span>
+					<font color='grey'><i class='glyphicon glyphicon-list-alt'></i>&nbsp;</font>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1</small></small></small></span>
 				</a>
 			</div>
 
@@ -94,7 +94,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="//172.18.3.7/sinta/public">
 							<button class="btn btn-primary btn-flat btn-sm">
-							<i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;Need Help?
+							<i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;NEED HELP?
 						</button>
                   	</a></li>
 					</ul>
@@ -118,7 +118,7 @@
 						?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<font face='calibri'>{{$par}}, <b>{{ Auth::user()->name }}</b></font>
+								<i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;<font face='calibri'>{{$par}}, <b>{{ Auth::user()->name }}</b></font>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
@@ -202,7 +202,7 @@
     			<ol class="breadcrumb">
   				<li>
   					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by MIS Department)
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
     			</font></li>
 				</ol>
     		</center>

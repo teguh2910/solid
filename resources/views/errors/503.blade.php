@@ -34,8 +34,7 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Hello, now SOLID is LIVE,
-				click <a href='http://172.18.3.7/solid/public'>here</a> to access</div>
+				<div class="title">Under Maintenance :'(</div>
 			</div>
 		</div>
 	</body>

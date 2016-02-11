@@ -54,4 +54,7 @@ class Invoice extends Model {
     		return 0;
     	}
     }
+
+    
+
 }

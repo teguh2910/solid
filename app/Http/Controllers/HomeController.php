@@ -66,7 +66,9 @@ class HomeController extends Controller {
 		return view('invoice.fa_list', compact('invoice','result','result2'));
 		} else if ($user->role == "4"){
 			$invoice = Invoice::where('status','!=','8')->get();
-			return view('invoice.op_list', compact('invoice'));
+			$queries = DB::select('select count(id) as a from invoice where status!="8"');
+        	$result = new Collection($queries);
+			return view('invoice.op_list', compact('invoice','result'));
 		} else {
 			return redirect('auth/logout') ;
 		}
@@ -308,7 +310,9 @@ class HomeController extends Controller {
 	public function invoice_op_list()
 	{
 		$invoice = Invoice::where('status','!=','8')->get();
-		return view('invoice.op_list', compact('invoice'));
+		$queries = DB::select('select count(id) as a from invoice where status!="8"');
+        $result = new Collection($queries);
+		return view('invoice.op_list', compact('invoice','result'));
 	}
 
 	public function invoice_rtp_user()
@@ -326,7 +330,9 @@ class HomeController extends Controller {
 		$invoice = Invoice::where('status','!=','8')
 							->where('dept_code',$user->dept_code)
 							->get();
-		return view('invoice.op_list', compact('invoice'));
+		$queries = DB::select('select count(id) as a from invoice where status!="8" and dept_code="'.$user->dept_code.'"');
+        $result = new Collection($queries);
+		return view('invoice.op_list', compact('invoice','result'));
 	}
 
 	public function invoice_pending_user_checked($id)

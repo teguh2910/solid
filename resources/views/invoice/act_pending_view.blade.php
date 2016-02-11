@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-        	<a href="{{ url('home') }}"><button class='btn btn-info btn-flat btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+        	<a href="{{ url('home') }}"><button class='btn btn-info btn-flat btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
             <br/>
             <div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered">

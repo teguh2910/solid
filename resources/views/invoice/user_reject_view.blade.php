@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ url('/invoice/user/reject/list') }}"><button class='btn btn-info btn-flat btn-sm'><font face='calibri'><b>BACK</b></font></button></a>
+            <a href="{{ url('/invoice/user/reject/list') }}"><button class='btn btn-info btn-flat btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
             <br/>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered">
@@ -55,7 +55,7 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td><small><font face='calibri'><b>{{ $invoice->remark_act }}</b></font></small></td>
+                    <td><small><font face='calibri'><b>{{ $invoice->remark_act }}</b><br/>{{$invoice->tgl_pending_act}}</font></small></td>
                 </tr>
                 </tbody>
             </table>

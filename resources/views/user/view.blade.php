@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <font face='calibri' color="grey"><b><big><big><big>DATA USER</big></big></big></b></font><br/>
             <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal">
-                <font face='calibri'><b>CREATE USER</b></font>
+                <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>CREATE USER</b></font>
             </button>
             <br/>
         	<div class="clearfix">&nbsp;</div>
