@@ -10,14 +10,8 @@
 </center>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-7">
-			<div class="item active">
-				<center>
-					<img src="{{ asset('img/bg.JPG') }}" width='75%' class="img-responsive img-thumbnail">
-				</center>
-			</div>
-		</div>
-		<div class="col-md-4">
+
+		<div class="col-md-4 col-md-offset-4">
 			<center>
 			<div class="panel panel-success">
 				<div class="panel-heading"><big><big><big><center><font face='calibri'><b>LOG IN</b></font></center></big></big></big></div>
