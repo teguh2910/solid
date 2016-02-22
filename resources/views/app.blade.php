@@ -30,7 +30,7 @@
 				</button>
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-list-alt'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1.1</small></small></small></span>
 				</a>
 			</div>
 
