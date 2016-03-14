@@ -173,9 +173,12 @@ class StockController extends Controller {
 
 	 public function input_transaction()
 	 { 
-	 	 $m_part=m_part::all();
-         $t_transaction=t_transaction::all();
-	 	 return view('stock.input_transaction',compact('m_part','t_transaction'));
+
+	 	  $input =\Input::all();
+	 	  $t_transaction=t_transaction::all();
+	 	  $part_number=$input['part_number'];
+	 	  $m_part=m_part::where('part_number','=',$part_number)->get();
+     	 	 return view('stock.input_transaction',compact('m_part','t_transaction'));
 	
 	 }
 
