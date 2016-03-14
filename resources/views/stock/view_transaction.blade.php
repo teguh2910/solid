@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @if (count($t_transaction) > 0)
                     @foreach ($m_part as $v)
                     <tr bgcolor='#FFFFFF'>
                         <td><font face='calibri'>{{ $v->back_number }}</font></td>
@@ -41,13 +41,13 @@
                         <td><font face='calibri'>{{ $k->amount_box }}</font></td>
                         <td><font face='calibri'>{{ $k->amount_pcs }}</font></td>
                         <td><font face='calibri'>{{ $k->total_pcs }}</font></td>
-                        @endforeach
                     </tr>
-                   
+                    @endforeach
+                   @else
                     <tr class='info'>
                         <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
-                    
+                    @endif
                 </tbody>
             </table>
         </section>
@@ -65,10 +65,10 @@
                     <h4 class="modal-title"><font face='calibri'><b>CREATE TRANSACTION</b></font></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/input_transaction') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
-    
+          
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Plant Type</b></font></label>
               <div class="col-md-7">
@@ -79,35 +79,43 @@
                 </select>
               </div>
             </div>
-
+              
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Area Code</b></font></label>
               <div class="col-md-7">
                 <select class="form-control select2" name="code_area" id="code_area" style="width: 100%;" required >
-                    @foreach ($m_area as $m_area)
-                     <option selected disabled="">Select Area Code </option>
-                     <option value="{{ $m_area->code_area }}">{{ $m_area->code_area }}</option>
-                   
+                   <option selected disabled="">Select Area Code </option>
+                   @foreach ($m_area as $m_area)  
+                   <option value="{{ $m_area->code_area }}">{{ $m_area->code_area }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
+
 
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Area Name</b></font></label>
               <div class="col-md-7">
                <select class="form-control select2" name="name_area" id="name_area" style="width: 100%;" required >
-                
                  <option selected disabled="">Select Area Name</option>
-                 <option value="{{ $m_area->name_area }}">{{ $m_area->name_area }}</option>
+                 @foreach ($m_area2 as $m_area2)  
+                 <option value="{{ $m_area2->name_area }}">{{ $m_area2->name_area }}</option> 
                  @endforeach
+                 
                </select>
               </div>
             </div>
-
+             
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Part Number</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>Part Number/Back Number</b></font></label>
               <div class="col-md-7">
-                  <input type='text' class="form-control" name="part_number" id="part_number" required>
+                <select class="form-control select2" name="part_number" id="part_number" style="width: 100%;" required >
+                 <option selected disabled="">Select Part Number/Back Number</option>
+                  @foreach ($m_part as $m_part)
+                 <option value="{{ $m_part->part_number }}">{{ $m_part->part_number }}</option>
+                 <option value="{{ $m_part->back_number }}">{{ $m_part->back_number }}</option>
+                 @endforeach  
+               </select>
                 </div>
               </div>
            

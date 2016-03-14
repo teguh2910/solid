@@ -167,15 +167,16 @@ class StockController extends Controller {
         $m_part=m_part::all();
 	 	$t_transaction=t_transaction::all();
 	 	$m_area=m_area::all();
-	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area'));
+	 	$m_area2=m_area::all();
+	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
 	 }
 
-	 public function save_transaction()
-	 {
-
-
-
-
+	 public function input_transaction()
+	 { 
+	 	 $m_part=m_part::all();
+         $t_transaction=t_transaction::all();
+	 	 return view('stock.input_transaction',compact('m_part','t_transaction'));
+	
 	 }
 
 
