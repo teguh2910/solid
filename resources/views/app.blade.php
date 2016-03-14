@@ -12,11 +12,21 @@
 	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
 	
    	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
    	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('/js/select2.full.min.js') }}"></script>
+
+
+	<script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -88,6 +98,39 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
+				<ul class="nav navbar-nav">
+							<li><a class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+								<font face='calibri'><b>STOCK</b></font> 
+								<span class="caret"></span>
+								<span class="sr-only"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="{{ url('stock/view_area') }}">
+										<font face='calibri'><i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											AREA
+										</font>
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('/stock/view_part') }}">
+										<font face='calibri'>
+											<i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											PART
+										</font>
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('/stock/view_transaction') }}">
+										<font face='calibri'>
+											<i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											TRANSACTION
+										</font>
+									</a>
+								</li>
+								</li>
+							</ul>
+						</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())

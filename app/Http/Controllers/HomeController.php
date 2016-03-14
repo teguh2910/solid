@@ -2,6 +2,7 @@
 use App\Invoice;
 use App\CsvHelper;
 use App\User;
+use App\Stock;
 use DB;
 use Illuminate\Support\Collection; 
 use Illuminate\Http\Request;

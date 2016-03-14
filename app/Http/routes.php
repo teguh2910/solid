@@ -55,6 +55,21 @@ Route::get('user/edit/{id}', 'HomeController@user_edit');
 Route::get('user/delete/{id}', 'HomeController@user_delete');
 Route::get('user/reset/{id}', 'HomeController@user_reset');
 Route::post('user/save_edit', 'HomeController@save_edit');
+
+Route::get('stock/view_area','StockController@view_area');
+Route::post('stock/save_area','StockController@save_area');
+Route::get('stock/edit_area/{id}', 'StockController@edit_area');
+Route::post('stock/save_edit_area', 'StockController@save_edit_area');
+Route::get('stock/delete_area/{id}', 'StockController@delete_area');
+
+Route::get('stock/view_part','StockController@view_part');
+Route::post('stock/save_part','StockController@save_part');
+Route::get('stock/edit_part/{id}', 'StockController@edit_part');
+Route::post('stock/save_edit_part', 'StockController@save_edit_part');
+Route::get('stock/delete_part/{id}', 'StockController@delete_part');
+
+Route::get('stock/view_transaction','StockController@view_transaction');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
