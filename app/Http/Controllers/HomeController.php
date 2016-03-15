@@ -2,6 +2,9 @@
 use App\Invoice;
 use App\CsvHelper;
 use App\User;
+use App\m_area;
+use App\m_part;
+use App\t_transaction;
 use App\Stock;
 use DB;
 use Illuminate\Support\Collection; 
@@ -70,7 +73,15 @@ class HomeController extends Controller {
 			$queries = DB::select('select count(id) as a from invoice where status!="8"');
         	$result = new Collection($queries);
 			return view('invoice.op_list', compact('invoice','result'));
-		} else {
+		}else if ($user->role == "5"){
+			
+        $m_part=m_part::all();
+	 	$m_area=m_area::all();
+	 	$m_area2=m_area::all();
+	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->get();
+	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
+		}else {
 			return redirect('auth/logout') ;
 		}
 	}

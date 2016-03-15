@@ -1,13 +1,12 @@
 @extends('app')
 
 @section('content')
-<div class="row mt">
-<div class="col-lg-12">
-<div class="content-panel">
-<div class="container-fluid">
-  <div class="row">
-
-        <h4 class="mb"><i class="fa fa-angle-right"></i> UPDATE PART</h4>
+<div class="container">
+   <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><center><span class='glyphicon glyphicon-pencil'></span> <font face='calibri'>&nbsp;<font face='calibri'><big><b>EDIT PART</b></big></font></center></div>
+        <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
          @if (count($m_part) > 0)
         @foreach ($m_part as $k => $v)             

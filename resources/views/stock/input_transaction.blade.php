@@ -40,7 +40,6 @@
               <div class="col-md-5">
                 <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs">
               </div>
-              </div>
             </div>
 
             
