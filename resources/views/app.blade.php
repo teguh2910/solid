@@ -131,6 +131,40 @@
 								</li>
 							</ul>
 						</ul>
+					@elseif (Auth::user()->role == "5")	
+					<ul class="nav navbar-nav">
+							<li><a class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+								<font face='calibri'><b>STOCK</b></font> 
+								<span class="caret"></span>
+								<span class="sr-only"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="{{ url('stock/view_area') }}">
+										<font face='calibri'><i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											AREA
+										</font>
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('/stock/view_part') }}">
+										<font face='calibri'>
+											<i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											PART
+										</font>
+									</a>
+								</li>
+								<li>
+									<a href="{{ url('/stock/view_transaction') }}">
+										<font face='calibri'>
+											<i class='glyphicon glyphicon-th-list'></i>&nbsp; 
+											TRANSACTION
+										</font>
+									</a>
+								</li>
+								</li>
+							</ul>
+						</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())

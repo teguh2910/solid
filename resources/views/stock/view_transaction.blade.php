@@ -29,18 +29,17 @@
                 </thead>
                 <tbody>
                     @if (count($t_transaction) > 0)
-                    @foreach ($m_part as $v)
+                      @foreach($t_transaction as $k)
                     <tr bgcolor='#FFFFFF'>
-                        <td><font face='calibri'>{{ $v->back_number }}</font></td>
-                        <td><font face='calibri'>{{ $v->part_number }}</font></td>
-                        <td><font face='calibri'>{{ $v->part_name }}</font></td>
-                        <td><font face='calibri'>{{ $v->qty_box }}</font></td>
-                        <td><font face='calibri'>{{ $v->unit }}</font></td>
-                        @endforeach
-                     @foreach($t_transaction as $k)
+                        <td><font face='calibri'>{{ $k->back_number }}</font></td>
+                        <td><font face='calibri'>{{ $k->part_number }}</font></td>
+                        <td><font face='calibri'>{{ $k->part_name }}</font></td>
+                        <td><font face='calibri'>{{ $k->qty_box }}</font></td>
+                        <td><font face='calibri'>{{ $k->unit }}</font></td>
                         <td><font face='calibri'>{{ $k->amount_box }}</font></td>
                         <td><font face='calibri'>{{ $k->amount_pcs }}</font></td>
                         <td><font face='calibri'>{{ $k->total_pcs }}</font></td>
+
                     </tr>
                     @endforeach
                    @else
@@ -135,7 +134,7 @@
         </div>
     </div>
 </div>
-     
+</div>
 @if (count($t_transaction) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/js/dataTables.bootstrap.js')}}"></script>

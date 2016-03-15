@@ -165,9 +165,10 @@ class StockController extends Controller {
 	 {
 
         $m_part=m_part::all();
-	 	$t_transaction=t_transaction::all();
 	 	$m_area=m_area::all();
 	 	$m_area2=m_area::all();
+	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->get();
 	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
 	 }
 
@@ -175,11 +176,38 @@ class StockController extends Controller {
 	 { 
 
 	 	  $input =\Input::all();
-	 	  $t_transaction=t_transaction::all();
+	 	  $t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number');
+	 	                             
 	 	  $part_number=$input['part_number'];
 	 	  $m_part=m_part::where('part_number','=',$part_number)->get();
      	 	 return view('stock.input_transaction',compact('m_part','t_transaction'));
 	
+	 }
+
+	 public function save_transaction()
+	 {
+        $input = \Input::all();
+        $part_number=$input['part_number'];
+        $a=$input['amount_box'];
+       	$b=$input['amount_pcs'];
+
+        $m_part=m_part::where('part_number',$part_number)->get();
+        foreach ($m_part as $m_part) {
+        	$qty_box = $m_part->qty_box;
+        }
+        $t_transaction     = new t_transaction;
+       	$total1=$a*$qty_box;
+       	$total_pcs=$total1+$b;
+       	
+		$t_transaction->part_number   =$input['part_number'];
+		$t_transaction->amount_box    =$input['amount_box'];
+		$t_transaction->amount_pcs    =$input['amount_pcs'];
+		$t_transaction->total_pcs    =$total_pcs;
+		$t_transaction->save();
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Area was successfully created');
+	 	return redirect('stock/view_transaction');  
+
 	 }
 
 

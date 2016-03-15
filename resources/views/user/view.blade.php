@@ -48,6 +48,8 @@
                         Finance
                     @elseif ($user->role == '4')
                         Cashier
+                    @elseif ($user->role == '5')
+                        Inventory   
                     @endif
                     </font></td>
                     <td class='warning'><center>
@@ -116,6 +118,7 @@
                      <option value="2">Accounting</option>
                      <option value="3">Finance</option>
                      <option value="4">Cashier</option>
+                     <option value="5">Inventory</option>
                 </select>
               </div>
             </div>

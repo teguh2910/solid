@@ -70,7 +70,7 @@ Route::get('stock/delete_part/{id}', 'StockController@delete_part');
 
 Route::get('stock/view_transaction','StockController@view_transaction');
 Route::post('stock/input_transaction','StockController@input_transaction');
-
+Route::post('stock/save_transaction','StockController@save_transaction');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

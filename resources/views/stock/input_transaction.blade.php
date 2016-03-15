@@ -14,7 +14,7 @@
         <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
           
-        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_amount') }}">
+        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             
             <div class="form-group">
@@ -25,12 +25,13 @@
               @endforeach
               </div>
             </div>
-             
+
+            
            
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'>Amount of Box</font></label>
               <div class="col-md-8">
-                <input type="integer" class="form-control" name="amount_box" id="amount_box" required>
+                <input type="number" class="form-control" name="amount_box" id="amount_box" required>
               </div>
             </div>
 
@@ -39,14 +40,9 @@
               <div class="col-md-5">
                 <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs">
               </div>
-            </div>
-
-              <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Total of PCS</font></label>
-              <div class="col-md-5">
-                <input type="number" class="form-control" name="total_pcs"  id="total_pcs">
               </div>
             </div>
+
             
             <div class="form-group">
               <div class="col-md-8 col-md-offset-3">
