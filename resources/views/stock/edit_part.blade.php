@@ -13,11 +13,23 @@
         <form class="form-horizontal" role="form" method="POST" action="{{ url('stock/save_edit_part') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+             <div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label">ID AREA</label>
+              <div class="col-md-10">
+                <input type="hidden" name="id" value="{{ $v->id }}">
+                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
+                   <option selected disabled="">Select ID Code </option>
+                   @foreach ($m_area as $m_area)  
+                   <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="col-sm-2 col-sm-2 control-label">BACK NUMBER</label>
               <div class="col-md-10">
                 <input type="text" class="form-control" name="back_number" id="back_number" value="{{ $v->back_number }}">
-                <input type="hidden" name="id" value="{{ $v->id }}">
               </div>
             </div>
 

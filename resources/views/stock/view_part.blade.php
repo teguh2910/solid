@@ -16,6 +16,7 @@
             <table  class="table table-condensed table-bordered">
                 <thead>
                     <tr>
+                        <th><center><font face='calibri'>ID AREA</font></center>
                         <th><center><font face='calibri'>BACK NUMBER</font></center></th>
                         <th><center><font face='calibri'>PART NUMBER</font></center></th>
                         <th><center><font face='calibri'>PART NAME</font></center></th>
@@ -28,6 +29,7 @@
                     @if (count($m_part) > 0)
                     @foreach ($m_part as $m_part)
                     <tr bgcolor='#FFFFFF'>
+                        <td><font face='calibri'>{{ $m_part->id_area     }}</font></td>
                         <td><font face='calibri'>{{ $m_part->back_number }}</font></td>
                         <td><font face='calibri'>{{ $m_part->part_number }}</font></td>
                         <td><font face='calibri'>{{ $m_part->part_name }}</font></td>
@@ -66,11 +68,23 @@
                     <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_part') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
+            <div class="form-group">
+              <label class="col-md-3 control-label"><font face='calibri'><b>ID Area</b></font></label>
+              <div class="col-md-7">
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
+                   <option selected disabled="">Select ID Code </option>
+                   @foreach ($m_area as $m_area)  
+                   <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
     
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Back Number</b></font></label>
               <div class="col-md-7">
-                <input type="text" class="form-control" name="back_number" id="back_number" autofocus required>
+                <input type="text" class="form-control" name="back_number" id="back_number" required>
               </div>
             </div>
 

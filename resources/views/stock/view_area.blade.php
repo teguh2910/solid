@@ -69,12 +69,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
     
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>ID Area</b></font></label>
-              <div class="col-md-7">
-                <input type="text" class="form-control" name="id_area" id="id_area" autofocus required>
-              </div>
-            </div>
+           
 
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Plant</b></font></label>

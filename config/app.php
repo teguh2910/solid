@@ -151,6 +151,7 @@ return [
 		 */
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
 	],
 
 	/*
@@ -198,9 +199,10 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 		// v1.0 by Ferry, Add entrust aliases
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
+
 
 		// v1.0 by Ferry, Add html aliases
 		'Form'      => 'Illuminate\Html\FormFacade',

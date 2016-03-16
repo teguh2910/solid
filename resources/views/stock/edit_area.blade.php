@@ -14,21 +14,17 @@
         <form class="form-horizontal" role="form" method="POST" action="{{ url('stock/save_edit_area') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label">ID AREA</label>
-              <div class="col-md-10">
-                <input type="text" class="form-control" name="id_area" id="id_area" value="{{ $v->id_area }}">
-                <input type="hidden" name="id" value="{{ $v->id }}">
-              </div>
-            </div>
+          
 
             <div class="form-group">
               <label class="col-sm-2 col-sm-2 control-label">PLANT TYPE</label>
               <div class="col-md-10">
+                <input type="hidden" name="id" value="{{ $v->id }}">
                 <select class="form-control" name="type_plant" id="type_plant">
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
+                 
               </div>
             </div>
 

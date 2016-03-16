@@ -20,6 +20,7 @@ class CreateMPartsTable extends Migration {
 			$table->string('part_name');
 			$table->integer('qty_per_box');
 			$table->string('unit');
+			$table->string('id_area');
 			$table->timestamps();
 		});
 	}

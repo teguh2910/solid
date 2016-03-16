@@ -50,11 +50,16 @@ class StockController extends Controller {
 	 public function save_area()
 	 {
 	 	$input = \Input::all();
+	 	$code_area=$input['code_area'];
+	 	$name_area=$input['name_area'];
+        $a=$input['code_area'];
+       	$b=$input['name_area'];
 		$m_area     = new m_area;
-		$m_area->id_area        =$input['id_area'];
+	 	$number_unik="$a-$b" ;
 		$m_area->type_plant     =$input['type_plant'];
 		$m_area->code_area      =$input['code_area'];
 		$m_area->name_area      =$input['name_area'];
+		$m_area->id_area=$number_unik;
 		$m_area->pic_name       =$input['pic_name'];
 		$m_area->pic_contact    =$input['pic_contact'];
 		$m_area->save();
@@ -75,14 +80,17 @@ class StockController extends Controller {
 		
 		$input = \Input::all();
 		$id=$input['id'];
-		$id_area=$input['id_area'];
+		
 		$type_plant=$input['type_plant'];
 		$code_area=$input['code_area'];
 		$name_area=$input['name_area'];
 		$pic_name=$input['pic_name'];
 		$pic_contact=$input['pic_contact'];
+		 $a=$input['code_area'];
+       	$b=$input['name_area'];
 		$m_area = M_area::findOrFail($id);
-		$m_area->id_area    = $id_area;
+		$number_unik="$a-$b" ;
+		$m_area->id_area    = $number_unik;
 		$m_area->type_plant = $type_plant;
 		$m_area->code_area  = $code_area;
 		$m_area->name_area  = $name_area;
@@ -104,13 +112,15 @@ class StockController extends Controller {
     public function view_part()
 	 {
 	 	$m_part=m_part::all();
-	 	return view('stock.view_part',compact('m_part'));
+	 	$m_area=m_area::all();
+	 	return view('stock.view_part',compact('m_part','m_area'));
 	 }
 
 	  public function save_part()
 	 {
 	 	$input = \Input::all();
 		$m_part     = new m_part;
+		$m_part->id_area        =$input['id_area'];
 		$m_part->back_number    =$input['back_number'];
 		$m_part->part_number    =$input['part_number'];
 		$m_part->part_name      =$input['part_name'];
@@ -118,14 +128,15 @@ class StockController extends Controller {
 		$m_part->unit           =$input['unit'];
 		$m_part->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Area was successfully created');
+        \Session::flash('flash_message','New part was successfully created');
 	 	return redirect('stock/view_part');
 	 }
 
 	 public function edit_part($id)
-	 {
+	 {    
+	 	 $m_area=m_area::all();
 	 	 $m_part=m_part::where('id',$id)->get();
-         return view('stock.edit_part',compact('m_part'));
+         return view('stock.edit_part',compact('m_part','m_area'));
 
 	 }
 
@@ -134,6 +145,7 @@ class StockController extends Controller {
 		
 		$input = \Input::all();
 		$id=$input['id'];
+		$id_area=$input['id_area'];
 		$back_number=$input['back_number'];
 		$part_number=$input['part_number'];
 		$part_name=$input['part_name'];
@@ -141,6 +153,7 @@ class StockController extends Controller {
 		$unit=$input['unit'];
 		
 		$m_part = M_part::findOrFail($id);
+		$m_part->id_area    = $id_area;
 		$m_part->back_number    = $back_number;
 		$m_part->part_number = $part_number;
 		$m_part->part_name  = $part_name;
@@ -209,6 +222,8 @@ class StockController extends Controller {
 	 	return redirect('stock/view_transaction');  
 
 	 }
+
+
 
 
 }
