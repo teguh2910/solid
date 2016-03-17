@@ -27,20 +27,20 @@
                 </thead>
                 <tbody>
                     @if (count($m_part) > 0)
-                    @foreach ($m_part as $m_part)
+                    @foreach ($m_part as $k => $v)
                     <tr bgcolor='#FFFFFF'>
-                        <td><font face='calibri'>{{ $m_part->id_area     }}</font></td>
-                        <td><font face='calibri'>{{ $m_part->back_number }}</font></td>
-                        <td><font face='calibri'>{{ $m_part->part_number }}</font></td>
-                        <td><font face='calibri'>{{ $m_part->part_name }}</font></td>
-                        <td><font face='calibri'>{{ $m_part->qty_box }}</font></td>
-                        <td><font face='calibri'>{{ $m_part->unit }}</font></td>
+                        <td><font face='calibri'>{{ $v->id_area     }}</font></td>
+                        <td><font face='calibri'>{{ $v->back_number }}</font></td>
+                        <td><font face='calibri'>{{ $v->part_number }}</font></td>
+                        <td><font face='calibri'>{{ $v->part_name }}</font></td>
+                        <td><font face='calibri'>{{ $v->qty_box }}</font></td>
+                        <td><font face='calibri'>{{ $v->unit }}</font></td>
                         <td><center>
-                            <a href="{{ url('stock/edit_part/'.$m_part->id) }}" class="btn btn-info btn-xs">
+                            <a href="{{ url('stock/edit_part/'.$v->id_m_parts) }}" class="btn btn-info btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                             
-                            <a href="{{ url('stock/delete_part/'.$m_part->id) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete part \'{{$m_part->name_part}}\'?')">
+                            <a href="{{ url('stock/delete_part/'.$v->id_m_parts) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete part \'{{$v->name_part}}\'?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </center>

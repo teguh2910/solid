@@ -64,60 +64,23 @@
                     <h4 class="modal-title"><font face='calibri'><b>CREATE TRANSACTION</b></font></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/input_transaction') }}">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="post" action="{{ url('/stock/view_list') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
           
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Plant Type</b></font></label>
-              <div class="col-md-7">
-                  <select class="form-control" name="type_plant" id="type_plant" onclick="test(this)">
-                      <option selected disabled="">Select Plant</option>
-                      <option value="UNIT">UNIT</option>
-                      <option value="BODY">BODY</option>
-                </select>
-              </div>
-            </div>
+           
               
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Area Code</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>ID AREA</b></font></label>
               <div class="col-md-7">
-                <select class="form-control select2" name="code_area" id="code_area" style="width: 100%;" required >
-                   <option selected disabled="">Select Area Code </option>
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
+                   <option selected disabled="">Select ID AREA</option>
                    @foreach ($m_area as $m_area)  
-                   <option value="{{ $m_area->code_area }}">{{ $m_area->code_area }}</option>
+                   <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
                   @endforeach
                 </select>
               </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Area Name</b></font></label>
-              <div class="col-md-7">
-               <select class="form-control select2" name="name_area" id="name_area" style="width: 100%;" required >
-                 <option selected disabled="">Select Area Name</option>
-                 @foreach ($m_area2 as $m_area2)  
-                 <option value="{{ $m_area2->name_area }}">{{ $m_area2->name_area }}</option> 
-                 @endforeach
-                 
-               </select>
-              </div>
-            </div>
-             
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Part Number/Back Number</b></font></label>
-              <div class="col-md-7">
-                <select class="form-control select2" name="part_number" id="part_number" style="width: 100%;" required >
-                 <option selected disabled="">Select Part Number/Back Number</option>
-                  @foreach ($m_part as $m_part)
-                 <option value="{{ $m_part->part_number }}">{{ $m_part->part_number }}</option>
-                 <option value="{{ $m_part->back_number }}">{{ $m_part->back_number }}</option>
-                 @endforeach  
-               </select>
-                </div>
-              </div>
-           
+            </div>  
 
           
             <div class="form-group">

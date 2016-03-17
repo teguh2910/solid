@@ -13,16 +13,17 @@
         <div class="panel-heading"><center><span class='glyphicon glyphicon-pencil'></span> <font face='calibri'>&nbsp;<font face='calibri'><b>Input Amount</b></font></center></div>
         <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
-          
+           @foreach($t_transaction as $t_transaction)
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'>Part Number</font></label>
               <div class="col-md-8">
-              @foreach($m_part as $m_part) 
-              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$m_part->part_number}}" required>
-              @endforeach
+               <input type="hidden" name="id" value="{{ $t_transaction->id }}">
+               
+              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" required>
+              
               </div>
             </div>
 
@@ -54,7 +55,7 @@
               </div>
             </div>
           </form>
-            
+            @endforeach
         </div>
         </div></div>
       </div>

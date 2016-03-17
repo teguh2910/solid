@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c9bff3bfeb238842a642bc79d8f23cc",
-    "content-hash": "cb717f2adbc3e60656aa24d5aba70f23",
+    "hash": "f9263bffe131b29b20237a044e59e3c9",
+    "content-hash": "b579957ecef9f573d02093e3db20bb48",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -667,23 +667,23 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "v2.1.0",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "e0a5afcf86aa4511b291584fae9f00c04e76e60c"
+                "reference": "be63dcef4394a4bbeaf524e7fe89340b7dab6b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/e0a5afcf86aa4511b291584fae9f00c04e76e60c",
-                "reference": "e0a5afcf86aa4511b291584fae9f00c04e76e60c",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/be63dcef4394a4bbeaf524e7fe89340b7dab6b7a",
+                "reference": "be63dcef4394a4bbeaf524e7fe89340b7dab6b7a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "5.0.*|5.1.*|5.2.*",
-                "illuminate/config": "5.0.*|5.1.*|5.2.*",
-                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*",
-                "illuminate/support": "5.0.*|5.1.*|5.2.*",
+                "illuminate/cache": "5.0.*|5.1.*",
+                "illuminate/config": "5.0.*|5.1.*",
+                "illuminate/filesystem": "5.0.*|5.1.*",
+                "illuminate/support": "5.0.*|5.1.*",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.4",
                 "phpoffice/phpexcel": "1.8.*",
@@ -691,15 +691,14 @@
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
-                "orchestra/testbench": "3.1.*",
+                "orchestra/testbench": "3.0.*",
                 "phpseclib/phpseclib": "~1.0",
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "illuminate/http": "5.0.*|5.1.*|5.2.*",
-                "illuminate/queue": "5.0.*|5.1.*|5.2.*",
-                "illuminate/routing": "5.0.*|5.1.*|5.2.*",
-                "illuminate/view": "5.0.*|5.1.*|5.2.*"
+                "illuminate/http": "5.0.*|5.1.*",
+                "illuminate/routing": "5.0.*|5.1.*",
+                "illuminate/view": "5.0.*|5.1.*"
             },
             "type": "library",
             "autoload": {
@@ -731,7 +730,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2015-12-10 18:31:14"
+            "time": "2015-10-26 11:52:19"
         },
         {
             "name": "monolog/monolog",

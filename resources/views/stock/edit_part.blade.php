@@ -16,9 +16,9 @@
              <div class="form-group">
               <label class="col-sm-2 col-sm-2 control-label">ID AREA</label>
               <div class="col-md-10">
-                <input type="hidden" name="id" value="{{ $v->id }}">
+                <input type="hidden" name="id" value="{{ $v->id_m_parts }}">
                  <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
-                   <option selected disabled="">Select ID Code </option>
+                   <option selected disabled="">Select ID AREA </option>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
                   @endforeach
