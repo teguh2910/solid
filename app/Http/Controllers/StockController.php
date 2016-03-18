@@ -155,6 +155,10 @@ class StockController extends Controller {
 		$input = \Input::all();
 		$id=$input['id'];
 		$m_part = m_part::findOrFail($id);
+		$t_transaction1 = t_transaction::where('part_number',$m_part->part_number)->get();
+        foreach ($t_transaction1 as $t_transaction1) {
+               $id2=$t_transaction1->id;
+        }
 		$m_part->back_number   = $input['back_number'];
 		$m_part->part_number   = $input['part_number'];
 		$m_part->part_name     = $input['part_name'];
@@ -162,6 +166,10 @@ class StockController extends Controller {
 		$m_part->unit          = $input['unit'];
 		$m_part->id_area       = $input['id_area'];
 		$m_part->save();
+        $t_transaction=t_transaction::findOrFail($id2);
+        $t_transaction->id_area     = $input['id_area'];
+        $t_transaction->part_number = $input['part_number'];
+        $t_transaction->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','part was successfully updated');
 	 	return redirect('stock/view_part');
