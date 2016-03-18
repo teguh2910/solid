@@ -66,7 +66,7 @@ Route::get('stock/delete_area/{id}', 'StockController@delete_area');
 Route::get('stock/view_part','StockController@view_part');
 Route::post('stock/save_part','StockController@save_part');
 Route::get('stock/edit_part/{id}', 'StockController@edit_part');
-Route::post('stock/save_edit_part', 'StockController@save_edit_part');
+Route::POST('stock/save_edit_part', 'StockController@save_edit_part');
 Route::get('stock/delete_part/{id}', 'StockController@delete_part');
 
 Route::get('stock/view_transaction','StockController@view_transaction');

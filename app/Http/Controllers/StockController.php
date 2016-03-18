@@ -152,25 +152,19 @@ class StockController extends Controller {
 
 	 public function save_edit_part()
 	{
-		// $input = \Input::all();
-		// $id=$input['id'];
-		// $back_number=$input['back_number'];
-		// $part_number=$input['part_number'];
-		// $part_name  =$input['part_name'];
-		// $qty_box    =$input['qty_box'];
-		// $unit       =$input['unit'];
-		// $id_area    =$input['id_area'];
-		// $m_part = m_part::findOrFail($id);
-		// $m_part->back_number   = $back_number;
-		// $m_part->part_number   = $part_number;
-		// $m_part->part_name     = $part_name;
-		// $m_part->qty_box       = $qty_box;
-		// $m_part->unit          = $unit;
-		// $m_part->id_area       = $id_area;
-		// $m_part->save();
-		// \Session::flash('flash_type','alert-success');
-  //       \Session::flash('flash_message','part was successfully updated');
-	 // 	return redirect('stock/view_list');
+		$input = \Input::all();
+		$id=$input['id'];
+		$m_part = m_part::findOrFail($id);
+		$m_part->back_number   = $input['back_number'];
+		$m_part->part_number   = $input['part_number'];
+		$m_part->part_name     = $input['part_name'];
+		$m_part->qty_box       = $input['qty_box'];
+		$m_part->unit          = $input['unit'];
+		$m_part->id_area       = $input['id_area'];
+		$m_part->save();
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','part was successfully updated');
+	 	return redirect('stock/view_part');
 		
 	}
 
@@ -257,8 +251,13 @@ class StockController extends Controller {
 	 	                            ->join('m_parts','m_parts.id_area','=','t_transactions.id_area')
 	 	                            ->where('t_transactions.id_area',$id_area)                            
 	 	                            ->get();
-        
-      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array){
+        $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	                            ->join('m_parts','m_parts.id_area','=','t_transactions.id_area')
+	 	                            ->where('t_transactions.id_area',$id_area)
+	 	                            ->groupBy('t_transactions.id_area')                            
+	 	                            ->get();
+	 	                            
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2){
       	foreach ($array as $key => $value) {
 				$back_number=$value->back_number;
 				$part_number=$value->part_number;
