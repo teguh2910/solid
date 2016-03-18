@@ -268,39 +268,36 @@ class StockController extends Controller {
 	 	}
 
       \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
-      	foreach ($array as $array => $value) {
-				$back_number=$value->back_number;
-				$part_number=$value->part_number;
-				$part_name  =$value->part_name;
-				$qty_box=$value->qty_box;
-				$unit=$value->unit;
-				$amount_box=$value->amount_box;
-				$amount_pcs=$value->amount_pcs;
-				$total_pcs=$value->total_pcs;
-				$name_area=$value->name_area ;
-				$code_area=$value->code_area ;
-			}
-			foreach ($array3 as $array3 ) {
+            
+		foreach ($array3 as $array3 ) {
 				$name_area=$array3->name_area ;
 				$code_area=$array3->code_area ;
 
 			$file->setActiveSheetIndex(0)->setCellValue('B4', $name_area);
-	        $file->setActiveSheetIndex(0)->setCellValue('J3', $code_area);
+	        $file->setActiveSheetIndex(0)->setCellValue('J2', $code_area);
 			}
+ 
+            $a="6";
+        foreach ($array as $array2) {
+				$back_number=$array2->back_number;
+				$part_number=$array2->part_number;
+				$part_name  =$array2->part_name;
+				$qty_box    =$array2->qty_box;
+				$unit       =$array2->unit;
+				$amount_box =$array2->amount_box;
+				$amount_pcs =$array2->amount_pcs;
+				$total_pcs  =$array2->total_pcs;
+				$a++;
 
-
-           
-			$file->setActiveSheetIndex(0)->setCellValue('C7', $back_number);
-			$file->setActiveSheetIndex(0)->setCellValue('D7', $part_number);
-			$file->setActiveSheetIndex(0)->setCellValue('E7', $part_name);
-			$file->setActiveSheetIndex(0)->setCellValue('F7', $qty_box);
-			$file->setActiveSheetIndex(0)->setCellValue('G7', $unit);
-			$file->setActiveSheetIndex(0)->setCellValue('H7', $amount_box);
-			$file->setActiveSheetIndex(0)->setCellValue('I7', $amount_pcs);
-			$file->setActiveSheetIndex(0)->setCellValue('J7', $total_pcs);
-			
-	 
-
+			$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $back_number);
+			$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $part_number);
+			$file->setActiveSheetIndex(0)->setCellValue('E'.$a.'', $part_name);
+			$file->setActiveSheetIndex(0)->setCellValue('F'.$a.'', $qty_box);
+			$file->setActiveSheetIndex(0)->setCellValue('G'.$a.'', $unit);
+			$file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', $amount_box);
+			$file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', $amount_pcs);
+			$file->setActiveSheetIndex(0)->setCellValue('J'.$a.'', $total_pcs);
+			}
 
 	 })->export('xlsx');
 
