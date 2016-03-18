@@ -21,9 +21,7 @@
               <label class="col-md-3 control-label"><font face='calibri'>Part Number</font></label>
               <div class="col-md-8">
                <input type="hidden" name="id" value="{{ $t_transaction->id }}">
-               
               <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" required>
-              
               </div>
             </div>
 
@@ -32,14 +30,14 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'>Amount of Box</font></label>
               <div class="col-md-8">
-                <input type="number" class="form-control" name="amount_box" id="amount_box" required>
+                <input type="number" class="form-control" name="amount_box" id="amount_box" value="{{$t_transaction->amount_box}}" required>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'>Amount of PCS</font></label>
               <div class="col-md-5">
-                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs">
+                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" value="{{$t_transaction->amount_pcs}}" required>
               </div>
             </div>
 

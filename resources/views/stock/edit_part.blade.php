@@ -20,7 +20,7 @@
                  <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
                    <option selected disabled="">Select ID AREA </option>
                    @foreach ($m_area as $m_area)  
-                   <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
+                   <option value="{{ $m_area->id_area }}" required>{{ $m_area->id_area }}</option>
                   @endforeach
                 </select>
               </div>

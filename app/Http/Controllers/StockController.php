@@ -201,7 +201,7 @@ class StockController extends Controller {
 	 	$input = \Input::all();
 	 	$id_area=$input['id_area'];
 	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_parts','m_parts.id_area','=','t_transactions.id_area')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)                            
 	 	                            ->get();
 	 	return view('stock.view_list',compact('t_transaction'));
@@ -223,15 +223,13 @@ class StockController extends Controller {
         $part_number=$input['part_number'];
         $a=$input['amount_box'];
        	$b=$input['amount_pcs'];
-
         $m_part=m_part::where('part_number',$part_number)->get();
         foreach ($m_part as $m_part) {
         	$qty_box = $m_part->qty_box;
         }
         $t_transaction     = t_transaction::findOrFail($id) ;
        	$total1=$a*$qty_box;
-       	$total_pcs=$total1+$b;
-       	
+       	$total_pcs=$total1+$b; 	
 		$t_transaction->part_number   =$input['part_number'];
 		$t_transaction->amount_box    =$input['amount_box'];
 		$t_transaction->amount_pcs    =$input['amount_pcs'];
@@ -253,20 +251,24 @@ class StockController extends Controller {
 	  public function print_result()
 	 {    
 	 	$input=\Input::all();
-       
 	 	$id_area=$input['id_area'];
         $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_parts','m_parts.id_area','=','t_transactions.id_area')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)                            
 	 	                            ->get();
         $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_parts','m_parts.id_area','=','t_transactions.id_area')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)
 	 	                            ->groupBy('t_transactions.id_area')                            
 	 	                            ->get();
-	 	                            
-      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2){
-      	foreach ($array as $key => $value) {
+	 	$array3=m_area::where('id_area',$id_area)->get();
+	 	foreach ($array3 as $m_area) {
+	 		$code_area=$m_area->code_area;
+	 	    $name_area=$m_area->name_area;
+	 	}
+
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
+      	foreach ($array as $array => $value) {
 				$back_number=$value->back_number;
 				$part_number=$value->part_number;
 				$part_name  =$value->part_name;
@@ -278,9 +280,16 @@ class StockController extends Controller {
 				$name_area=$value->name_area ;
 				$code_area=$value->code_area ;
 			}
+			foreach ($array3 as $array3 ) {
+				$name_area=$array3->name_area ;
+				$code_area=$array3->code_area ;
 
-            $file->setActiveSheetIndex(0)->setCellValue('C4', $name_area);
-	        $file->setActiveSheetIndex(0)->setCellValue('J4', $code_area);
+			$file->setActiveSheetIndex(0)->setCellValue('B4', $name_area);
+	        $file->setActiveSheetIndex(0)->setCellValue('J3', $code_area);
+			}
+
+
+           
 			$file->setActiveSheetIndex(0)->setCellValue('C7', $back_number);
 			$file->setActiveSheetIndex(0)->setCellValue('D7', $part_number);
 			$file->setActiveSheetIndex(0)->setCellValue('E7', $part_name);
