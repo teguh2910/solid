@@ -223,10 +223,20 @@ class StockController extends Controller {
         $part_number=$input['part_number'];
         $a=$input['amount_box'];
        	$b=$input['amount_pcs'];
+       	// $box_temporary  =$input['amount_box'];
+        // $pcs_temporary  =$input['amount_pcs'];
+        // $total_temporary=['total_pcs'];
         $m_part=m_part::where('part_number',$part_number)->get();
         foreach ($m_part as $m_part) {
         	$qty_box = $m_part->qty_box;
         }
+        // $t_transaction1=t_transaction::where('part_number',$part_number)->get();
+        // foreach ($t_transaction1 as $t_transaction) {
+        // 	$box_temporary   = $t_transaction1->amount_box;
+        // 	$pcs_temporary   = $t_transaction1->amount_pcs;
+        // 	$total_temporary = $t_transaction1->total_pcs ; 
+        // }
+
         $t_transaction     = t_transaction::findOrFail($id) ;
        	$total1=$a*$qty_box;
        	$total_pcs=$total1+$b; 	
