@@ -355,7 +355,7 @@ class StockController extends Controller {
 	    return view('stock/print_report_plant',compact('t_transaction','m_area'));
 	 }
 
-	  public function print_plant_result()
+	public function print_plant_result()
 	 {    
 	 	$input=\Input::all();
 	 	$type_plant=$input['type_plant'];
@@ -371,9 +371,7 @@ class StockController extends Controller {
 	 	                            ->groupBy('m_parts.part_number')                            
 	 	                            ->get();
 	 	$array3=m_area::where('type_plant',$type_plant)->get();
-	 	foreach ($array3 as $m_area) {
-	 		$type_plant=$m_area->type_plant;
-	 	}
+	 	
 
       \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
             
