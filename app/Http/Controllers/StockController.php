@@ -347,6 +347,68 @@ class StockController extends Controller {
 
   }
 
+   public function print_report_plant()
+	 {    
+        $input=\Input::all();
+        $t_transaction=t_transaction::all();
+        $m_area=m_area::all();
+	    return view('stock/print_report_plant',compact('t_transaction','m_area'));
+	 }
+
+	  public function print_plant_result()
+	 {    
+	 	$input=\Input::all();
+	 	$type_plant=$input['type_plant'];
+        $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->where('m_areas.type_plant',$type_plant)                           
+	 	                            ->get();
+        $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->where('m_areas.type_plant',$type_plant)
+	 	                            ->groupBy('m_parts.part_number')                            
+	 	                            ->get();
+	 	$array3=m_area::where('type_plant',$type_plant)->get();
+	 	foreach ($array3 as $m_area) {
+	 		$type_plant=$m_area->type_plant;
+	 	}
+
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
+            
+		foreach ($array3 as $array3 ) {
+				$type_plant=$array3->type_plant ;
+
+			$file->setActiveSheetIndex(0)->setCellValue('B4', $type_plant);
+			}
+ 
+            $a="6";
+        foreach ($array as $array2) {
+				$back_number=$array2->back_number;
+				$part_number=$array2->part_number;
+				$part_name  =$array2->part_name;
+				$qty_box    =$array2->qty_box;
+				$unit       =$array2->unit;
+				$amount_box =$array2->amount_box;
+				$amount_pcs =$array2->amount_pcs;
+				$total_pcs  =$array2->total_pcs;
+				$a++;
+
+			$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $back_number);
+			$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $part_number);
+			$file->setActiveSheetIndex(0)->setCellValue('E'.$a.'', $part_name);
+			$file->setActiveSheetIndex(0)->setCellValue('F'.$a.'', $qty_box);
+			$file->setActiveSheetIndex(0)->setCellValue('G'.$a.'', $unit);
+			$file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', $amount_box);
+			$file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', $amount_pcs);
+			$file->setActiveSheetIndex(0)->setCellValue('J'.$a.'', $total_pcs);
+			}
+
+	 })->export('xlsx');
+
+  }
+
 
 
 

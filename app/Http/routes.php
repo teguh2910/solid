@@ -78,7 +78,8 @@ Route::post('stock/save_transaction','StockController@save_transaction');
 
 Route::get('stock/print_report','StockController@print_report');
 Route::post('stock/print_result','StockController@print_result');
-
+Route::get('stock/print_report_plant','StockController@print_report_plant');
+Route::post('stock/print_plant_result','StockController@print_plant_result');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

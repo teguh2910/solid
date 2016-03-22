@@ -9,7 +9,6 @@
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
             <section id="unseen">
-                @if (Auth::user()->role == "5")
            <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal">
                 <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>CREATE PART</b></font>
             </button>

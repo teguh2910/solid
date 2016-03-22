@@ -110,6 +110,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
 				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/print_report_plant') }}"><font face='calibri'><b>PRINT PLANT REPORT</b></font></a></li>
+				</ul>
 
 
 					@elseif (Auth::user()->role == "5")	
@@ -125,13 +128,17 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
 				</ul>
-
-				@elseif (Auth::user()->role == "6")	
-			    
-			    <ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/print_report_plant') }}"><font face='calibri'><b>PRINT PLANT REPORT</b></font></a></li>
 				</ul>
-				
+
+				    @elseif (Auth::user()->role == "6")	
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_part') }}"><font face='calibri'><b>PART</b></font></a></li>
+				</ul>				
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
