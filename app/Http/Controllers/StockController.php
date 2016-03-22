@@ -137,6 +137,23 @@ class StockController extends Controller {
 	 	return view('stock.view_part',compact('m_part','m_area'));
 	 }
 
+
+	  public function m_part_import()
+	{
+		$file  = \Input::file('file');
+		$table = \Input::get('table');
+		$array_data = CsvHelper::csv_to_array($file);
+		$result     = m_part::array_to_db($array_data);
+		if ($result == 1) {
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Successfully Saved');
+		} else {
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','No data update');
+		}
+		return redirect('stock/view_part');
+	}
+
 	  public function save_part()
 	 {
 	 	$input = \Input::all();

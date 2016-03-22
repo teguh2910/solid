@@ -125,6 +125,13 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
 				</ul>
+
+				@elseif (Auth::user()->role == "6")	
+			    
+			    <ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
+				</ul>
+				
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
