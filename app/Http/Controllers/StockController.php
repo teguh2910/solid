@@ -48,6 +48,22 @@ class StockController extends Controller {
 	 	return view('stock.view_area',compact('m_area'));
 	 }
 
+	 public function m_area_import()
+	{
+		$file  = \Input::file('file');
+		$table = \Input::get('table');
+		$array_data = CsvHelper::csv_to_array($file);
+		$result     = m_area::array_to_db($array_data);
+		if ($result == 1) {
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Successfully Saved');
+		} else {
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','No data update');
+		}
+		return redirect('stock/view_area');
+	}
+
 	 public function save_area()
 	 {
 	 	$input = \Input::all();
@@ -232,14 +248,15 @@ class StockController extends Controller {
         }
         // $t_transaction1=t_transaction::where('part_number',$part_number)->get();
         // foreach ($t_transaction1 as $t_transaction) {
-        // 	$box_temporary   = $t_transaction1->amount_box;
-        // 	$pcs_temporary   = $t_transaction1->amount_pcs;
-        // 	$total_temporary = $t_transaction1->total_pcs ; 
+        // 	$box_temporary   = $t_transaction1->box_temporary;
+        // 	$pcs_temporary   = $t_transaction1->pcs_temporary;
+        // 	$total_temporary = $t_transaction1->total_temporary ; 
         // }
 
         $t_transaction     = t_transaction::findOrFail($id) ;
        	$total1=$a*$qty_box;
-       	$total_pcs=$total1+$b; 	
+       	$total_pcs=$total1+$b;
+
 		$t_transaction->part_number   =$input['part_number'];
 		$t_transaction->amount_box    =$input['amount_box'];
 		$t_transaction->amount_pcs    =$input['amount_pcs'];

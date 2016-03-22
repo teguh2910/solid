@@ -61,7 +61,7 @@ Route::post('stock/save_area','StockController@save_area');
 Route::get('stock/edit_area/{id}', 'StockController@edit_area');
 Route::post('stock/save_edit_area', 'StockController@save_edit_area');
 Route::get('stock/delete_area/{id}', 'StockController@delete_area');
-
+Route::post('stock/view_area', 'StockController@m_area_import');
 
 Route::get('stock/view_part','StockController@view_part');
 Route::post('stock/save_part','StockController@save_part');
@@ -73,6 +73,7 @@ Route::get('stock/view_transaction','StockController@view_transaction');
 Route::post('stock/view_list','StockController@view_list');
 Route::get('stock/input_transaction/{id}','StockController@input_transaction');
 Route::post('stock/save_transaction','StockController@save_transaction');
+
 
 Route::get('stock/print_report','StockController@print_report');
 Route::post('stock/print_result','StockController@print_result');
