@@ -296,10 +296,10 @@ class StockController extends Controller {
 	 {    
 	 	$input=\Input::all();
 	 	$id_area=$input['id_area'];
-        $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id_area)                            
-	 	                            ->get();
+        // $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	     //                        ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	     //                        ->where('t_transactions.id_area',$id_area)                            
+	 	     //                        ->get();
         $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)
@@ -311,7 +311,7 @@ class StockController extends Controller {
 	 	    $name_area=$m_area->name_area;
 	 	}
 
-      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array2,$array3){
             
 		foreach ($array3 as $array3 ) {
 				$name_area=$array3->name_area ;
@@ -322,7 +322,7 @@ class StockController extends Controller {
 			}
  
             $a="6";
-        foreach ($array as $array2) {
+        foreach ($array2 as $array2) {
 				$back_number=$array2->back_number;
 				$part_number=$array2->part_number;
 				$part_name  =$array2->part_name;
@@ -359,11 +359,11 @@ class StockController extends Controller {
 	 {    
 	 	$input=\Input::all();
 	 	$type_plant=$input['type_plant'];
-        $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
-	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('m_areas.type_plant',$type_plant)                           
-	 	                            ->get();
+        // $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	     //                        ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 	     //                        ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	     //                        ->where('m_areas.type_plant',$type_plant)                           
+	 	     //                        ->get();
         $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
@@ -373,7 +373,7 @@ class StockController extends Controller {
 	 	$array3=m_area::where('type_plant',$type_plant)->get();
 	 	
 
-      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array,$array2,$array3){
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array2,$array3){
             
 		foreach ($array3 as $array3 ) {
 				$type_plant=$array3->type_plant ;
@@ -382,7 +382,7 @@ class StockController extends Controller {
 			}
  
             $a="6";
-        foreach ($array as $array2) {
+        foreach ($array2 as $array2) {
 				$back_number=$array2->back_number;
 				$part_number=$array2->part_number;
 				$part_name  =$array2->part_name;
