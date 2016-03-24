@@ -54,6 +54,7 @@ class StockController extends Controller {
 		$table = \Input::get('table');
 		$array_data = CsvHelper::csv_to_array($file);
 		$result     = m_area::array_to_db($array_data);
+		$result     =t_transaction::array_to_db($array_data);
 		if ($result == 1) {
 			\Session::flash('flash_type','alert-success');
 			\Session::flash('flash_message','Successfully Saved');
