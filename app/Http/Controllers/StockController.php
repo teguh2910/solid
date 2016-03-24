@@ -407,6 +407,41 @@ class StockController extends Controller {
 
   }
 
+  	public function print_master_part()
+	 {    
+	 	
+	 	
+        $array2=m_part::all();
+	 	
+
+      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array2){
+ 
+            $a="6";
+        foreach ($array2 as $array2) {
+				$back_number=$array2->back_number;
+				$part_number=$array2->part_number;
+				$part_name  =$array2->part_name;
+				$qty_box    =$array2->qty_box;
+				$unit       =$array2->unit;
+				$amount_box =$array2->amount_box;
+				$amount_pcs =$array2->amount_pcs;
+				$total_pcs  =$array2->total_pcs;
+				$a++;
+
+			$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $back_number);
+			$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $part_number);
+			$file->setActiveSheetIndex(0)->setCellValue('E'.$a.'', $part_name);
+			$file->setActiveSheetIndex(0)->setCellValue('F'.$a.'', $qty_box);
+			$file->setActiveSheetIndex(0)->setCellValue('G'.$a.'', $unit);
+			$file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', $amount_box);
+			$file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', $amount_pcs);
+			$file->setActiveSheetIndex(0)->setCellValue('J'.$a.'', $total_pcs);
+			}
+
+	 })->export('xlsx');
+
+  }
+
 
 
 

@@ -16,6 +16,10 @@
             <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal2">
                 <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>IMPORT PART</b></font>
             </button>
+
+
+            <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-small'><font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
+            
             <br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
@@ -117,7 +121,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>ID Area</b></font></label>
               <div class="col-md-7">
-                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" >
                    <option selected disabled="">Select ID Code </option>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
@@ -130,7 +134,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Back Number</b></font></label>
               <div class="col-md-7">
-                <input type="text" class="form-control" name="back_number" id="back_number" required>
+                <input type="text" class="form-control" name="back_number" id="back_number">
               </div>
             </div>
 
@@ -151,7 +155,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Quantity of Box</b></font></label>
               <div class="col-md-7">
-                  <input type='text' class="form-control" name="qty_box" id="qty_box" required>
+                  <input type='text' class="form-control" name="qty_box" id="qty_box" >
                 </div>
               </div>
            
