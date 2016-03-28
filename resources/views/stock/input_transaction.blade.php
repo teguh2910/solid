@@ -21,7 +21,8 @@
               <label class="col-md-3 control-label"><font face='calibri'>Part Number</font></label>
               <div class="col-md-8">
                <input type="hidden" name="id" value="{{ $t_transaction->id }}">
-              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" required>
+                <input type="hidden" name="id_area" value="{{ $t_transaction->id_area }}">
+              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
               </div>
             </div>
 

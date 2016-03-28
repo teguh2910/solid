@@ -243,6 +243,17 @@ class StockController extends Controller {
 	 
 	 }
 
+	 public function view_list2($id)
+	 {  
+	 	$input = \Input::all();
+	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->where('t_transactions.id_area',$id)                            
+	 	                            ->get();
+	 	return view('stock.view_list',compact('t_transaction'));
+	 
+	 }
+
 	 public function input_transaction($id)
 	 {    
           $m_part=m_part::all();
@@ -255,23 +266,15 @@ class StockController extends Controller {
 	 {
         $input = \Input::all();
         $id=$input['id'];
+        $id_area = $input['id_area'];
+        // return $id_area;
         $part_number=$input['part_number'];
         $a=$input['amount_box'];
        	$b=$input['amount_pcs'];
-       	// $box_temporary  =$input['amount_box'];
-        // $pcs_temporary  =$input['amount_pcs'];
-        // $total_temporary=['total_pcs'];
         $m_part=m_part::where('part_number',$part_number)->get();
         foreach ($m_part as $m_part) {
         	$qty_box = $m_part->qty_box;
         }
-        // $t_transaction1=t_transaction::where('part_number',$part_number)->get();
-        // foreach ($t_transaction1 as $t_transaction) {
-        // 	$box_temporary   = $t_transaction1->box_temporary;
-        // 	$pcs_temporary   = $t_transaction1->pcs_temporary;
-        // 	$total_temporary = $t_transaction1->total_temporary ; 
-        // }
-
         $t_transaction     = t_transaction::findOrFail($id) ;
        	$total1=$a*$qty_box;
        	$total_pcs=$total1+$b;
@@ -283,7 +286,7 @@ class StockController extends Controller {
 		$t_transaction->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Amount was successfully added');
-	 	return redirect('stock/view_transaction');  
+	 	return redirect('stock/view_list/2/'.$id_area.'');  
 
 	 }
 
