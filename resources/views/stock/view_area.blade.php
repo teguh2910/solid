@@ -14,7 +14,7 @@
             </button>
                &nbsp;&nbsp;
             <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal2">
-                <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>IMPORT AREA</b></font>
+                <i class='glyphicon glyphicon-import'></i> <font face='calibri'><b>IMPORT AREA</b></font>
             </button>
             <br/><br/>
             <table  class="table table-condensed table-bordered">

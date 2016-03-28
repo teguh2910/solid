@@ -50,7 +50,11 @@
                     @elseif ($user_all->role == '4')
                         Cashier
                     @elseif ($user_all->role == '5')
-                        Inventory    
+                        Inventory 
+                    @elseif ($user_all->role == '6')
+                        Cashier
+                    @elseif ($user_all->role == '7')
+                        Inventory        
                     @endif
                     </font></td>
                     <td class='warning'><center>

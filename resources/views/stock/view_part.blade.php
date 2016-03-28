@@ -14,11 +14,11 @@
             </button>
             &nbsp;&nbsp;
             <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal2">
-                <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>IMPORT PART</b></font>
+                <i class='glyphicon glyphicon-import'></i> <font face='calibri'><b>IMPORT PART</b></font>
             </button>
 
             
-            <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-flat btn-sm'><font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
+            <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-flat btn-sm'><i class='glyphicon glyphicon-print'></i> &nbsp;<font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
             
             <br/><br/>
             <table  class="table table-condensed table-bordered">
