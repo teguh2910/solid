@@ -34,7 +34,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <?php 
