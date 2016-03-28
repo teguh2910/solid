@@ -4,7 +4,7 @@
 <div class="col-lg-12">
 <div class="content-panel">
 <div class="container-fluid">
-    <h4><i class="fa fa-angle-right"></i> DATA PART</h4>
+    <big><big><big><font face='calibri' color='grey'><b>MASTER PART</b></font></big></big></big>
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
@@ -16,14 +16,13 @@
             <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal2">
                 <i class='glyphicon glyphicon-import'></i> <font face='calibri'><b>IMPORT PART</b></font>
             </button>
-
-            
+            &nbsp;&nbsp;
             <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-flat btn-sm'><i class='glyphicon glyphicon-print'></i> &nbsp;<font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
             
             <br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
-                    <tr>
+                    <tr class='info'>
                         <th><center><font face='calibri'>ID AREA</font></center>
                         <th><center><font face='calibri'>BACK NUMBER</font></center></th>
                         <th><center><font face='calibri'>PART NUMBER</font></center></th>
@@ -57,8 +56,8 @@
                     </tr>
                     @endforeach
                     @else
-                    <tr class='info'>
-                        <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
+                    <tr bgcolor='#FFFFFF'>
+                        <td colspan="7"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
                 </tbody>
@@ -84,7 +83,7 @@
                                     <input type="file" id="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'size="40" onchange='$("#upload-file-info").html($(this).val());' autofocus required>
                                 </a>
                                 &nbsp;
-                                <span class='label label-info' id="upload-file-info"></span>
+                                <span class='label label-primary' id="upload-file-info"></span>
                             </div>
                         </div>
                     </div>
@@ -121,8 +120,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>ID Area</b></font></label>
               <div class="col-md-7">
-                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" >
-                   <option selected disabled="">Select ID Code </option>
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;">
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
                   @endforeach

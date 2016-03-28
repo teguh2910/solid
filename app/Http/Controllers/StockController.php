@@ -208,7 +208,6 @@ class StockController extends Controller {
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','part was successfully updated');
 	 	return redirect('stock/view_part');
-		
 	}
 
 	public function delete_part($id)
@@ -290,8 +289,9 @@ class StockController extends Controller {
 	 public function print_report()
 	 {    
         $input=\Input::all();
-        $t_transaction=t_transaction::all();
-	    return view('stock/print_report',compact('t_transaction'));
+        $t_transaction = t_transaction::all();
+        $id_area = m_area::all();
+	    return view('stock.print_report',compact('t_transaction','id_area'));
 	 }
 
 	  public function print_result()
@@ -350,7 +350,7 @@ class StockController extends Controller {
         $input=\Input::all();
         $t_transaction=t_transaction::all();
         $m_area=m_area::all();
-	    return view('stock/print_report_plant',compact('t_transaction','m_area'));
+	    return view('stock.print_report_plant',compact('t_transaction','m_area'));
 	 }
 
 	public function print_plant_result()

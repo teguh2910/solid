@@ -4,16 +4,14 @@
 <div class="col-lg-12">
 <div class="content-panel">
 <div class="container-fluid">
-    <h4><i class="fa fa-angle-right"></i> LIST STOCK</h4>
+    <big><big><big><font face='calibri' color='grey'><b>LIST STOCK</b></font></big></big></big>
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
             <section id="unseen">
-        
-            <br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
-                    <tr>
+                    <tr class='info'>
                         <th><center><font face='calibri'>BACK NO</font></center></th>
                         <th><center><font face='calibri'>PART NO</font></center></th>
                         <th><center><font face='calibri'>PART NAME</font></center>
@@ -47,7 +45,7 @@
                     </tr>
                     @endforeach
                    @else
-                    <tr class='info'>
+                    <tr  bgcolor='#FFFFFF'>
                         <td colspan="9"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
