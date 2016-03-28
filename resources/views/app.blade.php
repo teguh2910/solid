@@ -129,9 +129,6 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report_plant') }}"><font face='calibri'><b>PRINT PLANT REPORT</b></font></a></li>
 				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/print_master_part') }}"><font face='calibri'><b>PRINT MASTER PART</b></font></a></li>
-				</ul>
 				@elseif (Auth::user()->role == "6")	
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>

@@ -145,7 +145,8 @@ class StockController extends Controller {
 		$table = \Input::get('table');
 		$array_data = CsvHelper::csv_to_array($file);
 		$result     = m_part::array_to_db($array_data);
-		if ($result == 1) {
+		$result2    =t_transaction::array_to_db($array_data);
+		if ($result == 1 && $result2 == 1) {
 			\Session::flash('flash_type','alert-success');
 			\Session::flash('flash_message','Successfully Saved');
 		} else {
@@ -297,11 +298,7 @@ class StockController extends Controller {
 	 {    
 	 	$input=\Input::all();
 	 	$id_area=$input['id_area'];
-        // $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	     //                        ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	     //                        ->where('t_transactions.id_area',$id_area)                            
-	 	     //                        ->get();
-        $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
+            $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)
 	 	                            ->groupBy('t_transactions.id_area')                            
@@ -360,11 +357,6 @@ class StockController extends Controller {
 	 {    
 	 	$input=\Input::all();
 	 	$type_plant=$input['type_plant'];
-        // $array=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	     //                        ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
-	 	     //                        ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	     //                        ->where('m_areas.type_plant',$type_plant)                           
-	 	     //                        ->get();
         $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
