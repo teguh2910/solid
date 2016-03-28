@@ -17,8 +17,8 @@
                 <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>IMPORT PART</b></font>
             </button>
 
-
-            <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-small'><font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
+            
+            <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-flat btn-sm'><font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
             
             <br/><br/>
             <table  class="table table-condensed table-bordered">

@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class m_part extends Model {
 
 	protected $table ='m_parts' ;
-	protected $fillable = ['id_area','back_number','part_number','part_name','qt_box','unit'];
+	protected $fillable = ['id_area','back_number','part_number','part_name','qty_box','unit'];
     
     public static function array_to_db($array_data){
         $total=sizeof($array_data);
