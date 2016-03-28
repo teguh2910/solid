@@ -137,7 +137,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Area Name</b></font></label>
               <div class="col-md-7">
-                  <input type='text' class="form-control" name="name_area" id="name_area" required>
+                  <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp:PPIC_UNIT"required>
                 </div>
               </div>
            
