@@ -52,7 +52,7 @@
                     </tr>
                     @endforeach
                     @else
-                    <tr class='info'>
+                    <tr bgcolor='#FFFFFF'>
                         <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
@@ -137,7 +137,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Area Name</b></font></label>
               <div class="col-md-7">
-                  <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp:PPIC_UNIT"required>
+                  <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp : PPIC_UNIT"required>
                 </div>
               </div>
            
@@ -163,7 +163,7 @@
               <div class="col-md-8 col-md-offset-3">
                 <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>
+                </button>&nbsp;
                 <button type="reset" class="btn btn-flat btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
                 </button>

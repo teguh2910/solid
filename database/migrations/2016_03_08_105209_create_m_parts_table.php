@@ -15,12 +15,11 @@ class CreateMPartsTable extends Migration {
 		Schema::create('m_parts', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('back_number')
-			$table->string('part_number')
+			$table->string('back_number');
+			$table->string('part_number');
 			$table->string('part_name');
-			$table->integer('qty_per_box');
+			$table->integer('qty_box');
 			$table->string('unit');
-			$table->string('id_area');
 			$table->timestamps();
 		});
 	}

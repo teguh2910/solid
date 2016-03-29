@@ -78,7 +78,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div style="position:relative;">
-                                <a class='btn btn-info btn-flat btn-sm' href='javascript:;'>
+                                <a class='btn btn-primary btn-flat btn-sm' href='javascript:;'>
                                     <font face='calibri'><b>CHOOSE FILE</b></font>
                                     <input type="file" id="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'size="40" onchange='$("#upload-file-info").html($(this).val());' autofocus required>
                                 </a>

@@ -224,7 +224,7 @@ class StockController extends Controller {
         $m_part=m_part::all();
 	 	$m_area=m_area::all();
 	 	$m_area2=m_area::all();
-	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	$t_transaction=t_transaction::leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->get();
 	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
 	 }
@@ -234,22 +234,26 @@ class StockController extends Controller {
 	 {  
 	 	$input = \Input::all();
 	 	$id_area=$input['id_area'];
+	 	$check = m_area::where('id_area','=',$id_area)->get();
 	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id_area)                            
+	 	                            ->where('t_transactions.id_area',$id_area)  
+	 	                            ->groupBy('m_parts.part_number')                          
 	 	                            ->get();
-	 	return view('stock.view_list',compact('t_transaction'));
+	 	return view('stock.view_list',compact('t_transaction','check'));
 	 
 	 }
 
 	 public function view_list2($id)
 	 {  
 	 	$input = \Input::all();
+	 	$check = m_area::where('id_area','=',$id)->get();
 	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id)                            
+	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	                            ->where('t_transactions.id_area',$id)  
+	 	                            ->groupBy('m_parts.part_number')                           
 	 	                            ->get();
-	 	return view('stock.view_list',compact('t_transaction'));
+	 	return view('stock.view_list',compact('t_transaction','check'));
 	 
 	 }
 
@@ -303,11 +307,7 @@ class StockController extends Controller {
 	 	$id_area=$input['id_area'];
             $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id_area)
-	 	                            ->where('t_transactions.amount_box','!=','0')
-	 	                             ->where('t_transactions.amount_pcs','!=','0')
-	 	                              ->where('t_transactions.total_pcs','!=','0')
-	 	                            ->groupBy('t_transactions.id_area')                            
+	 	                            ->where('t_transactions.id_area',$id_area)                            
 	 	                            ->get();
 	 	$array3=m_area::where('id_area',$id_area)->get();
 	 	foreach ($array3 as $m_area) {
@@ -363,12 +363,27 @@ class StockController extends Controller {
 	 {    
 	 	$input=\Input::all();
 	 	$type_plant=$input['type_plant'];
-        $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
-	 	                            ->join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('m_areas.type_plant',$type_plant)
-	 	                            ->groupBy('m_parts.part_number')                            
-	 	                            ->get();
+	 	$array = DB::select('select *, sum(t_transactions.amount_box) as a, 
+	 		sum(t_transactions.amount_pcs) as b, 
+	 		sum(t_transactions.total_pcs) as c 
+	 		from t_transactions
+	 		join m_areas on (m_areas.id_area = t_transactions.id_area)
+	 		join m_parts on (m_parts.part_number = t_transactions.part_number) 
+	 		where 
+	 		m_areas.type_plant = "'.$type_plant.'"
+	 		group By t_transactions.part_number');
+        	$array2 = new Collection($array);
+
+        	// $tes = DB::select('select SUM(t_transactions.amount_box) as a, 
+        	// 	SUM(t_transactions.amount_pcs) as b, SUM(t_transactions.total_pcs) as c 
+        	// 	FROM t_transactions group by t_transactions.part_number');
+        	// $tes2 = new Collection($tes);
+        // $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	 	     //                        ->leftjoin('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 	     //                        ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
+	 	     //                        ->where('m_areas.type_plant',$type_plant)
+	 	     //                        ->groupBy('m_parts.part_number')                            
+	 	     //                        ->get();
 	 	$array3=m_area::where('type_plant',$type_plant)->get();
 	 	
 
@@ -387,9 +402,9 @@ class StockController extends Controller {
 				$part_name  =$array2->part_name;
 				$qty_box    =$array2->qty_box;
 				$unit       =$array2->unit;
-				$amount_box =$array2->amount_box;
-				$amount_pcs =$array2->amount_pcs;
-				$total_pcs  =$array2->total_pcs;
+				$amount_box =$array2->a;
+				$amount_pcs =$array2->b;
+				$total_pcs  =$array2->c;
 				$a++;
 
 			$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $back_number);

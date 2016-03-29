@@ -111,6 +111,9 @@
 				</ul>
 				@elseif (Auth::user()->role == "5")	
 				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>DATA USER</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
@@ -251,7 +254,7 @@
   				<li>
   					@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
   					<font face='calibri' color='grey'>
-  					<b>ELNA</b></font> <font face='calibri' color='grey'>(E-Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
+  					<b>ELNA</b></font> <font face='calibri' color='grey'>(Electronic Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
     				</font>
   					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
   					<font face='calibri' color='grey'>

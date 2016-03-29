@@ -4,7 +4,15 @@
 <div class="col-lg-12">
 <div class="content-panel">
 <div class="container-fluid">
-    <big><big><big><font face='calibri' color='grey'><b>LIST STOCK</b></font></big></big></big>
+    <a href="{{ url('stock/view_transaction') }}"><button class='btn btn-sm btn-flat btn-info'><i class='glyphicon glyphicon-chevron-left'></i> <b>BACK</b></button></a>
+    <big><big>
+    <br/><font face='calibri' color='grey'>
+    @foreach ($check as $check)
+        <small><small><b>Plant {{$check->type_plant}}<br/>Code Area {{$check->code_area}}<br/>
+            Name Area {{$check->name_area}}</b></small></small>
+    @endforeach
+    </font>
+    <big><center><font face='calibri' color='grey'><b>LIST STOCK</b></font></center></big></big></big>
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
@@ -36,7 +44,7 @@
                         <td><font face='calibri'>{{ $t_transaction->amount_pcs }}</font></td>
                         <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
                          <td><center>
-                            <a href="{{ url('stock/input_transaction/'.$t_transaction->id_t_transactions) }}" class="btn btn-info btn-xs">
+                            <a href="{{ url('stock/input_transaction/'.$t_transaction->id_t_transactions) }}" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>            
                         </center>
@@ -56,6 +64,7 @@
     </div>
   </div>
 </div>
+<br/>
 </div>
 @if (count($t_transaction) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
