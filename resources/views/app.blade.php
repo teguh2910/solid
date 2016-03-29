@@ -4,19 +4,33 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
+	<title>ELNA v1.0</title>
+	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
 	<title>SOLID v1.1</title>
-
+	@else
+	<title>Welcome</title>
+	@endif
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
 	
    	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
    	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('/js/select2.full.min.js') }}"></script>
+
+
+	<script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -28,10 +42,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
+				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
+				<a class="navbar-brand">
+					<font color='grey'><i class='glyphicon glyphicon-plane'></i>&nbsp;</font>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.0</small></small></small></span>
+				</a>
+				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-list-alt'></i>&nbsp;</font>
 					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1.1</small></small></small></span>
 				</a>
+				@endif
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -87,6 +108,36 @@
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
+				</ul>
+				@elseif (Auth::user()->role == "5")	
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>DATA USER</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_part') }}"><font face='calibri'><b>PART</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/print_report_plant') }}"><font face='calibri'><b>PRINT PLANT REPORT</b></font></a></li>
+				</ul>
+				@elseif (Auth::user()->role == "6")	
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
+				</ul>
+				    @elseif (Auth::user()->role == "7")
+				 <ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_part') }}"><font face='calibri'><b>PART</b></font></a></li>
 				</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
@@ -201,9 +252,19 @@
     		<center>
     			<ol class="breadcrumb">
   				<li>
+  					@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
+  					<font face='calibri' color='grey'>
+  					<b>ELNA</b></font> <font face='calibri' color='grey'>(Electronic Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
+    				</font>
+  					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
   					<font face='calibri' color='grey'>
   					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
-    			</font></li>
+    				</font>
+    				@else
+    				<font face='calibri' color='grey'>Finance Accounting Project ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
+    				</font>
+    				@endif
+    			</li>
 				</ol>
     		</center>
         </div>
@@ -212,10 +273,19 @@
 </html>
 
 <head>
+@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
+<style>
+body{
+background-image: url('{{ asset("img/img_elna.png") }}');
+background-repeat: repeat-x repeat-y;
+}
+</style>
+@else 
 <style>
 body{
 background-image: url('{{ asset("img/school.png") }}');
 background-repeat: repeat-x repeat-y;
 }
 </style>
+@endif
 </head>
