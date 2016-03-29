@@ -4,7 +4,7 @@
 <div class="col-lg-12">
 <div class="content-panel">
 <div class="container-fluid">
-    <h4><i class="fa fa-angle-right"></i> DATA STOCK</h4>
+    <big><big><big><font face='calibri' color='grey'><b>DATA TRANSACTION</b></font></big></big></big>
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
@@ -15,7 +15,7 @@
             <br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
-                    <tr>
+                    <tr class='info'>
                         <th><center><font face='calibri'>BACK NO</font></center></th>
                         <th><center><font face='calibri'>PART NO</font></center></th>
                         <th><center><font face='calibri'>PART NAME</font></center>
@@ -43,7 +43,7 @@
                     </tr>
                     @endforeach
                    @else
-                    <tr class='info'>
+                    <tr bgcolor='#FFFFFF'>
                         <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
@@ -73,8 +73,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>ID AREA</b></font></label>
               <div class="col-md-7">
-                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
-                   <option selected disabled="">Select ID AREA</option>
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
                   @endforeach
@@ -87,7 +86,7 @@
               <div class="col-md-8 col-md-offset-3">
                 <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-search'></span> <font face='calibri'><b>SEARCH</b></font>
-                </button>
+                </button>&nbsp;
                 <button type="reset" class="btn btn-flat btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
                 </button>

@@ -15,15 +15,19 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>INPUT ID AREA</font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>ID AREA</b></font></label>
               <div class="col-md-9">
-                <input type='text' class="form-control" name="id_area" id="id_area" autofocus required>
+                <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
+                @foreach ($id_area as $m_area)
+                <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
+                @endforeach
+                </select>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-9 col-md-offset-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-print'></span> <font face='calibri'><b> PRINT</b></font>
                 </button>
               </div>

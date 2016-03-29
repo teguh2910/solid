@@ -48,8 +48,8 @@
 				<div class="panel-heading">
 					<center>
 						<font face='calibri'>
-							<big><big><big><big><b>SOLID</b></big></big></big></big> <small>v.1.1.1</small><br/>
-							Aisin Operational Invoice Document
+							<big><big><big><big><b>Welcome</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							<!-- Aisin Operational Invoice Document -->
 						</font><br/><br/>
 					</center>
 

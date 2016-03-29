@@ -37,6 +37,14 @@
                         MIS
                     @elseif ($user->dept_code == '6')
                         HRD
+                    @elseif ($user->dept_code == '7')
+                        PPIC Body
+                    @elseif ($user->dept_code == '8')
+                        PPIC Unit
+                    @elseif ($user->dept_code == '9')
+                        Production Body
+                    @elseif ($user->dept_code == '10')
+                        Production Unit    
                     @endif
                     </font></td>
                     <td><font face='calibri'>
@@ -110,6 +118,10 @@
                     <option value="6">HRD</option>
                     <option value="5">MIS</option>
                     <option value="1">Purchasing</option>
+                    <option value="7">PPIC Body</option>
+                    <option value="8">PPIC Unit</option>
+                    <option value="9">Production Body</option>
+                    <option value="10">Production Unit</option>
                 </select>
               </div>
             </div>

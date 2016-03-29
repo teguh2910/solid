@@ -4,7 +4,7 @@
 <div class="col-lg-12">
 <div class="content-panel">
 <div class="container-fluid">
-    <h4><i class="fa fa-angle-right"></i> DATA AREA</h4>
+    <big><big><big><font face='calibri' color='grey'><b>MASTER AREA</b></font></big></big></big>
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
@@ -19,7 +19,7 @@
             <br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
-                    <tr>
+                    <tr class='info'>
                         <th><center><font face='calibri'>ID AREA</font></center></th>
                         <th><center><font face='calibri'>PLANT TYPE</font></center></th>
                         <th><center><font face='calibri'>AREA CODE</font></center></th>
@@ -40,11 +40,11 @@
                         <td><font face='calibri'>{{ $m_area->pic_name }}</font></td>
                         <td><font face='calibri'>{{ $m_area->pic_contact }}</font></td>
                         <td><center>
-                            <a href="{{ url('stock/edit_area/'.$m_area->id) }}" class="btn btn-info btn-xs">
+                            <a href="{{ url('stock/edit_area/'.$m_area->id) }}" class="btn btn-flat btn-info btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                             
-                            <a href="{{ url('stock/delete_area/'.$m_area->id) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete area \'{{$m_area->name_area}}\'?')">
+                            <a href="{{ url('stock/delete_area/'.$m_area->id) }}" class="btn btn-flat btn-danger btn-xs"  onclick="return confirm('Are you sure to delete area \'{{$m_area->name_area}}\'?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </center>
@@ -52,7 +52,7 @@
                     </tr>
                     @endforeach
                     @else
-                    <tr class='info'>
+                    <tr bgcolor='#FFFFFF'>
                         <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
@@ -74,7 +74,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <div style="position:relative;">
-                                <a class='btn btn-info btn-flat btn-sm' href='javascript:;'>
+                                <a class='btn btn-primary btn-flat btn-sm' href='javascript:;'>
                                     <font face='calibri'><b>CHOOSE FILE</b></font>
                                     <input type="file" id="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'size="40" onchange='$("#upload-file-info").html($(this).val());' autofocus required>
                                 </a>
@@ -120,7 +120,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Plant</b></font></label>
               <div class="col-md-7">
-               <select class="form-control" name="type_plant" id="type_plant">
+               <select class="form-control select2" name="type_plant" id="type_plant">
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
@@ -137,7 +137,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Area Name</b></font></label>
               <div class="col-md-7">
-                  <input type='text' class="form-control" name="name_area" id="name_area" required>
+                  <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp : PPIC_UNIT"required>
                 </div>
               </div>
            
@@ -163,7 +163,7 @@
               <div class="col-md-8 col-md-offset-3">
                 <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>
+                </button>&nbsp;
                 <button type="reset" class="btn btn-flat btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
                 </button>

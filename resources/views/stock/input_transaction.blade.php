@@ -18,36 +18,43 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Part Number</font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>Part Number</b></font></label>
               <div class="col-md-8">
                <input type="hidden" name="id" value="{{ $t_transaction->id }}">
-              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" required>
+                <input type="hidden" name="id_area" value="{{ $t_transaction->id_area }}">
+              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Amount of Box</b></font></label>
+              <div class="col-md-7">
+                @if ($t_transaction->amount_box == "0") 
+                <input type="number" class="form-control" name="amount_box" id="amount_box" placeholder="{{$t_transaction->amount_box}}">
+                @else
+                <input type="number" class="form-control" name="amount_box" id="amount_box" value="{{$t_transaction->amount_box}}">
+                @endif
               </div>
             </div>
 
-            
-           
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Amount of Box</font></label>
-              <div class="col-md-8">
-                <input type="number" class="form-control" name="amount_box" id="amount_box" value="{{$t_transaction->amount_box}}" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Amount of PCS</font></label>
-              <div class="col-md-5">
-                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" value="{{$t_transaction->amount_pcs}}" required>
+              <label class="col-md-3 control-label"><font face='calibri'><b>Amount of PCS</b></font></label>
+              <div class="col-md-7">
+                @if ($t_transaction->amount_pcs == "0") 
+                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" placeholder="{{$t_transaction->amount_pcs}}">
+                @else
+                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" value="{{$t_transaction->amount_pcs}}">
+                @endif
               </div>
             </div>
 
             
             <div class="form-group">
               <div class="col-md-8 col-md-offset-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>
-                <button type="reset" class="btn btn-danger">
+                </button>&nbsp;
+                <button type="reset" class="btn btn-flat btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>

@@ -15,9 +15,9 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>INPUT PLANT TYPE</font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>PLANT TYPE</b></font></label>
               <div class="col-md-9">
-               <select class="form-control" name="type_plant" id="type_plant">
+               <select class="form-control select2" name="type_plant" id="type_plant" style="width: 100%;" >
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
@@ -26,7 +26,7 @@
 
             <div class="form-group">
               <div class="col-md-9 col-md-offset-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-flat btn-primary">
                   <span class='glyphicon glyphicon-print'></span> <font face='calibri'><b> PRINT</b></font>
                 </button>
               </div>
