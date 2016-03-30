@@ -166,10 +166,33 @@
 								$par="Good Night";
 							} 
 
+							$role=Auth::user()->role;
+							if ($role == '1') {
+		                        $a = 'User';
+		                    }    
+		                    elseif ($role == '2') {
+		                        $a = 'Accounting';
+		                    }
+		                    elseif ($role == '3') {
+		                        $a = 'Finance';
+		                    }
+		                    elseif ($role == '4') {
+		                        $a = 'Cashier';
+		                    }
+		                    elseif ($role == '5') {
+		                        $a = 'Inventory';  
+		                    }
+		                    elseif ($role == '6') {
+		                        $a = 'Leader';
+		                    }
+		                    elseif ($role == '7') {
+		                        $a = 'Supervisor'; 
+		                    }    
+
 						?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;<font face='calibri'>{{$par}}, <b>{{ Auth::user()->name }}</b></font>
+								<font face='calibri'><b>{{ Auth::user()->name }}</b> ({{$a}})</font>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
@@ -197,6 +220,7 @@
 			<div class="col-md-12">
 				@if ( Session::has('flash_message') )
 					<div class="alert {{ Session::get('flash_type') }}">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						{{ Session::get('flash_message') }}
 					</div>
 				@endif

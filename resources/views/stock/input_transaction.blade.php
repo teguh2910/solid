@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Amount of PCS</b></font></label>
+              <label class="col-md-3 control-label"><font face='calibri'><b>Uncomplete</b></font></label>
               <div class="col-md-7">
                 @if ($t_transaction->amount_pcs == "0") 
                 <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" placeholder="{{$t_transaction->amount_pcs}}">
