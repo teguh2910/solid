@@ -16,14 +16,15 @@
             <table  class="table table-condensed table-bordered">
                 <thead>
                     <tr class='info'>
-                        <th><center><font face='calibri'>BACK NO</font></center></th>
-                        <th><center><font face='calibri'>PART NO</font></center></th>
-                        <th><center><font face='calibri'>PART NAME</font></center>
-                        <th><center><font face='calibri'>QUANTITY/BOX</font></center></th>
-                        <th><center><font face='calibri'>UNIT</font></center></th>
-                        <th><center><font face='calibri'>AMOUNT OF BOX</font></center>
-                        <th><center><font face='calibri'>AMOUNT OF PCS</font></center>  
-                        <th><center><font face='calibri'>TOTAL(PCS)</font></center></th>
+                        <th><center><font face='calibri'>ID Area</font></center></th>
+                        <th><center><font face='calibri'>Back No</font></center></th>
+                        <th><center><font face='calibri'>Part Number</font></center></th>
+                        <th><center><font face='calibri'>Part Name</font></center>
+                        <th><center><font face='calibri'>Quantity/Box</font></center></th>
+                        <th><center><font face='calibri'>Unit</font></center></th>
+                        <th><center><font face='calibri'>Amount Of Box</font></center>
+                        <th><center><font face='calibri'>Uncomplete</font></center>  
+                        <th><center><font face='calibri'>Total(Pcs)</font></center></th>
                         
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                     @if (count($t_transaction) > 0)
                       @foreach($t_transaction as $k)
                     <tr bgcolor='#FFFFFF'>
+                        <td><font face='calibri'>{{ $k->id_area }}</font></td>
                         <td><font face='calibri'>{{ $k->back_number }}</font></td>
                         <td><font face='calibri'>{{ $k->part_number }}</font></td>
                         <td><font face='calibri'>{{ $k->part_name }}</font></td>

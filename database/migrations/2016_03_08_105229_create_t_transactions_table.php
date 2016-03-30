@@ -16,7 +16,14 @@ class CreateTTransactionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('id_area');
+			$table->string('type_plant');
+			
 			$table->string('part_number');
+			$table->string('back_number');
+			$table->string('part_name');
+			$table->integer('qty_box');
+			$table->string('unit');
+			
 			$table->integer('amount_box');
 			$table->integer('amount_pcs');
             $table->integer('total_pcs');
