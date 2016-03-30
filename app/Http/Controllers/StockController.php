@@ -220,12 +220,8 @@ class StockController extends Controller {
 
     public function view_transaction()
 	 {
-
-        $m_part=m_part::all();
 	 	$m_area=m_area::all();
-	 	$m_area2=m_area::all();
-	 	$t_transaction=t_transaction::leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->get();
+	 	$t_transaction=t_transaction::all();
 	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
 	 }
 
@@ -306,7 +302,6 @@ class StockController extends Controller {
 	 	$input=\Input::all();
 	 	$id_area=$input['id_area'];
             $array2=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
 	 	                            ->where('t_transactions.id_area',$id_area)                            
 	 	                            ->get();
 	 	$array3=m_area::where('id_area',$id_area)->get();
@@ -367,13 +362,10 @@ class StockController extends Controller {
 	 		sum(t_transactions.amount_pcs) as b, 
 	 		sum(t_transactions.total_pcs) as c 
 	 		from t_transactions
-	 		join m_areas on (m_areas.id_area = t_transactions.id_area)
-	 		join m_parts on (m_parts.part_number = t_transactions.part_number) 
 	 		where 
-	 		m_areas.type_plant = "'.$type_plant.'"
+	 		type_plant = "'.$type_plant.'"
 	 		group By t_transactions.part_number');
-        	$array2 = new Collection($array);
-
+        $array2 = new Collection($array);
         	// $tes = DB::select('select SUM(t_transactions.amount_box) as a, 
         	// 	SUM(t_transactions.amount_pcs) as b, SUM(t_transactions.total_pcs) as c 
         	// 	FROM t_transactions group by t_transactions.part_number');
@@ -385,27 +377,22 @@ class StockController extends Controller {
 	 	     //                        ->groupBy('m_parts.part_number')                            
 	 	     //                        ->get();
 	 	$array3=m_area::where('type_plant',$type_plant)->get();
-	 	
-
-      \Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array2,$array3){
-            
+      	\Excel::load('/storage/template/report stock opname.xlsx', function($file) use($array2,$array3){    
 		foreach ($array3 as $array3 ) {
-				$type_plant=$array3->type_plant ;
-
+			$type_plant=$array3->type_plant ;
 			$file->setActiveSheetIndex(0)->setCellValue('B4', $type_plant);
-			}
- 
-            $a="6";
+		}
+        $a="6";
         foreach ($array2 as $array2) {
-				$back_number=$array2->back_number;
-				$part_number=$array2->part_number;
-				$part_name  =$array2->part_name;
-				$qty_box    =$array2->qty_box;
-				$unit       =$array2->unit;
-				$amount_box =$array2->a;
-				$amount_pcs =$array2->b;
-				$total_pcs  =$array2->c;
-				$a++;
+			$back_number=$array2->back_number;
+			$part_number=$array2->part_number;
+			$part_name  =$array2->part_name;
+			$qty_box    =$array2->qty_box;
+			$unit       =$array2->unit;
+			$amount_box =$array2->a;
+			$amount_pcs =$array2->b;
+			$total_pcs  =$array2->c;
+			$a++;
 
 			$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $back_number);
 			$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $part_number);
@@ -416,10 +403,8 @@ class StockController extends Controller {
 			$file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', $amount_pcs);
 			$file->setActiveSheetIndex(0)->setCellValue('J'.$a.'', $total_pcs);
 			}
-
-	 })->export('xlsx');
-
-  }
+		})->export('xlsx');
+  	}
 
   	public function print_master_part()
 	 {    

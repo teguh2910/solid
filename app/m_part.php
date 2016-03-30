@@ -15,11 +15,11 @@ class m_part extends Model {
                     $key=explode(';',$value);
                     self::create([
                         'id_area'       =>$key[0],
-                        'back_number'   =>$key[1],
-                        'part_number'   =>$key[2],
-                        'part_name'     =>$key[3],
-                        'qty_box'       =>$key[4],
-                        'unit'          =>$key[5],
+                        'back_number'   =>$key[2],
+                        'part_number'   =>$key[3],
+                        'part_name'     =>$key[4],
+                        'qty_box'       =>$key[5],
+                        'unit'          =>$key[6],
                     ]);
                 }
                 return 1;
