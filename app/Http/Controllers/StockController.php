@@ -232,9 +232,7 @@ class StockController extends Controller {
 	 	$id_area=$input['id_area'];
 	 	$check = m_area::where('id_area','=',$id_area)->get();
 	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id_area)  
-	 	                            ->groupBy('m_parts.part_number')                          
+	 	                            ->where('t_transactions.id_area',$id_area)                       
 	 	                            ->get();
 	 	return view('stock.view_list',compact('t_transaction','check'));
 	 
@@ -245,9 +243,7 @@ class StockController extends Controller {
 	 	$input = \Input::all();
 	 	$check = m_area::where('id_area','=',$id)->get();
 	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->leftjoin('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->where('t_transactions.id_area',$id)  
-	 	                            ->groupBy('m_parts.part_number')                           
+	 	                            ->where('t_transactions.id_area',$id)                      
 	 	                            ->get();
 	 	return view('stock.view_list',compact('t_transaction','check'));
 	 
