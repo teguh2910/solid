@@ -75,27 +75,21 @@ class HomeController extends Controller {
 			return view('invoice.op_list', compact('invoice','result'));
 		}else if ($user->role == "5"){
 			
-        $m_part=m_part::all();
-	 	$m_area=m_area::all();
-	 	$m_area2=m_area::all();
-	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->get();
-	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
-		}else if ($user->role == "6"){
-        $m_part=m_part::all();
-	 	$m_area=m_area::all();
-	 	$m_area2=m_area::all();
-	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->get();
-	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
-	 	}else if($user->role == "7"){
-        $m_part=m_part::all();
-	 	$m_area=m_area::all();
-	 	$m_area2=m_area::all();
-	 	$t_transaction=t_transaction::join('m_parts','m_parts.part_number','=','t_transactions.part_number')
-	 	                            ->get();
-	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
+	        $user=\Auth::user();	
+		 	$m_area=m_area::where('pic_name','=',$user->name)->get();
+		 	$t_transaction=t_transaction::all();
+		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 
+		}else if ($user->role == "6"){
+	        $user=\Auth::user();	
+		 	$m_area=m_area::where('pic_name','=',$user->name)->get();
+		 	$t_transaction=t_transaction::all();
+		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
+	 	}else if($user->role == "7"){
+	        $user=\Auth::user();	
+		 	$m_area=m_area::where('pic_name','=',$user->name)->get();
+		 	$t_transaction=t_transaction::all();
+		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 	}
 			return redirect('auth/logout') ;
 		}
