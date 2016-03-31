@@ -128,7 +128,16 @@
               </div>
             </div>
 
-    
+            <div class="form-group">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Type Plant</b></font></label>
+              <div class="col-md-7">
+                 <select class="form-control select2" name="type_plant" id="type_plant">
+                      <option value="UNIT">UNIT</option>
+                      <option value="BODY">BODY</option>
+                </select>
+              </div>
+            </div>
+            
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Back Number</b></font></label>
               <div class="col-md-7">
