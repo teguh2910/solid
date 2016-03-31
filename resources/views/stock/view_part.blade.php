@@ -18,8 +18,9 @@
             </button>
             &nbsp;&nbsp;
             <a href="{{ url('/stock/print_master_part') }}"><button class='btn btn-primary btn-flat btn-sm'><i class='glyphicon glyphicon-print'></i> &nbsp;<font face='calibri'><b>PRINT MASTER PART</b></font></button></a>
-            
-            <br/><br/>
+            &nbsp;&nbsp;
+            <!-- <a href="{{ url('/normalize/transaction') }}"><button class='btn btn-success btn-flat btn-sm'><font face='calibri'><b>NORMALIZE TRANSACTION</b></font></button></a>
+             --><br/><br/>
             <table  class="table table-condensed table-bordered">
                 <thead>
                     <tr class='info'>

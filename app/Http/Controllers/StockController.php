@@ -138,6 +138,26 @@ class StockController extends Controller {
 	 	return view('stock.view_part',compact('m_part','m_area'));
 	 }
 
+	public function normalize_transaction()
+	 {
+	 	$t_transactions = t_transaction::all();
+	 	foreach ($t_transactions as $t_transactions) {
+	 		$id 			= $t_transactions->id;
+	 		$qty_box 		= $t_transactions->qty_box;
+	 		$amount_box 	= $t_transactions->amount_box;
+	 		$amount_pcs 	= $t_transactions->amount_pcs;
+	 		$total_pcs      = $qty_box*$amount_box;
+	 		$total_pcs2     = $total_pcs+$amount_pcs;
+	 		
+	 		$m_area = t_transaction::findOrFail($id);
+	 		$m_area->total_pcs = $total_pcs2;
+	 		$m_area->save(); 
+	 	}
+	 	\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Transaction was normalize');
+        return redirect('stock/view_part');
+	 }
+
 
 	  public function m_part_import()
 	{
@@ -272,7 +292,7 @@ class StockController extends Controller {
         $part_number=$input['part_number'];
         $a=$input['amount_box'];
        	$b=$input['amount_pcs'];
-        $m_part=m_part::where('part_number',$part_number)->get();
+        $m_part=t_transaction::where('part_number',$part_number)->get();
         foreach ($m_part as $m_part) {
         	$qty_box = $m_part->qty_box;
         }
