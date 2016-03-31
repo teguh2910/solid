@@ -170,7 +170,12 @@ class StockController extends Controller {
 		
 		$t_transaction= new t_transaction;
 		$t_transaction->id_area =$input['id_area'];
+		$t_transaction->type_plant=$input['type_plant'];
 		$t_transaction->part_number=$input['part_number'];
+		$t_transaction->back_number    =$input['back_number'];
+		$t_transaction->part_name    =$input['part_name'];
+		$t_transaction->unit         =$input['unit'];
+		$t_transaction->qty_box=$input['qty_box'];
         $t_transaction->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','New part was successfully created');
@@ -220,9 +225,10 @@ class StockController extends Controller {
 
     public function view_transaction()
 	 {
-	 	$m_area=m_area::all();
+	 	$user=\Auth::user();	
+	 	$m_area=m_area::where('pic_name','=',$user->name)->get();
 	 	$t_transaction=t_transaction::all();
-	 	return view('stock.view_transaction',compact('t_transaction','m_part','m_area','m_area2'));
+	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 }
 
 
