@@ -7,7 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.0</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v1.1</title>
+	<title>SOLID v1.1.2</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -50,7 +50,7 @@
 				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-list-alt'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1.1</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1.2</small></small></small></span>
 				</a>
 				@endif
 			</div>
@@ -201,7 +201,7 @@
 							<ul class="dropdown-menu" role="menu">
 								<li>
 									<a  data-toggle="modal" data-target="#changePassword">
-										<font face='calibri'>CHANGE PASSWORD</font>
+										<font face='calibri'>Change Password</font>
 									</a>
 								</li>
 							</ul>

@@ -47,12 +47,12 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td class='warning'><center><small><font face='calibri'><b>{{ $invoice->tgl_terima_finance }}</b></font></small></center></td>
+                    <td class='warning'><center><small><a href="{{ url('invoice/approval/detail/'.$invoice->id) }}"><font face='calibri'><b>{{ $invoice->tgl_terima_finance }}</b></font></a></small></center></td>
                 </tr>
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="11"><center><font face='calibri'>No record to.. display</font></center></td>
+                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
                 </tbody>

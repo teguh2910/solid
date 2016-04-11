@@ -77,6 +77,8 @@
                         <b>Reject Accounting</b>
                     @elseif ($invoice_master->status=="7")
                         <b>Reject Finance</b>
+                    @elseif ($invoice_master->status=="8")
+                        <b>Ready To Pay</b>
                     @endif
                     </center></font></td>
                 </tr>
@@ -153,6 +155,24 @@
                     <tr class='info'>
                         <td><font face='calibri'>Approve Accounting</font></td>
                         <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
+                    </tr>
+                    @endif
+                    @if ($invoice->status=="8")
+                    <tr class='info'>
+                        <td><font face='calibri'>Checked User</font></td>
+                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
+                    </tr>
+                    <tr class='info'>
+                        <td><font face='calibri'>Approve Accounting</font></td>
+                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
+                    </tr>
+                    <tr class='info'>
+                        <td><font face='calibri'>Checked Finance</font></td>
+                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_finance }}</center></font></td>
+                    </tr>
+                    <tr class='info'>
+                        <td><font face='calibri'>Ready To Pay</font></td>
+                        <td><font face='calibri'><center>{{ $invoice->tgl_ready_to_pay }}</center></font></td>
                     </tr>
                     @endif
                 @endforeach

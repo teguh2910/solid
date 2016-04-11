@@ -34,6 +34,8 @@ class CreateTableInvoice extends Migration {
 			$table->dateTime('tgl_terima_act');
 			$table->string('finance');
 			$table->dateTime('tgl_terima_finance');
+			$table->string('finance2');
+			$table->dateTime('tgl_ready_to_pay');
 			$table->timestamps();
 		});
 	}
