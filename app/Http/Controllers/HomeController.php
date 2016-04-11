@@ -313,9 +313,9 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
-		$invoice->finance=$user->id;
+		$invoice->finance2=$user->id;
 		$invoice->status="8";
-		$invoice->tgl_terima_finance=$date;
+		$invoice->tgl_ready_to_pay=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Invoice was successfully finish');
@@ -324,16 +324,26 @@ class HomeController extends Controller {
 
 	public function invoice_rtp_list()
 	{
-		$invoice = Invoice::where('status','8')->get();
-		return view('invoice.rtp_list', compact('invoice'));
+		$user =\Auth::user();
+		if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
+			$invoice = Invoice::where('status','8')->get();
+			return view('invoice.rtp_list', compact('invoice'));
+		} else {
+			return redirect('invoice/rtp/user');
+		}
 	}
 
 	public function invoice_op_list()
 	{
-		$invoice = Invoice::where('status','!=','8')->get();
-		$queries = DB::select('select count(id) as a from invoice where status!="8"');
-        $result = new Collection($queries);
-		return view('invoice.op_list', compact('invoice','result'));
+		$user =\Auth::user();
+		if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
+			$invoice = Invoice::where('status','!=','8')->get();
+			$queries = DB::select('select count(id) as a from invoice where status!="8"');
+	        $result = new Collection($queries);
+			return view('invoice.op_list', compact('invoice','result'));
+		} else {
+			return redirect('invoice/op/user');
+		}
 	}
 
 	public function invoice_rtp_user()
