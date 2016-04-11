@@ -47,7 +47,7 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td class='warning'><center><small><a href="{{ url('invoice/approval/detail/'.$invoice->id) }}"><font face='calibri'><b>{{ $invoice->tgl_terima_finance }}</b></font></a></small></center></td>
+                    <td class='warning'><center><small><a href="{{ url('invoice/approval/detail/'.$invoice->id) }}"><font face='calibri'><b>{{ $invoice->tgl_ready_to_pay }}</b></font></a></small></center></td>
                 </tr>
                 @endforeach
             @else
