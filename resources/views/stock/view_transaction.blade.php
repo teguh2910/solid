@@ -69,9 +69,6 @@
                     <form class="form-horizontal" role="form" enctype='multipart/form-data' method="post" action="{{ url('/stock/view_list') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
-          
-           
-              
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>ID AREA</b></font></label>
               <div class="col-md-7">
@@ -83,7 +80,6 @@
               </div>
             </div>  
 
-          
             <div class="form-group">
               <div class="col-md-8 col-md-offset-3">
                 <button type="submit" class="btn btn-flat btn-primary">
@@ -111,8 +107,6 @@
     $('table').dataTable({
         "searching": true
     });
-
-
        function test (e) {
         if($('#action1').val()=="UNIT"){
             // $('#pending_reason').attr('disabled','disabled');
