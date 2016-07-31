@@ -45,11 +45,11 @@
                         <td><font face='calibri'>{{ $v->unit }}</font></td>
                       
                         <td><center>
-                            <a href="{{ url('stock/edit_part/'.$v->id_m_parts) }}" class="btn btn-info btn-xs">
+                            <a href="{{ url('stock/edit_part/'.$v->id) }}" class="btn btn-info btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                             
-                            <a href="{{ url('stock/delete_part/'.$v->id_m_parts) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete part \'{{$v->name_part}}\'?')">
+                            <a href="{{ url('stock/delete_part/'.$v->id) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete part \'{{$v->name_part}}\'?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </center>

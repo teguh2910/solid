@@ -54,7 +54,6 @@ class StockController extends Controller {
 		$table = \Input::get('table');
 		$array_data = CsvHelper::csv_to_array($file);
 		$result     = m_area::array_to_db($array_data);
-		$result     =t_transaction::array_to_db($array_data);
 		if ($result == 1) {
 			\Session::flash('flash_type','alert-success');
 			\Session::flash('flash_message','Successfully Saved');
@@ -92,7 +91,6 @@ class StockController extends Controller {
 	 {
 	 	 $m_area=m_area::where('id',$id)->get();
          return view('stock.edit_area',compact('m_area'));
-
 	 }
 
 	 public function save_edit_area()
@@ -132,9 +130,8 @@ class StockController extends Controller {
 
     public function view_part()
 	 {
-	 	$m_area=m_area::all();
-	 	$m_part=m_part::select('*','m_parts.id as id_m_parts')
-	 	->join('m_areas','m_areas.id_area','=','m_parts.id_area')->get();
+	 	$m_area = m_area::all();
+	 	$m_part = m_part::all();
 	 	return view('stock.view_part',compact('m_part','m_area'));
 	 }
 
@@ -245,9 +242,9 @@ class StockController extends Controller {
 
     public function view_transaction()
 	 {
-	 	$user=\Auth::user();	
-	 	$m_area=m_area::where('pic_name','=',$user->name)->get();
-	 	$t_transaction=t_transaction::all();
+	 	$user 			= \Auth::user();	
+	 	$m_area 		= m_area::where('pic_name','=',$user->name)->get();
+	 	$t_transaction 	= t_transaction::all();
 	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 }
 
@@ -257,8 +254,17 @@ class StockController extends Controller {
 	 	$input = \Input::all();
 	 	$id_area=$input['id_area'];
 	 	$check = m_area::where('id_area','=',$id_area)->get();
-	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->where('t_transactions.id_area',$id_area)                       
+	 	$t_transaction=t_transaction::where('id_area',$id_area)                       
+	 	                            ->get();
+	 	return view('stock.view_list',compact('t_transaction','check'));
+	 
+	 }
+
+	 public function view_list3($id)
+	 {  
+	 	$input = \Input::all();
+	 	$check = m_area::where('id_area','=',$id)->get();
+	 	$t_transaction=t_transaction::where('id_area',$id)                       
 	 	                            ->get();
 	 	return view('stock.view_list',compact('t_transaction','check'));
 	 

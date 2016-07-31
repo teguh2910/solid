@@ -44,7 +44,7 @@
                         <td><font face='calibri'>{{ $t_transaction->amount_pcs }}</font></td>
                         <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
                          <td><center>
-                            <a href="{{ url('stock/input_transaction/'.$t_transaction->id_t_transactions) }}" class="btn btn-primary btn-xs">
+                            <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>            
                         </center>

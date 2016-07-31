@@ -74,6 +74,7 @@ Route::post('stock/view_part', 'StockController@m_part_import');
 
 Route::get('stock/view_transaction','StockController@view_transaction');
 Route::post('stock/view_list','StockController@view_list');
+Route::get('stock/view_list/{id}','StockController@view_list3');
 Route::get('stock/view_list/2/{id}','StockController@view_list2');
 
 Route::get('stock/input_transaction/{id}','StockController@input_transaction');

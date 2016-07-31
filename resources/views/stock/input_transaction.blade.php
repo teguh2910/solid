@@ -5,7 +5,10 @@
 <div class="container">
    <div class="row">
     <div class="col-md-6 col-md-offset-3">
-     
+     @foreach($t_transaction as $t_transaction)
+    <a href="{{ url('stock/view_list/'.$t_transaction->id_area) }}"   class="btn btn-info btn-sm">
+                                            <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i> &nbsp;<b>BACK</b>
+                                        </a> 
         <br/><br/>
      
       <div class="panel panel-primary">
@@ -13,7 +16,7 @@
         <div class="panel-heading"><center><span class='glyphicon glyphicon-pencil'></span> <font face='calibri'>&nbsp;<font face='calibri'><b>Input Amount</b></font></center></div>
         <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
-           @foreach($t_transaction as $t_transaction)
+          
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             
