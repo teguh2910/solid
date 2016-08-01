@@ -41,8 +41,6 @@
                <input type="text" class="form-control" value="{{$t_transaction->part_name}}" readonly>
               </div>
             </div>
-            @if ($t_transaction->qty_box == "0")
-            @else
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Amount of Box</b></font></label>
               <div class="col-md-7">
@@ -53,7 +51,6 @@
                 @endif
               </div>
             </div>
-            @endif
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Uncomplete</b></font></label>
               <div class="col-md-7">
