@@ -34,7 +34,11 @@
                 <tbody>
                     @if (count($t_transaction) > 0)
                       @foreach($t_transaction as $t_transaction)
+                      @if ($t_transaction->total_pcs == '0')
                     <tr bgcolor='#FFFFFF'>
+                    @else
+                    <tr bgcolor='#DCDCDC'>
+                    @endif
                         <td><font face='calibri'>{{ $t_transaction->back_number }}</font></td>
                         <td><font face='calibri'>{{ $t_transaction->part_number }}</font></td>
                         <td><font face='calibri'>{{ $t_transaction->part_name }}</font></td>
