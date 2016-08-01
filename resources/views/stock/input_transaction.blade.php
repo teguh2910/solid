@@ -28,7 +28,20 @@
               <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
               </div>
             </div>
-  
+            <div class="form-group">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Back Number</b></font></label>
+              <div class="col-md-8">
+               <input type="text" class="form-control" value="{{$t_transaction->back_number}}" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label"><font face='calibri'><b>Part Name</b></font></label>
+              <div class="col-md-8">
+               <input type="text" class="form-control" value="{{$t_transaction->part_name}}" readonly>
+              </div>
+            </div>
+            @if ($t_transaction->qty_box == "0")
+            @else
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Amount of Box</b></font></label>
               <div class="col-md-7">
@@ -39,7 +52,7 @@
                 @endif
               </div>
             </div>
-
+            @endif
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Uncomplete</b></font></label>
               <div class="col-md-7">
@@ -54,10 +67,10 @@
             
             <div class="form-group">
               <div class="col-md-8 col-md-offset-3">
-                <button type="submit" class="btn btn-flat btn-primary">
+                <button type="submit" class="btn btn-flat btn-sm btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>&nbsp;
-                <button type="reset" class="btn btn-flat btn-danger">
+                </button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-flat btn-sm btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
