@@ -25,6 +25,7 @@
               <div class="col-md-8">
                <input type="hidden" name="id" value="{{ $t_transaction->id }}">
                 <input type="hidden" name="id_area" value="{{ $t_transaction->id_area }}">
+                <input type="hidden" name="qty_box" value="{{ $t_transaction->qty_box }}">
               <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
               </div>
             </div>
