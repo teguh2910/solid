@@ -244,8 +244,12 @@ class StockController extends Controller {
 	 {
 	 	$user 			= \Auth::user();	
 	 	$m_area 		= m_area::where('pic_name','=',$user->name)->get();
+	 	if ($user->role == '7') {
 	 	$t_transaction 	= t_transaction::join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 									->where('m_areas.pic_name',''.$user->name.'')->get();
+	 	} else {
+	 	$t_transaction 	= t_transaction::all();
+	 	}
 	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 }
 
