@@ -1,12 +1,11 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="box box-primary">
+        <div class="box-body">
         <div class="col-md-12">
-            <a href="{{ url('/invoice/user/reject/list') }}"><button class='btn btn-info btn-flat btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
-            <br/>
-        	<div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
+            <div class="clearfix">&nbsp;</div>
+                <table class="table table-hover table-bordered table-condensed">
                 <thead>
                     <tr class='success'>
                         <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
@@ -19,6 +18,7 @@
                         <th><center><small><font face='calibri'>CURR</font></small></center></th>
                         <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
                         <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
+                        <th><center><small><font face='calibri'>NO PO</font></small></center></th>
                         <th><center><small><font face='calibri'>REJECT REASON</font></small></center></th>
                     </tr>
                 </thead>
@@ -55,12 +55,12 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td><small><font face='calibri'><b>{{ $invoice->remark_act }}</b><br/>{{$invoice->tgl_pending_act}}</font></small></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-    </div>
     <div class="col-md-6 col-md-offset-3">
     <div class="panel-body">
         <div class="panel panel-default">
@@ -77,8 +77,8 @@
                 </div>
                 <div class="form-group" id="gr-button">
                     <div class="col-md-6 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary btn-flat btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font></button>
-                        <button type="reset" id="gr-reset" class="btn btn-danger btn-flat btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
+                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font></button>&nbsp;&nbsp;
+                        <button type="reset" id="gr-reset" class="btn btn-danger btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
                     </div>
                 </div>
             </form>
@@ -86,7 +86,7 @@
         </div></div>
     </div>
 </div>
-
+</div>
 </div>
 
 

@@ -1,15 +1,39 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
-    <div class="box box-primary">
-        <div class="box-body">
+    <div class="row">
         <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{{ url('invoice/user/list') }}">
+                            <font face='calibri' color='grey'><b>INVOICE LIST
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a>
+                            <big><big><big><font face='calibri' color='grey'><b>INVOICE CHECKED
+                            <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font></big></big></big>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('invoice/user/reject/list') }}">
+                            <font face='calibri' color='grey'><b>INVOICE REJECT
+                            <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                <font face='calibri' color='grey'>
+                    <b>LIST INVOICE CHECK BY USER</b>
+                </font>
         	<div class="clearfix">&nbsp;</div>
                 <table class="table table-hover table-bordered table-condensed">
                 <thead>
                     <tr class='success'>
                         <th><small><font face='calibri'>NO PENERIMAAN</font></small></th>
-                        <th><small><font face='calibri'>DEPT CODE </font></small></th>
+                        <th><small><font face='calibri'>DEPARTMENT</font></small></th>
                         <th><small><font face='calibri'>VENDOR</font></small></th>
                         <th><small><font face='calibri'>TGL TERIMA</font></small></th>
                         <th><small><font face='calibri'>DOC NO</font></small></th>
@@ -22,6 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
+            @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <?php 
                     date_default_timezone_set('Asia/Jakarta');
@@ -44,46 +69,29 @@
                         MIS
                     @elseif ($invoice->dept_code == '6')
                         HRD
-                    @endif</font></td>
+                    @endif
+                    </font></td>
                     <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
                     <td><center><font face='calibri'>{{ $invoice->tgl_terima }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->doc_no }}</font></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
+                    <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                 </tr>
+                @endforeach
+            @else
+                <tr class='warning'>
+                    <td colspan="11"><center><font face='calibri'><b>No record to display</b></font></center></td>
+                </tr>
+            @endif
                 </tbody>
             </table>
         </div>
-    <div class="col-md-6 col-md-offset-3">
-    <div class="panel-body">
-        <div class="panel panel-default">
-            <div class="panel-success"><div class="panel-heading">
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/pending/act/save') }}">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <br/><div class="form-group" id="gr-pending">
-                    <label class="col-md-3 control-label"><font face='calibri'><b>Reject Reason</b></font></label>
-                    <div class="col-md-8">
-                        <textarea name='remark' class="form-control" id='remark' autofocus required></textarea>
-                        <input type='hidden' name='id' value='{{ $invoice->id }}'>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="form-group" id="gr-button">
-                    <div class="col-md-8 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SUBMIT</b></font></button>&nbsp;&nbsp;
-                        <button type="reset" id="gr-reset" class="btn btn-danger btn-sm"><span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font></button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div></div>
     </div>
-</div>
-</div>
+    </div>
 </div>
 
 @if (count($invoice) > 0)

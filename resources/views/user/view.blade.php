@@ -3,84 +3,88 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <font face='calibri' color="grey"><b><big><big><big>DATA USER</big></big></big></b></font><br/>
-            <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal">
-                <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>CREATE USER</b></font>
-            </button>
-            <br/>
-        	<div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
-                <thead>
-                    <tr class='success'>
-                        <th><center><small><font face='calibri'>USERNAME</font></small></center></th>
-                        <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
-                        <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
-                        <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($user as $user)
-                <tr class='info'>
-                    <td><font face='calibri'>{{ $user->name }}</font></td>
-                    <td><font face='calibri'>{{ $user->email }}</font></td>
-                    <td><font face='calibri'>
-                    @if ($user->dept_code == '1')
-                        Purchasing
-                    @elseif ($user->dept_code == '2')
-                        General Affair
-                    @elseif ($user->dept_code == '3')
-                        BOD
-                    @elseif ($user->dept_code == '4')
-                        Finance & Accounting
-                    @elseif ($user->dept_code == '5')
-                        MIS
-                    @elseif ($user->dept_code == '6')
-                        HRD
-                    @elseif ($user->dept_code == '7')
-                        PPIC Body
-                    @elseif ($user->dept_code == '8')
-                        PPIC Unit
-                    @elseif ($user->dept_code == '9')
-                        Production Body
-                    @elseif ($user->dept_code == '10')
-                        Production Unit    
-                    @endif
-                    </font></td>
-                    <td><font face='calibri'>
-                    @if ($user->role == '1')
-                        User
-                    @elseif ($user->role == '2')
-                        Accounting
-                    @elseif ($user->role == '3')
-                        Finance
-                    @elseif ($user->role == '4')
-                        Cashier
-                    @elseif ($user->role == '5')
-                        Inventory  
-                    @elseif ($user->role == '6')
-                        Leader
-                    @elseif ($user->role == '7')
-                        Supervisor       
-                    @endif
-                    </font></td>
-                    <td class='warning'><center>
-                        <a href="{{ url('user/edit/'.$user->id) }}" class="btn btn-primary btn-flat btn-xs">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                        </a>
-                        <a href="{{ url('user/reset/'.$user->id) }}" class="btn btn-info btn-flat btn-xs"
-                            onclick="return confirm('Are you sure to reset password username \'{{$user->name}}\' to aiia?')">
-                                <i class="glyphicon glyphicon-refresh"></i>
-                        </a>
-                        <a href="{{ url('user/delete/'.$user->id) }}" class="btn btn-danger btn-flat btn-xs"
-                            onclick="return confirm('Are you sure to delete username \'{{$user->name}}\' ?')">
-                                <i class="glyphicon glyphicon-trash"></i>
-                        </a></center>
-                    </td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <div class="box box-primary">
+                <div class="box-body">
+                    <font face='calibri' color="grey"><b><big><big><big>MASTER USER</big></big></big></b></font><br/><br/>
+                    <button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#myModal">
+                        <font face='calibri'><b>CREATE USER</b></font>
+                    </button>
+                    <br/>
+                	<div class="clearfix">&nbsp;</div>
+                        <table class="table table-hover table-bordered table-condensed">
+                        <thead>
+                            <tr class='success'>
+                                <th><center><small><font face='calibri'>USERNAME</font></small></center></th>
+                                <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
+                                <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
+                                <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($user as $user)
+                        <tr class='info'>
+                            <td><font face='calibri'>{{ $user->name }}</font></td>
+                            <td><font face='calibri'>{{ $user->email }}</font></td>
+                            <td><font face='calibri'>
+                            @if ($user->dept_code == '1')
+                                Purchasing
+                            @elseif ($user->dept_code == '2')
+                                General Affair
+                            @elseif ($user->dept_code == '3')
+                                BOD
+                            @elseif ($user->dept_code == '4')
+                                Finance & Accounting
+                            @elseif ($user->dept_code == '5')
+                                MIS
+                            @elseif ($user->dept_code == '6')
+                                HRD
+                            @elseif ($user->dept_code == '7')
+                                PPIC Body
+                            @elseif ($user->dept_code == '8')
+                                PPIC Unit
+                            @elseif ($user->dept_code == '9')
+                                Production Body
+                            @elseif ($user->dept_code == '10')
+                                Production Unit    
+                            @endif
+                            </font></td>
+                            <td><font face='calibri'>
+                            @if ($user->role == '1')
+                                User
+                            @elseif ($user->role == '2')
+                                Accounting
+                            @elseif ($user->role == '3')
+                                Finance
+                            @elseif ($user->role == '4')
+                                Cashier
+                            @elseif ($user->role == '5')
+                                Inventory  
+                            @elseif ($user->role == '6')
+                                Leader
+                            @elseif ($user->role == '7')
+                                Supervisor       
+                            @endif
+                            </font></td>
+                            <td class='warning'><center>
+                                <a href="{{ url('user/edit/'.$user->id) }}" class="btn btn-primary btn-xs">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                </a>&nbsp;
+                                <a href="{{ url('user/reset/'.$user->id) }}" class="btn btn-success btn-xs"
+                                    onclick="return confirm('Are you sure to reset password username \'{{$user->name}}\' to aiia?')">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                </a>&nbsp;
+                                <a href="{{ url('user/delete/'.$user->id) }}" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('Are you sure to delete username \'{{$user->name}}\' ?')">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                </a></center>
+                            </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div id="myModal" class="modal fade" role="dialog">
@@ -95,22 +99,22 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Username</font></label>
               <div class="col-md-8">
+                <font face='calibri'><b>Username</b></font><br/>
                 <input type="text" class="form-control" name="name" id="name" autofocus required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>E-Mail Address</font></label>
               <div class="col-md-8">
+                <font face='calibri'><b>E-mail Address</b></font><br/>
                 <input type="email" class="form-control" name="email" id="email" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Department</font></label>
               <div class="col-md-4">
+                <font face='calibri'><b>Department</b></font><br/>
                 <select class="form-control" name="dept_code" id="dept_code">
                     <option value="3">BOD</option>
                     <option value="4">Finance&Accounting</option>
@@ -127,8 +131,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Access Role</font></label>
               <div class="col-md-4">
+                <font face='calibri'><b>Access Role</b></font><br/>
                 <select class="form-control" name="role" id="role">
                      <option value="1">User</option>
                      <option value="2">Accounting</option>
@@ -142,26 +146,19 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Password</font></label>
               <div class="col-md-6">
+                <font face='calibri'><b>Password</b></font><br/>
                 <input type="password" class="form-control" name="password" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'>Confirm Password</font></label>
-              <div class="col-md-6">
-                <input type="password" class="form-control" name="password1" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <button type="submit" class="btn btn-flat btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>
-                <button type="reset" class="btn btn-flat btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
+              <div class="col-md-8">
+                <button type="submit" class="btn btn-primary">
+                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;<font face='calibri'><b>SAVE</b></font>
+                </button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger">
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;<font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>

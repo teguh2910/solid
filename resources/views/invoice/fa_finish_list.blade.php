@@ -1,36 +1,38 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-tabs">
-               <li role="presentation">
+    <div class="col-md-12">
+        <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li>
                     <a href="{{ url('/invoice/fa/list') }}">
                         <font face='calibri' color='grey'><b>INVOICE CHECKED LIST 
                         <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                     </a>
                 </li>
-                <li role="presentation" class="active">
+                <li class="active">
                     <a>
                         <big><big><big><font face='calibri' color='grey'><b>INVOICE FINISH LIST 
                         <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font></big></big></big>
                     </a>
                 </li>
             </ul>
+            <div class="tab-content">
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered  table-condensed">
                 <thead>
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
-                        <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
-                        <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
-                        <th><center><small><font face='calibri'>TGL TERIMA</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>DUE DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>CURR</font></small></center></th>
-                        <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
+                        <th><small><font face='calibri'>NO PENERIMAAN</font></small></th>
+                        <th><small><font face='calibri'>DEPT CODE </font></small></th>
+                        <th><small><font face='calibri'>VENDOR</font></small></th>
+                        <th><small><font face='calibri'>TGL TERIMA</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>DOC DATE</font></small></th>
+                        <th><small><font face='calibri'>DUE DATE</font></small></th>
+                        <th><small><font face='calibri'>CURR</font></small></th>
+                        <th><small><font face='calibri'>AMOUNT</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>NO PO</font></small></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -67,22 +69,23 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td class='warning'>
-                        <center>
-                            <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-flat btn-xs" onclick="return confirm('Are you sure to Finish invoice with no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
-                                <font face='calibri'><b>Finish</b></font>
-                            </a>
-                        </center>
+                        <a href="{{ url('invoice/finish/fa/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
+                            onclick="return confirm('Apakah anda yakin akan melakukan finish untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
+                            <font face='calibri'><b>Finish</b></font>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="11"><center><font face='calibri'><b>No record to display</b></font></center></td>
+                    <td colspan="12"><center><font face='calibri'><b>No record to display</b></font></center></td>
                 </tr>
             @endif
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
 </div>
@@ -102,5 +105,4 @@
     });
 </script>
 @endif
-<br/>
 @endsection
