@@ -1,24 +1,26 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="box box-primary">
+        <div class="box-body">
         <div class="col-md-12">
-            <a href="{{ url('/invoice/op') }}"><button class='btn btn-info btn-flat btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
-            <br/>
+            <font face='calibri' color="grey"><b><big><big><big>VIEW DETAIL
+            </big></big></big></b></font>
             <div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered table-condensed">
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
-                        <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
-                        <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
-                        <th><center><small><font face='calibri'>TGL TERIMA</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>DUE DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>CURR</font></small></center></th>
-                        <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>STATUS</font></small></center></th>
+                        <th><small><font face='calibri'>NO PENERIMAAN</font></small></th>
+                        <th><small><font face='calibri'>DEPT CODE </font></small></th>
+                        <th><small><font face='calibri'>VENDOR</font></small></th>
+                        <th><small><font face='calibri'>TGL TERIMA</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>DOC DATE</font></small></th>
+                        <th><small><font face='calibri'>DUE DATE</font></small></th>
+                        <th><small><font face='calibri'>CURR</font></small></th>
+                        <th><small><font face='calibri'>AMOUNT</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>NO PO</font></small></th>
+                        <th><small><font face='calibri'>LAST STATUS</font></small></th>
                     </tr>
                 <tbody>
                 @foreach ($invoice as $invoice_master)
@@ -53,6 +55,7 @@
                     <td><font face='calibri'>{{ $invoice_master->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice_master->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice_master->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ $invoice_master->no_po }}</font></td>
                     <?php 
                     date_default_timezone_set('Asia/Jakarta');
                     $date = date('Y-m-d');
@@ -62,25 +65,25 @@
                         echo"<td class='warning'>";
                     }
                     ?>
-                    <font face='calibri'><center>
+                    <font face='calibri'>
                     @if ($invoice_master->status=="1")
-                        <b>Waiting User</b>
+                        <b>Waiting Approval User</b>
                     @elseif ($invoice_master->status=="2")
-                        <b>Checked User</b>
+                        <b>Checked by User</b>
                     @elseif ($invoice_master->status=="3")
-                        <b>Approve Accounting</b>
+                        <b>Approved by Accounting</b>
                     @elseif ($invoice_master->status=="4")
-                        <b>Checked Finance</b>
+                        <b>Checked by Finance</b>
                     @elseif ($invoice_master->status=="5")
-                        <b>Reject User</b>
+                        <b>Rejected by User</b>
                     @elseif ($invoice_master->status=="6")
-                        <b>Reject Accounting</b>
+                        <b>Rejected by Accounting</b>
                     @elseif ($invoice_master->status=="7")
-                        <b>Reject Finance</b>
+                        <b>Rejected by Finance</b>
                     @elseif ($invoice_master->status=="8")
                         <b>Ready To Pay</b>
                     @endif
-                    </center></font></td>
+                    </font></td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -90,95 +93,285 @@
     <div class="row">
         <div class="col-md-7 col-md-offset-3">
             <div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered table-condensed">
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>STATUS</font></small></center></th>
-                        <th><center><small><font face='calibri'>DATE</font></small></center></th>
+                        <th><small><font face='calibri'>STATUS</font></small></th>
+                        <th><small><font face='calibri'>DATE</font></small></th>
                     </tr>
                 <tbody>
                 @foreach ($invoice as $invoice)
-                    <tr class='info'>
-                        <td><font face='calibri'>Waiting User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_input }}</center></font></td>
-                    </tr>
+                    @if ($invoice->status=="1")
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                    @endif
                     @if ($invoice->status=="2")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }} 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="3")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Approve Accounting</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr class='info'>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }} 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_act != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
+                                {{ $invoice->tgl_pending_act }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Approved by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_act)) }} 
+                                {{ $invoice->tgl_terima_act }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="4")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Approve Accounting</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked Finance</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_finance }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }} 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_act != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
+                                {{ $invoice->tgl_pending_act }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Approved by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_act)) }} 
+                                {{ $invoice->tgl_terima_act }}
+                            </font></td>
+                        </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by Finance</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_finance)) }} 
+                                {{ $invoice->tgl_terima_finance }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="5")
-                    <tr class='info'>
-                        <td><font face='calibri'>Reject User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_pending_user }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="6")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Reject Accounting</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_pending_act }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }}, 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr class='info'>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }}, 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Rejected by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }}, 
+                                {{ $invoice->tgl_pending_act }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="7")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Approve Accounting</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }}, 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }}, 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_act != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
+                                {{ $invoice->tgl_pending_act }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Approved by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_act)) }}, 
+                                {{ $invoice->tgl_terima_act }}
+                            </font></td>
+                        </tr>
                     @endif
                     @if ($invoice->status=="8")
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked User</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_user }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Approve Accounting</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_act }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Checked Finance</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_terima_finance }}</center></font></td>
-                    </tr>
-                    <tr class='info'>
-                        <td><font face='calibri'>Ready To Pay</font></td>
-                        <td><font face='calibri'><center>{{ $invoice->tgl_ready_to_pay }}</center></font></td>
-                    </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Approval User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_input)) }}, 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_user != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
+                                {{ $invoice->tgl_pending_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by User</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_user)) }}, 
+                                {{ $invoice->tgl_terima_user }}
+                            </font></td>
+                        </tr>
+                        @if ($invoice->tgl_pending_act != '0000-00-00 00:00:00')
+                        <tr class='info'>
+                            <td><font face='calibri'>Rejected by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
+                                {{ $invoice->tgl_pending_act }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td class='info'><font face='calibri'>Approved by Accounting</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_act)) }}, 
+                                {{ $invoice->tgl_terima_act }}
+                            </font></td>
+                        </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Checked by Finance</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_terima_finance)) }}, 
+                                {{ $invoice->tgl_terima_finance }}
+                            </font></td>
+                        </tr>
+                        <tr>
+                            <td class='info'><font face='calibri'>Ready To Pay</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_ready_to_pay)) }}, 
+                                {{ $invoice->tgl_ready_to_pay }}
+                            </font></td>
+                        </tr>
                     @endif
                 @endforeach
                 </tbody>
                 </table>
         </div>
+    </div>
     </div>
 </div>
 
@@ -197,5 +390,4 @@
     });
 </script>
 @endif
-<br/>
 @endsection

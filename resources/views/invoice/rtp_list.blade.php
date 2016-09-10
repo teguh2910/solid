@@ -1,24 +1,27 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="box box-primary">
+        <div class="box-body">
         <div class="col-md-12">
-            <font face='calibri' color='grey'><b><big><big><big><span class='label label-info'>INVOICE READY TO PAY</span></big></big></big></b></font>
+            <font face='calibri' color="grey"><b><big><big><big>INVOICE READY TO PAY 
+            </big></big></big></b></font>
         	<div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered table-condensed">
                 <thead>
                     <tr class='success'>
-                        <th><center><small><font face='calibri'>NO PENERIMAAN</font></small></center></th>
-                        <th><center><small><font face='calibri'>DEPT CODE </font></small></center></th>
-                        <th><center><small><font face='calibri'>VENDOR</font></small></center></th>
-                        <th><center><small><font face='calibri'>TGL TERIMA</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>DUE DATE</font></small></center></th>
-                        <th><center><small><font face='calibri'>CURR</font></small></center></th>
-                        <th><center><small><font face='calibri'>AMOUNT</font></small></center></th>
-                        <th><center><small><font face='calibri'>DOC NO</font></small></center></th>
-                        <th><center><small><font face='calibri'>READY TO PAY</font></small></center></th>
+                        <th><small><font face='calibri'>NO PENERIMAAN</font></small></th>
+                        <th><small><font face='calibri'>DEPT CODE </font></small></th>
+                        <th><small><font face='calibri'>VENDOR</font></small></th>
+                        <th><small><font face='calibri'>TGL TERIMA</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>DOC DATE</font></small></th>
+                        <th><small><font face='calibri'>DUE DATE</font></small></th>
+                        <th><small><font face='calibri'>CURR</font></small></th>
+                        <th><small><font face='calibri'>AMOUNT</font></small></th>
+                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <th><small><font face='calibri'>NO PO</font></small></th>
+                        <th><small><font face='calibri'>READY TO PAY</font></small></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,17 +50,27 @@
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ $invoice->amount }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
-                    <td class='warning'><center><small><a href="{{ url('invoice/approval/detail/'.$invoice->id) }}"><font face='calibri'><b>{{ $invoice->tgl_ready_to_pay }}</b></font></a></small></center></td>
+                    <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
+                    <td class='warning'>
+                        <small>
+                            <a href="{{ url('invoice/approval/detail/'.$invoice->id) }}" target='/blank'>
+                                <font face='calibri'>
+                                    <b>{{ $invoice->tgl_ready_to_pay }}</b>
+                                </font>
+                            </a>
+                        </small>
+                    </td>
                 </tr>
                 @endforeach
             @else
                 <tr class='warning'>
-                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 </div>
 

@@ -44,17 +44,20 @@ class HomeController extends Controller {
 	{
 		$user =\Auth::user();
 		if ($user->role == "1") {
-			$user =\Auth::user();
-			$queries = DB::select('select count(id) as a from invoice where 
+			$user 		= \Auth::user();
+			$queries 	= DB::select('select count(id) as a from invoice where 
 			status="1" and dept_code='.$user->dept_code.'');
-        	$result = new Collection($queries);
-        	$queries2 = DB::select('select count(id) as b from invoice where 
+        	$result 	= new Collection($queries);
+        	$queries2 	= DB::select('select count(id) as b from invoice where 
 			status="6" and dept_code='.$user->dept_code.'');
-        	$result2 = new Collection($queries2);
-			$invoice = Invoice::where('status','1')
-							->where('dept_code',$user->dept_code)
-							->get();
-		return view('invoice.user_list', compact('invoice','result','result2'));
+        	$result2 	= new Collection($queries2);
+        	$queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        	$result3 = new Collection($queries3);
+			$invoice 	= Invoice::where('status','1')
+									->where('dept_code',$user->dept_code)
+									->get();
+			return view('invoice.user_list', compact('invoice','result','result2','result3'));
 		} else if ($user->role == "2") {
 			$invoice = Invoice::where ( function ($q) {
                 $q->where('status','2')
@@ -111,26 +114,27 @@ class HomeController extends Controller {
 
 	public function invoice_saving()
 	{		
-		$input = \Input::all();
-		$invoice = new Invoice;
 		date_default_timezone_set('Asia/Jakarta');
-		$date = date('Y-m-d H:i:s');
-		$invoice->no_penerimaan=$input['no_penerimaan'];
-		$invoice->dept_code=$input['dept_code'];
-		$invoice->vendor=$input['vendor'];
-		$invoice->tgl_terima=$input['tgl_terima'];
-		$invoice->doc_no=$input['doc_no'];
-		$invoice->doc_date=$input['doc_date'];
-		$invoice->due_date=$input['due_date'];
-		$invoice->curr=$input['curr'];
-		$invoice->amount=$input['amount'];
-		$invoice->doc_no_2=$input['doc_no_2'];
-		$invoice->tgl_input=$date;
-		$invoice->status="1";
+		$date 		= date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$invoice 					= new Invoice;
+		$invoice->no_penerimaan 	= $input['no_penerimaan'];
+		$invoice->dept_code 		= $input['dept_code'];
+		$invoice->vendor 			= $input['vendor'];
+		$invoice->tgl_terima 		= $input['tgl_terima'];
+		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->doc_date 			= $input['doc_date'];
+		$invoice->due_date 			= $input['due_date'];
+		$invoice->curr 				= $input['curr'];
+		$invoice->amount 			= $input['amount'];
+		$invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->tgl_input 		= $date;
+		$invoice->status 			= "1";
+		$invoice->no_po 			= $input['no_po'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully created');
-		return redirect('/invoice/op');
+        \Session::flash('flash_message','Sukses, data invoice berhasil ditambahkan ke database');
+		return redirect('master/upload');
 
 	}
 
@@ -143,10 +147,13 @@ class HomeController extends Controller {
         $queries2 = DB::select('select count(id) as b from invoice where 
 			status="6" and dept_code='.$user->dept_code.'');
         $result2 = new Collection($queries2);
+        $queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
 		$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
-		return view('invoice.user_list', compact('invoice','result','result2'));
+		return view('invoice.user_list', compact('invoice','result','result2','result3'));
 	}
 
 	public function invoice_checked_user($id)
@@ -166,19 +173,19 @@ class HomeController extends Controller {
 
 	public function invoice_pending_user($id)
 	{
-		$user =\Auth::user();
-		$invoice = Invoice::where('id',$id)
-						->where('dept_code',$user->dept_code)
-						->where('status','1')->get();
+		$user 		= \Auth::user();
+		$invoice 	= Invoice::where('id',$id)
+								->where('dept_code',$user->dept_code)
+								->where('status','1')->get();
 		return view('invoice.user_pending_view', compact('invoice'));
 	}
 
 	public function invoice_reject_user($id)
 	{
-		$user =\Auth::user();
-		$invoice = Invoice::where('id',$id)
-						->where('dept_code',$user->dept_code)
-						->where('status','6')->get();
+		$user 		= \Auth::user();
+		$invoice 	= Invoice::where('id',$id)
+							->where('dept_code',$user->dept_code)
+							->where('status','6')->get();
 		return view('invoice.user_reject_view', compact('invoice'));
 	}
 
@@ -212,19 +219,19 @@ class HomeController extends Controller {
 
 	public function invoice_pending_user_save()
 	{
-		$input = \Input::all();
-		$id=$input['id'];
-		$invoice = Invoice::findOrFail($id);
-		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="5";
-		$invoice->user=$user->id;
-		$invoice->tgl_pending_user=$date;
-		$invoice->remark=$input['remark'];
+		$input 		= \Input::all();
+		$user 		= \Auth::user();
+		$id 		= $input['id'];
+		$invoice 					= Invoice::findOrFail($id);
+		$invoice->status 			= "5";
+		$invoice->user 				= $user->id;
+		$invoice->tgl_pending_user 	= $date;
+		$invoice->remark 			= $input['remark'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully reject');
+        \Session::flash('flash_message','Sukses, invoice berhasil di reject');
 		return redirect('/invoice/user/list');
 	}
 
@@ -254,12 +261,53 @@ class HomeController extends Controller {
 
 	public function invoice_act_list()
 	{
+		$queries = DB::select('select count(id) as a from invoice where 
+			(status="2" or status="7")');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6"');
+        $result2 = new Collection($queries2);
+		$queries3 = DB::select('select count(id) as c from invoice where 
+			status="3"');
+        $result3 = new Collection($queries3);
 		$invoice = Invoice::where ( function ($q) {
                 $q->where('status','2')
                     ->orWhere('status','7');
                 })
 				->get();
-		return view('invoice.act_list', compact('invoice'));
+		return view('invoice.act_list', compact('invoice','result','result2','result3'));
+	}
+
+	public function invoice_act_approve_list()
+	{
+		$queries = DB::select('select count(id) as a from invoice where 
+			(status="2" or status="7")');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6"');
+        $result2 = new Collection($queries2);
+		$queries3 = DB::select('select count(id) as c from invoice where 
+			status="3"');
+        $result3 = new Collection($queries3);
+		$invoice = Invoice::where('status','3')
+							->get();
+		return view('invoice.act_approve_list', compact('invoice','result','result2','result3'));
+	}
+
+	public function invoice_act_reject_list()
+	{
+		$queries = DB::select('select count(id) as a from invoice where 
+			(status="2" or status="7")');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6"');
+        $result2 = new Collection($queries2);
+		$queries3 = DB::select('select count(id) as c from invoice where 
+			status="3"');
+        $result3 = new Collection($queries3);
+		$invoice = Invoice::where('status','6')
+							->get();
+		return view('invoice.act_reject_list', compact('invoice','result','result2','result3'));
 	}
 
 	public function invoice_checked_act($id)
@@ -335,7 +383,7 @@ class HomeController extends Controller {
 	{
 		$user =\Auth::user();
 		if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
-			$invoice = Invoice::where('status','8')->get();
+			$invoice = Invoice::where('status','8')->orderby('id','DESC')->get();
 			return view('invoice.rtp_list', compact('invoice'));
 		} else {
 			return redirect('invoice/rtp/user');
@@ -346,9 +394,9 @@ class HomeController extends Controller {
 	{
 		$user =\Auth::user();
 		if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
-			$invoice = Invoice::where('status','!=','8')->get();
-			$queries = DB::select('select count(id) as a from invoice where status!="8"');
-	        $result = new Collection($queries);
+			$invoice 	= Invoice::where('status','!=','8')->orderby('id','DESC')->get();
+			$queries 	= DB::select('select count(id) as a from invoice where status != "8"');
+	        $result 	= new Collection($queries);
 			return view('invoice.op_list', compact('invoice','result'));
 		} else {
 			return redirect('invoice/op/user');
@@ -396,19 +444,19 @@ class HomeController extends Controller {
 	public function Upload(){
 		$file = \Input::file('file');
 		$table = \Input::get('table');
-			$array_data=CsvHelper::csv_to_array($file);
-			//return $array_data;
-			$result=Invoice::array_to_db($array_data);
+		$array_data=CsvHelper::csv_to_array($file);
+		//return $array_data;
+		$result=Invoice::array_to_db($array_data);
 			
-			// Insert To DB
-			if($result==1){
-				\Session::flash('flash_type','alert-success');
-				\Session::flash('flash_message','Successfully Saved');
-			}else{
-				\Session::flash('flash_type','alert-danger');
-				\Session::flash('flash_message','No data update');
-			}
-		return redirect('/master/upload');
+		// Insert To DB
+		if($result==1){
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+		}else{
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+		}
+		return redirect('master/upload');
 	}
 
 	public function invoice_user_reject_list()
@@ -420,11 +468,31 @@ class HomeController extends Controller {
         $queries2 = DB::select('select count(id) as b from invoice where 
 			status="6" and dept_code='.$user->dept_code.'');
         $result2 = new Collection($queries2);
-		
+		$queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
 		$invoice = Invoice::where('status','6')
 							->where('dept_code',$user->dept_code)
 							->get();
-		return view('invoice.user_reject_list', compact('invoice','result','result2'));
+		return view('invoice.user_reject_list', compact('invoice','result','result2','result3'));
+	}
+
+	public function invoice_user_check()
+	{
+		$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
+		$queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
+		$invoice = Invoice::where('status','2')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.user_check', compact('invoice','result','result2','result3'));
 	}
 
 	public function user_view()
@@ -435,34 +503,24 @@ class HomeController extends Controller {
 
 	public function save_create()
 	{
-		$input = \Input::all();
-		$user = new User;
-		$pwd1 = $input['password'];
-		$pwd2 = $input['password1'];
-		if ($pwd1 == $pwd2) {
-        	$name = $input['name'];
-        	$user->password = bcrypt($input['password']);
-        	$user->email = $input['email'];
-        	$user->name = $input['name'];
-        	$user->role = $input['role'];
-        	$user->dept_code = $input['dept_code'];
-        	$user->save();
-        	\Session::flash('flash_type','alert-success');
-        	\Session::flash('flash_message','User was successfully created');
-        	return redirect('user/view');
-		} else {
-			\Session::flash('flash_type','alert-danger');
-	        \Session::flash('flash_message','Combination password is wrong, please repeat the process');
-			return redirect('user/crate');
-		}
-		
+		$input 				= \Input::all();
+		$user 				= new User;
+		$user->password 	= bcrypt($input['password']);
+    	$user->email 		= $input['email'];
+    	$user->name 		= $input['name'];
+    	$user->role 		= $input['role'];
+    	$user->dept_code 	= $input['dept_code'];
+    	$user->save();
+    	\Session::flash('flash_type','alert-success');
+    	\Session::flash('flash_message','Sukses, user baru berhasil ditambahkan ke database');
+    	return redirect('user/view');
 	}
 
 	public function user_delete($id)
     {
         User::destroy($id);
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully deleted');
+        \Session::flash('flash_message','Sukses, data user berhasil dihapus dari database');
         return redirect('user/view');
     }
 
@@ -470,41 +528,40 @@ class HomeController extends Controller {
     {
         Invoice::destroy($id);
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully deleted');
+        \Session::flash('flash_message','Sukses, data berhasil dihapus');
         return redirect('/invoice/op');
     }
     
     public function user_reset($id)
     {
-        $password = bcrypt('aiia');
-        $user = User::findOrFail($id);
+        $password 		= bcrypt('aiia');
+        $user 			= User::findOrFail($id);
         $user->password = $password;
         $user->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User password was successfully reset to "aiia"');
+        \Session::flash('flash_message','Sukses, password user berhasil diubah menjadi aiia');
         return redirect('user/view');
     }
 
     public function user_edit($id)
     {
-        $user = User::where('id',$id)
-        			->get();
-        $user_all = User::all();
+        $user 		= User::where('id',$id)->get();
+        $user_all 	= User::all();
 		return view('user.edit', compact('user','user_all'));
     }
 
     public function save_edit()
 	{
-		$input = \Input::all();
-		$id = $input['id'];
-		$user = User::findOrFail($id);
-		$user->email = $input['email'];
-        $user->name = $input['name'];
-        $user->role = $input['role'];
-        $user->dept_code = $input['dept_code'];
+		$input 				= \Input::all();
+		$id 				= $input['id'];
+		$user 				= User::findOrFail($id);
+		$user->email 		= $input['email'];
+        $user->name 		= $input['name'];
+        $user->role 		= $input['role'];
+        $user->dept_code 	= $input['dept_code'];
         $user->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','User was successfully updated');
+        \Session::flash('flash_message','Sukses, data user berhasil diubah');
         return redirect('user/view');
 	}
 
@@ -516,34 +573,34 @@ class HomeController extends Controller {
 	public function save_edit_password()
 	{
 	
-            $input = \Input::all();
-            $pwd1=$input['password1'];
-            $pwd2=$input['password2'];
-            $pwd3=$input['password3'];
-            $pwd4=bcrypt($pwd1);
-            $pwd5=bcrypt($pwd2);
-            $pwd6=bcrypt($pwd3);
-            $user =\Auth::user();
+            $input 	= \Input::all();
+            $pwd1 	= $input['password1'];
+            $pwd2 	= $input['password2'];
+            $pwd3 	= $input['password3'];
+            $pwd4 	= bcrypt($pwd1);
+            $pwd5 	= bcrypt($pwd2);
+            $pwd6 	= bcrypt($pwd3);
+            $user 	= \Auth::user();
           	if ($pwd1 == NULL or $pwd2 == NULL or $pwd3 == NULL){
           		\Session::flash('flash_type','alert-danger');
-        		\Session::flash('flash_message','Error, there columns that you have not fill');
+        		\Session::flash('flash_message','Error, terdapat kolom yang belum terisi, silakan ulangi proses');
           		return redirect('/');
           	} else {
             	if (\Hash::check($pwd1, $user->password)){
             		if ($pwd2 == $pwd3) {
-        				$user->password=$pwd6;
+        				$user->password = $pwd6;
         				$user->save();
         				\Session::flash('flash_type','alert-success');
- 				       \Session::flash('flash_message','Password was successfully updated');
+ 				        \Session::flash('flash_message','Sukses, password berhasil diubah');
         				return redirect('/') ;
 		            } else {
         		    	\Session::flash('flash_type','alert-danger');
-        				\Session::flash('flash_message','Error, your administrator password incorrect');
+        				\Session::flash('flash_message','Error, password administrasi yang anda masukkan salah, silakan ulangi proses');
           		       	return redirect('/');
             		}
             	} else {
             		\Session::flash('flash_type','alert-danger');
-        			\Session::flash('flash_message','Error, your new password combination do not match');
+        			\Session::flash('flash_message','Error, kombinasi password anda salah');
           		    return redirect('/');
             	}
         	}
@@ -557,22 +614,23 @@ class HomeController extends Controller {
 
 	public function invoice_update_save()
 	{
-		$input = \Input::all();
-		$id = $input['id'];
-		$invoice = Invoice::findOrFail($id);
-		$invoice->no_penerimaan = $input['no_penerimaan'];
-		$invoice->dept_code = $input['dept_code'];
-		$invoice->vendor = $input['vendor'];
-		$invoice->tgl_terima = $input['tgl_terima'];
-		$invoice->doc_no = $input['doc_no'];
-		$invoice->doc_date = $input['doc_date'];
-		$invoice->due_date = $input['due_date'];
-		$invoice->curr = $input['curr'];
-		$invoice->amount = $input['amount'];
-		$invoice->doc_no_2 = $input['doc_no_2'];
+		$input 		= \Input::all();
+		$id 		= $input['id'];
+		$invoice 					= Invoice::findOrFail($id);
+		$invoice->no_penerimaan 	= $input['no_penerimaan'];
+		$invoice->dept_code 		= $input['dept_code'];
+		$invoice->vendor 			= $input['vendor'];
+		$invoice->tgl_terima 		= $input['tgl_terima'];
+		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->doc_date 			= $input['doc_date'];
+		$invoice->due_date 			= $input['due_date'];
+		$invoice->curr 				= $input['curr'];
+		$invoice->amount 			= $input['amount'];
+		$invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->no_po 			= $input['no_po'];
         $invoice->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully updated');
+        \Session::flash('flash_message','Sukses, data berhasil diubah');
         return redirect('invoice/op');
 	}
 	public function invoice_approval_detail($id)

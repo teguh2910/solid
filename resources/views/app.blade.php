@@ -7,7 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.4</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v1.1.2</title>
+	<title>SOLID v2.0</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -27,7 +27,6 @@
 
 	<script>
       $(function () {
-        //Initialize Select2 Elements
         $(".select2").select2();
       });
     </script>
@@ -49,8 +48,8 @@
 				</a>
 				@else 
 				<a class="navbar-brand">
-					<font color='grey'><i class='glyphicon glyphicon-list-alt'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v1.1.2</small></small></small></span>
+					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v2.0</small></small></small></span>
 				</a>
 				@endif
 			</div>
@@ -95,7 +94,7 @@
 				</ul>
 				@elseif (Auth::user()->role == "4")
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>DATA USER</b></font></a></li>
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
@@ -111,7 +110,7 @@
 				</ul>
 				@elseif (Auth::user()->role == "5")	
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>DATA USER</b></font></a></li>
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
@@ -208,7 +207,7 @@
 						</li>
 						<li>
 							<a href="{{ url('/auth/logout') }}">
-								<button class="btn bg-maroon btn-flat btn-sm">
+								<button class="btn bg-maroon btn-sm">
 									<div ><span class='glyphicon glyphicon-off'></span></div>
 								</button>
 							</a>
@@ -285,7 +284,7 @@
     				</font>
   					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
   					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department & <b>BAYMAX TEAM</b>)
     				</font>
     				@else
     				<font face='calibri' color='grey'>Finance Accounting Project ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
