@@ -59,11 +59,21 @@ class HomeController extends Controller {
 									->get();
 			return view('invoice.user_list', compact('invoice','result','result2','result3'));
 		} else if ($user->role == "2") {
+			$queries = DB::select('select count(id) as a from invoice where 
+			(status="2" or status="7")');
+	        $result = new Collection($queries);
+	        $queries2 = DB::select('select count(id) as b from invoice where 
+				status="6"');
+	        $result2 = new Collection($queries2);
+			$queries3 = DB::select('select count(id) as c from invoice where 
+				status="3"');
+	        $result3 = new Collection($queries3);
 			$invoice = Invoice::where ( function ($q) {
-                $q->where('status','2')
-                    ->orWhere('status','7');
-                })->get();
-			return view('invoice.act_list', compact('invoice'));
+	                $q->where('status','2')
+	                    ->orWhere('status','7');
+	                })
+					->get();
+			return view('invoice.act_list', compact('invoice','result','result2','result3'));
 		} else if ($user->role == "3"){
 			$invoice = Invoice::where('status','3')->get();
 			$queries = DB::select('select count(id) as a from invoice where status="3"');
@@ -167,7 +177,7 @@ class HomeController extends Controller {
 		$invoice->tgl_terima_user=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully checked');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
 		return redirect('invoice/user/list');
 	}
 
@@ -195,7 +205,7 @@ class HomeController extends Controller {
 		$invoice->status="7";
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully reject');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di reject');
 		return redirect('invoice/fa/list');
 	}
 
@@ -249,7 +259,7 @@ class HomeController extends Controller {
 		$invoice->remark_act=$input['remark'];
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully reject');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di reject');
 		return redirect('home');
 	}
 
@@ -321,7 +331,7 @@ class HomeController extends Controller {
 		$invoice->tgl_terima_act=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully approve');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di approve');
 		return redirect('invoice/act/list');
 	}
 
@@ -360,7 +370,7 @@ class HomeController extends Controller {
 		$invoice->tgl_terima_finance=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully checked');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
 		return redirect('/invoice/fa/list');
 	}
 
@@ -375,7 +385,7 @@ class HomeController extends Controller {
 		$invoice->tgl_ready_to_pay=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully finish');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di finish');
 		return redirect('/invoice/fa/finish/list');
 	}
 
@@ -433,7 +443,7 @@ class HomeController extends Controller {
 		$invoice->user=$user->name;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Invoice was successfully checked');
+        \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
 		return redirect('invoice/pending/list');
 	}
 
