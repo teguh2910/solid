@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID v2.0 & ELNA v1.4</title>
+    <title>SOLID v2.0.1 & ELNA v1.4</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">

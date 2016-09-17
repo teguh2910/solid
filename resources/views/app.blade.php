@@ -5,9 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-	<title>ELNA v1.4</title>
+	<title>ELNA v1.4.1</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v2.0</title>
+	<title>SOLID v2.0.1</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -44,12 +44,12 @@
 				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-plane'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.4</small></small></small></span>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.4.1</small></small></small></span>
 				</a>
 				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v2.0</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v2.0.1</small></small></small></span>
 				</a>
 				@endif
 			</div>

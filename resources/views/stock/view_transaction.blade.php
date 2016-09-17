@@ -9,22 +9,22 @@
         <div class="col-md-12">
             <div class="clearfix">&nbsp;</div>
             <section id="unseen">
-                <button class='btn btn-primary btn-flat btn-sm' data-toggle="modal" data-target="#myModal">
-                <i class='glyphicon glyphicon-plus'></i> <font face='calibri'><b>CREATE TRANSACTION</b></font>
+                <button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#myModal">
+                <font face='calibri'><b>CREATE TRANSACTION</b></font>
             </button>
             <br/><br/>
-            <table  class="table table-condensed table-bordered">
+            <table  class="table table-condensed table-bordered table-hover">
                 <thead>
                     <tr class='info'>
-                        <th><center><font face='calibri'>ID Area</font></center></th>
-                        <th><center><font face='calibri'>Back No</font></center></th>
-                        <th><center><font face='calibri'>Part Number</font></center></th>
-                        <th><center><font face='calibri'>Part Name</font></center>
-                        <th><center><font face='calibri'>Quantity/Box</font></center></th>
-                        <th><center><font face='calibri'>Unit</font></center></th>
-                        <th><center><font face='calibri'>Amount Of Box</font></center>
-                        <th><center><font face='calibri'>Uncomplete</font></center>  
-                        <th><center><font face='calibri'>Total(Pcs)</font></center></th>
+                        <th><font face='calibri'>ID Area</font></th>
+                        <th><font face='calibri'>Back No</font></th>
+                        <th><font face='calibri'>Part Number</font></th>
+                        <th><font face='calibri'>Part Name</font></th>
+                        <th><font face='calibri'>Quantity/Box</font></th>
+                        <th><font face='calibri'>Unit</font></th>
+                        <th><font face='calibri'>Amount Of Box</font></th>
+                        <th><font face='calibri'>Uncomplete</font></th>  
+                        <th><font face='calibri'>Total(Pcs)</font></th>
                         
                     </tr>
                 </thead>
@@ -45,12 +45,11 @@
                         <td><font face='calibri'>{{ $k->amount_box }}</font></td>
                         <td><font face='calibri'>{{ $k->amount_pcs }}</font></td>
                         <td><font face='calibri'>{{ $k->total_pcs }}</font></td>
-
                     </tr>
                     @endforeach
                    @else
                     <tr bgcolor='#FFFFFF'>
-                        <td colspan="8"><center><font face='calibri'>No record to display</font></center></td>
+                        <td colspan="9"><center><font face='calibri'>No record to display</font></center></td>
                     </tr>
                     @endif
                 </tbody>
@@ -74,8 +73,8 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
             <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>ID AREA</b></font></label>
               <div class="col-md-7">
+                <font face='calibri'><b>ID AREA</b></font><br/>
                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
@@ -85,12 +84,12 @@
             </div>  
 
             <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <button type="submit" class="btn btn-flat btn-primary">
-                  <span class='glyphicon glyphicon-search'></span> <font face='calibri'><b>SEARCH</b></font>
-                </button>&nbsp;
-                <button type="reset" class="btn btn-flat btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
+              <div class="col-md-8">
+                <button type="submit" class="btn btn-primary btn-sm">
+                  <span class='glyphicon glyphicon-search'></span>&nbsp;&nbsp;<font face='calibri'><b>SEARCH</b></font>
+                </button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger btn-sm">
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;&nbsp;<font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>
