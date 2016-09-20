@@ -201,8 +201,8 @@ class StockController extends Controller {
 
 	 public function edit_part($id)
 	 {    
-	 	 $m_area=m_area::all();
-	 	 $m_part=m_part::where('id',$id)->get();
+	 	 $m_area = m_area::all();
+	 	 $m_part = m_part::where('id',$id)->get();
          return view('stock.edit_part',compact('m_part','m_area'));
 
 	 }
@@ -244,15 +244,15 @@ class StockController extends Controller {
 	 {
 	 	$user 			= \Auth::user();	
 	 	if ($user->role == '7') {
-	 	$m_area 		= m_area::where('pic_name','=',$user->name)->get();
+	 		$m_area 		= m_area::where('pic_name','=',$user->name)->get();
 	 	} else {
-	 	$m_area 		= m_area::all();	
+	 		$m_area 		= m_area::all();	
 	 	}
 	 	if ($user->role == '7') {
-	 	$t_transaction 	= t_transaction::join('m_areas','m_areas.id_area','=','t_transactions.id_area')
-	 									->where('m_areas.pic_name',''.$user->name.'')->get();
+	 		$t_transaction 	= t_transaction::join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 										->where('m_areas.pic_name',''.$user->name.'')->get();
 	 	} else {
-	 	$t_transaction 	= t_transaction::all();
+	 		$t_transaction 	= t_transaction::all();
 	 	}
 	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 }
@@ -260,12 +260,11 @@ class StockController extends Controller {
 
 	  public function view_list()
 	 {  
-	 	$input = \Input::all();
-	 	$id_area=$input['id_area'];
-	 	$check = m_area::where('id_area','=',$id_area)->get();
-	 	$t_transaction=t_transaction::where('id_area',$id_area)                       
-	 	                            ->get();
-	 	return view('stock.view_list',compact('t_transaction','check'));
+	 	$input 			= \Input::all();
+	 	$id_area 		= $input['id_area'];
+	 	$check 			= m_area::where('id_area',$id_area)->get();
+	 	$t_transaction 	= t_transaction::where('id_area',$id_area)->get();
+	 	return view('stock.view_list', compact('t_transaction','check'));
 	 
 	 }
 
@@ -290,38 +289,29 @@ class StockController extends Controller {
 	 
 	 }
 
-	 public function input_transaction($id)
-	 {    
-          $m_part=m_part::all();
-	 	  $t_transaction=t_transaction::where('id',$id)->get(); 	               
-     	  return view('stock.input_transaction',compact('t_transaction','m_part'));
-	
-	 }
+	public function input_transaction($id) {    
+        $m_part 		= m_part::all();
+	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	               
+     	return view('stock.input_transaction',compact('t_transaction','m_part'));
+	}
 
 	 public function save_transaction()
 	 {
-        $input = \Input::all();
-        $id=$input['id'];
-        $id_area = $input['id_area'];
-        $qty_box = $input['qty_box'];
-        // return $id_area;
-        $part_number=$input['part_number'];
-        $a=$input['amount_box'];
-       	$b=$input['amount_pcs'];
-        
-        $t_transaction     = t_transaction::findOrFail($id) ;
-       	$total1=$a*$qty_box;
-       	$total_pcs=$total1+$b;
-
-		$t_transaction->part_number   =$input['part_number'];
-		$t_transaction->amount_box    =$input['amount_box'];
-		$t_transaction->amount_pcs    =$input['amount_pcs'];
-		$t_transaction->total_pcs    =$total_pcs;
+        $input 		 = \Input::all();
+        $id 		 = $input['id'];
+        $id_area 	 = $input['id_area'];
+        $qty_box 	 = $input['qty_box'];
+        $part_number = $input['part_number'];
+        $a 			 = $input['amount_box'];
+       	$b 			 = $input['amount_pcs'];
+       	$total1 		= $a*$qty_box;
+       	$total_pcs 		= $total1+$b;
+        $t_transaction  			= t_transaction::findOrFail($id);
+		$t_transaction->total_pcs   = $total_pcs;
 		$t_transaction->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Amount was successfully added');
+        \Session::flash('flash_message','Sukses, data stock berhasil disimpan ke dalam sistem');
 	 	return redirect('stock/view_list/2/'.$id_area.'');  
-
 	 }
 
 	 public function print_report()

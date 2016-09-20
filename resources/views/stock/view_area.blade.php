@@ -173,7 +173,6 @@
         </div>
     </div>
 </div>
-
 </div>
 @if (count($m_area) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
@@ -189,6 +188,4 @@
     });
 </script>
 @endif
-<br/>
-
 @endsection
