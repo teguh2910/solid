@@ -44,7 +44,7 @@ class StockController extends Controller {
 
 	public function view_area()
 	 {
-	 	$m_area=m_area::all();
+	 	$m_area = m_area::all();
 	 	return view('stock.view_area',compact('m_area'));
 	 }
 
@@ -89,7 +89,7 @@ class StockController extends Controller {
 
 	 public function edit_area($id)
 	 {
-	 	 $m_area=m_area::where('id',$id)->get();
+	 	 $m_area = m_area::where('id',$id)->get();
          return view('stock.edit_area',compact('m_area'));
 	 }
 
@@ -258,36 +258,32 @@ class StockController extends Controller {
 	 }
 
 
-	  public function view_list()
-	 {  
+	public function view_list()
+	{  
 	 	$input 			= \Input::all();
 	 	$id_area 		= $input['id_area'];
 	 	$check 			= m_area::where('id_area',$id_area)->get();
 	 	$t_transaction 	= t_transaction::where('id_area',$id_area)->get();
-	 	return view('stock.view_list', compact('t_transaction','check'));
-	 
-	 }
+	 	return view('stock.view_list', compact('t_transaction','check')); 
+	}
 
-	 public function view_list3($id)
-	 {  
-	 	$input = \Input::all();
-	 	$check = m_area::where('id_area','=',$id)->get();
-	 	$t_transaction=t_transaction::where('id_area',$id)                       
-	 	                            ->get();
-	 	return view('stock.view_list',compact('t_transaction','check'));
-	 
-	 }
+	public function view_list3($id)
+	{  
+	 	$input 			= \Input::all();
+	 	$check 			= m_area::where('id_area','=',$id)->get();
+	 	$t_transaction 	= t_transaction::where('id_area',$id)->get();
+	 	return view('stock.view_list',compact('t_transaction','check')); 
+	}
 
-	 public function view_list2($id)
-	 {  
-	 	$input = \Input::all();
-	 	$check = m_area::where('id_area','=',$id)->get();
-	 	$t_transaction=t_transaction::select('*','t_transactions.id as id_t_transactions')
+	public function view_list2($id)
+	{  
+	 	$input 			= \Input::all();
+	 	$check 			= m_area::where('id_area','=',$id)->get();
+	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_t_transactions')
 	 	                            ->where('t_transactions.id_area',$id)                      
 	 	                            ->get();
-	 	return view('stock.view_list',compact('t_transaction','check'));
-	 
-	 }
+	 	return view('stock.view_list',compact('t_transaction','check')); 
+	}
 
 	public function input_transaction($id) {    
         $m_part 		= m_part::all();

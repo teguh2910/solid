@@ -10,20 +10,20 @@
                         <i class='glyphicon glyphicon-chevron-left'></i>&nbsp;<b>BACK TO DATA TRANSACTION</b>
                     </button>
                 </a><br/><br/>
-                <table class="table table-bordered table-condensed" width="30%">
-                    <tr>
-                        <td bgcolor='#00008B'><font face="calibri" color='white'><b>Plant</b></font></td>
-                        <td bgcolor='#ADE8E6'><font face="calibri">{{$check->type_plant}}</font></td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#00008B'><font face="calibri" color='white'><b>Code Area</b></font></td>
-                        <td bgcolor='#ADE8E6'><font face="calibri">{{$check->code_area}}</font></td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#00008B'><font face="calibri" color='white'><b>Name Area</b></font></td>
-                        <td bgcolor='#ADE8E6'><font face="calibri">{{$check->name_area}}</font></td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <font face='calibri'><b>Plant</b></font><br/>
+                        <input type='text' value="{{$check->type_plant}}" class="form-control" disabled>
+                    </div>
+                   <div class="col-md-7">
+                        <font face='calibri'><b>Code Area</b></font><br/>
+                        <input type='text' value="{{$check->code_area}}" class="form-control" disabled>
+                    </div>
+                   <div class="col-md-7">
+                        <font face='calibri'><b>Name Area</b></font><br/>
+                        <input type='text' value="{{$check->name_area}}" class="form-control" disabled>
+                    </div>
+                </div>
             </div>
             @endforeach
             <div class="col-lg-12">

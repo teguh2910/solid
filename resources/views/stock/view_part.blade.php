@@ -1,6 +1,8 @@
 @extends('app')
 @section('content')
 <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12">
     <div class="box box-primary">
         <div class="box-body">
 <div class="col-lg-12">
@@ -45,10 +47,11 @@
                         <td><font face='calibri'>{{ $v->unit }}</font></td>
                       
                         <td><center>
-                            <a href="{{ url('stock/edit_part/'.$v->id) }}" class="btn btn-primary btn-xs">
+                            <a href="{{ url('stock/edit_part/'.$v->id) }}" class="btn btn-primary btn-xs" target='/blank'>
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>&nbsp;
-                            <a href="{{ url('stock/delete_part/'.$v->id) }}" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete part \'{{$v->name_part}}\'?')">
+                            <a href="{{ url('stock/delete_part/'.$v->id) }}" class="btn btn-danger btn-xs"  
+                                onclick="return confirm('Apakah anda yakin akan menghapus part \'{{$v->name_part}}\'?')">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
                         </center>
@@ -66,7 +69,7 @@
         </div>
     </div>
        <div id="myModal2" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-info">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -107,7 +110,7 @@
     </div>
 
      <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-info">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -187,6 +190,9 @@
     </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 @if (count($m_part) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/js/dataTables.bootstrap.js')}}"></script>
@@ -201,6 +207,4 @@
     });
 </script>
 @endif
-<br/>
-
 @endsection

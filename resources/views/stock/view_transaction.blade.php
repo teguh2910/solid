@@ -61,7 +61,7 @@
 </div>
 </div>
 <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-info">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -73,7 +73,7 @@
              
             <div class="form-group">
               <div class="col-md-7">
-                <font face='calibri'><b>ID AREA</b></font><br/>
+                <font face='calibri'><b>ID Area</b></font><br/>
                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
@@ -85,10 +85,8 @@
             <div class="form-group">
               <div class="col-md-8">
                 <button type="submit" class="btn btn-primary btn-sm">
-                  <span class='glyphicon glyphicon-search'></span>&nbsp;&nbsp;<font face='calibri'><b>SEARCH</b></font>
-                </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger btn-sm">
-                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;&nbsp;<font face='calibri'><b>RESET</b></font>
+                  <span class='glyphicon glyphicon-search'></span>&nbsp;&nbsp;
+                  <font face='calibri'><b>SEARCH</b></font>
                 </button>
               </div>
             </div>

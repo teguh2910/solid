@@ -5,7 +5,7 @@
    <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-primary">
-        <div class="panel-heading"><font face='calibri'>&nbsp;<font face='calibri'><big><b>EDIT PART</b></big></font></div>
+        <div class="panel-heading"><big><big><big><font face='calibri'><b>EDIT PART</b></font></big></big></big></div>
         <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
          @if (count($m_part) > 0)

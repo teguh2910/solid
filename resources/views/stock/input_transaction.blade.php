@@ -9,7 +9,11 @@
     </a> 
     <br/><br/>
     <div class="panel panel-primary">   
-      <div class="panel-heading"><font face='calibri'>&nbsp;<font face='calibri'><b>INPUT AMOUNT</b></font></div>
+      <div class="panel-heading">
+        <big><big><big>
+          <font face='calibri'><b>INPUT AMOUNT</b></font>
+        </big></big></big>
+      </div>
         <div class="panel-info"><div class="panel-heading">
           <div class="panel-body"> 
             <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
