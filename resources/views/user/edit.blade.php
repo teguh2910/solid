@@ -4,12 +4,9 @@
 <div class="container">
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-success">
+      <div class="panel panel-primary">
         <div class="panel-heading">
-          <a href="{{ url('user/view') }}" class="btn btn-info btn-sm">
-            <font face='calibri'><b>BACK</b></font>
-          </a>&nbsp;&nbsp;
-          <big><big><font face='calibri'>&nbsp;<b>UPDATE DATA USER</b></font></big></big>
+          <big><big><big><font face='calibri'><b>EDIT USER</b></font></big></big></big>
         </div>
         <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
@@ -17,7 +14,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @foreach ($user as $user)
             <div class="form-group">
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <font face='calibri'><b>Username</b></font><br/>
                 <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" autofocus required>
                 <input type="hidden" class="form-control" name="id" id="id" value="{{$user->id}}" required>
@@ -25,7 +22,7 @@
             </div>
 
             <div class="form-group">
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <font face='calibri'><b>E-mail Address</b></font><br/>
                 <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" required>
               </div>
@@ -69,10 +66,12 @@
             <div class="form-group">
               <div class="col-md-8">
                 <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;<font face='calibri'><b>UPDATE</b></font>
+                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
+                  <font face='calibri'><b>UPDATE</b></font>
                 </button>&nbsp;&nbsp;
                 <button type="reset" class="btn btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;<font face='calibri'><b>RESET</b></font>
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;
+                  <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>

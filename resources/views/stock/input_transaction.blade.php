@@ -1,88 +1,88 @@
 @extends('app')
-
 @section('content')
-
 <div class="container">
-   <div class="row">
+  <div class="row">
     <div class="col-md-6 col-md-offset-3">
-     @foreach($t_transaction as $t_transaction)
-    <a href="{{ url('stock/view_list/'.$t_transaction->id_area) }}"   class="btn btn-info btn-sm">
-                                            <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i> &nbsp;<b>BACK</b>
-                                        </a> 
-        <br/><br/>
-     
-      <div class="panel panel-primary">
-       
-        <div class="panel-heading"><center><span class='glyphicon glyphicon-pencil'></span> <font face='calibri'>&nbsp;<font face='calibri'><b>Input Amount</b></font></center></div>
+    @foreach($t_transaction as $t_transaction)
+    <div class="panel panel-primary">   
+      <div class="panel-heading">
+        <big><big><big>
+          <font face='calibri'><b>INPUT AMOUNT</b></font>
+        </big></big></big>
+      </div>
         <div class="panel-info"><div class="panel-heading">
-        <div class="panel-body">
-          
-        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Part Number</b></font></label>
-              <div class="col-md-8">
-               <input type="hidden" name="id" value="{{ $t_transaction->id }}">
-                <input type="hidden" name="id_area" value="{{ $t_transaction->id_area }}">
-                <input type="hidden" name="qty_box" value="{{ $t_transaction->qty_box }}">
-              <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
+          <div class="panel-body"> 
+            <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="form-group">
+                <div class="col-md-9">
+                  <font face='calibri'><b>Part Number</b></font><br/>
+                  <input type="hidden" name="id" value="{{ $t_transaction->id }}">
+                  <input type="hidden" name="id_area" value="{{ $t_transaction->id_area }}">
+                  <input type="hidden" name="qty_box" value="{{ $t_transaction->qty_box }}">
+                  <input type="text" class="form-control" name="part_number" id="part_number" value="{{$t_transaction->part_number}}" readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Back Number</b></font></label>
-              <div class="col-md-8">
-               <input type="text" class="form-control" value="{{$t_transaction->back_number}}" readonly>
+              <div class="form-group">
+                <div class="col-md-5">
+                  <font face='calibri'><b>Back Number</b></font><br/>
+                  <input type="text" class="form-control" value="{{$t_transaction->back_number}}" readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Part Name</b></font></label>
-              <div class="col-md-8">
-               <input type="text" class="form-control" value="{{$t_transaction->part_name}}" readonly>
+              <div class="form-group">
+                <div class="col-md-12">
+                  <font face='calibri'><b>Part Name</b></font><br/>
+                  <input type="text" class="form-control" value="{{$t_transaction->part_name}}" readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Amount of Box</b></font></label>
-              <div class="col-md-7">
-                @if ($t_transaction->amount_box == "0") 
-                <input type="number" class="form-control" name="amount_box" id="amount_box" placeholder="{{$t_transaction->amount_box}}">
-                @else
-                <input type="number" class="form-control" name="amount_box" id="amount_box" value="{{$t_transaction->amount_box}}">
-                @endif
+              <div class="form-group">
+                <div class="col-md-3">
+                  <font face='calibri'><b>Qty / Box</b></font><br/>
+                  <input type="text" class="form-control" value="{{$t_transaction->qty_box}} {{$t_transaction->unit}}" readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label"><font face='calibri'><b>Uncomplete</b></font></label>
-              <div class="col-md-7">
-                @if ($t_transaction->amount_pcs == "0") 
-                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" placeholder="{{$t_transaction->amount_pcs}}">
-                @else
-                <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" value="{{$t_transaction->amount_pcs}}">
-                @endif
+              @if ($t_transaction->qty_box == 0 || $t_transaction->qty_box = "")
+              @else
+              <div class="form-group">
+                <div class="col-md-3">
+                  <font face='calibri'><b>Amount of Box</b></font><br/>
+                  @if ($t_transaction->amount_box == "0") 
+                  <input type="number" class="form-control" name="amount_box" id="amount_box" placeholder="{{$t_transaction->amount_box}}" autofocus>
+                  @else
+                  <input type="number" class="form-control" name="amount_box" id="amount_box" value="{{$t_transaction->amount_box}}" autofocus>
+                  @endif
+                </div>
+              </div> 
+              @endif
+              <div class="form-group">
+                <div class="col-md-3">
+                  <font face='calibri'><b>Uncomplete</b></font><br/>
+                  @if ($t_transaction->amount_pcs == "0") 
+                  <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" placeholder="{{$t_transaction->amount_pcs}}">
+                  @else
+                  <input type="number" class="form-control" name="amount_pcs"  id="amount_pcs" value="{{$t_transaction->amount_pcs}}">
+                  @endif
+                </div>
               </div>
-            </div>
-
-            
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <button type="submit" class="btn btn-flat btn-sm btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
-                </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-flat btn-sm btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
-                </button>
+              <div class="form-group">
+                <div class="col-md-8">
+                  <button type="submit" class="btn btn-sm btn-primary">
+                    <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
+                    <font face='calibri'><b>SUBMIT</b></font>
+                  </button>&nbsp;&nbsp;
+                  <button type="reset" class="btn btn-sm btn-danger">
+                    <span class='glyphicon glyphicon-repeat'></span>&nbsp;
+                    <font face='calibri'><b>RESET</b></font>
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
             @endforeach
+          </div>
         </div>
-        </div></div>
       </div>
     </div>
   </div>
 </div>
-  <!-- Table -->
- 
-
-
+</div>
 @endsection

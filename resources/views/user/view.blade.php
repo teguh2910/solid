@@ -13,11 +13,11 @@
                 	<div class="clearfix">&nbsp;</div>
                         <table class="table table-hover table-bordered table-condensed">
                         <thead>
-                            <tr class='success'>
-                                <th><center><small><font face='calibri'>USERNAME</font></small></center></th>
-                                <th><center><small><font face='calibri'>E-MAIL ADDRESS</font></small></center></th>
-                                <th><center><small><font face='calibri'>DEPARTMENT</font></small></center></th>
-                                <th><center><small><font face='calibri'>ACCESS ROLE</font></small></center></th>
+                            <tr bgcolor='#00008B'>
+                                <th><font face='calibri' color='white'>Username</font></th>
+                                <th><font face='calibri' color='white'>E-mail Address</font></th>
+                                <th><font face='calibri' color='white'>Department</font></th>
+                                <th><font face='calibri' color='white'>Access Role</font></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-info">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

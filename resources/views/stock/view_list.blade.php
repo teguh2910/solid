@@ -1,74 +1,87 @@
 @extends('app')
 @section('content')
-<div class="row mt">
-<div class="col-lg-12">
-<div class="content-panel">
 <div class="container-fluid">
-    <a href="{{ url('stock/view_transaction') }}"><button class='btn btn-sm btn-flat btn-info'><i class='glyphicon glyphicon-chevron-left'></i> <b>BACK</b></button></a>
-    <big><big>
-    <br/><font face='calibri' color='grey'>
-    @foreach ($check as $check)
-        <small><small><b>Plant {{$check->type_plant}}<br/>Code Area {{$check->code_area}}<br/>
-            Name Area {{$check->name_area}}</b></small></small>
-    @endforeach
-    </font>
-    <big><center><font face='calibri' color='grey'><b>LIST STOCK</b></font></center></big></big></big>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="clearfix">&nbsp;</div>
-            <section id="unseen">
-            <table  class="table table-condensed table-bordered">
-                <thead>
-                    <tr class='info'>
-                        <th><center><font face='calibri'>BACK NO</font></center></th>
-                        <th><center><font face='calibri'>PART NO</font></center></th>
-                        <th><center><font face='calibri'>PART NAME</font></center>
-                        <th><center><font face='calibri'>QUANTITY/BOX</font></center></th>
-                        <th><center><font face='calibri'>UNIT</font></center></th>
-                        <th><center><font face='calibri'>AMOUNT OF BOX</font></center>
-                        <th><center><font face='calibri'>AMOUNT OF PCS</font></center>  
-                        <th><center><font face='calibri'>TOTAL(PCS)</font></center></th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div class="box box-primary">
+        <div class="box-body">
+            @foreach ($check as $check)
+            <div class="col-lg-6">
+                <a href="{{ url('stock/view_transaction') }}">
+                    <button class='btn btn-xs btn-info'>
+                        <i class='glyphicon glyphicon-chevron-left'></i>&nbsp;<b>BACK TO DATA TRANSACTION</b>
+                    </button>
+                </a><br/><br/>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <font face='calibri'><b>Plant</b></font><br/>
+                        <input type='text' value="{{$check->type_plant}}" class="form-control" disabled>
+                    </div>
+                   <div class="col-md-7">
+                        <font face='calibri'><b>Code Area</b></font><br/>
+                        <input type='text' value="{{$check->code_area}}" class="form-control" disabled>
+                    </div>
+                   <div class="col-md-7">
+                        <font face='calibri'><b>Name Area</b></font><br/>
+                        <input type='text' value="{{$check->name_area}}" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <div class="col-lg-12">
+                <div class="clearfix">&nbsp;</div>
+                <table class="table table-hover table-bordered table-condensed">
+                    <thead>
+                        <tr bgcolor='#00008B'>
+                            <th><font face='calibri' color='white'>Back No</font></th>
+                            <th><font face='calibri' color='white'>Part Number</font></th>
+                            <th><font face='calibri' color='white'>Part Name</font></th>
+                            <th><font face='calibri' color='white'>Qty / Box</font></th>
+                            <th><font face='calibri' color='white'>Unit</font></th>
+                            <th><font face='calibri' color='white'>Amount Of Box</font></th>
+                            <th><font face='calibri' color='white'>Uncomplete</font></th>  
+                            <th><font face='calibri' color='white'>Total (Pcs)</font></th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     @if (count($t_transaction) > 0)
-                      @foreach($t_transaction as $t_transaction)
-                      @if ($t_transaction->total_pcs == '0')
-                    <tr bgcolor='#FFFFFF'>
+                        @foreach($t_transaction as $t_transaction)
+                            @if ($t_transaction->total_pcs == '0')
+                                <tr bgcolor='#ADE8E6'>
+                            @else
+                                <tr bgcolor='#A9A9A9'>
+                            @endif
+                            <td><font face='calibri'>{{ $t_transaction->back_number }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->part_number }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->part_name }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->qty_box }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->unit }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->amount_box }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->amount_pcs }}</font></td>
+                            <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
+                            <td>
+                                <center>
+                                    <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" 
+                                        class="btn btn-primary btn-xs" target="blank">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </a>            
+                                </center>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                     @else
-                    <tr bgcolor='#DCDCDC'>
+                        <tr bgcolor='#FFFFFF'>
+                            <td colspan="9">
+                                <center>
+                                    <font face='calibri'>No record to display</font>
+                                </center>
+                            </td>
+                        </tr>
                     @endif
-                        <td><font face='calibri'>{{ $t_transaction->back_number }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->part_number }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->part_name }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->qty_box }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->unit }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->amount_box }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->amount_pcs }}</font></td>
-                        <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
-                         <td><center>
-                            <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" class="btn btn-primary btn-xs">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </a>            
-                        </center>
-                        </td>
-
-                    </tr>
-                    @endforeach
-                   @else
-                    <tr  bgcolor='#FFFFFF'>
-                        <td colspan="9"><center><font face='calibri'>No record to display</font></center></td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
-        </section>
+                </table>
+            </div>
         </div>
     </div>
-  </div>
-</div>
-<br/>
 </div>
 @if (count($t_transaction) > 0)
 <script src="{{asset('/js/jquery.dataTables.min.js')}}"></script>
@@ -84,7 +97,5 @@
     });
 </script>
 @endif
-<br/>
-
 @endsection
 
