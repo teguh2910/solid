@@ -18,7 +18,7 @@
           
 
             <div class="form-group">
-              <div class="col-md-10">
+              <div class="col-md-4">
                 <font face='calibri'><b>Plant Type</b></font><br/>
                 <input type="hidden" name="id" value="{{ $v->id }}">
                 <select class="form-control" name="type_plant" id="type_plant">
@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-              <div class="col-md-10">
+              <div class="col-md-3">
                 <font face='calibri'><b>Area Code</b></font><br/>
                 <input type="text" class="form-control" name="code_area" id="code_area" value="{{ $v->code_area }}">
               </div>
@@ -51,7 +51,7 @@
             </div>
              
             <div class="form-group">
-              <div class="col-md-10">
+              <div class="col-md-7">
                 <font face='calibri'><b>Contact</b></font><br/>
                 <input type="text" class="form-control" name="pic_contact" id="pic_contact" value="{{$v->pic_contact}}">
               </div>

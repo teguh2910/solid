@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-	<title>ELNA v1.4.1</title>
+	<title>ELNA v1.5</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
 	<title>SOLID v2.0.1</title>
 	@else
@@ -43,8 +43,8 @@
 				</button>
 				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 				<a class="navbar-brand">
-					<font color='grey'><i class='glyphicon glyphicon-plane'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.4.1</small></small></small></span>
+					<font color='grey'><i class='glyphicon glyphicon-transfer'></i>&nbsp;</font>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.5</small></small></small></span>
 				</a>
 				@else 
 				<a class="navbar-brand">
@@ -110,7 +110,7 @@
 				</ul>
 				@elseif (Auth::user()->role == "5")	
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
+					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>USER</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>

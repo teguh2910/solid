@@ -130,14 +130,14 @@
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <font face='calibri'><b>Code Area</b></font><br/>
                 <input type="text" class="form-control" name="code_area" id="code_area" required>
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-8">
                     <font face='calibri'><b>Area Name</b></font><br/>
                   <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp : PPIC_UNIT"required>
                 </div>
@@ -145,7 +145,7 @@
            
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-8">
                 <font face='calibri'><b>PIC</b></font><br/>
                 <input type="text" class="form-control" name="pic_name" id="pic_name" required>
               </div>

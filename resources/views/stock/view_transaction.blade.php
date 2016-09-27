@@ -107,21 +107,6 @@
     $('table').dataTable({
         "searching": true
     });
-       function test (e) {
-        if($('#action1').val()=="UNIT"){
-            // $('#pending_reason').attr('disabled','disabled');
-            $('#gr-UNIT').hide();
-            $('#gr-BODY').hide();
-            $('#gr-button').show();
-            $('#gr-reset').hide();
-        }else {
-            $('#gr-UNIT').hide();
-            $('#gr-BODY').hide();
-            $('#gr-button').hide();
-        }
-    }
 </script>
 @endif
-<br/>
-
 @endsection

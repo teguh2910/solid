@@ -4,10 +4,6 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
     @foreach($t_transaction as $t_transaction)
-    <a href="{{ url('stock/view_list/'.$t_transaction->id_area) }}" class="btn btn-info btn-xs">
-      <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i> &nbsp;<b>BACK</b>
-    </a> 
-    <br/><br/>
     <div class="panel panel-primary">   
       <div class="panel-heading">
         <big><big><big>
@@ -42,7 +38,7 @@
               <div class="form-group">
                 <div class="col-md-3">
                   <font face='calibri'><b>Qty / Box</b></font><br/>
-                  <input type="text" class="form-control" value="{{$t_transaction->qty_box}}" readonly>
+                  <input type="text" class="form-control" value="{{$t_transaction->qty_box}} {{$t_transaction->unit}}" readonly>
                 </div>
               </div>
               @if ($t_transaction->qty_box == 0 || $t_transaction->qty_box = "")

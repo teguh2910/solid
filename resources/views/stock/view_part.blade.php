@@ -132,7 +132,7 @@
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <font face='calibri'><b>Type Plant</b></font><br/>
                  <select class="form-control select2" name="type_plant" id="type_plant">
                       <option value="UNIT">UNIT</option>
@@ -142,34 +142,34 @@
             </div>
             
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <font face='calibri'><b>Back Number</b></font><br/>
                 <input type="text" class="form-control" name="back_number" id="back_number">
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-8">
                 <font face='calibri'><b>Part Number</b></font><br/>
                 <input type="text" class="form-control" name="part_number" id="part_number" required>
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-8">
                 <font face='calibri'><b>Part Name</b></font><br/>
                 <input type="text" class="form-control" name="part_name" id="part_name" required>
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-3">
                 <font face='calibri'><b>Quantity of Box</b></font><br/>
                   <input type='text' class="form-control" name="qty_box" id="qty_box" >
                 </div>
               </div>
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <font face='calibri'><b>Unit</b></font><br/>
                 <input type="text" class="form-control" name="unit" id="unit" required>
               </div>
