@@ -37,7 +37,7 @@
                             <th><font face='calibri' color='white'>Qty / Box</font></th>
                             <th><font face='calibri' color='white'>Unit</font></th>
                             <th><font face='calibri' color='white'>Amount Of Box</font></th>
-                            <th><font face='calibri' color='white'>Amount Of Pcs</font></th>  
+                            <th><font face='calibri' color='white'>Uncomplete</font></th>  
                             <th><font face='calibri' color='white'>Total (Pcs)</font></th>
                             <th>&nbsp;</th>
                         </tr>
@@ -60,7 +60,8 @@
                             <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
                             <td>
                                 <center>
-                                    <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" class="btn btn-primary btn-xs" target="\blank">
+                                    <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" 
+                                        class="btn btn-primary btn-xs" target="blank">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </a>            
                                 </center>

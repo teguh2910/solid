@@ -117,14 +117,14 @@ class StockController extends Controller {
 		$m_area->pic_contact= $pic_contact;
 		$m_area->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','area was successfully updated');
+        \Session::flash('flash_message','Sukses, data area berhasil diubah');
 		return redirect('stock/view_area');
 	}
 	public function delete_area($id)
     {
         M_area::destroy($id);
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Area was successfully deleted');
+        \Session::flash('flash_message','Sukses, data area berhasil dihapus');
         return redirect('stock/view_area');
     }
 
@@ -228,7 +228,7 @@ class StockController extends Controller {
         $t_transaction->part_number = $input['part_number'];
         $t_transaction->save();
 		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','part was successfully updated');
+        \Session::flash('flash_message','Sukses, data part berhasil diubah');
 	 	return redirect('stock/view_part');
 	}
 
@@ -236,7 +236,7 @@ class StockController extends Controller {
     {
         M_part::destroy($id);
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Area was successfully deleted');
+        \Session::flash('flash_message','Sukses, data part berhasil dihapus');
         return redirect('stock/view_part');
     }
 
@@ -269,7 +269,6 @@ class StockController extends Controller {
 
 	public function view_list3($id)
 	{  
-	 	$input 			= \Input::all();
 	 	$check 			= m_area::where('id_area','=',$id)->get();
 	 	$t_transaction 	= t_transaction::where('id_area',$id)->get();
 	 	return view('stock.view_list',compact('t_transaction','check')); 
@@ -277,11 +276,8 @@ class StockController extends Controller {
 
 	public function view_list2($id)
 	{  
-	 	$input 			= \Input::all();
 	 	$check 			= m_area::where('id_area','=',$id)->get();
-	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_t_transactions')
-	 	                            ->where('t_transactions.id_area',$id)                      
-	 	                            ->get();
+	 	$t_transaction 	= t_transaction::where('t_transactions.id_area',$id)->get();
 	 	return view('stock.view_list',compact('t_transaction','check')); 
 	}
 
@@ -303,6 +299,8 @@ class StockController extends Controller {
        	$total1 		= $a*$qty_box;
        	$total_pcs 		= $total1+$b;
         $t_transaction  			= t_transaction::findOrFail($id);
+		$t_transaction->amount_box  = $a;
+		$t_transaction->amount_pcs	= $b;
 		$t_transaction->total_pcs   = $total_pcs;
 		$t_transaction->save();
 		\Session::flash('flash_type','alert-success');
