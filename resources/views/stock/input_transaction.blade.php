@@ -42,6 +42,7 @@
                 </div>
               </div>
               @if ($t_transaction->qty_box == 0 || $t_transaction->qty_box = "")
+              <input type="hidden" class="form-control" name="amount_box" id="amount_box" value='null'>
               @else
               <div class="form-group">
                 <div class="col-md-3">

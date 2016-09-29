@@ -294,15 +294,23 @@ class StockController extends Controller {
         $id_area 	 = $input['id_area'];
         $qty_box 	 = $input['qty_box'];
         $part_number = $input['part_number'];
-        $a 			 = $input['amount_box'];
-       	$b 			 = $input['amount_pcs'];
-       	$total1 		= $a*$qty_box;
-       	$total_pcs 		= $total1+$b;
-        $t_transaction  			= t_transaction::findOrFail($id);
-		$t_transaction->amount_box  = $a;
-		$t_transaction->amount_pcs	= $b;
-		$t_transaction->total_pcs   = $total_pcs;
-		$t_transaction->save();
+        if ($input['amount_box'] == 'null') {
+        	$b 			 = $input['amount_pcs'];
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_pcs	= $b;
+			$t_transaction->total_pcs   = $b;
+			$t_transaction->save();
+        } else {
+        	$a 			 = $input['amount_box'];
+       		$b 			 = $input['amount_pcs'];
+	       	$total1 	 = $a*$qty_box;
+	       	$total_pcs 	 = $total1+$b;
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_box  = $a;
+			$t_transaction->amount_pcs	= $b;
+			$t_transaction->total_pcs   = $total_pcs;
+			$t_transaction->save();
+        }
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data stock berhasil disimpan ke dalam sistem');
 	 	return redirect('stock/view_list/2/'.$id_area.'');  
