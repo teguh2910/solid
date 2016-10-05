@@ -42,6 +42,7 @@
                     <option value="8">PPIC Unit</option>
                     <option value="9">Production Body</option>
                     <option value="10">Purchasing</option>
+                    <option value="11">IRL</option>
                 </select>
               </div>
             </div>

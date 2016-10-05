@@ -48,6 +48,8 @@
                         MIS
                     @elseif ($invoice_master->dept_code == '6')
                         HRD
+                    @elseif ($invoice_master->dept_code == '11')
+                        IRL
                     @endif
                     </font></td>
                     <td><font face='calibri'>{{ $invoice_master->vendor }}</font></td>
@@ -91,6 +93,7 @@
                       <option value="3">BOD</option>
                       <option value="5">MIS</option>
                       <option value="6">HRD</option>
+                      <option value="11">IRL</option>
                 </select>
               </div>
             </div>

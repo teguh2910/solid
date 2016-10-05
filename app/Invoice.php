@@ -26,6 +26,8 @@ class Invoice extends Model {
                         $dept="5";
                     } elseif ($key[1]=="HRD"){
                         $dept="6";
+                    } elseif ($key[1]=="IRL"){
+                        $dept="11";
                     }
     				self::create([
     					'no_penerimaan'=>$key[0],
