@@ -46,7 +46,9 @@
                             @elseif ($user->dept_code == '9')
                                 Production Body
                             @elseif ($user->dept_code == '10')
-                                Production Unit    
+                                Production Unit   
+                            @elseif ($user->dept_code == '11')
+                                IRL    
                             @endif
                             </font></td>
                             <td><font face='calibri'>
@@ -120,6 +122,7 @@
                     <option value="4">Finance&Accounting</option>
                     <option value="2">General Affair</option>
                     <option value="6">HRD</option>
+                    <option value="11">IRL</option>
                     <option value="5">MIS</option>
                     <option value="1">Purchasing</option>
                     <option value="7">PPIC Body</option>

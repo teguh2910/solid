@@ -67,6 +67,8 @@
                                 MIS
                             @elseif ($invoice->dept_code == '6')
                                 HRD
+                            @elseif ($invoice->dept_code == '11')
+                                IRL
                             @endif
                             </font></td>
                             <td><font face='calibri'>{{ $invoice->vendor }}</font></td>
