@@ -114,7 +114,8 @@
     });
 
     $('table').dataTable({
-        "searching": true
+        "searching": true,
+        "iDisplayLength": 100
     });
 </script>
 @endif
