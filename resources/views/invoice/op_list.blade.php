@@ -146,6 +146,7 @@
 
     $('table').dataTable({
         "searching": true,
+        //hotfix-2.0.4, by Yudo Maryanto, Mengubah paging menjadi 100
         "iDisplayLength": 100
     });
 </script>
