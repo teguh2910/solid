@@ -125,6 +125,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -150,6 +152,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -166,6 +170,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
                                 {{ $invoice->tgl_pending_act }}
+                                <br>
+                                Reason : {{$invoice->remark_act}}
                             </font></td>
                         </tr>
                         @endif
@@ -191,6 +197,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -207,6 +215,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
                                 {{ $invoice->tgl_pending_act }}
+                                <br>
+                                Reason : {{$invoice->remark_act}}
                             </font></td>
                         </tr>
                         @endif
@@ -238,6 +248,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                     @endif
@@ -255,6 +267,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{ $invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -270,7 +284,10 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }}, 
                                 {{ $invoice->tgl_pending_act }}
+                                <br>
+                                Reason : {{ $invoice->remark_act }} 
                             </font></td>
+                                       
                         </tr>
                     @endif
                     @if ($invoice->status=="7")
@@ -287,6 +304,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -303,6 +322,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
                                 {{ $invoice->tgl_pending_act }}
+                                <br>
+                                Reason : {{$invoice->remark_act}}
                             </font></td>
                         </tr>
                         @endif
@@ -328,6 +349,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_user)) }} 
                                 {{ $invoice->tgl_pending_user }}
+                                <br>
+                                Reason : {{$invoice->remark}}
                             </font></td>
                         </tr>
                         @endif
@@ -344,6 +367,8 @@
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_pending_act)) }} 
                                 {{ $invoice->tgl_pending_act }}
+                                <br>
+                                Reason : {{$invoice->remark_act}}
                             </font></td>
                         </tr>
                         @endif
@@ -351,7 +376,7 @@
                             <td class='info'><font face='calibri'>Approved by Accounting</font></td>
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_terima_act)) }}, 
-                                {{ $invoice->tgl_terima_act }}
+                                {{ $invoice->tgl_terima_act}}
                             </font></td>
                         </tr>
                         <tr>
