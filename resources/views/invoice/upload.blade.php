@@ -56,7 +56,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>No Penerimaan</b></font></label>
               <div class="col-md-7">
-                <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" autofocus required>
+                <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" value='{{$nomor}}' autofocus required disabled>
               </div>
             </div>
 
@@ -77,7 +77,12 @@
             <div class="form-group">
               <label class="col-md-3 control-label"><font face='calibri'><b>Vendor</b></font></label>
               <div class="col-md-8">
-                <input type="text" class="form-control" name="vendor" id="vendor" required>
+                <!-- <input type="text" class="form-control" name="vendor" id="vendor" required> -->
+                <select class="form-control select2" name="shipping_qty" id="code_ng_list" style="width: 50%;" autofocus required>
+                    @foreach ($bank_datas as $k => $v)
+                    <option value="{{ $v->id }}">{{ $v->vendor_name }}</option>
+                    @endforeach
+                </select>    
               </div>
             </div>
 
