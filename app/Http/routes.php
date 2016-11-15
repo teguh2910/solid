@@ -90,6 +90,8 @@ Route::get('stock/print_report_plant','StockController@print_report_plant');
 Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
 
+Route::get('data','HomeController@data');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

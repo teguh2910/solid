@@ -1,5 +1,6 @@
 {
     "providers": [
+        "Yajra\\Datatables\\DatatablesServiceProvider",
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "Illuminate\\Auth\\AuthServiceProvider",
         "Illuminate\\Bus\\BusServiceProvider",
@@ -32,6 +33,7 @@
         "Maatwebsite\\Excel\\ExcelServiceProvider"
     ],
     "eager": [
+        "Yajra\\Datatables\\DatatablesServiceProvider",
         "Illuminate\\Auth\\AuthServiceProvider",
         "Illuminate\\Routing\\ControllerServiceProvider",
         "Illuminate\\Cookie\\CookieServiceProvider",
