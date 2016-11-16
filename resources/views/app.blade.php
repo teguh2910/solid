@@ -23,6 +23,8 @@
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+
 
 
 	<script>

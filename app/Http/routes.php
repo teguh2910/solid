@@ -42,6 +42,7 @@ Route::post('master/upload','HomeController@upload');
 Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
 Route::get('invoice/op/user', 'HomeController@invoice_op_user');
 Route::get('invoice/delete/{id}', 'HomeController@invoice_delete');
+Route::get('invoice/print/{id}', 'HomeController@invoice_print');
 Route::get('invoice/detail/{id}', 'HomeController@invoice_detail');
 Route::get('invoice/reject/user/{id}', 'HomeController@invoice_reject_user');
 Route::get('invoice/reject/fa/{id}', 'HomeController@invoice_reject_fa');
@@ -89,6 +90,9 @@ Route::post('stock/print_result','StockController@print_result');
 Route::get('stock/print_report_plant','StockController@print_report_plant');
 Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
+
+Route::post('json/part_bank/{id}','HomeController@part_bank');
+Route::post('json/account/{id}/{id2}','HomeController@account');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

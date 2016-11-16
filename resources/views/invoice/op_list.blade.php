@@ -112,6 +112,9 @@
                                     onclick="return confirm('Apakah anda yakin akan menghapus data dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </a>
+                                    <a href="{{ url('invoice/print/'.$invoice->id) }}" class="btn btn-primary btn-xs">
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </a>
                                 </center>
                             </td>
                         @else

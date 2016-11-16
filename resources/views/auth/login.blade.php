@@ -17,7 +17,8 @@
 }    </style>
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src='{{ asset("js/bootstrap.min.js") }}'></script>
-    <script type="text/javascript">
+    	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+        <script type="text/javascript">
         window.alert = function(){};
         var defaultCSS = document.getElementById('bootstrap-css');
         function changeCSS(css){
@@ -26,12 +27,12 @@
         }
         $( document ).ready(function() {
           var iframe_height = parseInt($('html').height()); 
-          window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
+          // window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
         });
-    </script>
+        </script>
 </head>
 <body>
-	<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
+
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">

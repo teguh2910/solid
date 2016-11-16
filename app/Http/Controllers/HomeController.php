@@ -30,6 +30,7 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
+	
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -127,10 +128,16 @@ class HomeController extends Controller {
 		date_default_timezone_set('Asia/Jakarta');
 		$date 		= date('Y-m-d H:i:s');
 		$input 		= \Input::all();
+		$account_no = $input['account_no2'];
+		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		foreach ($queries as $queries) {
+			$code_bank_data = $queries->id;
+		}
+		// return $account_no;
 		$invoice 					= new Invoice;
 		$invoice->no_penerimaan 	= $input['no_penerimaan'];
 		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['vendor'];
+		$invoice->vendor 			= $input['code_vendor'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
 		$invoice->doc_date 			= $input['doc_date'];
@@ -141,6 +148,7 @@ class HomeController extends Controller {
 		$invoice->tgl_input 		= $date;
 		$invoice->status 			= "1";
 		$invoice->no_po 			= $input['no_po'];
+		$invoice->code_bank_data	= $code_bank_data;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data invoice berhasil ditambahkan ke database');
@@ -422,6 +430,36 @@ class HomeController extends Controller {
 		return view('invoice.rtp_list', compact('invoice'));
 	}
 
+	public function invoice_print($id)
+	{
+		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.* from invoice inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
+			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank where invoice.id = "'.$id.'"');
+		
+		\Excel::load('/storage/template/tandaterima.xlsx', function($file) use($invoice){
+
+		foreach ($invoice as $invoice) {
+			
+			$no_penerimaan = $invoice->no_penerimaan;
+			$vendor_name   = $invoice->vendor_name;
+			$invoice 	   = $invoice->no_po;
+			// $tanggal 	   = $invoice->doc_date;
+			// $keterangan    = $invoice->
+			// $amount        = $invoice->curr;
+			// $ampunt        = $invoice->amount;
+			// $bank_name     = $invoice->bank_name;
+			// $account_no    = $invoice->account_no;
+			// $account_name  = $invoice->account_name;
+			// $jatuh_tempo   = $invoice->due_date;
+			// $tgl           = date("dd-MM-yyyy");
+			
+
+		}
+		$file->setActiveSheetIndex(0)->setCellValue('J7', $no_penerimaan);
+
+		// return $no_penerimaan;
+		})->download('pdf');
+	}
+
 	public function invoice_op_user()
 	{
 		$user =\Auth::user();
@@ -451,7 +489,8 @@ class HomeController extends Controller {
 		$date = date('y');
 		$nomor = '';
 		$invoice = DB::select('select max(no_penerimaan) as nomor from invoice');
-		$bank_datas = DB::select('select * from t_bank_datas');
+		$bank_datas = DB::select('select * from t_bank_datas group by vendor_name');
+		$part_bank = DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
 			$nomor = $invoice->nomor;
 		}
@@ -470,7 +509,20 @@ class HomeController extends Controller {
 
 		}
 		// return $nomor;
-		return view('invoice.upload', compact('nomor','bank_datas'));
+		return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
+	}
+
+	public function part_bank($id){
+		$invoice = DB::select('select part_bank from t_bank_datas where code_vendor = "'.$id.'"');
+		return $invoice;
+
+	}
+
+	public function account($id,$id2){
+		$invoice = DB::select('select t_bank_datas.code_bank, t_bank_datas.account_no, t_bank_datas.account_name, m_banks.bank_name from t_bank_datas inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank
+					where code_vendor = "'.$id.'" and part_bank = "'.$id2.'"');
+		return $invoice;
+
 	}
 
 	public function Upload(){
