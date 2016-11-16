@@ -91,8 +91,13 @@ Route::get('stock/print_report_plant','StockController@print_report_plant');
 Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
 
+
 Route::post('json/part_bank/{id}','HomeController@part_bank');
 Route::post('json/account/{id}/{id2}','HomeController@account');
+
+Route::get('data','HomeController@data');
+Route::get('data_user','HomeController@data_user');
+Route::post('import/vendor','HomeController@import_vendor');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
