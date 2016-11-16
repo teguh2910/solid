@@ -493,30 +493,25 @@ class HomeController extends Controller {
 		return redirect('invoice/pending/list');
 	}
 
-	public function upload_master(){
-		$date = date('y');
-		$nomor = '';
-		$invoice = DB::select('select max(no_penerimaan) as nomor from invoice');
+	public function upload_master() {
+		$date 		= date('y');
+		$nomor 		= '';
+		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
 		$bank_datas = DB::select('select * from t_bank_datas group by vendor_name');
-		$part_bank = DB::select('select part_bank from t_bank_datas group by part_bank');
+		$part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
 			$nomor = $invoice->nomor;
 		}
 		$getNomor = substr($nomor, 0,2);
 		if ($nomor == '' || $nomor == null){
 			$nomor = $date+'00000001';
-		}
-		else {
-			if($getNomor == $date){
+		} else {
+			if($getNomor == $date) {
 				$nomor = $nomor+1;
-			}
-			else
-			{
+			} else {
 				$nomor = $date+'00000001';
 			}
-
 		}
-		// return $nomor;
 		return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
 	}
 
