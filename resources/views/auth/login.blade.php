@@ -40,7 +40,7 @@
 			@foreach ($errors->all() as $error)
                 	<div class="alert alert-danger alert-dismissible" role="alert">
                     	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    	<font face='calibri'><b>Error</b>, invalid E-Mail Address or Password</font>
+                    	<font face='calibri'><b>Error</b>, invalid E-mail Address or Password</font>
                 	</div>
 			@endforeach
 		@endif	
@@ -48,8 +48,8 @@
 				<div class="panel-heading">
 					<center>
 						<font face='calibri'>
-							<big><big><big><big><b>Welcome</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
-							<!-- Aisin Operational Invoice Document -->
+							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							&nbsp;<small><b>v2.1</b></small>
 						</font><br/><br/>
 					</center>
 

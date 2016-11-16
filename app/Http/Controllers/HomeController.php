@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Libern\QRCodeReader\QRCodeReader;
 use Datatables;
+use App\m_bank;
+use App\t_bank_data;
 class HomeController extends Controller {
 
 	/*
@@ -395,14 +397,14 @@ class HomeController extends Controller {
 
 	public function invoice_rtp_list()
 	{
-		// $user =\Auth::user();
+		$user = \Auth::user();
 		// if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
 		// 	$invoice = Invoice::where('status','8')->orderby('id','DESC')->get();
 		// 	return view('invoice.rtp_list', compact('invoice'));
 		// } else {
 		// 	return redirect('invoice/rtp/user');
 		// }
-		return view('invoice.rtp_list_2');
+		return view('invoice.rtp_list_2', compact('user'));
 	}
 
 	public function invoice_op_list()
@@ -420,12 +422,12 @@ class HomeController extends Controller {
 
 	public function invoice_rtp_user()
 	{
-		// $user =\Auth::user();
+		$user = \Auth::user();
 		// $invoice = Invoice::where('status','8')
 		// 					->where('dept_code',$user->dept_code)
 		// 					->get();
 		// return view('invoice.rtp_list', compact('invoice'));
-		return view('invoice.rtp_list');
+		return view('invoice.rtp_list_2', compact('user'));
 	}
 
 	public function invoice_op_user()
@@ -491,6 +493,23 @@ class HomeController extends Controller {
 			\Session::flash('flash_type','alert-success');
 			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
 		}else{
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+		}
+		return redirect('master/upload');
+	}
+
+	public function import_vendor(){
+		$file 		= \Input::file('file');
+		$table 		= \Input::get('table');
+		$array_data = CsvHelper::csv_to_array($file);
+		$result 	= m_bank::array_to_db($array_data);
+		$result2 	= t_bank_data::array_to_db($array_data);
+			
+		if ($result == 1 ) {
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+		} else {
 			\Session::flash('flash_type','alert-danger');
 			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
 		}
@@ -679,9 +698,15 @@ class HomeController extends Controller {
 	}
 
 	public function data() {
-		$user =\Auth::user();
 		$test = Invoice::select(['no_penerimaan','dept_code','vendor','tgl_terima','doc_no','doc_date','due_date','curr','amount',
 			'doc_no_2','no_po','tgl_ready_to_pay'])->where('status','8');
+		return Datatables::of($test)->make();
+	}
+
+	public function data_user() {
+		$user = \Auth::user();
+		$test = Invoice::select(['no_penerimaan','vendor','tgl_terima','doc_no','doc_date','due_date','curr','amount',
+			'doc_no_2','no_po','tgl_ready_to_pay'])->where('status','8')->where('dept_code',$user->dept_code);
 		return Datatables::of($test)->make();
 	}
 

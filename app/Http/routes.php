@@ -91,6 +91,8 @@ Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
 
 Route::get('data','HomeController@data');
+Route::get('data_user','HomeController@data_user');
+Route::post('import/vendor','HomeController@import_vendor');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
