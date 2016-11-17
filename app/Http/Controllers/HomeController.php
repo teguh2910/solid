@@ -149,6 +149,7 @@ class HomeController extends Controller {
 		$invoice->vendor 			= $input['code_vendor'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->description		= $input['description'];
 		$invoice->doc_date 			= $input['doc_date'];
 		$invoice->due_date 			= $input['due_date'];
 		$invoice->curr 				= $input['curr'];
@@ -455,7 +456,7 @@ class HomeController extends Controller {
     } else if ($x <200) {
         $temp = " seratus" . $this->kekata($x - 100);
     } else if ($x <1000) {
-        $temp = kekata($x/100) . " ratus" . $this->kekata($x % 100);
+        $temp = $this->kekata($x/100) . " ratus" . $this->kekata($x % 100);
     } else if ($x <2000) {
         $temp = " seribu" . $this->kekata($x - 1000);
     } else if ($x <1000000) {
@@ -510,7 +511,7 @@ class HomeController extends Controller {
 				$vendor_name   = $result->vendor_name;
 				$invoice 	   = $result->doc_no;
 				$tanggal 	   = $result->doc_date;
-				// $keterangan    = $invoice->
+				$keterangan    = $result->description;
 				$curr          = $result->curr;
 				$amount        = $result->amount;
 				$bank_name     = $result->bank_name;
@@ -527,6 +528,7 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('D9', $no_penerimaan);
 		$file->setActiveSheetIndex(0)->setCellValue('I5', $no_penerimaan);
 		$file->setActiveSheetIndex(0)->setCellValue('D10',$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('H13',$keterangan);
 		$file->setActiveSheetIndex(0)->setCellValue('B13',$invoice);
 		$file->setActiveSheetIndex(0)->setCellValue('F13',$tanggal);
 		$file->setActiveSheetIndex(0)->setCellValue('L13',$curr." ".number_format($amount, "0", ".", "."));
@@ -538,7 +540,7 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('K23', $account_no);
 		$file->setActiveSheetIndex(0)->setCellValue('K24', $account_name);
 		$file->setActiveSheetIndex(0)->setCellValue('K25', $jatuh_tempo);
-		// return $no_penerimaan;
+		
 
 		//invoice verification voucher
 		$file->setActiveSheetIndex(0)->setCellValue('K33', $tgl);
@@ -546,8 +548,8 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('c36', $code_vendor."/".$vendor_name);
 		$file->setActiveSheetIndex(0)->setCellValue('J36', $curr);
 		$file->setActiveSheetIndex(0)->setCellValue('L36', number_format($amount, "0", ".", "."));
-		//keterangan belum
-		$file->setActiveSheetIndex(0)->setCellValue('H39',$invoice);
+		$file->setActiveSheetIndex(0)->setCellValue('A39', $keterangan);
+		$file->setActiveSheetIndex(0)->setCellValue('H39', $invoice);
 		$file->setActiveSheetIndex(0)->setCellValue('L39', number_format($amount, "0", ".", "."));
 		$file->setActiveSheetIndex(0)->setCellValue('C44'," ".$terbilang2." rupiah");
 		$file->setActiveSheetIndex(0)->setCellValue('L44', number_format($amount, "0", ".", "."));

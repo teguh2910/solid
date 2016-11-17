@@ -3,11 +3,12 @@
 @section('content')
 <script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 <div class="container-fluid">
-  <div class="col-md-7">
+  <div class="col-md-4">
     <div class="box box-info">
       <div class="box-body">
-        <div class="col-md-5">
+        <div class="col-md-12">
             <!-- <font face='calibri' color="grey"><b><big><big><big>INPUT INVOICE</big></big></big></b></font><br/><br/> -->
+            <div class="row">
             <div class="panel panel-success">
               <div class="panel-heading">
                 <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>DATA VENDOR</b></big></big></font>
@@ -42,7 +43,9 @@
             {!! Form::close() !!}
           </div>
         </div>
-        <div class="col-md-6">
+        <!-- </div> -->
+        <!-- <div class="col-md-6"> -->
+        <div class="row">
           <div class="panel panel-success">
             <div class="panel-heading">
               <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>DATA INVOICE</b></big></big></font>
@@ -84,7 +87,8 @@
         </div>
       </div>
     </div>
-  <div class="col-md-5">
+  </div>
+  <div class="col-md-8">
     <div class="box box-info">
       <div class="box-body">
         <div class="col-md-12">
@@ -95,7 +99,7 @@
 
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                <div class="col-xs-6">
                 <div class="form-group">
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
@@ -146,6 +150,28 @@
                   </div>
                 </div>
 
+                <div class="form-group" id="po">
+                  <label class="col-md-1 control-label"></label>
+                  <div class="col-md-12">
+                    <font face='calibri'><b>DOC No.</b></font>
+                    <input type="text" class="form-control" name="doc_no" id="doc_no">
+                  </div>
+                </div>
+
+                  <div class="form-group" >
+                  <label class="col-md-1 control-label"></label>
+                  <div class="col-md-12">
+                    <font face='calibri'><b>Nomor PO</b></font>
+                    <input type="text" class="form-control" name="no_po" id="no_po">
+                  </div>
+                </div> 
+                
+              </div>
+
+
+
+              <div class="col-xs-6">
+               
                 <div class="form-group">
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
@@ -156,14 +182,6 @@
                           <span class="glyphicon glyphicon-calendar"></span>
                           </span>
                     </div>
-                  </div>
-                </div>
-
-                <div class="form-group" id="po">
-                  <label class="col-md-1 control-label"></label>
-                  <div class="col-md-12">
-                    <font face='calibri'><b>DOC No.</b></font>
-                    <input type="text" class="form-control" name="doc_no" id="doc_no">
                   </div>
                 </div>
 
@@ -209,170 +227,27 @@
                   </div>
                 </div>
 
-                <div class="form-group" id="po2">
+                 <div class="form-group" id="po">
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
-                    <font face='calibri'><b>DOC No.</b></font>
-                    <input type="number" class="form-control" name="doc_no_2" id="doc_no_2">
+                    <font face='calibri'><b>Keterangan</b></font>
+                    <input type="text" class="form-control" name="description" id="description">
                   </div>
                 </div>
 
-                <div class="form-group" >
-                  <label class="col-md-1 control-label"></label>
-                  <div class="col-md-12">
-                    <font face='calibri'><b>Nomor PO</b></font>
-                    <input type="text" class="form-control" name="no_po" id="no_po">
-                  </div>
-                </div> 
-                <div class="form-group">
-                        <div class="col-md-12">
-                          <button type="submit" class="btn btn-sm btn-primary">
-                            <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
-                            <font face='calibri'><b>SUBMIT</b></font>
-                          </button>&nbsp;&nbsp;
-                          <button type="reset" class="btn btn-sm btn-danger">
-                            <span class='glyphicon glyphicon-repeat'></span>&nbsp;
-                            <font face='calibri'><b>RESET</b></font>
-                          </button>
-                        </div>
-                      </div>      
+              </div>     
               </div>
-            </div>
+            </div> 
           </div>
     </div>
   </div>
 
-      <!-- <div class="col-md-5">
-        <div class="box box-warning">
-          <div class="box-body">
-          <div class="col-md-12">
-            <div class="panel panel-success">
-              <div class="panel-heading">
-                <font face='calibri'>MANUAL INPUT&nbsp;&nbsp;<big><big><b>DATA INVOICE</b></big></big></font>
-              </div>
-              <div class="panel-info">
-                <div class="panel-heading">
-                  <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/invoice/saving') }}">
-                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                      <div class="form-group">
-                        <label class="col-md-1 control-label"></label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>NO PENERIMAAN</b></font>
-                          <input type="text" class="form-control" name="no_penerimaan" id="no_penerimaan" value='{{$nomor}}' autofocus required disabled>
-                        </div>
-                        <label class="col-md-1 control-label"></label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>DEPARTMENT</b></font>
-                          <select class="form-control select2" name="dept_code" id="dept_code" style="width: 100%;">
-                            <option value="1">Purchasing & Exim</option>
-                            <option value="2">General Affair</option>
-                            <option value="3">BOD</option>
-                            <option value="6">HR</option>
-                            <option value="5">IT Development</option>
-                            <option value="11">IRL</option>
-                          </select>
-                        </div>
-                        <label class="col-md-1 control-label"></label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>VENDOR</b></font>
-                          <select class="form-control select2" name="shipping_qty" id="code_ng_list" style="width: 100%;" required>
-                            @foreach ($bank_datas as $k => $v)
-                            <option value="{{ $v->id }}">{{ $v->vendor_name }}</option>
-                            @endforeach
-                          </select>    
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>TANGGAL TERIMA</b></font>
-                          <div class='input-group date mypicker' id='en_date'>
-                            <input type='text' class="form-control" name="tgl_terima" id="tgl_terima" readonly/>
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>DOC NO</b></font>
-                          <input type="text" class="form-control" name="doc_no" id="doc_no" required>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>DOC DATE</b></font>
-                          <div class='input-group date mypicker' id='en_date'>
-                            <input type='text' class="form-control" name="doc_date" id="doc_date"  readonly/>
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>DUE DATE</b></font>
-                          <div class='input-group date mypicker' id='en_date'>
-                            <input type='text' class="form-control" name="due_date" id="due_date"  readonly/>
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>CURR</b></font>
-                          <input type="text" class="form-control" name="curr" id="curr" required>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>AMOUNT</b></font>
-                          <input type="number" class="form-control" name="amount" id="amount" required>
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>DOC NO</b></font>
-                          <input type="number" class="form-control" name="doc_no_2" id="doc_no_2">
-                        </div>
-                        <label class="col-md-1 control-label">
-                        </label>
-                        <div class="col-md-12">
-                          <font face='calibri'><b>PO NUMBER</b></font>
-                          <input type="text" class="form-control" name="no_po" id="no_po">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-9">
-                          <button type="submit" class="btn btn-sm btn-primary">
-                            <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
-                            <font face='calibri'><b>SUBMIT</b></font>
-                          </button>&nbsp;&nbsp;
-                          <button type="reset" class="btn btn-sm btn-danger">
-                            <span class='glyphicon glyphicon-repeat'></span>&nbsp;
-                            <font face='calibri'><b>RESET</b></font>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
->>>>>>> c2cf1d6bf4a99de60ac0461e2d024599f423dba6
-              </div>
-            </div>
-          </div>
-        </div>
-<<<<<<< HEAD -->
 <div class="col-md-12">
 <div class="panel panel-success">
           <div class="panel-heading"><big><big><font face='calibri'><b>BANK DATA</b></font></big></big></div>
             <div class="panel-info"><div class="panel-heading">
               <div class="panel-body">
-
+                <div class="col-xs-6">
                 <div class="form-group">
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
@@ -398,14 +273,15 @@
                     <input name="account_no2" id="account_no2" type="hidden">
                   </div>
                 </div>
-                <br>
-
+  
                 <div class="form-group">
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Bank Key</b></font>
                     <input type="text" class="form-control" name="code_bank" id="code_bank" required disabled>
+                    <label id="test2"></label> 
                   </div>
+
                 </div>
 
                 <div class="form-group">
@@ -416,30 +292,25 @@
                 </div>
                 <br>
                 <!-- <label id="test"></label>   -->
-                <div class="form-group">
-              <div class="col-md-9">
-                <button type="submit" class="btn btn-sm btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;<font face='calibri'><b>SUBMIT</b></font>
-                 </button>&nbsp;&nbsp;
-                 <button type="reset" class="btn btn-sm btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;<font face='calibri'><b>RESET</b></font>
-                </button>
-              </div>
-            </div>
-
+               </div>
+               <div class="col-xs-6">
+               </div>             
               </div>
             </div>
           </div>
         </div>
-
-
-            
-
+        <center>               
+          <button type="submit" class="btn btn-sm btn-primary">
+            <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;<font face='calibri'><b>SUBMIT</b></font>
+            </button>&nbsp;&nbsp;
+            <button type="reset" class="btn btn-sm btn-danger">
+            <span class='glyphicon glyphicon-repeat'></span>&nbsp;<font face='calibri'><b>RESET</b></font>
+          </button>
+        </center>
+ 
        </form>
-</div>
-</div>
-
-       
+    </div>
+   </div>     
       </div>
    </div>
   </div>
@@ -456,30 +327,11 @@
 
 <script type="text/javascript">
 
-    $('#po').hide();
-    $('#po2').hide();
 
     var code_vendor ;
     var no_penerimaan = "";
     $("#code_vendor").change(function() {
       code_vendor = $('option:selected', this).val();
-    });
-
-    $("#jenis_penerimaan").change(function() {
-      no_penerimaan = $('option:selected', this).val();
-        // alert(no_penerimaan);
-      
-
-      if (no_penerimaan == 1)
-      {
-        $('#po').show();
-        $('#po2').hide();
-
-      }
-      else{
-        $('#po').hide();
-        $('#po2').show();
-      }
     });
 
     $("#part_bank").change(function() {
