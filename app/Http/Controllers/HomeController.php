@@ -514,6 +514,7 @@ class HomeController extends Controller {
 				$keterangan    = $result->description;
 				$curr          = $result->curr;
 				$amount        = $result->amount;
+				$bank_code     = $result->code_bank;
 				$bank_name     = $result->bank_name;
 				$account_no    = $result->account_no;
 				$account_name  = $result->account_name;
@@ -521,44 +522,45 @@ class HomeController extends Controller {
 				$tgl           = date("Y-m-d");
 				$tgl2           = date("Y");
 			}
+
 		$terbilang = $this->terbilang($amount, 1);
 		$terbilang2 = $this->terbilang($amount, 2);
 		//tanda Terima
-		$file->setActiveSheetIndex(0)->setCellValue('K7', $no_penerimaan);
-		$file->setActiveSheetIndex(0)->setCellValue('D9', $no_penerimaan);
-		$file->setActiveSheetIndex(0)->setCellValue('I5', $no_penerimaan);
-		$file->setActiveSheetIndex(0)->setCellValue('D10',$vendor_name);
-		$file->setActiveSheetIndex(0)->setCellValue('H13',$keterangan);
-		$file->setActiveSheetIndex(0)->setCellValue('B13',$invoice);
-		$file->setActiveSheetIndex(0)->setCellValue('F13',$tanggal);
-		$file->setActiveSheetIndex(0)->setCellValue('L13',$curr." ".number_format($amount, "0", ".", "."));
-		$file->setActiveSheetIndex(0)->setCellValue('L16',$curr." ".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('K9', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('D11', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('I7', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('D12',$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('H15',$keterangan);
+		$file->setActiveSheetIndex(0)->setCellValue('B15',$invoice);
+		$file->setActiveSheetIndex(0)->setCellValue('F15',$tanggal);
+		$file->setActiveSheetIndex(0)->setCellValue('L15',$curr." ".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L18',$curr." ".number_format($amount, "0", ".", "."));
 		
-		$file->setActiveSheetIndex(0)->setCellValue('D18'," ".$terbilang." RUPIAH");
-		$file->setActiveSheetIndex(0)->setCellValue('K20', $tgl);
-		$file->setActiveSheetIndex(0)->setCellValue('K22', $bank_name);
-		$file->setActiveSheetIndex(0)->setCellValue('K23', $account_no);
-		$file->setActiveSheetIndex(0)->setCellValue('K24', $account_name);
-		$file->setActiveSheetIndex(0)->setCellValue('K25', $jatuh_tempo);
+		$file->setActiveSheetIndex(0)->setCellValue('D20'," ".$terbilang." RUPIAH");
+		$file->setActiveSheetIndex(0)->setCellValue('K22', $tgl);
+		$file->setActiveSheetIndex(0)->setCellValue('K24', $bank_name);
+		$file->setActiveSheetIndex(0)->setCellValue('K25', $account_no);
+		$file->setActiveSheetIndex(0)->setCellValue('K26', $account_name);
+		$file->setActiveSheetIndex(0)->setCellValue('K27', $jatuh_tempo);
 		
 
 		//invoice verification voucher
-		$file->setActiveSheetIndex(0)->setCellValue('K33', $tgl);
-		$file->setActiveSheetIndex(0)->setCellValue('E35', $tgl2."/".$no_penerimaan);
-		$file->setActiveSheetIndex(0)->setCellValue('c36', $code_vendor."/".$vendor_name);
-		$file->setActiveSheetIndex(0)->setCellValue('J36', $curr);
-		$file->setActiveSheetIndex(0)->setCellValue('L36', number_format($amount, "0", ".", "."));
-		$file->setActiveSheetIndex(0)->setCellValue('A39', $keterangan);
-		$file->setActiveSheetIndex(0)->setCellValue('H39', $invoice);
-		$file->setActiveSheetIndex(0)->setCellValue('L39', number_format($amount, "0", ".", "."));
-		$file->setActiveSheetIndex(0)->setCellValue('C44'," ".$terbilang2." rupiah");
-		$file->setActiveSheetIndex(0)->setCellValue('L44', number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('K35', $tgl);
+		$file->setActiveSheetIndex(0)->setCellValue('E37', $tgl2."/".$no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('c38', $code_vendor."/".$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('J38', $curr);
+		$file->setActiveSheetIndex(0)->setCellValue('L38', number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('A41', $keterangan);
+		$file->setActiveSheetIndex(0)->setCellValue('H41', $invoice);
+		$file->setActiveSheetIndex(0)->setCellValue('L41', number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('C46'," ".$terbilang2." rupiah");
+		$file->setActiveSheetIndex(0)->setCellValue('L46', "Rp. ".number_format($amount, "0", ".", "."));
 
-		$file->setActiveSheetIndex(0)->setCellValue('D48', $bank_name);
-		$file->setActiveSheetIndex(0)->setCellValue('D49', $account_no);
-		$file->setActiveSheetIndex(0)->setCellValue('D50', $account_name);
+		$file->setActiveSheetIndex(0)->setCellValue('D50', $bank_code);
+		$file->setActiveSheetIndex(0)->setCellValue('D51', $account_no);
+		$file->setActiveSheetIndex(0)->setCellValue('D52', $account_name);
 
-		$file->setActiveSheetIndex(0)->setCellValue('k49', $jatuh_tempo);
+		$file->setActiveSheetIndex(0)->setCellValue('L51', $jatuh_tempo);
 
 		})->download('xlsx');
 	}
@@ -641,10 +643,43 @@ class HomeController extends Controller {
 		return redirect('master/upload');
 	}
 
+	function csvToArray($filename = '', $delimiter = ',')
+{
+    if (!file_exists($filename) || !is_readable($filename))
+        return false;
+
+    $header = null;
+    $data = array();
+    if (($handle = fopen($filename, 'r')) !== false)
+    {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+        {
+            if (!$header)
+                $header = $row;
+            else
+                $data[] = array_combine($header, $row);
+        }
+        fclose($handle);
+    }
+
+    return $data;
+}
+
 	public function import_vendor(){
 		$file 		= \Input::file('file');
 		$table 		= \Input::get('table');
 		$array_data = CsvHelper::csv_to_array($file);
+		$customerArr = $this->csvToArray($file);
+
+	    for ($i = 0; $i < count($customerArr); $i ++)
+	    {
+	        // User::firstOrCreate($customerArr[$i]);
+	        $terisi = $customerArr[$i][0];
+	    }
+	    return $terisi;
+	    
+
+
 		$result 	= m_bank::array_to_db($array_data);
 		$result2 	= t_bank_data::array_to_db($array_data);
 			
