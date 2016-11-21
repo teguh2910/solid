@@ -18,8 +18,10 @@ use Libern\QRCodeReader\QRCodeReader;
 use Datatables;
 use App\m_bank;
 use App\t_bank_data;
+use App\m_vendor;
 
 
+use Excel;
 
 class HomeController extends Controller {
 
@@ -495,9 +497,13 @@ class HomeController extends Controller {
 }
 	public function invoice_print($id)
 	{
-		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.* from invoice inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
-			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank where invoice.id = "'.$id.'"');
+		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.*, m_vendors.* from invoice 
+			inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
+			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank 
+			inner join m_vendors on t_bank_datas.code_vendor = m_vendors.code_vendor
+			where invoice.id = "'.$id.'"');
 		 $result = new Collection($invoice);
+		 // return $id;
 		// return $invoice;
 	// $terbilang  = Terbilang::make($amount, ' rupiah');
 
@@ -594,8 +600,8 @@ class HomeController extends Controller {
 		$date 		= date('y');
 		$nomor 		= '';
 		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
-		$bank_datas = DB::select('select * from t_bank_datas group by vendor_name');
-		$part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
+		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
+		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
 			$nomor = $invoice->nomor;
 		}
@@ -609,7 +615,8 @@ class HomeController extends Controller {
 				$nomor = $date+'00000001';
 			}
 		}
-		return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
+		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
+		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 
 	public function part_bank($id){
@@ -664,34 +671,85 @@ class HomeController extends Controller {
 
     return $data;
 }
-
+	
 	public function import_vendor(){
-		$file 		= \Input::file('file');
-		$table 		= \Input::get('table');
-		$array_data = CsvHelper::csv_to_array($file);
-		$customerArr = $this->csvToArray($file);
+		try{
+			$file 		= \Input::file('file');
+			$table 		= \Input::get('table');
+		
+            Excel::load(\Input::file('file'), function ($reader) {
 
-	    for ($i = 0; $i < count($customerArr); $i ++)
-	    {
-	        // User::firstOrCreate($customerArr[$i]);
-	        $terisi = $customerArr[$i][0];
-	    }
-	    return $terisi;
-	    
+                foreach ($reader->toArray() as $row) {
+                	m_vendor::firstOrCreate($row);                   
+                }
+            });
 
-
-		$result 	= m_bank::array_to_db($array_data);
-		$result2 	= t_bank_data::array_to_db($array_data);
-			
-		if ($result == 1 ) {
 			\Session::flash('flash_type','alert-success');
 			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
-		} else {
+			
+			return redirect('master/upload');
+		}
+		catch (Exception $e){
 			\Session::flash('flash_type','alert-danger');
 			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
 		}
-		return redirect('master/upload');
 	}
+
+	//dev-3.0 , import master bank by yudo m
+	public function import_bank(){
+		try{
+			$file = \Input::file('file_bank');
+			$table = \Input::get('table');
+			// $array_data=CsvHelper::csv_to_array($file);
+			// $result=m_bank::array_to_db($array_data);
+			Excel::load(\Input::file('file_bank'), function ($reader) {
+
+	                foreach ($reader->toArray() as $row) {
+	                	m_bank::firstOrCreate($row);	                     
+                }
+            });
+			
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+			return redirect('master/upload');
+		}
+		catch(Exception $e){
+
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
+		}
+		
+	}
+
+		public function vendor_bank(){
+		try{
+			$file = \Input::file('file_vendor_bank');
+			$table = \Input::get('table');
+			// $array_data=CsvHelper::csv_to_array($file);
+			// $result=m_bank::array_to_db($array_data);
+			Excel::load(\Input::file('file_vendor_bank'), function ($reader) {
+
+	                foreach ($reader->toArray() as $row) {
+	                	t_bank_data::firstOrCreate($row);	                     
+	                }
+	            });
+				
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+			return redirect('master/upload');
+			}
+		catch(Exception $e){
+
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
+		}
+		
+	}
+
+
 
 	public function invoice_user_reject_list()
 	{

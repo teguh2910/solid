@@ -43,9 +43,81 @@
             {!! Form::close() !!}
           </div>
         </div>
+
+         <div class="row">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>DATA BANK</b></big></big></font>
+              </div>
+              <div class="panel-info">
+                <div class="panel-heading">
+                  <div class="panel-body">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('import/bank') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                      <div class="col-md-4">
+                        <input type="file" id="file_bank" name="file_bank" required>
+                      </div>
+                      <div class="col-md-12">
+                        <small>
+                          <font face='calibri'>Extension file harus <b>.csv</b>, didalam file <b>tidak boleh</b> ada karakter <b>koma ( , )</b>, koma diganti menjadi <b>titik ( . )</b></font>
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                          <span class='glyphicon glyphicon-import'></span>&nbsp;&nbsp;
+                          <font face='calibri'><b>IMPORT</b></font>
+                        </button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>VENDOR - BANK</b></big></big></font>
+              </div>
+              <div class="panel-info">
+                <div class="panel-heading">
+                  <div class="panel-body">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('import/vendor_bank') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                      <div class="col-md-4">
+                        <input type="file" id="file_vendor_bank" name="file_vendor_bank" required>
+                      </div>
+                      <div class="col-md-12">
+                        <small>
+                          <font face='calibri'>Extension file harus <b>.csv</b>, didalam file <b>tidak boleh</b> ada karakter <b>koma ( , )</b>, koma diganti menjadi <b>titik ( . )</b></font>
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                          <span class='glyphicon glyphicon-import'></span>&nbsp;&nbsp;
+                          <font face='calibri'><b>IMPORT</b></font>
+                        </button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+          </div>
+        </div>
         <!-- </div> -->
         <!-- <div class="col-md-6"> -->
-        <div class="row">
+    <!--     <div class="row">
           <div class="panel panel-success">
             <div class="panel-heading">
               <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>DATA INVOICE</b></big></big></font>
@@ -83,7 +155,7 @@
               </div>
             </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -252,13 +324,9 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Part Bank</b></font>
-                    <!-- <input type="text" class="form-control" name="vendor" id="vendor" required> -->
-                    <select class="form-control select2" name="part_bank" id="part_bank" style="width: 100%;" autofocus required>
-                      <option value="" selected>-Please Select-</option>
-                      @foreach ($part_bank as $k => $v)
-                      <option value="{{ $v->part_bank }}">{{ $v->part_bank }}</option>
-                      @endforeach
-                    </select>  
+                    
+                    <select class="form-control select2" name="part_bank" id="part_bank" style="width: 100%;" autofocus required>  
+                    </select>
                     <label id="test"></label>  
                   </div>
 
@@ -331,8 +399,28 @@
     var code_vendor ;
     var no_penerimaan = "";
     $("#code_vendor").change(function() {
-      code_vendor = $('option:selected', this).val();
-    });
+        code_vendor = $('option:selected', this).val();
+        var data = {
+            _token: '{{ csrf_token() }}',
+        };
+        $.ajax({
+          type: "POST",
+          data: {id: code_vendor, _token: "{{ csrf_token() }}"},
+          url :"{{ url('json/part_bank').'/'}}"+code_vendor,
+          dataType: 'json',
+          success: function(myData) {
+                 var $el = $("#part_bank");
+                $el.empty(); // remove old options
+                $el.append($("<option></option>")
+                    .attr("value", '').text('Please Select'));
+                $.each(myData, function(value, key) {
+                $el.append($("<option></option>")
+                    .attr("value", value.part_bank).text(key.part_bank));
+              });                              
+            }
+          });
+        });
+    // });
 
     $("#part_bank").change(function() {
          

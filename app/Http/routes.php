@@ -98,6 +98,8 @@ Route::post('json/account/{id}/{id2}','HomeController@account');
 Route::get('data','HomeController@data');
 Route::get('data_user','HomeController@data_user');
 Route::post('import/vendor','HomeController@import_vendor');
+Route::post('import/bank','HomeController@import_bank');
+Route::post('import/vendor_bank','HomeController@vendor_bank');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
