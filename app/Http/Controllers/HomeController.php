@@ -134,40 +134,7 @@ class HomeController extends Controller {
 		return view('invoice.add');
 	}
 
-	public function invoice_saving()
-	{		
-		date_default_timezone_set('Asia/Jakarta');
-		$date 		= date('Y-m-d H:i:s');
-		$input 		= \Input::all();
-		$account_no = $input['account_no2'];
-		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
-		foreach ($queries as $queries) {
-			$code_bank_data = $queries->id;
-		}
-		// return $account_no;
-		$invoice 					= new Invoice;
-		$invoice->no_penerimaan 	= $input['no_penerimaan'];
-		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['code_vendor'];
-		$invoice->tgl_terima 		= $input['tgl_terima'];
-		$invoice->doc_no 			= $input['doc_no'];
-		$invoice->description		= $input['description'];
-		$invoice->doc_date 			= $input['doc_date'];
-		$invoice->due_date 			= $input['due_date'];
-		$invoice->curr 				= $input['curr'];
-		$invoice->amount 			= $input['amount'];
-		// $invoice->doc_no_2 			= $input['doc_no_2'];
-		$invoice->tgl_input 		= $date;
-		$invoice->status 			= "1";
-		$invoice->no_po 			= $input['no_po'];
-		$invoice->code_bank_data	= $code_bank_data;
-		$invoice->save();
-		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Sukses, data invoice berhasil ditambahkan ke database');
-		return redirect('master/upload');
-
-	}
-
+	
 	public function invoice_user_list()
 	{
 		$user =\Auth::user();
@@ -619,14 +586,24 @@ class HomeController extends Controller {
 		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 
+	//dev-3.0 by yudo, json part_bank dropdown list
 	public function part_bank($id){
 		$invoice = DB::select('select part_bank from t_bank_datas where code_vendor = "'.$id.'"');
 		return $invoice;
 
 	}
 
+	//dev-3.0 by yudo, selected value di dropdown list
+	public function part_bank_selected($id,$id2){
+		$invoice = DB::select('select t_bank_datas.part_bank from t_bank_datas inner join invoice 
+			on t_bank_datas.id = invoice.code_bank_data where code_vendor = "'.$id.'" and invoice.id = "'.$id2.'"');
+		return $invoice;
+
+	}
+
+	//dev-3.0 by yudo, json data bank
 	public function account($id,$id2){
-		$invoice = DB::select('select t_bank_datas.code_bank, t_bank_datas.account_no, t_bank_datas.account_name, m_banks.bank_name from t_bank_datas inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank
+		$invoice = DB::select('select t_bank_datas.*, t_bank_datas.account_no, t_bank_datas.account_name, m_banks.bank_name from t_bank_datas inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank
 					where code_vendor = "'.$id.'" and part_bank = "'.$id2.'"');
 		return $invoice;
 
@@ -651,27 +628,27 @@ class HomeController extends Controller {
 	}
 
 	function csvToArray($filename = '', $delimiter = ',')
-{
-    if (!file_exists($filename) || !is_readable($filename))
-        return false;
+	{
+	    if (!file_exists($filename) || !is_readable($filename))
+	        return false;
 
-    $header = null;
-    $data = array();
-    if (($handle = fopen($filename, 'r')) !== false)
-    {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
-        {
-            if (!$header)
-                $header = $row;
-            else
-                $data[] = array_combine($header, $row);
-        }
-        fclose($handle);
-    }
-
-    return $data;
-}
+	    $header = null;
+	    $data = array();
+	    if (($handle = fopen($filename, 'r')) !== false)
+	    {
+	        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+	        {
+	            if (!$header)
+	                $header = $row;
+	            else
+	                $data[] = array_combine($header, $row);
+	        }
+	        fclose($handle);
+	    }
+	    return $data;
+	}
 	
+	//dev-3.0 by yudo, import vendor
 	public function import_vendor(){
 		try{
 			$file 		= \Input::file('file');
@@ -696,7 +673,7 @@ class HomeController extends Controller {
 		}
 	}
 
-	//dev-3.0 , import master bank by yudo m
+	//dev-3.0 by yudo, import master bank 
 	public function import_bank(){
 		try{
 			$file = \Input::file('file_bank');
@@ -723,7 +700,8 @@ class HomeController extends Controller {
 		
 	}
 
-		public function vendor_bank(){
+	//dev-3.0 by yudo, import vendor_bank
+	public function vendor_bank(){
 		try{
 			$file = \Input::file('file_vendor_bank');
 			$table = \Input::get('table');
@@ -900,26 +878,59 @@ class HomeController extends Controller {
 
 	public function invoice_update($id)
 	{
-		$invoice = Invoice::where('id',$id)->get();
-		return view('invoice.invoice_update', compact('invoice'));
+		// $invoice = Invoice::where('id',$id)->get();
+		//dev-3.0 by yudo, invoice update 
+		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.*, m_vendors.* from invoice 
+			inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
+			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank 
+			inner join m_vendors on t_bank_datas.code_vendor = m_vendors.code_vendor
+			where invoice.id = "'.$id.'"');
+
+		// $vendor  = m_vendor::lists('code_vendor','vendor_name');
+		$vendor = DB::select('select * from m_vendors group by vendor_name');
+		$vendor_selected = DB::select('select m_vendors.code_vendor from m_vendors inner join t_bank_datas
+			on m_vendors.code_vendor = t_bank_datas.code_vendor 
+			inner join invoice on invoice.code_bank_data = t_bank_datas.id where invoice.id = "'.$id.'"');
+		// $vendor_selected = $vendor->vendor_name->lists('id');
+		foreach ($vendor_selected as $vendor_selected) {
+			$selected = $vendor_selected->code_vendor;
+		}
+		return view('invoice.invoice_update', compact('invoice','vendor','selected','id'));
 	}
 
+	//dev-3.0 by yudo , update invoice
 	public function invoice_update_save()
 	{
+
 		$input 		= \Input::all();
-		$id 		= $input['id'];
+
+		date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$account_no = $input['account_no2'];
+		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		foreach ($queries as $queries) {
+			$code_bank_data = $queries->id;
+		}
+
+		$id 						= $input['id'];
 		$invoice 					= Invoice::findOrFail($id);
 		$invoice->no_penerimaan 	= $input['no_penerimaan'];
 		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['vendor'];
+		$invoice->vendor 			= $input['code_vendor'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->description		= $input['description'];
 		$invoice->doc_date 			= $input['doc_date'];
 		$invoice->due_date 			= $input['due_date'];
 		$invoice->curr 				= $input['curr'];
 		$invoice->amount 			= $input['amount'];
-		$invoice->doc_no_2 			= $input['doc_no_2'];
+		// $invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->tgl_input 		= $date;
+		$invoice->status 			= "1";
 		$invoice->no_po 			= $input['no_po'];
+		$invoice->code_bank_data	= $code_bank_data;
+
         $invoice->save();
         \Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data berhasil diubah');

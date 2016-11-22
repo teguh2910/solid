@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('invoice/input', 'HomeController@invoice_add');
 Route::post('invoice/saving', 'HomeController@invoice_saving');
+Route::post('invoice/update', 'HomeController@invoice_update');
 Route::get('invoice/user/list', 'HomeController@invoice_user_list');
 Route::get('invoice/user/reject/list', 'HomeController@invoice_user_reject_list');
 Route::get('invoice/user/check', 'HomeController@invoice_user_check');
@@ -93,6 +94,7 @@ Route::get('stock/print_master_part','StockController@print_master_part');
 
 
 Route::post('json/part_bank/{id}','HomeController@part_bank');
+Route::post('json/part_bank_selected/{id}/{id2}','HomeController@part_bank_selected');
 Route::post('json/account/{id}/{id2}','HomeController@account');
 
 Route::get('data','HomeController@data');

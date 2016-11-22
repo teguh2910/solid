@@ -8,7 +8,7 @@ class m_vendor extends Model
 {
     //
     protected $table ='m_vendors' ;
-	protected $fillable = ['code_vendor','category','vendor_name'];
+	protected $fillable = ['code_vendor','country','vendor_name'];
     
     // public static function array_to_db($array_data){
     //     $total=sizeof($array_data);
