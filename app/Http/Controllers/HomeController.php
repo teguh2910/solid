@@ -937,6 +937,44 @@ class HomeController extends Controller {
         return redirect('invoice/op');
 	}
 
+	public function invoice_saving()
+	{
+
+		$input 		= \Input::all();
+
+		date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$account_no = $input['account_no2'];
+		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		foreach ($queries as $queries) {
+			$code_bank_data = $queries->id;
+		}
+		$string = str_replace(',', '', $input['amount']);
+
+		$invoice 					= new Invoice;
+		$invoice->no_penerimaan 	= $input['no_penerimaan'];
+		$invoice->dept_code 		= $input['dept_code'];
+		$invoice->vendor 			= $input['code_vendor'];
+		$invoice->tgl_terima 		= $input['tgl_terima'];
+		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->description		= $input['description'];
+		$invoice->doc_date 			= $input['doc_date'];
+		$invoice->due_date 			= $input['due_date'];
+		$invoice->curr 				= $input['curr'];
+		$invoice->amount 			= $string;
+		// $invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->tgl_input 		= $date;
+		$invoice->status 			= "1";
+		$invoice->no_po 			= $input['no_po'];
+		$invoice->code_bank_data	= $code_bank_data;
+
+        $invoice->save();
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Sukses, data berhasil disimpan');
+        return redirect('invoice/op');
+	}
+
 	public function invoice_approval_detail($id)
 	{
 		$invoice = Invoice::where('id',$id)->get();
