@@ -44,6 +44,7 @@ Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
 Route::get('invoice/op/user', 'HomeController@invoice_op_user');
 Route::get('invoice/delete/{id}', 'HomeController@invoice_delete');
 Route::get('invoice/print/{id}', 'HomeController@invoice_print');
+Route::post('invoice_list/print', 'HomeController@invoice_list_print');
 Route::get('invoice/detail/{id}', 'HomeController@invoice_detail');
 Route::get('invoice/reject/user/{id}', 'HomeController@invoice_reject_user');
 Route::get('invoice/reject/fa/{id}', 'HomeController@invoice_reject_fa');

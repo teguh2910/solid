@@ -115,47 +115,49 @@
             {!! Form::close() !!}
           </div>
         </div>
-        <!-- </div> -->
-        <!-- <div class="col-md-6"> -->
-    <!--     <div class="row">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <font face='calibri'>IMPORT&nbsp;&nbsp;<big><big><b>DATA INVOICE</b></big></big></font>
-            </div>
-            <div class="panel-info">
+
+          <div class="row">
+            <div class="panel panel-success">
               <div class="panel-heading">
-                <div class="panel-body">
-                  {!! Form::open(['class' => 'form-horizontal', 'files' => true]) !!}
-                  <div class="form-group">
-                    <div class="col-md-4">
-                      <div style="position:relative;">
-                        <a class='btn btn-success btn-xs btn-flat' href='javascript:;'>
-                          <i class='glyphicon glyphicon-file'></i>&nbsp;
-                          <font face='calibri'><b>CHOOSE FILE</b></font>
-                          <input type="file" id="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());' required >
-                        </a>
-                        &nbsp;
-                        <span class='label label-info' id="upload-file-info"></span>
+                <font face='calibri'>EXPORT&nbsp;&nbsp;<big><big><b>INVOICE</b></big></big></font>
+              </div>
+              <div class="panel-info">
+                <div class="panel-heading">
+                  <div class="panel-body">
+                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('invoice_list/print') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <!-- <input type="file" id="file_vendor_bank" name="file_vendor_bank" required> -->
+                          <div class='input-group date mypicker' id='en_date'>
+                              <input type='text' class="form-control" name="ex_tgl_terima" id="ex_tgl_terima" readonly/>
+                              <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                        <small>
+                          <font face='calibri'>Extension file harus <b>.csv</b>, didalam file <b>tidak boleh</b> ada karakter <b>koma ( , )</b>, koma diganti menjadi <b>titik ( . )</b></font>
+                        </small>
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <small><font face='calibri'>Extension file harus <b>.csv</b>, didalam file <b>tidak boleh</b> ada karakter <b>koma ( , )</b>, koma diganti menjadi <b>titik ( . )</b></font></small>
+                    <div class="form-group">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                          <span class='glyphicon glyphicon-import'></span>&nbsp;&nbsp;
+                          <font face='calibri'><b>EXPORT</b></font>
+                        </button>
+                      </div>
                     </div>
+                    </form>
                   </div>
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <button type="submit" class="btn btn-primary btn-sm">
-                        <span class='glyphicon glyphicon-import'></span>&nbsp;&nbsp;
-                        <font face='calibri'><b>IMPORT</b></font>
-                      </button>
-                    </div>
-                  </div>
-                  {!! Form::close() !!}
                 </div>
-              </div>
             </div>
-            </div>
-          </div> -->
+            {!! Form::close() !!}
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -287,7 +289,13 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Curr</b></font>
-                    <input type="text" class="form-control" name="curr" id="curr"  required>
+                    <!-- <input type="text" class="form-control" name="curr" id="curr"  required> -->
+                    <select class="form-control" name="curr" id="curr" required>
+                          <option value="IDR">IDR</option>
+                          <option value="JPY">YEN</option>
+                          <option value="THB">BTH</option>
+                          <option value="USD">USD</option>
+                    </select>
                   </div>
                 </div>
 
@@ -385,7 +393,10 @@
 </div>
 <script type="text/javascript">
   $(function() {
-    
+    var today = new Date();
+    var nowDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+ 
+    $('#tgl_terima').val(nowDate);
     $('.mypicker').datepicker({
       format: "yyyy-m-d",
       autoclose: true,
@@ -393,12 +404,7 @@
     });
   });
 
-  // $(function(){
-  //   $("#amount").keyup(function(e){
-  //       $(this).val(format($(this).val()));
-  //   });
-// });
-  
+
 </script>
 
 <script type="text/javascript">

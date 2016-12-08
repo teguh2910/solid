@@ -462,17 +462,81 @@ class HomeController extends Controller {
     }     
     return $hasil;
 }
+
+	//dev-3.0, 20161207, by yudo, invoice list print
+	public function invoice_list_print(){
+
+		$input 	= \Input::all();
+		// $data   = array("no penerimaan", "department", "vendor", "tanggal terima", "doc_no","doc_date","due date", "curr", "amount", "no po");
+		$data   = array();
+
+		$data[] = array("no penerimaan", "department", "vendor", "tanggal terima", "doc_no","doc_date","due date", "curr", "amount", "no po");
+		$tgl_terima = $input['ex_tgl_terima'];
+
+
+		$invoice = DB::select('select * from invoice where tgl_terima = "'.$tgl_terima.'"');
+		$result = new Collection($invoice);
+
+            foreach($result as $result) {
+
+            	 $dept = $result->dept_code;
+            	 switch ($dept) {
+				    case "1":
+				        $deptName = "Purchasing & Exim";
+				        break;
+				    case "2":
+				        $deptName = "General Affair";
+				        break;
+				    case "3":
+				        $deptName = "BOD";
+				        break;
+				    case "5":
+				        $deptName = "HR";
+				        break;
+				    case "6":
+				        $deptName = "IT Development";
+				        break;
+				    case "11":
+				        $deptName = "IRL";
+				        break;
+				  
+				}
+               
+                 $data[] = array(
+                    $result->no_penerimaan,
+                    $deptName,
+                    $result->vendor,
+                    $result->tgl_terima,
+                    $result->doc_no,
+                    $result->doc_date,
+                    $result->due_date,
+                    $result->curr,
+                    $result->amount,
+                    $result->no_po
+                );
+            }
+
+            // return $data;
+
+           Excel::create('list_invoice', function($excel) use($data) {
+
+   				 $excel->sheet('Data', function($sheet) use($data) {
+        		 // $sheet->fromArray($data);
+        		 $sheet->fromArray($data, null, 'A1', false, false);
+    			 });
+			})->export('xls');
+
+	}
+	//dev-3.0 , 20161207, by yudo, invoice print
 	public function invoice_print($id)
 	{
+
 		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.*, m_vendors.* from invoice 
 			inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
 			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank 
 			inner join m_vendors on t_bank_datas.code_vendor = m_vendors.code_vendor
 			where invoice.id = "'.$id.'"');
 		 $result = new Collection($invoice);
-		 // return $id;
-		// return $invoice;
-	// $terbilang  = Terbilang::make($amount, ' rupiah');
 
 		
 		\Excel::load('/storage/template/tandaterima.xlsx', function($file) use($result){
@@ -496,6 +560,30 @@ class HomeController extends Controller {
 				$tgl2           = date("Y");
 			}
 
+		
+        	 switch ($curr) {
+			    case "IDR":
+			        $mata_uang1 = "RUPIAH";
+			        $mata_uang2 = "rupiah";
+			        $currency   = "Rp. ";
+			        break;
+			    case "JPY":
+			        $mata_uang1 = "YEN";
+			        $mata_uang2 = "yen";
+			        $currency   = "";
+			        break;
+			    case "THB":
+			        $mata_uang1 = "BATH";
+			        $mata_uang2 = "bath";
+			        $currency   = "";
+			        break;
+			    case "USD":
+			        $mata_uang1 = "dollar";
+			        $mata_uang2 = "DOLLAR";
+			        $currency   = "";
+			        break;		  
+			}
+
 		$terbilang = $this->terbilang($amount, 1);
 		$terbilang2 = $this->terbilang($amount, 2);
 		//tanda Terima
@@ -509,9 +597,9 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('L15',$curr." ".number_format($amount, "0", ".", "."));
 		$file->setActiveSheetIndex(0)->setCellValue('L18',$curr." ".number_format($amount, "0", ".", "."));
 		
-		$file->setActiveSheetIndex(0)->setCellValue('D20'," ".$terbilang." RUPIAH");
+		$file->setActiveSheetIndex(0)->setCellValue('D19', $terbilang." ".$mata_uang1);
 		$file->setActiveSheetIndex(0)->setCellValue('K22', $tgl);
-		$file->setActiveSheetIndex(0)->setCellValue('K24', $bank_name);
+		$file->setActiveSheetIndex(0)->setCellValue('K23', $bank_name);
 		$file->setActiveSheetIndex(0)->setCellValue('K25', $account_no);
 		$file->setActiveSheetIndex(0)->setCellValue('K26', $account_name);
 		$file->setActiveSheetIndex(0)->setCellValue('K27', $jatuh_tempo);
@@ -526,8 +614,8 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('A41', $keterangan);
 		$file->setActiveSheetIndex(0)->setCellValue('H41', $invoice);
 		$file->setActiveSheetIndex(0)->setCellValue('L41', number_format($amount, "0", ".", "."));
-		$file->setActiveSheetIndex(0)->setCellValue('C46'," ".$terbilang2." rupiah");
-		$file->setActiveSheetIndex(0)->setCellValue('L46', "Rp. ".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('C46', $terbilang2." ".$mata_uang2);
+		$file->setActiveSheetIndex(0)->setCellValue('L46', $currency.number_format($amount, "0", ".", "."));
 
 		$file->setActiveSheetIndex(0)->setCellValue('D50', $bank_code);
 		$file->setActiveSheetIndex(0)->setCellValue('D51', $account_no);
@@ -969,7 +1057,16 @@ class HomeController extends Controller {
 		$invoice->no_po 			= $input['no_po'];
 		$invoice->code_bank_data	= $code_bank_data;
 
+		
+
         $invoice->save();
+        $latestId 	= DB::select('select MAX(id) as id from invoice');
+       
+		foreach ($latestId as $latestId) {
+			$lastId = $latestId->id;
+		}
+		
+        $this->invoice_print($lastId);
         \Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data berhasil disimpan');
         return redirect('invoice/op');
