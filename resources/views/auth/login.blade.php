@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID v2.2 & ELNA v1.4</title>
+    <title>SOLID v2.0.3 & ELNA v1.4</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
@@ -29,19 +29,6 @@
           window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
         });
     </script>
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
-	
-   	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
-   	<script src="{{asset('/js/script.js')}}"></script>
-	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
-	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('/js/select2.full.min.js') }}"></script>
-
 </head>
 <body>
 	<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
@@ -53,15 +40,15 @@
 			@foreach ($errors->all() as $error)
                 	<div class="alert alert-danger alert-dismissible" role="alert">
                     	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    	<font face='calibri'><b>Error</b>, Invalid E-mail Address or Password</font>
+                    	<font face='calibri'><b>Error</b>, invalid E-Mail Address or Password</font>
                 	</div>
 			@endforeach
 		@endif	
-    <div class="box box-primary">
-        <div class="box-body">
+    <div class="panel panel-info">
+				<div class="panel-heading">
 					<center>
 						<font face='calibri'>
-							<big><big><big><big><b>WELCOME</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							<big><big><big><big><b>Welcome</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
 							<!-- Aisin Operational Invoice Document -->
 						</font><br/><br/>
 					</center>
@@ -69,24 +56,22 @@
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group has-feedback">
-							<label class="col-md-1 control-label">
+							<label class="col-md-2 control-label">
 							</label>
-							<div class="col-md-10">
-								<font face='calibri'><b>E-mail Address</b></font><br/>
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus required>
+							<div class="col-md-8">
+								<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
 							</div>
 						</div>
 						<div class="form-group has-feedback">
-							<label class="col-md-1 control-label">
+							<label class="col-md-2 control-label">
 							</label>
-							<div class="col-md-10">
-								<font face='calibri'><b>Password</b></font><br/>
-								<input type="password" class="form-control" name="password" required>
+							<div class="col-md-8">
+								<input type="password" class="form-control" name="password" placeholder="Password" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-md-10 col-md-offset-1">
-								<button class="btn btn-flat btn-sm btn-primary">
+							<div class="col-md-8 col-md-offset-2">
+								<button class="btn btn-flat btn-primary">
 									<i class='glyphicon glyphicon-lock'></i>&nbsp; 
 									<font face='calibri'><b>LOG IN</b></font>
 								</button>

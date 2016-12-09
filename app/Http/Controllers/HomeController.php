@@ -12,14 +12,6 @@ use Illuminate\Http\Request;
 use Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use Carbon\Carbon;
-use Libern\QRCodeReader\QRCodeReader;
-use Datatables;
-use App\m_bank;
-use App\t_bank_data;
-use App\m_vendor;
-
 class HomeController extends Controller {
 
 	/*
@@ -399,25 +391,13 @@ class HomeController extends Controller {
 
 	public function invoice_rtp_list()
 	{
-		// $user =\Auth::user();
-		// if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
-		// 	$invoice = Invoice::where('status','8')->orderby('id','DESC')->get();
-		// 	return view('invoice.rtp_list', compact('invoice'));
-		// } else {
-		// 	return redirect('invoice/rtp/user');
-		// }
-		$user = \Auth::user();
-		return view('invoice.rtp_list_2', compact('user'));
-	}
-
-	public function invoice_rtp_user()
-	{
-		$user = \Auth::user();
-		// $invoice = Invoice::where('status','8')
-		// 					->where('dept_code',$user->dept_code)
-		// 					->get();
-		// return view('invoice.rtp_list', compact('invoice'));
-		return view('invoice.rtp_list_2', compact('user'));
+		$user =\Auth::user();
+		if ($user->role == '4' || $user->role == '3' || $user->role == '2') {
+			$invoice = Invoice::where('status','8')->orderby('id','DESC')->get();
+			return view('invoice.rtp_list', compact('invoice'));
+		} else {
+			return redirect('invoice/rtp/user');
+		}
 	}
 
 	public function invoice_op_list()
@@ -663,24 +643,10 @@ class HomeController extends Controller {
         \Session::flash('flash_message','Sukses, data berhasil diubah');
         return redirect('invoice/op');
 	}
-
 	public function invoice_approval_detail($id)
 	{
 		$invoice = Invoice::where('id',$id)->get();
 		return view('invoice.invoice_approval_detail', compact('invoice'));
-	}
-
-	public function data() {
-		$test = Invoice::select(['no_penerimaan','dept_code','vendor','tgl_terima','doc_no','doc_date','due_date','curr','amount',
-			'doc_no_2','no_po','tgl_ready_to_pay'])->where('status','8');
-		return Datatables::of($test)->make();
-	}
-
-	public function data_user() {
-		$user = \Auth::user();
-		$test = Invoice::select(['no_penerimaan','vendor','tgl_terima','doc_no','doc_date','due_date','curr','amount',
-			'doc_no_2','no_po','tgl_ready_to_pay'])->where('status','8')->where('dept_code',$user->dept_code);
-		return Datatables::of($test)->make();
 	}
 
 }
