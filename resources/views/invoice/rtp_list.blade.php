@@ -24,7 +24,7 @@
                         <th><small><font face='calibri'>READY TO PAY</font></small></th>
                     </tr>
                 </thead>
-                <tbody>
+                <!-- <tbody>
             @if (count($invoice) > 0)
                 @foreach ($invoice as $invoice)
                 <tr class='info'>
@@ -69,7 +69,7 @@
                     <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
-                </tbody>
+                </tbody> -->
             </table>
         </div>
     </div>
