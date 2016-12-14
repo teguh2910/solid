@@ -90,6 +90,10 @@ Route::get('stock/print_report_plant','StockController@print_report_plant');
 Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
 
+Route::get('data','HomeController@data');
+Route::get('data_user','HomeController@data_user');
+Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

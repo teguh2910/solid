@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID v2.0.3 & ELNA v1.4</title>
+    <title>SOLID v2.2 & ELNA v1.4</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
@@ -30,6 +30,18 @@
         });
     </script>
 </head>
+<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/css/AdminLTE.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
+	
+   	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
+   	<script src="{{asset('/js/script.js')}}"></script>
+	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
+	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('/js/select2.full.min.js') }}"></script>
 <body>
 	<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
@@ -44,11 +56,11 @@
                 	</div>
 			@endforeach
 		@endif	
-    <div class="panel panel-info">
-				<div class="panel-heading">
+    <div class="box box-primary">
+        <div class="box-body">
 					<center>
 						<font face='calibri'>
-							<big><big><big><big><b>Welcome</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							<big><big><big><big><b>WELCOME</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
 							<!-- Aisin Operational Invoice Document -->
 						</font><br/><br/>
 					</center>

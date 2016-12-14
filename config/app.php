@@ -114,6 +114,7 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
+		'Yajra\Datatables\DatatablesServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Bus\BusServiceProvider',
