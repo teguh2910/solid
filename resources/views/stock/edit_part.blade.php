@@ -4,9 +4,9 @@
 <div class="container">
    <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><big><big><big><font face='calibri'><b>EDIT PART</b></font></big></big></big></div>
-        <div class="panel-info"><div class="panel-heading">
+      <div class="box box-primary">
+        <div class="box-body">
+          <big><big><big><font face='calibri'><b>UPDATE PART</b></font></big></big></big></div>
         <div class="panel-body">
          @if (count($m_part) > 0)
         @foreach ($m_part as $k => $v)             
@@ -14,9 +14,9 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
              <div class="form-group">
-              <div class="col-md-10">
+              <div class="col-md-5">
                 <font face='calibri'><b>ID Area</b></font><br/>  
-                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required >
+                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
                    <option selected disabled="">Select ID AREA </option>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}" required>{{ $m_area->id_area }}</option>
@@ -48,7 +48,7 @@
              
             <div class="form-group">
               <div class="col-md-3">
-                <font face='calibri'><b>Quantity Of Box</b></font><br/>
+                <font face='calibri'><b>Qty Of Box</b></font><br/>
                 <input type="text" class="form-control" name="qty_box" id="qty_box" value="{{$v->qty_box}}">
               </div>
             </div>
@@ -61,11 +61,13 @@
             </div>
             <div class="form-group">
               <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>UPDATE</b></font>
+                <button type="submit" class="btn btn-sm btn-primary">
+                  <span class='glyphicon glyphicon-floppy-saved'></span>
+                  &nbsp;<font face='calibri'><b>UPDATE</b></font>
                 </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
+                <button type="reset" class="btn btn-sm btn-danger">
+                  <span class='glyphicon glyphicon-repeat'></span>
+                  &nbsp;<font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>

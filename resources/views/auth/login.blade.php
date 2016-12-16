@@ -43,8 +43,8 @@
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
 <body>
-	<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
-<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
+
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 	<div class="col-md-5 col-md-offset-4">
@@ -52,7 +52,7 @@
 			@foreach ($errors->all() as $error)
                 	<div class="alert alert-danger alert-dismissible" role="alert">
                     	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    	<font face='calibri'><b>Error</b>, invalid E-Mail Address or Password</font>
+                    	<font face='calibri'><b>Error</b>, invalid E-mail Address or Password !</font>
                 	</div>
 			@endforeach
 		@endif	
@@ -71,6 +71,7 @@
 							<label class="col-md-2 control-label">
 							</label>
 							<div class="col-md-8">
+								<font face='calibri'><b>E-mail Address</b></font><br/>
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autofocus required>
 							</div>
 						</div>
@@ -78,12 +79,13 @@
 							<label class="col-md-2 control-label">
 							</label>
 							<div class="col-md-8">
+								<font face='calibri'><b>Password</b></font><br/>
 								<input type="password" class="form-control" name="password" placeholder="Password" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-8 col-md-offset-2">
-								<button class="btn btn-flat btn-primary">
+								<button class="btn btn-flat btn-sm btn-primary">
 									<i class='glyphicon glyphicon-lock'></i>&nbsp; 
 									<font face='calibri'><b>LOG IN</b></font>
 								</button>

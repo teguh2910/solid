@@ -83,7 +83,6 @@ Route::get('stock/view_list/2/{id}','StockController@view_list2');
 Route::get('stock/input_transaction/{id}','StockController@input_transaction');
 Route::post('stock/save_transaction','StockController@save_transaction');
 
-
 Route::get('stock/print_report','StockController@print_report');
 Route::post('stock/print_result','StockController@print_result');
 Route::get('stock/print_report_plant','StockController@print_report_plant');
@@ -93,6 +92,10 @@ Route::get('stock/print_master_part','StockController@print_master_part');
 Route::get('data','HomeController@data');
 Route::get('data_user','HomeController@data_user');
 Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
+
+Route::get('stock/view_transaction/inventory','StockController@view_transaction_inventory');
+Route::get('stock/input_transaction/inventory/{id}','StockController@input_transaction_inventory');
+Route::post('stock/save_transaction/inventory','StockController@save_transaction_inventory');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
