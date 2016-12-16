@@ -257,6 +257,13 @@ class StockController extends Controller {
 	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
 	 }
 
+	 public function view_transaction_inventory()
+	 {
+	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_transaksi')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->get();
+	 	return view('stock.view_transaction_inventory',compact('t_transaction'));
+	 }
 
 	public function view_list()
 	{  
@@ -287,6 +294,12 @@ class StockController extends Controller {
      	return view('stock.input_transaction',compact('t_transaction','m_part'));
 	}
 
+	public function input_transaction_inventory($id) {    
+        $m_part 		= m_part::all();
+	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	               
+     	return view('stock.input_transaction_inventory',compact('t_transaction','m_part'));
+	}
+
 	 public function save_transaction()
 	 {
         $input 		 = \Input::all();
@@ -314,6 +327,35 @@ class StockController extends Controller {
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data stock berhasil disimpan ke dalam sistem');
 	 	return redirect('stock/view_list/2/'.$id_area.'');  
+	 }
+
+	 public function save_transaction_inventory()
+	 {
+        $input 		 = \Input::all();
+        $id 		 = $input['id'];
+        $id_area 	 = $input['id_area'];
+        $qty_box 	 = $input['qty_box'];
+        $part_number = $input['part_number'];
+        if ($input['amount_box'] == 'null') {
+        	$b 			 = $input['amount_pcs'];
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_pcs	= $b;
+			$t_transaction->total_pcs   = $b;
+			$t_transaction->save();
+        } else {
+        	$a 			 = $input['amount_box'];
+       		$b 			 = $input['amount_pcs'];
+	       	$total1 	 = $a*$qty_box;
+	       	$total_pcs 	 = $total1+$b;
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_box  = $a;
+			$t_transaction->amount_pcs	= $b;
+			$t_transaction->total_pcs   = $total_pcs;
+			$t_transaction->save();
+        }
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Sukses, data stock berhasil disimpan ke dalam sistem');
+	 	return redirect('stock/view_transaction/inventory');  
 	 }
 
 	 public function print_report()

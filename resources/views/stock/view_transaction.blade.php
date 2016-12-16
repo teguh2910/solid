@@ -13,11 +13,13 @@
                 <font face='calibri'><b>CREATE TRANSACTION</b></font>
             </button>
             <br/><br/>
-            <table class="table table-hover table-bordered table-condensed">
+            <font face='calibri'><b>Keterangan :</b></font>&nbsp;&nbsp;<img src = {{ asset ('/img/biru.jpg')}} width='15px'><small><font face='calibri'> Belum di input</font></small>
+                &nbsp;&nbsp;&nbsp;&nbsp;<img src = {{ asset ('/img/abu.jpg')}} width='15px'><small><font face='calibri'> Sudah di input</font></small><br/><br/>
+            <table class="table table-bordered table-condensed">
                 <thead>
                     <tr bgcolor='#00008B'>
-                        <th><font face='calibri' color='white'>ID Area</font></th>
-                        <th><font face='calibri' color='white'>Back No</font></th>
+                        <th><font face='calibri' color='white'>Id Area</font></th>
+                        <th><font face='calibri' color='white'>Back Number</font></th>
                         <th><font face='calibri' color='white'>Part Number</font></th>
                         <th><font face='calibri' color='white'>Part Name</font></th>
                         <th><font face='calibri' color='white'>Qty / Box</font></th>
@@ -73,7 +75,7 @@
              
             <div class="form-group">
               <div class="col-md-7">
-                <font face='calibri'><b>ID Area</b></font><br/>
+                <font face='calibri'><b>Id Area</b></font><br/>
                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;" required>
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
@@ -105,7 +107,8 @@
     });
 
     $('table').dataTable({
-        "searching": true
+        "searching": true,
+        pageLength:20
     });
 </script>
 @endif

@@ -11,7 +11,7 @@
         </big></big></big>
       </div>
           <div class="panel-body"> 
-            <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction') }}">
+            <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_transaction/inventory') }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
                 <div class="col-md-9">

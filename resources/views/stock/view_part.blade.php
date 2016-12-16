@@ -23,10 +23,10 @@
              -->
             <!-- <a href="{{ url('/normalize/transaction') }}"><button class='btn btn-success btn-flat btn-sm'><font face='calibri'><b>NORMALIZE TRANSACTION</b></font></button></a>
              --><br/><br/>
-            <table class="table table-hover table-bordered table-condensed">
+            <table class="table table-bordered table-condensed">
                 <thead>
                     <tr bgcolor='#00008B'>
-                        <th><font face='calibri' color='white'>ID Area</font></th>
+                        <th><font face='calibri' color='white'>Id Area</font></th>
                         <th><font face='calibri' color='white'>Back Number</font></th>
                         <th><font face='calibri' color='white'>Part Number</font></th>
                         <th><font face='calibri' color='white'>Part Name</font></th>
@@ -121,8 +121,8 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
             <div class="form-group">
-              <div class="col-md-7">
-                <font face='calibri'><b>ID Area</b></font><br/>
+              <div class="col-md-4">
+                <font face='calibri'><b>Id Area</b></font><br/>
                 <select class="form-control select2" name="id_area" id="id_area" style="width: 100%;">
                    @foreach ($m_area as $m_area)  
                    <option value="{{ $m_area->id_area }}">{{ $m_area->id_area }}</option>
@@ -132,9 +132,9 @@
             </div>
 
             <div class="form-group">
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <font face='calibri'><b>Type Plant</b></font><br/>
-                 <select class="form-control select2" name="type_plant" id="type_plant">
+                 <select class="form-control select2" name="type_plant" id="type_plant" style="width: 100%;">
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
@@ -177,11 +177,13 @@
 
             <div class="form-group">
               <div class="col-md-8">
-                <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
+                <button type="submit" class="btn btn-sm btn-primary">
+                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
+                  <font face='calibri'><b>SAVE</b></font>
                 </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
+                <button type="reset" class="btn btn-sm btn-danger">
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;
+                  <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>
