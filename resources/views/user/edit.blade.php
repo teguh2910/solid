@@ -4,11 +4,10 @@
 <div class="container">
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <big><big><big><font face='calibri'><b>EDIT USER</b></font></big></big></big>
+      <div class="box box-primary">
+        <div class="box-body">
+          <big><big><big><font face='calibri'><b>UPDATE USER</b></font></big></big></big>
         </div>
-        <div class="panel-info"><div class="panel-heading">
         <div class="panel-body">
         <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/user/save_edit') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -31,7 +30,7 @@
             <div class="form-group">
               <div class="col-md-4">
                 <font face='calibri'><b>Department</b></font><br/>
-                <select class="form-control" name="dept_code" id="dept_code">
+                <select class="form-control select2" name="dept_code" id="dept_code" style="width: 100%;">
                     <option value="3">BOD</option>
                     <option value="4">Finance&Accounting</option>
                     <option value="2">General Affair</option>
@@ -50,7 +49,7 @@
             <div class="form-group">
               <div class="col-md-4">
                 <font face='calibri'><b>Access Role</b></font><br/>
-                <select class="form-control" name="role" id="role">
+                <select class="form-control select2" name="role" id="role" style="width: 100%;">
                      <option value="1">User</option>
                      <option value="2">Accounting</option>
                      <option value="3">Finance</option>
@@ -66,11 +65,11 @@
             @endforeach
             <div class="form-group">
               <div class="col-md-8">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-sm btn-primary">
                   <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
                   <font face='calibri'><b>UPDATE</b></font>
                 </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger">
+                <button type="reset" class="btn btn-sm btn-danger">
                   <span class='glyphicon glyphicon-repeat'></span>&nbsp;
                   <font face='calibri'><b>RESET</b></font>
                 </button>

@@ -3,36 +3,15 @@
 <div class="container-fluid">
     <div class="box box-primary">
         <div class="box-body">
-            @foreach ($check as $check)
-            <div class="col-lg-6">
-                <a href="{{ url('stock/view_transaction') }}">
-                    <button class='btn btn-xs btn-info'>
-                        <i class='glyphicon glyphicon-chevron-left'></i>&nbsp;<b>BACK TO DATA TRANSACTION</b>
-                    </button>
-                </a><br/><br/>
-                <div class="form-group">
-                    <div class="col-md-7">
-                        <font face='calibri'><b>Plant</b></font><br/>
-                        <input type='text' value="{{$check->type_plant}}" class="form-control" disabled>
-                    </div>
-                   <div class="col-md-7">
-                        <font face='calibri'><b>Code Area</b></font><br/>
-                        <input type='text' value="{{$check->code_area}}" class="form-control" disabled>
-                    </div>
-                   <div class="col-md-7">
-                        <font face='calibri'><b>Name Area</b></font><br/>
-                        <input type='text' value="{{$check->name_area}}" class="form-control" disabled>
-                    </div>
-                </div>
-            </div>
-            @endforeach
             <div class="col-lg-12">
-                <br/>
+                <big><big><big><font face='calibri' color='grey'><b>DATA TRANSACTION ALL</b></font></big></big></big>
+                <br/><br/>
                 <font face='calibri'><b>Keterangan :</b></font>&nbsp;&nbsp;<img src = {{ asset ('/img/biru.jpg')}} width='15px'><small><font face='calibri'> Belum di input</font></small>
                 &nbsp;&nbsp;&nbsp;&nbsp;<img src = {{ asset ('/img/abu.jpg')}} width='15px'><small><font face='calibri'> Sudah di input</font></small><br/><br/>
                 <table class="table table-bordered table-condensed">
                     <thead>
                         <tr bgcolor='#00008B'>
+                            <th><font face='calibri' color='white'>Id Area</font></th>
                             <th><font face='calibri' color='white'>Back Number</font></th>
                             <th><font face='calibri' color='white'>Part Number</font></th>
                             <th><font face='calibri' color='white'>Part Name</font></th>
@@ -52,6 +31,7 @@
                             @else
                                 <tr bgcolor='#A9A9A9'>
                             @endif
+                            <td><font face='calibri'>{{ $t_transaction->id_area }}</font></td>
                             <td><font face='calibri'>{{ $t_transaction->back_number }}</font></td>
                             <td><font face='calibri'>{{ $t_transaction->part_number }}</font></td>
                             <td><font face='calibri'>{{ $t_transaction->part_name }}</font></td>
@@ -62,7 +42,7 @@
                             <td><font face='calibri'>{{ $t_transaction->total_pcs }}</font></td>
                             <td class='warning'>
                                 <center>
-                                    <a href="{{ url('stock/input_transaction/'.$t_transaction->id) }}" 
+                                    <a href="{{ url('stock/input_transaction/inventory/'.$t_transaction->id_transaksi) }}" 
                                         class="btn btn-primary btn-xs" target="blank">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </a>            
@@ -95,7 +75,8 @@
     });
 
     $('table').dataTable({
-        "searching": true
+        "searching": true,
+        pageLength:20
     });
 </script>
 @endif

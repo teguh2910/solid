@@ -21,7 +21,7 @@
             <table  class="table table-condensed table-bordered">
                 <thead>
                     <tr bgcolor='#00008B'>
-                        <th><font face='calibri' color='white'>ID Area</font></th>
+                        <th><font face='calibri' color='white'>Id Area</font></th>
                         <th><font face='calibri' color='white'>Plant Type</font></th>
                         <th><font face='calibri' color='white'>Area Code</font></th>
                         <th><font face='calibri' color='white'>Area Name</font></th>
@@ -116,13 +116,10 @@
                     <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_area') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
-    
-           
-
             <div class="form-group">
-              <div class="col-md-7">
+              <div class="col-md-4">
                 <font face='calibri'><b>Plant</b></font><br/>
-               <select class="form-control select2" name="type_plant" id="type_plant">
+               <select class="form-control select2" name="type_plant" id="type_plant" style="width: 100%;">
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
@@ -143,7 +140,6 @@
                 </div>
               </div>
            
-
             <div class="form-group">
               <div class="col-md-8">
                 <font face='calibri'><b>PIC</b></font><br/>
@@ -151,7 +147,6 @@
               </div>
               </div>
             
-
             <div class="form-group">
               <div class="col-md-7">
                     <font face='calibri'><b>Contact</b></font><br/>
@@ -159,15 +154,15 @@
                </div>
               </div>
             
-
-
             <div class="form-group">
               <div class="col-md-8">
-                <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>SAVE</b></font>
+                <button type="submit" class="btn btn-sm btn-primary">
+                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
+                  <font face='calibri'><b>SAVE</b></font>
                 </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span> <font face='calibri'><b>RESET</b></font>
+                <button type="reset" class="btn btn-sm btn-danger">
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;
+                  <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>

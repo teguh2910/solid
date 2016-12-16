@@ -5,10 +5,9 @@
 <div class="container">
    <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <big><big><big><font face='calibri'><b>EDIT AREA</b></font></big></big></big></div>
-        <div class="panel-info"><div class="panel-heading">
+      <div class="box box-primary">
+        <div class="box-body">
+          <big><big><big><font face='calibri'><b>UPDATE AREA</b></font></big></big></big></div>
         <div class="panel-body">
          @if (count($m_area) > 0)
         @foreach ($m_area as $k => $v)             
@@ -18,10 +17,10 @@
           
 
             <div class="form-group">
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <font face='calibri'><b>Plant Type</b></font><br/>
                 <input type="hidden" name="id" value="{{ $v->id }}">
-                <select class="form-control" name="type_plant" id="type_plant">
+                <select class="form-control select2" name="type_plant" id="type_plant" style="width: 100%;">
                       <option value="UNIT">UNIT</option>
                       <option value="BODY">BODY</option>
                 </select>
@@ -61,11 +60,13 @@
 
             <div class="form-group">
               <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">
-                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;<font face='calibri'><b>UPDATE</b></font>
+                <button type="submit" class="btn btn-sm btn-primary">
+                  <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
+                  <font face='calibri'><b>UPDATE</b></font>
                 </button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger">
-                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;<font face='calibri'><b>RESET</b></font>
+                <button type="reset" class="btn btn-sm btn-danger">
+                  <span class='glyphicon glyphicon-repeat'></span>&nbsp;
+                  <font face='calibri'><b>RESET</b></font>
                 </button>
               </div>
             </div>

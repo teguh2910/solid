@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-	<title>ELNA v1.5.1</title>
+	<title>ELNA v1.5.2</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
 	<title>SOLID v2.2</title>
 	@else
@@ -43,8 +43,8 @@
 				</button>
 				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 				<a class="navbar-brand">
-					<font color='grey'><i class='glyphicon glyphicon-transfer'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.5.1</small></small></small></span>
+					<font color='grey'><i class='glyphicon glyphicon-heart'></i>&nbsp;</font>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v1.5.2</small></small></small></span>
 				</a>
 				@else 
 				<a class="navbar-brand">
@@ -120,6 +120,9 @@
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/view_transaction/inventory') }}"><font face='calibri'><b>TRANSACTION ALL</b></font></a></li>
 				</ul>
 				<!-- <ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
@@ -243,26 +246,29 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>Current Password</font></label>
+              <label class="col-md-1 control-label"></label>
               <div class="col-md-6">
+              	<font face='calibri' color='black'><b>Current Password</b></font><br/>
                 <input type="password" class="form-control" name="password1" id="password1" autofocus required>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>New Password</font></label>
+              <label class="col-md-1 control-label"></label>
               <div class="col-md-6">
+              	<font face='calibri' color='black'><b>New Password</b></font><br/>
                 <input type="password" class="form-control" name="password2" id="password2" required>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label"><font face='calibri'>Confirm New Password</font></label>
+              <label class="col-md-1 control-label"></label>
               <div class="col-md-6">
+              	<font face='calibri' color='black'><b>Confirm New Password</b></font><br/>
                 <input type="password" class="form-control" name="password3" id="password3" required>
               </div>
             </div>
 
             <div class="form-group">
-              <div class="col-md-6 col-md-offset-4">
+              <div class="col-md-6 col-md-offset-1">
                 <button type="submit" class="btn btn-primary btn-flat">
                   <span class='glyphicon glyphicon-floppy-saved'></span> <font face='calibri'><b>UPDATE</b></font>
                 </button>
