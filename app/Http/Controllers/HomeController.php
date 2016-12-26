@@ -557,7 +557,7 @@ class HomeController extends Controller {
 				$account_name  = $result->account_name;
 				$jatuh_tempo   = $result->due_date;
 				$tgl           = date("Y-m-d");
-				$tgl2           = date("Y");
+				$tgl2          = date("Y");
 			}
 
 		
@@ -570,17 +570,17 @@ class HomeController extends Controller {
 			    case "JPY":
 			        $mata_uang1 = "YEN";
 			        $mata_uang2 = "yen";
-			        $currency   = "";
+			        $currency   = "'";
 			        break;
 			    case "THB":
 			        $mata_uang1 = "BATH";
 			        $mata_uang2 = "bath";
-			        $currency   = "";
+			        $currency   = "'";
 			        break;
 			    case "USD":
-			        $mata_uang1 = "dollar";
-			        $mata_uang2 = "DOLLAR";
-			        $currency   = "";
+			        $mata_uang1 = "DOLLAR";
+			        $mata_uang2 = "dollar";
+			        $currency   = "'";
 			        break;		  
 			}
 
@@ -591,6 +591,7 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('D11', $no_penerimaan);
 		$file->setActiveSheetIndex(0)->setCellValue('I7', $no_penerimaan);
 		$file->setActiveSheetIndex(0)->setCellValue('D12',$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('C27', \Auth::user()->name);
 		$file->setActiveSheetIndex(0)->setCellValue('H15',$keterangan);
 		$file->setActiveSheetIndex(0)->setCellValue('B15',$invoice);
 		$file->setActiveSheetIndex(0)->setCellValue('F15',$tanggal);
@@ -610,12 +611,14 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('E37', $tgl2."/".$no_penerimaan);
 		$file->setActiveSheetIndex(0)->setCellValue('c38', $code_vendor."/".$vendor_name);
 		$file->setActiveSheetIndex(0)->setCellValue('J38', $curr);
-		$file->setActiveSheetIndex(0)->setCellValue('L38', number_format($amount, "0", ".", "."));
+		// $file->setActiveSheetIndex(0)->setCellValue('L38', "'".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L38', $amount);
 		$file->setActiveSheetIndex(0)->setCellValue('A41', $keterangan);
 		$file->setActiveSheetIndex(0)->setCellValue('H41', $invoice);
-		$file->setActiveSheetIndex(0)->setCellValue('L41', number_format($amount, "0", ".", "."));
+		// $file->setActiveSheetIndex(0)->setCellValue('L41', "'".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L41', $amount);
 		$file->setActiveSheetIndex(0)->setCellValue('C46', $terbilang2." ".$mata_uang2);
-		$file->setActiveSheetIndex(0)->setCellValue('L46', $currency.number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L46', $amount);
 
 		$file->setActiveSheetIndex(0)->setCellValue('D50', $bank_code);
 		$file->setActiveSheetIndex(0)->setCellValue('D51', $account_no);

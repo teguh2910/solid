@@ -293,7 +293,7 @@
                     <select class="form-control" name="curr" id="curr" required>
                           <option value="IDR">IDR</option>
                           <option value="JPY">YEN</option>
-                          <option value="THB">BTH</option>
+                          <option value="THB">THB</option>
                           <option value="USD">USD</option>
                     </select>
                   </div>
