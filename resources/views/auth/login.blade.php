@@ -17,7 +17,8 @@
 }    </style>
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src='{{ asset("js/bootstrap.min.js") }}'></script>
-    <script type="text/javascript">
+    	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+        <script type="text/javascript">
         window.alert = function(){};
         var defaultCSS = document.getElementById('bootstrap-css');
         function changeCSS(css){
@@ -26,9 +27,9 @@
         }
         $( document ).ready(function() {
           var iframe_height = parseInt($('html').height()); 
-          window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
+          // window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
         });
-    </script>
+        </script>
 </head>
 <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -43,8 +44,13 @@
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
 <body>
+
 <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 
+
+
+<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+>>>>>>> feature/print-invoice
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 	<div class="col-md-5 col-md-offset-4">
@@ -52,7 +58,11 @@
 			@foreach ($errors->all() as $error)
                 	<div class="alert alert-danger alert-dismissible" role="alert">
                     	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
                     	<font face='calibri'><b>Error</b>, invalid E-mail Address or Password !</font>
+
+                    	<font face='calibri'><b>Error</b>, invalid E-mail Address or Password</font>
+
                 	</div>
 			@endforeach
 		@endif	
@@ -60,8 +70,13 @@
         <div class="box-body">
 					<center>
 						<font face='calibri'>
+
 							<big><big><big><big><b>WELCOME</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
 							<!-- Aisin Operational Invoice Document -->
+
+							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							&nbsp;<small><b>v3.0</b></small>
+
 						</font><br/><br/>
 					</center>
 

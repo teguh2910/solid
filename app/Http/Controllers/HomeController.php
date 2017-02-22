@@ -12,10 +12,18 @@ use Illuminate\Http\Request;
 use Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//dev
+
+
 use Carbon\Carbon;
 use Libern\QRCodeReader\QRCodeReader;
 use Datatables;
+use App\m_bank;
+use App\t_bank_data;
+use App\m_vendor;
+
+
+use Excel;
+
 
 class HomeController extends Controller {
 
@@ -35,6 +43,7 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
+	
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -127,32 +136,7 @@ class HomeController extends Controller {
 		return view('invoice.add');
 	}
 
-	public function invoice_saving()
-	{		
-		date_default_timezone_set('Asia/Jakarta');
-		$date 		= date('Y-m-d H:i:s');
-		$input 		= \Input::all();
-		$invoice 					= new Invoice;
-		$invoice->no_penerimaan 	= $input['no_penerimaan'];
-		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['vendor'];
-		$invoice->tgl_terima 		= $input['tgl_terima'];
-		$invoice->doc_no 			= $input['doc_no'];
-		$invoice->doc_date 			= $input['doc_date'];
-		$invoice->due_date 			= $input['due_date'];
-		$invoice->curr 				= $input['curr'];
-		$invoice->amount 			= $input['amount'];
-		$invoice->doc_no_2 			= $input['doc_no_2'];
-		$invoice->tgl_input 		= $date;
-		$invoice->status 			= "1";
-		$invoice->no_po 			= $input['no_po'];
-		$invoice->save();
-		\Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Sukses, data invoice berhasil ditambahkan ke database');
-		return redirect('master/upload');
-
-	}
-
+	
 	public function invoice_user_list()
 	{
 		$user =\Auth::user();
@@ -427,6 +411,226 @@ class HomeController extends Controller {
 		// 					->get();
 		// return view('invoice.rtp_list', compact('invoice'));
 		return view('invoice.rtp_list_2', compact('user'));
+
+	}
+
+	function kekata($x) {
+    $x = abs($x);
+    $angka = array("", "satu", "dua", "tiga", "empat", "lima",
+    "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+    $temp = "";
+    if ($x <12) {
+        $temp = " ". $angka[$x];
+    } else if ($x <20) {
+        $temp = $this->kekata($x - 10). " belas";
+    } else if ($x <100) {
+        $temp = $this->kekata($x/10)." puluh". $this->kekata($x % 10);
+    } else if ($x <200) {
+        $temp = " seratus" . $this->kekata($x - 100);
+    } else if ($x <1000) {
+        $temp = $this->kekata($x/100) . " ratus" . $this->kekata($x % 100);
+    } else if ($x <2000) {
+        $temp = " seribu" . $this->kekata($x - 1000);
+    } else if ($x <1000000) {
+        $temp = $this->kekata($x/1000) . " ribu" . $this->kekata($x % 1000);
+    } else if ($x <1000000000) {
+        $temp = $this->kekata($x/1000000) . " juta" . $this->kekata($x % 1000000);
+    } else if ($x <1000000000000) {
+        $temp = $this->kekata($x/1000000000) . " milyar" . $this->kekata(fmod($x,1000000000));
+    } else if ($x <1000000000000000) {
+        $temp = $this->kekata($x/1000000000000) . " trilyun" . $this->kekata(fmod($x,1000000000000));
+    }     
+        return $temp;
+}
+
+	function terbilang($x, $style=4) {
+    if($x<0) {
+        $hasil = "minus ". trim($this->kekata($x));
+    } else {
+        $hasil = trim($this->kekata($x));
+    }     
+    switch ($style) {
+        case 1:
+            $hasil = strtoupper($hasil);
+            break;
+        case 2:
+            $hasil = strtolower($hasil);
+            break;
+        case 3:
+            $hasil = ucwords($hasil);
+            break;
+        default:
+            $hasil = ucfirst($hasil);
+            break;
+    }     
+    return $hasil;
+}
+
+	//dev-3.0, 20161207, by yudo, invoice list print
+	public function invoice_list_print(){
+
+		$input 	= \Input::all();
+		// $data   = array("no penerimaan", "department", "vendor", "tanggal terima", "doc_no","doc_date","due date", "curr", "amount", "no po");
+		$data   = array();
+
+		$data[] = array("no penerimaan", "department", "vendor", "tanggal terima", "doc_no","doc_date","due date", "curr", "amount", "no po");
+		$tgl_terima = $input['ex_tgl_terima'];
+
+
+		$invoice = DB::select('select * from invoice where tgl_terima = "'.$tgl_terima.'"');
+		$result = new Collection($invoice);
+
+            foreach($result as $result) {
+
+            	 $dept = $result->dept_code;
+            	 switch ($dept) {
+				    case "1":
+				        $deptName = "Purchasing & Exim";
+				        break;
+				    case "2":
+				        $deptName = "General Affair";
+				        break;
+				    case "3":
+				        $deptName = "BOD";
+				        break;
+				    case "5":
+				        $deptName = "HR";
+				        break;
+				    case "6":
+				        $deptName = "IT Development";
+				        break;
+				    case "11":
+				        $deptName = "IRL";
+				        break;
+				  
+				}
+               
+                 $data[] = array(
+                    $result->no_penerimaan,
+                    $deptName,
+                    $result->vendor,
+                    $result->tgl_terima,
+                    $result->doc_no,
+                    $result->doc_date,
+                    $result->due_date,
+                    $result->curr,
+                    $result->amount,
+                    $result->no_po
+                );
+            }
+
+            // return $data;
+
+           Excel::create('list_invoice', function($excel) use($data) {
+
+   				 $excel->sheet('Data', function($sheet) use($data) {
+        		 // $sheet->fromArray($data);
+        		 $sheet->fromArray($data, null, 'A1', false, false);
+    			 });
+			})->export('xls');
+
+	}
+	//dev-3.0 , 20161207, by yudo, invoice print
+	public function invoice_print($id)
+	{
+
+		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.*, m_vendors.* from invoice 
+			inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
+			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank 
+			inner join m_vendors on t_bank_datas.code_vendor = m_vendors.code_vendor
+			where invoice.id = "'.$id.'"');
+		 $result = new Collection($invoice);
+
+		
+		\Excel::load('/storage/template/tandaterima.xlsx', function($file) use($result){
+
+			foreach ($result as $result) {
+			
+				$no_penerimaan = $result->no_penerimaan;
+				$code_vendor   = $result->code_vendor;
+				$vendor_name   = $result->vendor_name;
+				$invoice 	   = $result->doc_no;
+				$tanggal 	   = $result->doc_date;
+				$keterangan    = $result->description;
+				$curr          = $result->curr;
+				$amount        = $result->amount;
+				$bank_code     = $result->code_bank;
+				$bank_name     = $result->bank_name;
+				$account_no    = $result->account_no;
+				$account_name  = $result->account_name;
+				$jatuh_tempo   = $result->due_date;
+				$tgl           = date("Y-m-d");
+				$tgl2          = date("Y");
+			}
+
+		
+        	 switch ($curr) {
+			    case "IDR":
+			        $mata_uang1 = "RUPIAH";
+			        $mata_uang2 = "rupiah";
+			        $currency   = "Rp. ";
+			        break;
+			    case "JPY":
+			        $mata_uang1 = "YEN";
+			        $mata_uang2 = "yen";
+			        $currency   = "'";
+			        break;
+			    case "THB":
+			        $mata_uang1 = "BATH";
+			        $mata_uang2 = "bath";
+			        $currency   = "'";
+			        break;
+			    case "USD":
+			        $mata_uang1 = "DOLLAR";
+			        $mata_uang2 = "dollar";
+			        $currency   = "'";
+			        break;		  
+			}
+
+		$terbilang = $this->terbilang($amount, 1);
+		$terbilang2 = $this->terbilang($amount, 2);
+		//tanda Terima
+		$file->setActiveSheetIndex(0)->setCellValue('K9', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('D11', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('I7', $no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('D12',$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('C27', \Auth::user()->name);
+		$file->setActiveSheetIndex(0)->setCellValue('H15',$keterangan);
+		$file->setActiveSheetIndex(0)->setCellValue('B15',$invoice);
+		$file->setActiveSheetIndex(0)->setCellValue('F15',$tanggal);
+		$file->setActiveSheetIndex(0)->setCellValue('L15',$curr." ".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L18',$curr." ".number_format($amount, "0", ".", "."));
+		
+		$file->setActiveSheetIndex(0)->setCellValue('D19', $terbilang." ".$mata_uang1);
+		$file->setActiveSheetIndex(0)->setCellValue('K22', $tgl);
+		$file->setActiveSheetIndex(0)->setCellValue('K23', $bank_name);
+		$file->setActiveSheetIndex(0)->setCellValue('K25', $account_no);
+		$file->setActiveSheetIndex(0)->setCellValue('K26', $account_name);
+		$file->setActiveSheetIndex(0)->setCellValue('K27', $jatuh_tempo);
+		
+
+		//invoice verification voucher
+		$file->setActiveSheetIndex(0)->setCellValue('K35', $tgl);
+		$file->setActiveSheetIndex(0)->setCellValue('E37', $tgl2."/".$no_penerimaan);
+		$file->setActiveSheetIndex(0)->setCellValue('c38', $code_vendor."/".$vendor_name);
+		$file->setActiveSheetIndex(0)->setCellValue('J38', $curr);
+		// $file->setActiveSheetIndex(0)->setCellValue('L38', "'".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L38', $amount);
+		$file->setActiveSheetIndex(0)->setCellValue('A41', $keterangan);
+		$file->setActiveSheetIndex(0)->setCellValue('H41', $invoice);
+		// $file->setActiveSheetIndex(0)->setCellValue('L41', "'".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L41', $amount);
+		$file->setActiveSheetIndex(0)->setCellValue('C46', $terbilang2." ".$mata_uang2);
+		$file->setActiveSheetIndex(0)->setCellValue('L46', $amount);
+
+		$file->setActiveSheetIndex(0)->setCellValue('D50', $bank_code);
+		$file->setActiveSheetIndex(0)->setCellValue('D51', $account_no);
+		$file->setActiveSheetIndex(0)->setCellValue('D52', $account_name);
+
+		$file->setActiveSheetIndex(0)->setCellValue('L51', $jatuh_tempo);
+
+		})->download('xlsx');
+
 	}
 
 	public function invoice_op_user()
@@ -454,8 +658,50 @@ class HomeController extends Controller {
 		return redirect('invoice/pending/list');
 	}
 
-	public function upload_master(){
-		return view('invoice.upload');
+	public function upload_master() {
+		$date 		= date('y');
+		$nomor 		= '';
+		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
+		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
+		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
+		foreach ($invoice as $invoice) {
+			$nomor = $invoice->nomor;
+		}
+		$getNomor = substr($nomor, 0,2);
+		if ($nomor == '' || $nomor == null){
+			$nomor = $date+'00000001';
+		} else {
+			if($getNomor == $date) {
+				$nomor = $nomor+1;
+			} else {
+				$nomor = $date+'00000001';
+			}
+		}
+		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
+		return view('invoice.upload', compact('nomor','bank_datas'));
+	}
+
+	//dev-3.0 by yudo, json part_bank dropdown list
+	public function part_bank($id){
+		$invoice = DB::select('select part_bank from t_bank_datas where code_vendor = "'.$id.'"');
+		return $invoice;
+
+	}
+
+	//dev-3.0 by yudo, selected value di dropdown list
+	public function part_bank_selected($id,$id2){
+		$invoice = DB::select('select t_bank_datas.part_bank from t_bank_datas inner join invoice 
+			on t_bank_datas.id = invoice.code_bank_data where code_vendor = "'.$id.'" and invoice.id = "'.$id2.'"');
+		return $invoice;
+
+	}
+
+	//dev-3.0 by yudo, json data bank
+	public function account($id,$id2){
+		$invoice = DB::select('select t_bank_datas.*, t_bank_datas.account_no, t_bank_datas.account_name, m_banks.bank_name from t_bank_datas inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank
+					where code_vendor = "'.$id.'" and part_bank = "'.$id2.'"');
+		return $invoice;
+
 	}
 
 	public function Upload(){
@@ -475,6 +721,108 @@ class HomeController extends Controller {
 		}
 		return redirect('master/upload');
 	}
+
+	function csvToArray($filename = '', $delimiter = ',')
+	{
+	    if (!file_exists($filename) || !is_readable($filename))
+	        return false;
+
+	    $header = null;
+	    $data = array();
+	    if (($handle = fopen($filename, 'r')) !== false)
+	    {
+	        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+	        {
+	            if (!$header)
+	                $header = $row;
+	            else
+	                $data[] = array_combine($header, $row);
+	        }
+	        fclose($handle);
+	    }
+	    return $data;
+	}
+	
+	//dev-3.0 by yudo, import vendor
+	public function import_vendor(){
+		try{
+			$file 		= \Input::file('file');
+			$table 		= \Input::get('table');
+		
+            Excel::load(\Input::file('file'), function ($reader) {
+
+                foreach ($reader->toArray() as $row) {
+                	m_vendor::firstOrCreate($row);                   
+                }
+            });
+
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+			
+			return redirect('master/upload');
+		}
+		catch (Exception $e){
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
+		}
+	}
+
+	//dev-3.0 by yudo, import master bank 
+	public function import_bank(){
+		try{
+			$file = \Input::file('file_bank');
+			$table = \Input::get('table');
+			// $array_data=CsvHelper::csv_to_array($file);
+			// $result=m_bank::array_to_db($array_data);
+			Excel::load(\Input::file('file_bank'), function ($reader) {
+
+	                foreach ($reader->toArray() as $row) {
+	                	m_bank::firstOrCreate($row);	                     
+                }
+            });
+			
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+			return redirect('master/upload');
+		}
+		catch(Exception $e){
+
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
+		}
+		
+	}
+
+	//dev-3.0 by yudo, import vendor_bank
+	public function vendor_bank(){
+		try{
+			$file = \Input::file('file_vendor_bank');
+			$table = \Input::get('table');
+			// $array_data=CsvHelper::csv_to_array($file);
+			// $result=m_bank::array_to_db($array_data);
+			Excel::load(\Input::file('file_vendor_bank'), function ($reader) {
+
+	                foreach ($reader->toArray() as $row) {
+	                	t_bank_data::firstOrCreate($row);	                     
+	                }
+	            });
+				
+			\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, data berhasil diimport ke database');
+			return redirect('master/upload');
+			}
+		catch(Exception $e){
+
+			\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message','Error, tidak ada data yang disimpan');
+			return redirect('master/upload');
+		}
+		
+	}
+
+
 
 	public function invoice_user_reject_list()
 	{
@@ -625,31 +973,112 @@ class HomeController extends Controller {
 
 	public function invoice_update($id)
 	{
-		$invoice = Invoice::where('id',$id)->get();
-		return view('invoice.invoice_update', compact('invoice'));
+		// $invoice = Invoice::where('id',$id)->get();
+		//dev-3.0 by yudo, invoice update 
+		$invoice = DB::select('select invoice.*, t_bank_datas.*, m_banks.*, m_vendors.* from invoice 
+			inner join t_bank_datas on invoice.code_bank_data = t_bank_datas.id 
+			inner join m_banks on t_bank_datas.code_bank = m_banks.code_bank 
+			inner join m_vendors on t_bank_datas.code_vendor = m_vendors.code_vendor
+			where invoice.id = "'.$id.'"');
+
+		// $vendor  = m_vendor::lists('code_vendor','vendor_name');
+		$vendor = DB::select('select * from m_vendors group by vendor_name');
+		$vendor_selected = DB::select('select m_vendors.code_vendor from m_vendors inner join t_bank_datas
+			on m_vendors.code_vendor = t_bank_datas.code_vendor 
+			inner join invoice on invoice.code_bank_data = t_bank_datas.id where invoice.id = "'.$id.'"');
+		// $vendor_selected = $vendor->vendor_name->lists('id');
+		foreach ($vendor_selected as $vendor_selected) {
+			$selected = $vendor_selected->code_vendor;
+		}
+		return view('invoice.invoice_update', compact('invoice','vendor','selected','id'));
 	}
 
+	//dev-3.0 by yudo , update invoice
 	public function invoice_update_save()
 	{
+
 		$input 		= \Input::all();
-		$id 		= $input['id'];
+
+		date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$account_no = $input['account_no2'];
+		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		foreach ($queries as $queries) {
+			$code_bank_data = $queries->id;
+		}
+
+		$id 						= $input['id'];
 		$invoice 					= Invoice::findOrFail($id);
 		$invoice->no_penerimaan 	= $input['no_penerimaan'];
 		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['vendor'];
+		$invoice->vendor 			= $input['code_vendor'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->description		= $input['description'];
 		$invoice->doc_date 			= $input['doc_date'];
 		$invoice->due_date 			= $input['due_date'];
 		$invoice->curr 				= $input['curr'];
 		$invoice->amount 			= $input['amount'];
-		$invoice->doc_no_2 			= $input['doc_no_2'];
+		// $invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->tgl_input 		= $date;
+		$invoice->status 			= "1";
 		$invoice->no_po 			= $input['no_po'];
+		$invoice->code_bank_data	= $code_bank_data;
+
         $invoice->save();
         \Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, data berhasil diubah');
         return redirect('invoice/op');
 	}
+
+	public function invoice_saving()
+	{
+
+		$input 		= \Input::all();
+
+		date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$account_no = $input['account_no2'];
+		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		foreach ($queries as $queries) {
+			$code_bank_data = $queries->id;
+		}
+		$string = str_replace(',', '', $input['amount']);
+
+		$invoice 					= new Invoice;
+		$invoice->no_penerimaan 	= $input['no_penerimaan'];
+		$invoice->dept_code 		= $input['dept_code'];
+		$invoice->vendor 			= $input['code_vendor'];
+		$invoice->tgl_terima 		= $input['tgl_terima'];
+		$invoice->doc_no 			= $input['doc_no'];
+		$invoice->description		= $input['description'];
+		$invoice->doc_date 			= $input['doc_date'];
+		$invoice->due_date 			= $input['due_date'];
+		$invoice->curr 				= $input['curr'];
+		$invoice->amount 			= $string;
+		// $invoice->doc_no_2 			= $input['doc_no_2'];
+		$invoice->tgl_input 		= $date;
+		$invoice->status 			= "1";
+		$invoice->no_po 			= $input['no_po'];
+		$invoice->code_bank_data	= $code_bank_data;
+
+		
+
+        $invoice->save();
+        $latestId 	= DB::select('select MAX(id) as id from invoice');
+       
+		foreach ($latestId as $latestId) {
+			$lastId = $latestId->id;
+		}
+		
+        $this->invoice_print($lastId);
+        \Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Sukses, data berhasil disimpan');
+        return redirect('invoice/op');
+	}
+
 	public function invoice_approval_detail($id)
 	{
 		$invoice = Invoice::where('id',$id)->get();

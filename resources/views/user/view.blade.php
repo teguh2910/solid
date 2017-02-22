@@ -11,7 +11,7 @@
                     </button>
                     <br/>
                 	<div class="clearfix">&nbsp;</div>
-                        <table class="table table-hover table-bordered table-condensed">
+                        <table class="table table-bordered table-condensed">
                         <thead>
                             <tr bgcolor='#00008B'>
                                 <th><font face='calibri' color='white'>Username</font></th>

@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('invoice/input', 'HomeController@invoice_add');
 Route::post('invoice/saving', 'HomeController@invoice_saving');
+Route::post('invoice/update', 'HomeController@invoice_update');
 Route::get('invoice/user/list', 'HomeController@invoice_user_list');
 Route::get('invoice/user/reject/list', 'HomeController@invoice_user_reject_list');
 Route::get('invoice/user/check', 'HomeController@invoice_user_check');
@@ -42,6 +43,8 @@ Route::post('master/upload','HomeController@upload');
 Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
 Route::get('invoice/op/user', 'HomeController@invoice_op_user');
 Route::get('invoice/delete/{id}', 'HomeController@invoice_delete');
+Route::get('invoice/print/{id}', 'HomeController@invoice_print');
+Route::post('invoice_list/print', 'HomeController@invoice_list_print');
 Route::get('invoice/detail/{id}', 'HomeController@invoice_detail');
 Route::get('invoice/reject/user/{id}', 'HomeController@invoice_reject_user');
 Route::get('invoice/reject/fa/{id}', 'HomeController@invoice_reject_fa');
@@ -89,13 +92,26 @@ Route::get('stock/print_report_plant','StockController@print_report_plant');
 Route::post('stock/print_plant_result','StockController@print_plant_result');
 Route::get('stock/print_master_part','StockController@print_master_part');
 
-Route::get('data','HomeController@data');
-Route::get('data_user','HomeController@data_user');
+
+// Route::get('data','HomeController@data');
+// Route::get('data_user','HomeController@data_user');
 Route::get('invoice/rtp/user', 'HomeController@invoice_rtp_user');
 
 Route::get('stock/view_transaction/inventory','StockController@view_transaction_inventory');
 Route::get('stock/input_transaction/inventory/{id}','StockController@input_transaction_inventory');
 Route::post('stock/save_transaction/inventory','StockController@save_transaction_inventory');
+
+
+Route::post('json/part_bank/{id}','HomeController@part_bank');
+Route::post('json/part_bank_selected/{id}/{id2}','HomeController@part_bank_selected');
+Route::post('json/account/{id}/{id2}','HomeController@account');
+
+Route::get('data','HomeController@data');
+Route::get('data_user','HomeController@data_user');
+Route::post('import/vendor','HomeController@import_vendor');
+Route::post('import/bank','HomeController@import_bank');
+Route::post('import/vendor_bank','HomeController@vendor_bank');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
