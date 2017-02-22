@@ -7,7 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.5.2</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v2.2</title>
+	<title>SOLID v3.0</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -23,6 +23,8 @@
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+
 
 
 	<script>
@@ -49,7 +51,9 @@
 				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v2.2</small></small></small></span>
+
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.0</small></small></small></span>
+
 				</a>
 				@endif
 			</div>
