@@ -7,11 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.5.2</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-<<<<<<< HEAD
-	<title>SOLID v2.2</title>
-=======
 	<title>SOLID v3.0</title>
->>>>>>> feature/print-invoice
 	@else
 	<title>Welcome</title>
 	@endif

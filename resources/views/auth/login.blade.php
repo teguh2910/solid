@@ -50,7 +50,7 @@
 
 
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
->>>>>>> feature/print-invoice
+
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 	<div class="col-md-5 col-md-offset-4">
