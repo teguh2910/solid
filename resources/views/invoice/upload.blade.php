@@ -220,7 +220,8 @@
                         @foreach ($bank_datas as $k => $v)
                         <option value="{{ $v->code_vendor }}">{{ $v->vendor_name }}</option>
                         @endforeach
-                    </select>    
+                    </select>
+                    <input name="vendor_name" id="vendor_name" type="hidden">     
                   </div>
                 </div>
 
@@ -413,6 +414,7 @@
     var code_vendor ;
     var no_penerimaan = "";
     $("#code_vendor").change(function() {
+        $('#vendor_name').val($("#code_vendor option:selected").text()); //hotfix-3.0.2, by yudo, add vendor_name
         code_vendor = $('option:selected', this).val();
         var data = {
             _token: '{{ csrf_token() }}',

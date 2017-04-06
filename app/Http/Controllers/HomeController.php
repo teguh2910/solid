@@ -542,7 +542,7 @@ class HomeController extends Controller {
 		 $result = new Collection($invoice);
 
 		
-		\Excel::load('/storage/template/tandaterima.xlsx', function($file) use($result){
+		\Excel::load('/storage/template/tandaterima.xlsm', function($file) use($result){
 
 			foreach ($result as $result) {
 			
@@ -629,7 +629,12 @@ class HomeController extends Controller {
 
 		$file->setActiveSheetIndex(0)->setCellValue('L51', $jatuh_tempo);
 
-		})->download('xlsx');
+		})->export('xlsm');
+
+		\Session::flash('flash_message','Sukses, invoice telah berhasil di finish');
+		return Redirect::to('master/upload');
+
+	    // return redirect('master/upload');
 
 	}
 
@@ -1050,7 +1055,7 @@ class HomeController extends Controller {
 		$invoice 					= new Invoice;
 		$invoice->no_penerimaan 	= $input['no_penerimaan'];
 		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['code_vendor'];
+		$invoice->vendor 			= $input['vendor_name'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
 		$invoice->description		= $input['description'];
