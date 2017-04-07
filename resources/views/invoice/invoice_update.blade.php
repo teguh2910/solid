@@ -134,9 +134,9 @@
                     @else
                     <option value="{{$vendor->code_vendor}}" >{{$vendor->vendor_name}}</option>
                     @endif
-
                     @endforeach
                   </select>
+                  <input name="vendor_name" value="{{$selected2}}" id="vendor_name" type="hidden">
                   </div>
                 </div>
 
@@ -256,7 +256,7 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Bank Account</b></font>
                     <input type="text" class="form-control" value="{{$invoice_basic->account_no}}" name="account_no" id="account_no" required disabled>
-                    <input name="account_no2" id="account_no2" type="hidden">
+                    <input name="account_no2" value="{{$invoice_basic->account_no}}" id="account_no2" type="hidden">
                   </div>
                 </div>
   
@@ -350,6 +350,7 @@
         var code_vendor_selected;
         var no_penerimaan = "";
         $("#code_vendor").change(function() {
+            $('#vendor_name').val($("#code_vendor option:selected").text()); 
             code_vendor_selected = $('option:selected', this).val();
             var data = {
                 _token: '{{ csrf_token() }}',
