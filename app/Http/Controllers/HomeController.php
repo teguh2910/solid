@@ -988,14 +988,15 @@ class HomeController extends Controller {
 
 		// $vendor  = m_vendor::lists('code_vendor','vendor_name');
 		$vendor = DB::select('select * from m_vendors group by vendor_name');
-		$vendor_selected = DB::select('select m_vendors.code_vendor from m_vendors inner join t_bank_datas
+		$vendor_selected = DB::select('select m_vendors.code_vendor, m_vendors.vendor_name from m_vendors inner join t_bank_datas
 			on m_vendors.code_vendor = t_bank_datas.code_vendor 
 			inner join invoice on invoice.code_bank_data = t_bank_datas.id where invoice.id = "'.$id.'"');
 		// $vendor_selected = $vendor->vendor_name->lists('id');
 		foreach ($vendor_selected as $vendor_selected) {
 			$selected = $vendor_selected->code_vendor;
+			$selected2 = $vendor_selected->vendor_name;
 		}
-		return view('invoice.invoice_update', compact('invoice','vendor','selected','id'));
+		return view('invoice.invoice_update', compact('invoice','vendor','selected','selected2','id'));
 	}
 
 	//dev-3.0 by yudo , update invoice
@@ -1017,7 +1018,7 @@ class HomeController extends Controller {
 		$invoice 					= Invoice::findOrFail($id);
 		$invoice->no_penerimaan 	= $input['no_penerimaan'];
 		$invoice->dept_code 		= $input['dept_code'];
-		$invoice->vendor 			= $input['code_vendor'];
+		$invoice->vendor 			= $input['vendor_name'];
 		$invoice->tgl_terima 		= $input['tgl_terima'];
 		$invoice->doc_no 			= $input['doc_no'];
 		$invoice->description		= $input['description'];
