@@ -1047,7 +1047,8 @@ class HomeController extends Controller {
 		$date 		= date('Y-m-d H:i:s');
 		$input 		= \Input::all();
 		$account_no = $input['account_no2'];
-		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		$account_name = $input['account_name'];
+		$queries 	= DB::select('SELECT id FROM t_bank_datas WHERE account_no = "'.$account_no.'" AND account_name = "'..'" ');
 		foreach ($queries as $queries) {
 			$code_bank_data = $queries->id;
 		}
