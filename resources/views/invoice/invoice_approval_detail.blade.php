@@ -55,7 +55,7 @@
                     <td><center><font face='calibri'>{{ $invoice_master->doc_date }}</font></center></td>
                     <td><center><font face='calibri'>{{ $invoice_master->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice_master->curr }}</font></td>
-                    <td><font face='calibri'>{{ $invoice_master->amount }}</font></td>
+                    <td><font face='calibri'>{{ number_format($invoice->amount, 2) }}</font></td>
                     <td><font face='calibri'>{{ $invoice_master->doc_no_2 }}</font></td>
                     <td><font face='calibri'>{{ $invoice_master->no_po }}</font></td>
                     <?php 

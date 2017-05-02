@@ -81,7 +81,7 @@
                     <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td><font face='calibri'>{{ $invoice->amount }}</font></td>
+                    <td><font face='calibri'>{{ number_format($invoice->amount, 2) }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td><font face='calibri'><small><b>{{ $invoice->remark_act }}</b><br/>{{$invoice->tgl_pending_act}}</small></font></td>
