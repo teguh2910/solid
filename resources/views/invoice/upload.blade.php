@@ -336,7 +336,8 @@
                     
                     <select class="form-control select2" name="part_bank" id="part_bank" style="width: 100%;" autofocus required>  
                     </select>
-                    <label id="test"></label>  
+                    <label id="account_name"></label>  
+                    <input name="account_name_hide" id="account_name_hide" type="hidden">
                   </div>
 
                 </div>
@@ -356,7 +357,7 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Bank Key</b></font>
                     <input type="text" class="form-control" name="code_bank" id="code_bank" required disabled>
-                    <label id="test2"></label> 
+                    <label id="bank_name"></label> 
                   </div>
 
                 </div>
@@ -364,7 +365,7 @@
                 <div class="form-group">
                   <div class="col-md-3"></div>
                     <div class="col-md-7">
-                    <label id="test2"></label>  
+                    <label id="bank_name"></label>  
                   </div>
                 </div>
                 <br>
@@ -470,8 +471,9 @@
                         for(var i=0;i<len;i++)
                         {
                             
-                            $('#test').text(myData[i].account_name);
-                            $('#test2').text(myData[i].bank_name);
+                            $('#account_name').text(myData[i].account_name);
+                            $('#account_name_hide').text(myData[i].account_name_hide);
+                            $('#bank_name').text(myData[i].bank_name);
                             $('#account_no').val(myData[i].account_no);
                             $('#account_no2').val(myData[i].account_no);
                             $('#code_bank').val(myData[i].code_bank);
