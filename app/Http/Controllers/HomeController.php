@@ -598,8 +598,8 @@ class HomeController extends Controller {
 		$file->setActiveSheetIndex(0)->setCellValue('H15',$keterangan);
 		$file->setActiveSheetIndex(0)->setCellValue('B15',$invoice);
 		$file->setActiveSheetIndex(0)->setCellValue('F15',$tanggal);
-		$file->setActiveSheetIndex(0)->setCellValue('L15',$curr." ".number_format($amount, "0", ".", "."));
-		$file->setActiveSheetIndex(0)->setCellValue('L18',$curr." ".number_format($amount, "0", ".", "."));
+		$file->setActiveSheetIndex(0)->setCellValue('L15',$curr." ".number_format($amount,"2"));
+		$file->setActiveSheetIndex(0)->setCellValue('L18',$curr." ".number_format($amount,"2"));
 		
 		$file->setActiveSheetIndex(0)->setCellValue('D19', $terbilang." ".$mata_uang1);
 		$file->setActiveSheetIndex(0)->setCellValue('K22', $tgl);
@@ -1009,7 +1009,9 @@ class HomeController extends Controller {
 		$date 		= date('Y-m-d H:i:s');
 		$input 		= \Input::all();
 		$account_no = $input['account_no2'];
-		$queries 	= DB::select('select id from t_bank_datas where account_no = "'.$account_no.'" ');
+		$code_vendor = $input['code_vendor']; //hotfix-3.0.5 by yudo, 20170502, menambahkan variable code vendor
+		$part_bank   = $input['part_bank']; //hotfix-3.0.5 by yudo, 20170502, menambahkan variabel partbank
+		$queries 	= DB::select('SELECT id FROM t_bank_datas WHERE account_no = "'.$account_no.'" AND code_vendor = "'.$code_vendor.'" AND part_bank = "'.$part_bank.'"');
 		foreach ($queries as $queries) {
 			$code_bank_data = $queries->id;
 		}
@@ -1047,8 +1049,9 @@ class HomeController extends Controller {
 		$date 		= date('Y-m-d H:i:s');
 		$input 		= \Input::all();
 		$account_no = $input['account_no2'];
-		$account_name = $input['account_name'];
-		$queries 	= DB::select('SELECT id FROM t_bank_datas WHERE account_no = "'.$account_no.'" AND account_name = "'..'" ');
+		$code_vendor = $input['code_vendor'];
+		$part_bank   = $input['part_bank'];
+		$queries 	= DB::select('SELECT id FROM t_bank_datas WHERE account_no = "'.$account_no.'" AND code_vendor = "'.$code_vendor.'" AND part_bank = "'.$part_bank.'"');
 		foreach ($queries as $queries) {
 			$code_bank_data = $queries->id;
 		}
