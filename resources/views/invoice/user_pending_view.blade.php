@@ -46,7 +46,7 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ number_format($invoice->amount, 2) }}</font></td>
+                    <td bgcolor='#FFFFFF'><font face='calibri'>{{ (float)number_format($invoice->amount) }}</font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td bgcolor='#FFFFFF'><font face='calibri'>{{ $invoice->no_po }}</font></td>
                 </tr>

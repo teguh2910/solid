@@ -46,7 +46,7 @@
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->curr }}</font></center></td>
-                    <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ number_format($invoice->amount, 2) }}</font></center></td>
+                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></center></td>  <!-- hotfix-3.0.7, by yudo, 20170508, number format -->
                     <td bgcolor='#FFFFFF'><center><font face='calibri'>{{ $invoice->doc_no_2 }}</font></center></td>
                     </tr>
                 </tbody>
