@@ -75,7 +75,7 @@
 							<!-- Aisin Operational Invoice Document -->
 
 							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
-							&nbsp;<small><b>v3.0.5</b></small>
+							&nbsp;<small><b>v3.0.8</b></small>
 
 						</font><br/><br/>
 					</center>
