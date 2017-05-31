@@ -40,8 +40,9 @@
                   <input type="text" class="form-control" value="{{$t_transaction->qty_box}} {{$t_transaction->unit}}" readonly>
                 </div>
               </div>
-              @if ($t_transaction->qty_box == 0 || $t_transaction->qty_box = "")
-              <input type="hidden" class="form-control" name="amount_box" id="amount_box" value='null'>
+              @if (($t_transaction->qty_box == 0 || $t_transaction->qty_box = "") && (\Auth::user()->dept_code == "9" || \Auth::user()->dept_code == "10"))
+              <!-- <input type="hidden" class="form-control" name="amount_box" id="amount_box" value='null'> -->
+              <input type="hidden" class="form-control" name="amount_box" id="amount_box" value="{{\Auth::user()->dept_code}}">
               @else
               <div class="form-group">
                 <div class="col-md-3">
