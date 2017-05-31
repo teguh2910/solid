@@ -290,13 +290,14 @@ class StockController extends Controller {
 
 	public function input_transaction($id) {    
         $m_part 		= m_part::all();
-	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	               
+	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	      
+	 		 	// return \Auth::user()->dept_code;            
      	return view('stock.input_transaction',compact('t_transaction','m_part'));
 	}
 
 	public function input_transaction_inventory($id) {    
         $m_part 		= m_part::all();
-	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	               
+	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	            
      	return view('stock.input_transaction_inventory',compact('t_transaction','m_part'));
 	}
 
