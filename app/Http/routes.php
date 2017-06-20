@@ -112,6 +112,15 @@ Route::post('import/vendor','HomeController@import_vendor');
 Route::post('import/bank','HomeController@import_bank');
 Route::post('import/vendor_bank','HomeController@vendor_bank');
 
+// Handika
+Route::get('vendor/view_vendor','VendorController@index');
+Route::post('vendor/save_create','VendorController@create');
+Route::get('vendor/edit_vendor/{id}', 'VendorController@edit');
+Route::get('vendor/delete/{id}', 'VendorController@destroy');
+Route::post('vendor/save_edit', 'VendorController@save_edit');
+
+
+// Handika
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

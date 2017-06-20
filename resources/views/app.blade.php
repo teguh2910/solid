@@ -61,6 +61,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if (Auth::guest())
 				@elseif (Auth::user()->role == "1")
+				<!-- < 1 = user> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/user/list') }}">
 							<font face='calibri'><b>INVOICE LIST</b></font>
@@ -77,6 +78,7 @@
 					</a></li>
 				</ul>
 				@elseif (Auth::user()->role == "2")
+				<!-- < 2 = acoounting team> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/act/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
@@ -87,6 +89,7 @@
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "3")
+				<!-- < 3 = cashier> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/fa/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
@@ -97,8 +100,12 @@
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "4")
+				<!-- < 4 = administrator> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/vendor/view_vendor') }}"><font face='calibri'><b>MASTER VENDOR</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
@@ -112,7 +119,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
-				@elseif (Auth::user()->role == "5")	
+				@elseif (Auth::user()->role == "5")	 
+				<!-- < 5 = inventory> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>USER</b></font></a></li>
 				</ul>
@@ -139,6 +147,7 @@
 					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "7")
+				<!-- < 7 = spv area> -->
 				<!--  <ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
 				</ul>
