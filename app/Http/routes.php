@@ -112,15 +112,19 @@ Route::post('import/vendor','HomeController@import_vendor');
 Route::post('import/bank','HomeController@import_bank');
 Route::post('import/vendor_bank','HomeController@vendor_bank');
 
-// Handika
+// master vendor by Handika
 Route::get('vendor/view_vendor','VendorController@index');
 Route::post('vendor/save_create','VendorController@create');
 Route::get('vendor/edit_vendor/{id}', 'VendorController@edit');
 Route::get('vendor/delete/{id}', 'VendorController@destroy');
 Route::post('vendor/save_edit', 'VendorController@save_edit');
 
-
-// Handika
+// master bank by Fachrul
+Route::get('bank/view_bank','BankController@index');
+Route::post('bank/save_create','BankController@create');
+Route::get('bank/edit_bank/{id}', 'BankController@edit');
+Route::get('bank/delete/{id}', 'BankController@destroy');
+Route::post('bank/save_edit', 'BankController@save_edit');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
