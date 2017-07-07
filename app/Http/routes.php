@@ -119,6 +119,12 @@ Route::get('vendor/edit_vendor/{id}', 'VendorController@edit');
 Route::get('vendor/delete/{id}', 'VendorController@destroy');
 Route::post('vendor/save_edit', 'VendorController@save_edit');
 
+//Bait
+Route::get('payment', 'PaymentController@index');
+Route::post('payment/save_payment','PaymentController@create');
+Route::get('payment/edit_payment/{id} ', 'PaymentController@edit');
+Route::post('payment/save_edit', 'PaymentController@save_edit');
+Route::get('payment/delete/{id}', 'PaymentController@destroy');
 
 // Handika
 

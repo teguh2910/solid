@@ -108,6 +108,9 @@
 					<li><a href="{{ url('/vendor/view_vendor') }}"><font face='calibri'><b>MASTER VENDOR</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/payment') }}"><font face='calibri'><b>VENDOR PAYMENT</b></font></a></li>
+				</ul>
+				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
@@ -119,6 +122,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
+				
 				@elseif (Auth::user()->role == "5")	 
 				<!-- < 5 = inventory> -->
 				<ul class="nav navbar-nav">
