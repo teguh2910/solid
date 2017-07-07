@@ -110,6 +110,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/payment') }}"><font face='calibri'><b>VENDOR PAYMENT</b></font></a></li>
 				</ul>
+					<li><a href="{{ url('/bank/view_bank') }}"><font face='calibri'><b>MASTER BANK</b></font></a></li>
+				</ul>
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
