@@ -104,14 +104,21 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
+
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/vendor/view_vendor') }}"><font face='calibri'><b>MASTER VENDOR</b></font></a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								<font face='calibri'><b>MASTER</b></font>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{{ url('/vendor/view_vendor') }}"><font face='calibri'><b>MASTER VENDOR</b></font></a></li>
+								<li><a href="{{ url('/payment') }}"><font face='calibri'><b>VENDOR PAYMENT</b></font></a></li>
+								<li><a href="{{ url('/bank/view_bank') }}"><font face='calibri'><b>MASTER BANK</b></font></a></li>
+							</ul>
+						</li>
 				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/payment') }}"><font face='calibri'><b>VENDOR PAYMENT</b></font></a></li>
-				</ul>
-					<li><a href="{{ url('/bank/view_bank') }}"><font face='calibri'><b>MASTER BANK</b></font></a></li>
-				</ul>
+
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
