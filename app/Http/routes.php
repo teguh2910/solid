@@ -128,11 +128,11 @@ Route::get('payment/delete/{id}', 'PaymentController@destroy');
 
 
 // master bank by Fachrul
-Route::get('bank/view_bank','BankController@index');
-Route::post('bank/save_create','BankController@create');
-Route::get('bank/edit_bank/{id}', 'BankController@edit');
-Route::get('bank/delete/{id}', 'BankController@destroy');
-Route::post('bank/save_edit', 'BankController@save_edit');
+Route::get('bank/view_bank','bankController@index');
+Route::post('bank/save_create','bankController@create');
+Route::get('bank/edit_bank/{id}', 'bankController@edit');
+Route::get('bank/delete/{id}', 'bankController@destroy');
+Route::post('bank/save_edit', 'bankController@save_edit');
 
 
 Route::controllers([
