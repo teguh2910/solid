@@ -7,7 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.5.2</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v3.0.8</title>
+	<title>SOLID v3.1</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -52,7 +52,7 @@
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
 
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.0.8</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.1</small></small></small></span>
 
 				</a>
 				@endif
@@ -61,6 +61,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if (Auth::guest())
 				@elseif (Auth::user()->role == "1")
+				<!-- < 1 = user> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/user/list') }}">
 							<font face='calibri'><b>INVOICE LIST</b></font>
@@ -77,6 +78,7 @@
 					</a></li>
 				</ul>
 				@elseif (Auth::user()->role == "2")
+				<!-- < 2 = acoounting team> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/act/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
@@ -87,6 +89,7 @@
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "3")
+				<!-- < 3 = cashier> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/fa/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
 				</ul>
@@ -97,9 +100,25 @@
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "4")
+				<!-- < 4 = administrator> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
 				</ul>
+
+				<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								<font face='calibri'><b>MASTER</b></font>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{{ url('/vendor/view_vendor') }}"><font face='calibri'><b>MASTER VENDOR</b></font></a></li>
+								<li><a href="{{ url('/payment') }}"><font face='calibri'><b>VENDOR PAYMENT</b></font></a></li>
+								<li><a href="{{ url('/bank/view_bank') }}"><font face='calibri'><b>MASTER BANK</b></font></a></li>
+							</ul>
+						</li>
+				</ul>
+
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
@@ -112,7 +131,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
-				@elseif (Auth::user()->role == "5")	
+				
+				@elseif (Auth::user()->role == "5")	 
+				<!-- < 5 = inventory> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>USER</b></font></a></li>
 				</ul>
@@ -139,6 +160,7 @@
 					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
 				</ul>
 				@elseif (Auth::user()->role == "7")
+				<!-- < 7 = spv area> -->
 				<!--  <ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
 				</ul>

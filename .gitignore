@@ -1,3 +1,5 @@
 /vendor
 /node_modules
 .env
+bootstrap/cache/compiled.php
+composer.lock
