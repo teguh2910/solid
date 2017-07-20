@@ -39,8 +39,8 @@ class PaymentController extends Controller
         $v_payment->account_name = $input['account_name'];
         $v_payment->save();
         \Session::flash('flash_type','alert-success');
-        \Session::flash('flash_message','Sukses, vendor baru berhasil ditambahkan ke database');
-        return redirect('payment/view_payment');
+        \Session::flash('flash_message','Sukses, payment baru berhasil ditambahkan ke database');
+        return redirect('payment');
     }
 
     /**
