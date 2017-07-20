@@ -77,14 +77,14 @@
             <div class="form-group">
               <div class="col-md-8">
                 <font face='calibri'><b>Vendor Code</b></font><br/>
-                <input type="text" class="form-control" name="c_vendor" id="c_vendor" autofocus required>
+                <input type="text" class="form-control" name="code_vendor" id="code_vendor" autofocus required>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-4">
                 <font face='calibri'><b>Bank Code</b></font><br/>
-                <select class="form-control select2" name="bank_c" id="bank_c" style="width: 100%;" required>
+                <select class="form-control select2" name="code_bank" id="code_bank" style="width: 100%;" required>
                     <option value=''>--Choose Bank--</option>
                     @foreach ($bank_c as $as)
                             <option value="{{ $as->code_bank }}">({{ $as->code_bank }}) {{ $as->bank_name }}</option>
@@ -103,21 +103,21 @@
              <div class="form-group">
               <div class="col-md-8">
                 <font face='calibri'><b>Part Bank</b></font><br/>
-                <input type="text" class="form-control" name="p_bank" id="p_bank" required>
+                <input type="text" class="form-control" name="part_bank" id="part_bank" required>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-8">
                 <font face='calibri'><b>Account Number</b></font><br/>
-                <input type="text" class="form-control" name="a_number" id="a_number" required>
+                <input type="text" class="form-control" name="account_no" id="account_no" required>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-8">
                 <font face='calibri'><b>Account Name</b></font><br/>
-                <input type="text" class="form-control" name="a_name" id="a_name" required>
+                <input type="text" class="form-control" name="account_name" id="account_name" required>
               </div>
             </div>
 
