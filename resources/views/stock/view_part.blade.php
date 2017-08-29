@@ -32,6 +32,7 @@
                         <th><font face='calibri' color='white'>Part Name</font></th>
                         <th><font face='calibri' color='white'>Qty Of Box</font></th>
                         <th><font face='calibri' color='white'>Unit</font></th>
+                        <th><font face='calibri' color='white'>Harga</font></th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                         <td><font face='calibri'>{{ $v->part_name }}</font></td>
                         <td><font face='calibri'>{{ $v->qty_box }}</font></td>
                         <td><font face='calibri'>{{ $v->unit }}</font></td>
+                        <td><font face='calibri'>{{ $v->harga }}</font></td>
                       
                         <td><center>
                             <a href="{{ url('stock/edit_part/'.$v->id) }}" class="btn btn-primary btn-xs" target='/blank'>

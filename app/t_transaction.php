@@ -7,7 +7,7 @@ class t_transaction extends Model {
 	protected $fillable=[
     'id_area','type_plant', 
     'part_number','back_number','part_name','qty_box','unit',
-    'amount_box','amount_pcs','total_pcs'
+    'amount_box','amount_pcs','total_pcs', 'harga','total_amount'
     ];
 
     public static function array_to_db($array_data){
@@ -17,13 +17,15 @@ class t_transaction extends Model {
                 foreach ($array_data as $value) {
                     $key=explode(';',$value);
                     self::create([
+                        
                         'id_area'        =>$key[0],
-                        'part_number'    =>$key[3],
-                        'type_plant'     =>$key[1],
-                        'back_number'    =>$key[2],
-                        'part_name'      =>$key[4],
+                        'back_number'    =>$key[1],
+                        'part_number'    =>$key[2],
+                        'part_name'      =>$key[3],
+                        'type_plant'     =>$key[4],
                         'qty_box'        =>$key[5],
                         'unit'           =>$key[6],
+                        'harga'          =>$key[7],
                     ]);
                 }
                 return 1;
