@@ -158,19 +158,32 @@ class StockController extends Controller {
 
 	  public function m_part_import()
 	{
-		$file  = \Input::file('file');
-		$table = \Input::get('table');
-		$array_data = CsvHelper::csv_to_array($file);
-		$result     = m_part::array_to_db($array_data);
-		$result2    =t_transaction::array_to_db($array_data);
-		if ($result == 1 && $result2 == 1) {
-			\Session::flash('flash_type','alert-success');
-			\Session::flash('flash_message','Successfully Saved');
-		} else {
-			\Session::flash('flash_type','alert-danger');
-			\Session::flash('flash_message','No data update');
-		}
+		 \DB::beginTransaction();
+		try
+		{
+			$file  = \Input::file('file');
+			$table = \Input::get('table');
+			$array_data = CsvHelper::csv_to_array($file);
+			$result     = m_part::array_to_db($array_data);
+			$result2    =t_transaction::array_to_db($array_data);
+			if ($result == 1 && $result2 == 1) {
+				\Session::flash('flash_type','alert-success');
+				\Session::flash('flash_message','Successfully Saved');
+			} else {
+				\Session::flash('flash_type','alert-danger');
+				\Session::flash('flash_message','No data update');
+			}
+		\DB::commit();
 		return redirect('stock/view_part');
+		}
+
+		catch (\Exception $e)
+		{
+			\DB::rollback();
+			return $e;
+		}
+		
+
 	}
 
 	  public function save_part()
@@ -259,9 +272,10 @@ class StockController extends Controller {
 
 	 public function view_transaction_inventory()
 	 {
-	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_transaksi')
+	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'))
 	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 									->get();
+	 							
 	 	return view('stock.view_transaction_inventory',compact('t_transaction'));
 	 }
 
@@ -320,6 +334,8 @@ class StockController extends Controller {
 	       	$total1 	 = $a*$qty_box;
 	       	$total_pcs 	 = $total1+$b;
 	       	$t_transaction  			= t_transaction::findOrFail($id);
+	       	$total_amt = $total_pcs * $t_transaction->harga;
+	       	$t_transaction->total_amount = $total_amt;
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
 			$t_transaction->total_pcs   = $total_pcs;
@@ -349,6 +365,8 @@ class StockController extends Controller {
 	       	$total1 	 = $a*$qty_box;
 	       	$total_pcs 	 = $total1+$b;
 	       	$t_transaction  			= t_transaction::findOrFail($id);
+	       	$total_amt = $total_pcs * $t_transaction->harga;
+	       	$t_transaction->total_amount = $total_amt;
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
 			$t_transaction->total_pcs   = $total_pcs;
