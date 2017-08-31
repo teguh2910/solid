@@ -360,12 +360,12 @@ class StockController extends Controller {
 			$t_transaction->total_pcs   = $b;
 			$t_transaction->save();
         } else {
-        	$a 			 = $input['amount_box'];
-       		$b 			 = $input['amount_pcs'];
-	       	$total1 	 = $a*$qty_box;
-	       	$total_pcs 	 = $total1+$b;
-	       	$t_transaction  			= t_transaction::findOrFail($id);
-	       	$total_amt = $total_pcs * $t_transaction->harga;
+        	$a 			 	= $input['amount_box'];
+       		$b 			 	= $input['amount_pcs'];
+	       	$total1 	 	= $a*$qty_box;
+	       	$total_pcs 	 	= $total1+$b;
+	       	$t_transaction  = t_transaction::findOrFail($id);
+	       	$total_amt 		= ($total_pcs * $t_transaction->harga);
 	       	$t_transaction->total_amount = $total_amt;
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
