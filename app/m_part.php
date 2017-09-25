@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class m_part extends Model {
 
 	protected $table ='m_parts' ;
-	protected $fillable = ['id_area','back_number','part_number','part_name','qty_box','unit','harga'];
+	protected $fillable = ['back_number','part_number','part_name','v_class','kind','qty_box','unit','harga'];
     
     public static function array_to_db($array_data){
         $total=sizeof($array_data);
@@ -14,13 +14,15 @@ class m_part extends Model {
                 foreach ($array_data as $value) {
                     $key=explode(';',$value);
                     self::create([
-                        'id_area'       =>$key[0],
+                        
                         'back_number'   =>$key[1],
                         'part_number'   =>$key[2],
                         'part_name'     =>$key[3],
-                        'qty_box'       =>$key[5],
-                        'unit'          =>$key[6],
-                        'harga'         =>$key[7],
+                        'v_class'       =>$key[4],
+                        'kind'          =>$key[5],
+                        'qty_box'       =>$key[7],
+                        'unit'          =>$key[8],
+                        'harga'         =>$key[9],
                     ]);
                 }
                 return 1;

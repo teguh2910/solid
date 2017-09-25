@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Excel;
 
 class StockController extends Controller {
 
@@ -279,6 +280,16 @@ class StockController extends Controller {
 	 	return view('stock.view_transaction_inventory',compact('t_transaction'));
 	 }
 
+	 public function view_sto_report() //v1.6.1, by ario 20170919
+	 {
+	 	$t_transaction 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),'t_transactions.*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'), 't_transactions.v_class as vclass','t_transactions.part_number as part_number','t_transactions.part_name as part_name','t_transactions.kind as kind')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->groupBy('t_transactions.part_number')
+	 									->get();
+	 					// return $t_transaction;		
+	 	return view('stock.view_sto_report',compact('t_transaction'));
+	 }
+
 	public function view_list()
 	{  
 	 	$input 			= \Input::all();
@@ -360,12 +371,12 @@ class StockController extends Controller {
 			$t_transaction->total_pcs   = $b;
 			$t_transaction->save();
         } else {
-        	$a 			 	= $input['amount_box'];
-       		$b 			 	= $input['amount_pcs'];
-	       	$total1 	 	= $a*$qty_box;
-	       	$total_pcs 	 	= $total1+$b;
-	       	$t_transaction  = t_transaction::findOrFail($id);
-	       	$total_amt 		= ($total_pcs * $t_transaction->harga);
+        	$a 			 = $input['amount_box'];
+       		$b 			 = $input['amount_pcs'];
+	       	$total1 	 = $a*$qty_box;
+	       	$total_pcs 	 = $total1+$b;
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+	       	$total_amt = $total_pcs * $t_transaction->harga;
 	       	$t_transaction->total_amount = $total_amt;
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
@@ -529,7 +540,60 @@ class StockController extends Controller {
 
   }
 
+public function upload_sto() { //by ario, 20170925
 
+  		$i = 1;	
+    	try {	
+			
+	    	DB::beginTransaction();
+
+    		$file = \Input::file('file');
+    
+       		$data = array();
+	    	$file->move('../file/', $file->getClientoriginalName());
+	    	$extension = \Input::file('file')->getClientoriginalExtension();
+	    	$fileName  = $file->getClientoriginalName();
+	    
+      		$row = Excel::load('file/'.$fileName)->get();
+      
+	    	foreach ($row as $rows) {
+
+	    		$pn = $rows['part_number'];
+	    		$trx=t_transaction::where('part_number',$pn)->first();
+	    		if($pn != '' && $pn != '000000' && $pn != null ){
+
+	    			$trx = t_transaction::where('part_number', $pn)
+	    									->first();
+	    			if (! $trx) {
+	    				throw new \Exception('part number : ('.$pn.') tidak ditemukan', 1);
+	    			}
+	    			else {
+			    		// return $pn;
+			    		$trx->ending_pcs=$rows['qty'];
+			    		$trx->ending_amount=$rows['amount'];
+			    		$trx->save();
+			    		
+	    			}
+	    		}
+
+	    		$i++;
+	    		
+	    	}
+	    	
+	    	DB::commit();
+
+	    	\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, Ending Qty dan Amount berhasil di upload!');
+    		return redirect ('stock/sto/report');
+    	}
+    	catch(\Exception $e){
+    		DB::rollback();
+    		\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message', 'Baris-'.$i.' problem ===> '.$e->getMessage());
+			return redirect ('stock/sto/report');	// hotfix-3.1.3, Ferry, kembali ke menu import
+    	}   	
+    	
+	}
 
 
 }
