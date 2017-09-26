@@ -152,6 +152,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/sto/report') }}"><font face='calibri'><b>STO REPORT</b></font></a></li>
 				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/stock/sto/report_2') }}"><font face='calibri'><b>STO REPORT 2</b></font></a></li>
+				</ul>
 				<!-- <ul class="nav navbar-nav">
 					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
 				</ul>

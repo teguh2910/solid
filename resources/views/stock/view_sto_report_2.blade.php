@@ -9,10 +9,7 @@
                 <div class="row">
                 <div class="col-md-12">
                     <section id="unseen">
-                    <button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#myModal">
-                        <font face='calibri'><b>IMPORT ENDING</b></font>
-                    </button>
-                    <a href="{{ url('stock/sto/report/download') }}">
+                    <a href="{{ url('stock/sto/report_2/download') }}">
                     <button class='btn btn-success btn-sm' data-toggle="modal">
                         <font face='calibri'><b>DOWNLOAD REPORT</b></font>
                     </button>
@@ -20,18 +17,16 @@
                     <br><br>
                     <table class="table table-bordered table-condensed">
                         <thead>
-                            <tr bgcolor='#FFFF00'>
-                                <th colspan="5"><font face='calibri' color='black'></font></th>
+                            <tr bgcolor='#64950'>
+                                <th colspan="2"><font face='calibri' color='black'></font></th>
                                 <th colspan="2"><font face='calibri' color='black'>STO</font></th>
                                 <th colspan="2"><font face='calibri' color='black'>Ending</font></th>
                                 <th colspan="2"><font face='calibri' color='black'>Different</font></th>
                             </tr>
-                            <tr bgcolor='#FFFF00'>
-                                <th rowspan="2"><font face='calibri' color='black'>Part number</font></th>
-                                <th rowspan="2"><font face='calibri' color='black'>Part Name</font></th>
+                            <tr bgcolor='#64950'>
+                                
                                 <th rowspan="2"><font face='calibri' color='black'>V Class</font></th>
                                 <th rowspan="2"><font face='calibri' color='black'>Kind</font></th>
-                                <th rowspan="2"><font face='calibri' color='black'>Price</font></th>
                                 <th ><font face='calibri' color='black'>Qty</font></th>
                                 <th ><font face='calibri' color='black'>Amount</font></th>
                                 <th ><font face='calibri' color='black'>Qty</font></th>
@@ -48,25 +43,16 @@
                                 @else
                                     <tr bgcolor='#A9A9A9'>
                                 @endif
-                                <td><font face='calibri'>{{ $t_transaction->part_number }}</font></td>
-                                <td><font face='calibri'>{{ $t_transaction->part_name }}</font></td>
+                                
                                 <td><font face='calibri'>{{ $t_transaction->v_class }}</font></td>
                                 <td><font face='calibri'>{{ $t_transaction->kind }}</font></td>
-                                <td><font face='calibri'>{{ $t_transaction->harga }}</font></td>
                                 <td><font face='calibri'>{{ $t_transaction->sto_qty }}</font></td> 
                                 <td><font face='calibri'>{{ $t_transaction->sto_amount }}</font></td>
-                                <td><font face='calibri'>{{ $t_transaction->ending_pcs }}</font></td>
-                                <td><font face='calibri'>{{ $t_transaction->ending_amount }}</font></td>
+                                <td><font face='calibri'>{{ $t_transaction->sto_ending_pcs }}</font></td>
+                                <td><font face='calibri'>{{ $t_transaction->sto_ending_amount }}</font></td>
                                 <td><font face='calibri'>{{ $t_transaction->dif_pcs }}</font></td>
                                 <td><font face='calibri'>{{ $t_transaction->dif_amount }}</font></td>
-                                <!-- <td class='warning'>
-                                    <center>
-                                        <a href="{{ url('stock/input_transaction/inventory/'.$t_transaction->id_transaksi) }}" 
-                                            class="btn btn-primary btn-xs" target="blank">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                        </a>            
-                                    </center>
-                                </td> -->
+                                
                             </tr>
                             @endforeach
                         </tbody>
