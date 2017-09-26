@@ -101,6 +101,12 @@ Route::get('stock/view_transaction/inventory','StockController@view_transaction_
 Route::get('stock/input_transaction/inventory/{id}','StockController@input_transaction_inventory');
 Route::post('stock/save_transaction/inventory','StockController@save_transaction_inventory');
 
+Route::get('stock/sto/report','StockController@view_sto_report'); //v1.6.1 by Ario, 20170918
+Route::post('stock/sto/report', 'StockController@upload_sto');
+Route::get('stock/sto/report/download','StockController@download_sto_report');
+
+Route::get('stock/sto/report_2','StockController@view_sto_report_2'); //v1.6.1 by Ario, 20170918
+Route::get('stock/sto/report_2/download','StockController@download_sto_report_2');
 
 Route::post('json/part_bank/{id}','HomeController@part_bank');
 Route::post('json/part_bank_selected/{id}/{id2}','HomeController@part_bank_selected');

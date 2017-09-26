@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Excel;
 
 class StockController extends Controller {
 
@@ -279,6 +280,103 @@ class StockController extends Controller {
 	 	return view('stock.view_transaction_inventory',compact('t_transaction'));
 	 }
 
+	 public function view_sto_report() //v1.6.1, by ario 20170919
+	 {
+	 	$t_transaction 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_amount) - sum(t_transactions.ending_amount) as dif_amount'),'t_transactions.*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'), 't_transactions.v_class as vclass','t_transactions.part_number as part_number','t_transactions.part_name as part_name','t_transactions.kind as kind', 't_transactions.ending_pcs as ending_pcs','t_transactions.ending_amount as ending_amount')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->groupBy('t_transactions.part_number')
+	 									->get();
+	 					// return $t_transaction;		
+	 	return view('stock.view_sto_report',compact('t_transaction'));
+	 }
+
+	 public function view_sto_report_2() //v1.6.1, by ario 20170919
+	 {
+	 	$t_transaction 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),DB::raw('sum(t_transactions.ending_pcs) as sto_ending_pcs'),DB::raw('sum(t_transactions.ending_amount) as sto_ending_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_amount) - sum(t_transactions.ending_amount) as dif_amount'), 't_transactions.v_class as v_class','t_transactions.kind as kind')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->groupBy('t_transactions.v_class')
+	 									->get();
+	 					// return $t_transaction;		
+	 	return view('stock.view_sto_report_2',compact('t_transaction'));
+	 }
+
+	 public function download_sto_report() { //ver 3.3.0 by Ario R 20170823 --> ambil data dari quota_daily_ajax.blade, data di ajax controller
+		$user_logged_in    = \Auth::user();
+
+		// $filter_month = ($filter_month == 'Now') ? \Carbon::now()->format('Y-m') : $filter_month;
+		// // $last_day = ($filter_month == 'Now') ? \Carbon::now()->daysInMonth : 
+		// // 										\Carbon::parse($filter_month.'-01')->daysInMonth;
+
+		// $last_day = 31;	// ditangani di javascript saja utk visible: false
+		// $month_number = ($filter_month == 'Now') ? \Carbon::now()->daysInMonth : 
+		// 										\Carbon::parse($filter_month.'-01')->format('n');
+
+		$t_transactions 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_amount) - sum(t_transactions.ending_amount) as dif_amount'),'t_transactions.*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'), 't_transactions.v_class as v_class','t_transactions.part_number as part_number','t_transactions.part_name as part_name','t_transactions.kind as kind', 't_transactions.ending_pcs as ending_pcs','t_transactions.ending_amount as ending_amount','t_transactions.harga as price')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->groupBy('t_transactions.part_number')
+	 									->get();
+		\Excel::load('/storage/template/report_sto.xlsx', function($file) use($t_transactions){
+			$a="3";
+			$last_day = 31;
+			foreach ($t_transactions as $t_transaction){
+				// for ($i=1; $i <= $last_day; $i++) {
+				// $file->setAttribute('day'.$i, 0);
+				// }
+				$file->setActiveSheetIndex(0)->setCellValue('A'.$a.'', $t_transaction->part_number);
+				$file->setActiveSheetIndex(0)->setCellValue('B'.$a.'', $t_transaction->part_name);
+				$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $t_transaction->v_class);
+				$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $t_transaction->kind);
+				$file->setActiveSheetIndex(0)->setCellValue('E'.$a.'', $t_transaction->price);
+				$file->setActiveSheetIndex(0)->setCellValue('F'.$a.'', $t_transaction->sto_qty);
+				$file->setActiveSheetIndex(0)->setCellValue('G'.$a.'', $t_transaction->sto_amount);
+				$file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', $t_transaction->ending_pcs);
+				$file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', $t_transaction->ending_amount);
+				$file->setActiveSheetIndex(0)->setCellValue('J'.$a.'', $t_transaction->dif_pcs);
+				$file->setActiveSheetIndex(0)->setCellValue('K'.$a.'', $t_transaction->dif_amount);
+				// $file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', round($t_transaction->quota_rounded_2 / 60,2));
+				// $file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', round(($t_transaction->quota_rounded_2/60)-$t_transaction->quota_rounded,2));
+				$a++;
+			}
+		})->export('xlsx');
+	}
+
+	public function download_sto_report_2() { //ver 3.3.0 by Ario R 20170823 --> ambil data dari quota_daily_ajax.blade, data di ajax controller
+		$user_logged_in    = \Auth::user();
+
+		// $filter_month = ($filter_month == 'Now') ? \Carbon::now()->format('Y-m') : $filter_month;
+		// // $last_day = ($filter_month == 'Now') ? \Carbon::now()->daysInMonth : 
+		// // 										\Carbon::parse($filter_month.'-01')->daysInMonth;
+
+		// $last_day = 31;	// ditangani di javascript saja utk visible: false
+		// $month_number = ($filter_month == 'Now') ? \Carbon::now()->daysInMonth : 
+		// 										\Carbon::parse($filter_month.'-01')->format('n');
+
+		$t_transactions 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),DB::raw('sum(t_transactions.ending_pcs) as ending_pcs'),DB::raw('sum(t_transactions.ending_amount) as ending_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_amount) - sum(t_transactions.ending_amount) as dif_amount'), 't_transactions.v_class as v_class','t_transactions.kind as kind')
+	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
+	 									->groupBy('t_transactions.v_class')
+	 									->get();
+		\Excel::load('/storage/template/report_sto_2.xlsx', function($file) use($t_transactions){
+			$a="3";
+			$last_day = 31;
+			foreach ($t_transactions as $t_transaction){
+				// for ($i=1; $i <= $last_day; $i++) {
+				// $file->setAttribute('day'.$i, 0);
+				// }
+				$file->setActiveSheetIndex(0)->setCellValue('A'.$a.'', $t_transaction->v_class);
+				$file->setActiveSheetIndex(0)->setCellValue('B'.$a.'', $t_transaction->kind);
+				$file->setActiveSheetIndex(0)->setCellValue('C'.$a.'', $t_transaction->sto_qty);
+				$file->setActiveSheetIndex(0)->setCellValue('D'.$a.'', $t_transaction->sto_amount);
+				$file->setActiveSheetIndex(0)->setCellValue('E'.$a.'', $t_transaction->ending_pcs);
+				$file->setActiveSheetIndex(0)->setCellValue('F'.$a.'', $t_transaction->ending_amount);
+				$file->setActiveSheetIndex(0)->setCellValue('G'.$a.'', $t_transaction->dif_pcs);
+				$file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', $t_transaction->dif_amount);
+				// $file->setActiveSheetIndex(0)->setCellValue('H'.$a.'', round($t_transaction->quota_rounded_2 / 60,2));
+				// $file->setActiveSheetIndex(0)->setCellValue('I'.$a.'', round(($t_transaction->quota_rounded_2/60)-$t_transaction->quota_rounded,2));
+				$a++;
+			}
+		})->export('xlsx');
+	}
+
 	public function view_list()
 	{  
 	 	$input 			= \Input::all();
@@ -360,12 +458,12 @@ class StockController extends Controller {
 			$t_transaction->total_pcs   = $b;
 			$t_transaction->save();
         } else {
-        	$a 			 	= $input['amount_box'];
-       		$b 			 	= $input['amount_pcs'];
-	       	$total1 	 	= $a*$qty_box;
-	       	$total_pcs 	 	= $total1+$b;
-	       	$t_transaction  = t_transaction::findOrFail($id);
-	       	$total_amt 		= ($total_pcs * $t_transaction->harga);
+        	$a 			 = $input['amount_box'];
+       		$b 			 = $input['amount_pcs'];
+	       	$total1 	 = $a*$qty_box;
+	       	$total_pcs 	 = $total1+$b;
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+	       	$total_amt = $total_pcs * $t_transaction->harga;
 	       	$t_transaction->total_amount = $total_amt;
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
@@ -529,7 +627,60 @@ class StockController extends Controller {
 
   }
 
+public function upload_sto() { //by ario, 20170925
 
+  		$i = 1;	
+    	try {	
+			
+	    	DB::beginTransaction();
+
+    		$file = \Input::file('file');
+    
+       		$data = array();
+	    	$file->move('../file/', $file->getClientoriginalName());
+	    	$extension = \Input::file('file')->getClientoriginalExtension();
+	    	$fileName  = $file->getClientoriginalName();
+	    
+      		$row = Excel::load('file/'.$fileName)->get();
+      
+	    	foreach ($row as $rows) {
+
+	    		$pn = $rows['part_number'];
+	    		$trx=t_transaction::where('part_number',$pn)->first();
+	    		if($pn != '' && $pn != '000000' && $pn != null ){
+
+	    			$trx = t_transaction::where('part_number', $pn)
+	    									->first();
+	    			if (! $trx) {
+	    				throw new \Exception('part number : ('.$pn.') tidak ditemukan', 1);
+	    			}
+	    			else {
+			    		// return $pn;
+			    		$trx->ending_pcs=$rows['qty'];
+			    		$trx->ending_amount=$rows['amount'];
+			    		$trx->save();
+			    		
+	    			}
+	    		}
+
+	    		$i++;
+	    		
+	    	}
+	    	
+	    	DB::commit();
+
+	    	\Session::flash('flash_type','alert-success');
+			\Session::flash('flash_message','Sukses, Ending Qty dan Amount berhasil di upload!');
+    		return redirect ('stock/sto/report');
+    	}
+    	catch(\Exception $e){
+    		DB::rollback();
+    		\Session::flash('flash_type','alert-danger');
+			\Session::flash('flash_message', 'Baris-'.$i.' problem ===> '.$e->getMessage());
+			return redirect ('stock/sto/report');	// hotfix-3.1.3, Ferry, kembali ke menu import
+    	}   	
+    	
+	}
 
 
 }
