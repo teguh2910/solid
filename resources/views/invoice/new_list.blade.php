@@ -7,7 +7,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="{{ url('/invoice/user/newlist') }}">
-                            <big><big><big><font face='calibri' color='grey'><b>LIST INVOICE CASIER
+                            <big><big><big><font face='calibri' color='grey'><b>LIST INVOICE CASHIER
                             <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>

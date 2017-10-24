@@ -7,7 +7,7 @@
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 	<title>ELNA v1.6.0</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v3.1</title>
+	<title>SOLID v3.4.0</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -52,7 +52,7 @@
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
 
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.1.1</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.4.0</small></small></small></span>
 
 				</a>
 				@endif
