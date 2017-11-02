@@ -5,28 +5,28 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li>
+                    <li class="active">
                         <a href="{{ url('/invoice/user/newlist') }}">
-                            <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
-                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                            <big><big><big><font face='calibri' color='grey'><b>LIST INVOICE CASHIER
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
-                    <li class="active">
-                        <a>
-                            <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST PUD
-                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
+                    <li>
+                        <a href="{{ url('/invoice/user/list') }}">
+                            <font face='calibri' color='grey'><b>INVOICE LIST PUD
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/invoice/user/check') }}">
                             <font face='calibri' color='grey'><b>INVOICE CHECKED
-                                <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font>
+                            <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/invoice/user/reject/list') }}">
                             <font face='calibri' color='grey'><b>INVOICE REJECT
-                                <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
+                            <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                         </a>
                     </li>
                 </ul>
@@ -87,14 +87,10 @@
                             <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                             <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                             <td class='warning'>
-                                <a href="{{ url('invoice/checked/check/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
+                                <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                                     onclick="return confirm('Apakah anda yakin akan melakukan check pada invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
-                                    <font face='calibri'><b>Check</b></font>
+                                    <font face='calibri'><b>Purchasing Received</b></font>
                                 </a>&nbsp;
-                                <a href="{{ url('invoice/pending/user/'.$invoice->id) }}" class="btn btn-danger btn-xs">
-                                    <font face='calibri'><b>Reject</b></font>
-                                </a>
-
                             </td>
                         </tr>
                         @endforeach
