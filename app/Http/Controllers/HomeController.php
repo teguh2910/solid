@@ -193,7 +193,7 @@ class HomeController extends Controller {
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
-		return redirect('invoice/user/list');
+		return redirect('invoice/user/newlist');
 	}
 
 	public function invoice_checked_check($id)
