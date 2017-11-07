@@ -5,6 +5,9 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
+                    @if (Auth::guest())
+                    @elseif (Auth::user()->role == "8")
+                    <!-- < 8 = renni> -->
                     <li>
                         <a href="{{ url('/invoice/user/newlist') }}">
                             <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
@@ -17,6 +20,15 @@
                             <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
                         </a>
                     </li>
+                    @elseif (Auth::user()->role == "1")
+                    <!-- < 1 = user> -->
+                    <li>
+                        <a href="{{ url('/invoice/user/newlist') }}">
+                            <font face='calibri' color='grey'><b>LIST INVOICE
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                    @endif
                     <li>
                         <a href="{{ url('/invoice/user/check') }}">
                             <font face='calibri' color='grey'><b>INVOICE CHECKED
