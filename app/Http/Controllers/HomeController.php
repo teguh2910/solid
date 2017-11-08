@@ -57,7 +57,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$user =\Auth::user();
-		if ($user->role == "1") {
+		if ($user->role == "1" || $user->role == "8") {
 			$user 		= \Auth::user();
 			$queries 	= DB::select('select count(id) as a from invoice where 
 			status="1" and dept_code='.$user->dept_code.'');
