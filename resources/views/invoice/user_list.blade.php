@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="{{ url('/invoice/user/reject/list') }}">
+                        <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST PUD
                             <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
                         </a>
