@@ -5,14 +5,31 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
+                    @if (Auth::guest())
+                    @elseif (Auth::user()->role == "8")
+                    <!-- < 8 = renni> -->
                     <li>
-                        <a href="{{ url('invoice/user/list') }}">
-                            <font face='calibri' color='grey'><b>INVOICE LIST
+                        <a href="{{ url('/invoice/user/newlist') }}">
+                            <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
                             <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('invoice/user/list') }}">
+                            <font face='calibri' color='grey'><b>INVOICE LIST PUD
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                    @elseif (Auth::user()->role == "1")
+                    <li>
+                        <a href="{{ url('/invoice/user/newlist') }}">
+                            <font face='calibri' color='grey'><b>LIST INVOICE
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                    @endif
                     <li class="active">
-                        <a>
+                        <a href="{{ url('/invoice/user/check') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE CHECKED
                             <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font></big></big></big>
                         </a>
@@ -23,6 +40,7 @@
                             <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                         </a>
                     </li>
+                    
                 </ul>
                 <div class="tab-content">
                 <font face='calibri' color='grey'>
