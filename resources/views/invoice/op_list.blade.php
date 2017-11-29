@@ -100,6 +100,8 @@
                             <br/><small>{{$invoice->tgl_pending_act}}</small>
                         @elseif ($invoice->status=="7")
                             <b>Rejected by Finance</b>
+                        @elseif ($invoice->status=="9")
+                            <b>Waiting Approval by User</b>
                         @endif
                         </font></a></td>
                          @if (Auth::user()->role == "4")
