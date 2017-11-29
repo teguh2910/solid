@@ -57,7 +57,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$user =\Auth::user();
-		if ($user->role == "1") {
+		if ($user->role == "1" || $user->role == "8") {
 			$user 		= \Auth::user();
 			$queries 	= DB::select('select count(id) as a from invoice where 
 			status="1" and dept_code='.$user->dept_code.'');
@@ -139,7 +139,7 @@ class HomeController extends Controller {
 		return view('invoice.add');
 	}
 
-	public function invoice_new_list()
+	public function invoice_new_list() // tab tambahan renni
 	{
 		$user =\Auth::user();
 		$queries = DB::select('select count(id) as a from invoice where 
@@ -160,7 +160,28 @@ class HomeController extends Controller {
 		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
 	}
 
-	public function invoice_user_list()
+	public function invoice_new_list1() // tab user
+	{
+		$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
+        $queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
+        $queries4 = DB::select('select count(id) as d from invoice where 
+			status="9" and dept_code='.$user->dept_code.'');
+        $result4 = new Collection($queries4);
+		$invoice = Invoice::where('status','1')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
+	}
+
+	public function invoice_user_list() 
 	{
 		$user =\Auth::user();
 		$queries = DB::select('select count(id) as a from invoice where 
@@ -193,7 +214,7 @@ class HomeController extends Controller {
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
-		return redirect('invoice/user/list');
+		return redirect('invoice/user/newlist');
 	}
 
 	public function invoice_checked_check($id)
