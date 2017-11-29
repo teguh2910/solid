@@ -60,8 +60,8 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if (Auth::guest())
-				@elseif (Auth::user()->role == "1")
-				<!-- < 1 = user> -->
+				@elseif (Auth::user()->role == "1" or Auth::user()->role == "8")
+				<!-- < 1 = user 8 = renni> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/invoice/user/list') }}">
 							<font face='calibri'><b>INVOICE LIST</b></font>
@@ -204,7 +204,7 @@
 							} 
 
 							$role=Auth::user()->role;
-							if ($role == '1') {
+							if ($role == '1' || $role == '8') {
 		                        $a = 'User';
 		                    }    
 		                    elseif ($role == '2') {

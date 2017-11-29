@@ -273,7 +273,7 @@ class StockController extends Controller {
 
 	 public function view_transaction_inventory()
 	 {
-	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'))
+	 	$t_transaction 	= t_transaction::select('*','t_transactions.id as id_transaksi', ('t_transactions.total_pcs * t_transactions.harga as total_amount'))
 	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 									->get();
 	 							
@@ -282,7 +282,7 @@ class StockController extends Controller {
 
 	 public function view_sto_report() //v1.6.1, by ario 20170919
 	 {
-	 	$t_transaction 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_amount) as sto_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_amount) - sum(t_transactions.ending_amount) as dif_amount'),'t_transactions.*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'), 't_transactions.v_class as vclass','t_transactions.part_number as part_number','t_transactions.part_name as part_name','t_transactions.kind as kind', 't_transactions.ending_pcs as ending_pcs','t_transactions.ending_amount as ending_amount')
+	 	$t_transaction 	= t_transaction::select(DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_pcs) * t_transactions.harga as sto_amount'),DB::raw('sum(t_transactions.total_pcs) - sum(t_transactions.ending_pcs) as dif_pcs'),DB::raw('sum(t_transactions.total_pcs) as sto_qty'),DB::raw('sum(t_transactions.total_pcs) * t_transactions.harga - t_transactions.ending_amount as dif_amount'),'t_transactions.*','t_transactions.id as id_transaksi', ('t_transactions.amount_pcs * t_transactions.harga as total_amount'), 't_transactions.v_class as vclass','t_transactions.part_number as part_number','t_transactions.part_name as part_name','t_transactions.kind as kind', 't_transactions.ending_pcs as ending_pcs','t_transactions.ending_amount as ending_amount')
 	 									->join('m_areas','m_areas.id_area','=','t_transactions.id_area')
 	 									->groupBy('t_transactions.part_number')
 	 									->get();

@@ -5,6 +5,9 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
+                    @if (Auth::guest())
+                    @elseif (Auth::user()->role == "8")
+                    <!-- < 8 = renni> -->
                     <li>
                         <a href="{{ url('/invoice/user/newlist') }}">
                             <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
@@ -12,11 +15,21 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a>
+                        <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST PUD
                             <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
+                    @elseif (Auth::user()->role == "1")
+                    <!-- < 8 = renni> -->
+                    <li class="active">
+                        <a href="{{ url('/invoice/user/newlist') }}">
+                            <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
+                        </a>
+                    </li>
+
+                    @endif
                     <li>
                         <a href="{{ url('/invoice/user/check') }}">
                             <font face='calibri' color='grey'><b>INVOICE CHECKED
@@ -29,6 +42,8 @@
                                 <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                         </a>
                     </li>
+
+
                 </ul>
                 <div class="tab-content">
                     <div class="clearfix">&nbsp;</div>
