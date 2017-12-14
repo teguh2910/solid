@@ -11,19 +11,19 @@
                     <li>
                         <a href="{{ url('/invoice/user/newlist') }}">
                             <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
-                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
                         </a>
                     </li>
                     <li class="active">
                         <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST PUD
-                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
                     @elseif (Auth::user()->role == "1")
                     <!-- < 8 = renni> -->
                     <li class="active">
-                        <a href="{{ url('/invoice/user/newlist') }}">
+                        <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST
                             <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
                         </a>

@@ -101,7 +101,7 @@
                         @elseif ($invoice->status=="7")
                             <b>Rejected by Finance</b>
                         @elseif ($invoice->status=="9")
-                            <b>Waiting Approval by User</b>
+                            <b>Waiting Purch Received</b>
                         @endif
                         </font></a></td>
                          @if (Auth::user()->role == "4")

@@ -57,7 +57,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$user =\Auth::user();
-		if ($user->role == "1" || $user->role == "8") {
+		if ($user->role == "1") {
 			$user 		= \Auth::user();
 			$queries 	= DB::select('select count(id) as a from invoice where 
 			status="1" and dept_code='.$user->dept_code.'');
@@ -91,7 +91,26 @@ class HomeController extends Controller {
 	                })
 					->get();
 			return view('invoice.act_list', compact('invoice','result','result2','result3','result4'));
-		} else if ($user->role == "3"){
+		} elseif ($user->role == "8") {
+			$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
+        $queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
+        $queries4 = DB::select('select count(id) as d from invoice where 
+			status="9" and dept_code='.$user->dept_code.'');
+        $result4 = new Collection($queries4);
+		$invoice = Invoice::where('status','9')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
+		
+		}else if($user->role == "3"){
 			$invoice = Invoice::where('status','3')->get();
 			$queries = DB::select('select count(id) as a from invoice where status="3"');
         	$result = new Collection($queries);
@@ -154,7 +173,7 @@ class HomeController extends Controller {
         $queries4 = DB::select('select count(id) as d from invoice where 
 			status="9" and dept_code='.$user->dept_code.'');
         $result4 = new Collection($queries4);
-		$invoice = Invoice::where('status','1')
+		$invoice = Invoice::where('status','9')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
@@ -196,7 +215,7 @@ class HomeController extends Controller {
         $queries4 = DB::select('select count(id) as d from invoice where 
 			status="9" and dept_code='.$user->dept_code.'');
         $result4 = new Collection($queries4);
-		$invoice = Invoice::where('status','9')
+		$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.user_list', compact('invoice','result','result2','result3','result4'));
@@ -209,7 +228,7 @@ class HomeController extends Controller {
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
 		$invoice->user=$user->id;
-		$invoice->status="9";
+		$invoice->status="1";
 		$invoice->tgl_terima_user=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
@@ -229,7 +248,7 @@ class HomeController extends Controller {
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
-		return redirect('invoice/user/check');
+		return redirect('invoice/user/list');
 	}
 
 	public function invoice_pending_user($id)
@@ -237,7 +256,18 @@ class HomeController extends Controller {
 		$user 		= \Auth::user();
 		$invoice 	= Invoice::where('id',$id)
 								->where('dept_code',$user->dept_code)
-								->where('status','9')->get();
+								->where('status','1')
+								->get();
+		return view('invoice.user_pending_view', compact('invoice'));
+	}
+
+	public function invoice_pending_user1($id)
+	{
+		$user 		= \Auth::user();
+		$invoice 	= Invoice::where('id',$id)
+								->where('dept_code',$user->dept_code)
+								->where('status','9')
+								->get();
 		return view('invoice.user_pending_view', compact('invoice'));
 	}
 
@@ -1138,7 +1168,13 @@ class HomeController extends Controller {
 		$invoice->amount 			= $string;
 		// $invoice->doc_no_2 			= $input['doc_no_2'];
 		$invoice->tgl_input 		= $date;
-		$invoice->status 			= "1";
+		
+		if ($input['dept_code'] == '1') {
+			$invoice->status 			= "9";
+		}else{
+			$invoice->status 			= "1";
+		}
+
 		$invoice->no_po 			= $input['no_po'];
 		$invoice->code_bank_data	= $code_bank_data;
 

@@ -11,13 +11,13 @@
                     <li class="active">
                         <a href="{{ url('/invoice/user/newlist') }}">
                             <big><big><big><font face='calibri' color='grey'><b>LIST INVOICE CASHIER
-                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/invoice/user/list') }}">
                             <font face='calibri' color='grey'><b>INVOICE LIST PUD
-                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                         </a>
                     </li>
                     @elseif (Auth::user()->role == "1")
@@ -104,6 +104,9 @@
                                     onclick="return confirm('Apakah anda yakin akan melakukan check pada invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
                                     <font face='calibri'><b>Purchasing Received</b></font>
                                 </a>&nbsp;
+                                <a href="{{ url('invoice/pending/user1/'.$invoice->id) }}" class="btn btn-danger btn-xs">
+                                    <font face='calibri'><b>Reject</b></font>
+                                </a>
                                 @elseif (Auth::user()->role == "1")
                                 <a href="{{ url('invoice/checked/check/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                                     onclick="return confirm('Apakah anda yakin akan melakukan check pada invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
