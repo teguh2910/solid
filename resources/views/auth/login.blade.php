@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID v3.6.0 & ELNA v1.4</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SOLID v3.6.2 & ELNA v3.6.2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
     body{
@@ -75,7 +75,7 @@
 							<!-- Aisin Operational Invoice Document -->
 
 							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
-							&nbsp;<small><b>v3.6.0</b></small>
+							&nbsp;<small><b>v3.6.2</b></small>
 
 						</font><br/><br/>
 					</center>

@@ -758,7 +758,7 @@ class HomeController extends Controller {
 	public function upload_master() {
 		$date 		= date('y');
 		$nomor 		= '';
-		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
+		$invoice 	= DB::select('select no_penerimaan as nomor from invoice');
 		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
 		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
@@ -766,15 +766,14 @@ class HomeController extends Controller {
 		}
 		$getNomor = substr($nomor, 0,2);
 		if ($nomor == '' || $nomor == null){
-			$nomor = $date+'00000001';
+			$nomor = $date.''.'00000001';
 		} else {
 			if($getNomor == $date) {
 				$nomor = $nomor+1;
 			} else {
-				$nomor = $date+'00000001';
+				$nomor = $date.''.'00000001';
 			}
 		}
-		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
 		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 
