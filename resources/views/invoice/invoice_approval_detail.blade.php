@@ -103,6 +103,16 @@
                 <tbody>
                 @foreach ($invoice as $invoice)
                     @if ($invoice->status=="1")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+            
+                        @endif  
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -111,7 +121,25 @@
                             </font></td>
                         </tr>
                     @endif
+                    @if ($invoice->status=="9")
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_input }}
+                            </font></td>
+                        </tr>
+                    @endif
                     @if ($invoice->status=="2")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif 
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -139,6 +167,15 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="3")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -184,6 +221,15 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="4")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval by User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -236,13 +282,24 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="5")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
+                        @if ($invoice->tgl_terima_user != '0000-00-00 00:00:00')
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval User</font></td>
                             <td class='warning'><font face='calibri'>
                                 {{ $day = date('D', strtotime($invoice->tgl_input)) }} 
-                                {{ $invoice->tgl_input }}
+                                {{ $invoice->tgl_terima_user }}
                             </font></td>
                         </tr>
+                        @endif
                         <tr class='info'>
                             <td><font face='calibri'>Rejected by User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -254,6 +311,15 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="6")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -291,6 +357,15 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="7")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval User</font></td>
                             <td class='warning'><font face='calibri'>
@@ -336,6 +411,15 @@
                         </tr>
                     @endif
                     @if ($invoice->status=="8")
+                        @if ($invoice->tgl_approve_user != '0000-00-00 00:00:00')
+                        <tr>
+                            <td class='info'><font face='calibri'>Waiting Purch Received</font></td>
+                            <td class='warning'><font face='calibri'>
+                                {{ $day = date('D', strtotime($invoice->tgl_approve_user)) }} 
+                                {{ $invoice->tgl_approve_user }}
+                            </font></td>
+                        </tr>
+                        @endif
                         <tr>
                             <td class='info'><font face='calibri'>Waiting Approval User</font></td>
                             <td class='warning'><font face='calibri'>

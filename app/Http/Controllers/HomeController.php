@@ -229,7 +229,7 @@ class HomeController extends Controller {
 		$invoice = Invoice::findOrFail($id);
 		$invoice->user=$user->id;
 		$invoice->status="1";
-		$invoice->tgl_terima_user=$date;
+		$invoice->tgl_input=$date;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
@@ -747,7 +747,11 @@ class HomeController extends Controller {
 		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="1";
+		if ($invoice->dept_code == '1') {
+			$invoice->status	= "9";
+		}else{
+			$invoice->status	= "1";
+		}
 		$invoice->user=$user->name;
 		$invoice->save();
 		\Session::flash('flash_type','alert-success');
@@ -758,7 +762,7 @@ class HomeController extends Controller {
 	public function upload_master() {
 		$date 		= date('y');
 		$nomor 		= '';
-		$invoice 	= DB::select('select no_penerimaan as nomor from invoice');
+		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
 		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
 		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
@@ -766,14 +770,15 @@ class HomeController extends Controller {
 		}
 		$getNomor = substr($nomor, 0,2);
 		if ($nomor == '' || $nomor == null){
-			$nomor = $date.''.'00000001';
+			$nomor = $date+'00000001';
 		} else {
 			if($getNomor == $date) {
 				$nomor = $nomor+1;
 			} else {
-				$nomor = $date.''.'00000001';
+				$nomor = $date+'00000001';
 			}
 		}
+		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
 		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 
@@ -1167,6 +1172,7 @@ class HomeController extends Controller {
 		$invoice->amount 			= $string;
 		// $invoice->doc_no_2 			= $input['doc_no_2'];
 		$invoice->tgl_input 		= $date;
+		$invoice->tgl_approve_user 	= $date;
 		
 		if ($input['dept_code'] == '1') {
 			$invoice->status 			= "9";

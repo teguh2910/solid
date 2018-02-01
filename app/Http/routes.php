@@ -24,6 +24,7 @@ Route::get('invoice/user/check', 'HomeController@invoice_user_check');
 Route::get('invoice/checked/user/{id}', 'HomeController@invoice_checked_user');
 Route::get('invoice/checked/check/{id}', 'HomeController@invoice_checked_check');
 Route::get('invoice/pending/user/{id}', 'HomeController@invoice_pending_user');
+Route::get('invoice/pending/user1/{id}', 'HomeController@invoice_pending_user1');
 Route::get('invoice/pending/act/{id}', 'HomeController@invoice_pending_act');
 Route::post('invoice/pending/user/save', 'HomeController@invoice_pending_user_save');
 Route::post('invoice/pending/act/save', 'HomeController@invoice_pending_act_save');

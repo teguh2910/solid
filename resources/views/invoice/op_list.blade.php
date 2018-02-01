@@ -102,6 +102,7 @@
                             <b>Rejected by Finance</b>
                         @elseif ($invoice->status=="9")
                             <b>Waiting Purch Received</b>
+                            <br/><small>{{$invoice->tgl_approve_user}}</small>
                         @endif
                         </font></a></td>
                          @if (Auth::user()->role == "4")
