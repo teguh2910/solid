@@ -24,6 +24,7 @@
                         <th><font face='calibri' color='white'>Id Area</font></th>
                         <th><font face='calibri' color='white'>Plant Type</font></th>
                         <th><font face='calibri' color='white'>Area Code</font></th>
+                        <th><font face='calibri' color='white'>Area Detail</font></th>
                         <th><font face='calibri' color='white'>Area Name</font></th>
                         <th><font face='calibri' color='white'>PIC</font></th>
                         <th><font face='calibri' color='white'>Contact</font></th>
@@ -37,6 +38,7 @@
                         <td><font face='calibri'>{{ $m_area->id_area }}</font></td>
                         <td><font face='calibri'>{{ $m_area->type_plant }}</font></td>
                         <td><font face='calibri'>{{ $m_area->code_area }}</font></td>
+                        <td><font face='calibri'>{{ $m_area->detail_area }}</font></td>
                         <td><font face='calibri'>{{ $m_area->name_area }}</font></td>
                         <td><font face='calibri'>{{ $m_area->pic_name }}</font></td>
                         <td><font face='calibri'>{{ $m_area->pic_contact }}</font></td>
@@ -113,7 +115,7 @@
                     <h4 class="modal-title"><font face='calibri'><b>CREATE AREA</b></font></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_area') }}">
+        <form class="form-horizontal" role="form" enctype='multipart/form-data' method="POST" action="{{ url('/stock/save_area') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
              
             <div class="form-group">
@@ -137,6 +139,13 @@
               <div class="col-md-8">
                     <font face='calibri'><b>Area Name</b></font><br/>
                   <input type='text' class="form-control" name="name_area" id="name_area" placeholder="use underscore for space, exp : PPIC_UNIT"required>
+                </div>
+              </div>
+
+            <div class="form-group">
+              <div class="col-md-8">
+                    <font face='calibri'><b>Area Detail</b></font><br/>
+                  <input type='text' class="form-control" name="detail_area" id="detail_area" placeholder="use underscore for space, exp : DOCK_DELIVERY"required>
                 </div>
               </div>
            
