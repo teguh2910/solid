@@ -37,7 +37,7 @@
                         <th><small><font face='calibri'>DUE DATE</font></small></th>
                         <th><small><font face='calibri'>CURR</font></small></th>
                         <th><small><font face='calibri'>AMOUNT</font></small></th>
-                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <!-- <th><small><font face='calibri'>DOC NO</font></small></th> -->
                         <th><small><font face='calibri'>NO PO</font></small></th>
                         <th><small><font face='calibri'></font></small></th>
                     </tr>
@@ -78,7 +78,7 @@
                     <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td> <!-- hotfix-3.0.7, by yudo, 20170508, number format -->
-                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <!-- <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td> -->
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td class='warning'>
                         <a href="{{ url('invoice/checked/act/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
