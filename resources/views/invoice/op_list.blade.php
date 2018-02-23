@@ -78,7 +78,7 @@
                             echo"<td class='warning'>";
                         }
                         ?>
-                        <a href="{{ url('invoice/approval/detail/'.$invoice->id) }}" target="_blank">
+                        <a href="{{ url('invoice/approval/detail/'.$invoice->id.'/'.$invoice->no_penerimaan) }}" target="_blank">
                         <font face='calibri'>
                         @if ($invoice->status=="1")
                             <b>Waiting Approval by User</b>
@@ -93,6 +93,9 @@
                             <b>Checked by Finance</b>
                             <br/><small>{{$invoice->tgl_terima_finance}}</small>
                         @elseif ($invoice->status=="5")
+                            <b>Rejected by Purch</b>
+                            <br/><small>{{$invoice->tgl_pending_user}}</small>
+                        @elseif ($invoice->status=="20")
                             <b>Rejected by User</b>
                             <br/><small>{{$invoice->tgl_pending_user}}</small>
                         @elseif ($invoice->status=="6")
