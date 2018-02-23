@@ -59,7 +59,7 @@
                         <th><small><font face='calibri'>DUE DATE</font></small></th>
                         <th><small><font face='calibri'>CURR</font></small></th>
                         <th><small><font face='calibri'>AMOUNT</font></small></th>
-                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <!-- <th><small><font face='calibri'>DOC NO</font></small></th> -->
                         <th><small><font face='calibri'>NO PO</font></small></th>
                         <th><small><font face='calibri'>REJECT REASON</font></small></th>
                         <th><small><font face='calibri'></font></small></th>
@@ -100,7 +100,7 @@
                     <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                     <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td>
-                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <!-- <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td> -->
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td><font face='calibri'><small><b>{{ $invoice->remark_act }}</b><br/>{{$invoice->tgl_pending_act}}</small></font></td>
                     <td class='warning'>
