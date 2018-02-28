@@ -44,6 +44,13 @@
 
             <div class="form-group">
               <div class="col-md-10">
+                <font face='calibri'><b>Area Detail</b></font><br/>
+                <input type="text" class="form-control" name="detail_area" id="detail_area" value="{{$v->detail_area}}">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-10">
                 <font face='calibri'><b>PIC</b></font><br/>
                 <input type="text" class="form-control" name="pic_name" id="pic_name" value="{{ $v->pic_name }}">
               </div>

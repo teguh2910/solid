@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class m_area extends Model {
 
 	protected $table ='m_areas' ;
-    protected $fillable = ['id_area','type_plant','code_area','name_area','pic_name','pic_contact'];
+    protected $fillable = ['id_area','type_plant','code_area','detail_area','name_area','pic_name','pic_contact'];
  
 	public static function array_to_db($array_data){
         $total=sizeof($array_data);
@@ -17,9 +17,10 @@ class m_area extends Model {
                         'id_area'       =>$key[0],
                         'type_plant'    =>$key[1],
                         'code_area'     =>$key[2],
-                        'name_area'     =>$key[3],
-                        'pic_name'      =>$key[4],
-                        'pic_contact'   =>$key[5],
+                        'detail_area'   =>$key[3],
+                        'name_area'     =>$key[4],
+                        'pic_name'      =>$key[5],
+                        'pic_contact'   =>$key[6],
                     ]);
                 }
                 return 1;

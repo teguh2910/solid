@@ -11,19 +11,19 @@
                     <li>
                         <a href="{{ url('/invoice/user/newlist') }}">
                             <font face='calibri' color='grey'><b>LIST INVOICE CASHIER
-                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
+                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font>
                         </a>
                     </li>
                     <li class="active">
                         <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST PUD
-                            <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
                     @elseif (Auth::user()->role == "1")
                     <!-- < 8 = renni> -->
                     <li class="active">
-                        <a href="{{ url('/invoice/user/newlist') }}">
+                        <a href="{{ url('/invoice/user/list') }}">
                             <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST
                             <span class='badge badge-info'>@foreach ($result4 as $result4) {{ $result4->d }} @endforeach</span></b></font></big></big></big>
                         </a>
@@ -59,9 +59,9 @@
                                 <th><small><font face='calibri'>DUE DATE</font></small></th>
                                 <th><small><font face='calibri'>CURR</font></small></th>
                                 <th><small><font face='calibri'>AMOUNT</font></small></th>
-                                <th><small><font face='calibri'>DOC NO</font></small></th>
+                                <!-- <th><small><font face='calibri'>DOC NO</font></small></th> -->
                                 <th><small><font face='calibri'>NO PO</font></small></th>
-                                <th></th>
+                                <th><small><font face='calibri'><center>ACTION</center></font></small></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,7 +99,7 @@
                             <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                             <td><font face='calibri'>{{ $invoice->curr }}</font></td>
                             <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td>
-                            <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                            <!-- <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td> -->
                             <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                             <td class='warning'>
                                 <a href="{{ url('invoice/checked/check/'.$invoice->id) }}" class="btn btn-primary btn-xs" 

@@ -6,13 +6,13 @@ use App\m_area;
 use App\m_part;
 use App\t_transaction;
 use App\Stock;
+use App\history_invoice; //dev-3.7.0, 20180202, by Fahrul Sudarusman
 use DB;
 use Illuminate\Support\Collection; 
 use Illuminate\Http\Request;
 use Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 
 use Carbon\Carbon;
 use Libern\QRCodeReader\QRCodeReader;
@@ -57,7 +57,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$user =\Auth::user();
-		if ($user->role == "1" || $user->role == "8") {
+		if ($user->role == "1") {
 			$user 		= \Auth::user();
 			$queries 	= DB::select('select count(id) as a from invoice where 
 			status="1" and dept_code='.$user->dept_code.'');
@@ -91,7 +91,26 @@ class HomeController extends Controller {
 	                })
 					->get();
 			return view('invoice.act_list', compact('invoice','result','result2','result3','result4'));
-		} else if ($user->role == "3"){
+		} elseif ($user->role == "8") {
+			$user =\Auth::user();
+		$queries = DB::select('select count(id) as a from invoice where 
+			status="1" and dept_code='.$user->dept_code.'');
+        $result = new Collection($queries);
+        $queries2 = DB::select('select count(id) as b from invoice where 
+			status="6" and dept_code='.$user->dept_code.'');
+        $result2 = new Collection($queries2);
+        $queries3 = DB::select('select count(id) as c from invoice where 
+			status="2" and dept_code='.$user->dept_code.'');
+        $result3 = new Collection($queries3);
+        $queries4 = DB::select('select count(id) as d from invoice where 
+			status="9" and dept_code='.$user->dept_code.'');
+        $result4 = new Collection($queries4);
+		$invoice = Invoice::where('status','9')
+							->where('dept_code',$user->dept_code)
+							->get();
+		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
+		
+		}else if($user->role == "3"){
 			$invoice = Invoice::where('status','3')->get();
 			$queries = DB::select('select count(id) as a from invoice where status="3"');
         	$result = new Collection($queries);
@@ -154,7 +173,7 @@ class HomeController extends Controller {
         $queries4 = DB::select('select count(id) as d from invoice where 
 			status="9" and dept_code='.$user->dept_code.'');
         $result4 = new Collection($queries4);
-		$invoice = Invoice::where('status','1')
+		$invoice = Invoice::where('status','9')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.new_list', compact('invoice','result','result2','result3','result4'));
@@ -196,7 +215,7 @@ class HomeController extends Controller {
         $queries4 = DB::select('select count(id) as d from invoice where 
 			status="9" and dept_code='.$user->dept_code.'');
         $result4 = new Collection($queries4);
-		$invoice = Invoice::where('status','9')
+		$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
 		return view('invoice.user_list', compact('invoice','result','result2','result3','result4'));
@@ -209,9 +228,27 @@ class HomeController extends Controller {
 		$date = date('Y-m-d H:i:s');
 		$invoice = Invoice::findOrFail($id);
 		$invoice->user=$user->id;
-		$invoice->status="9";
-		$invoice->tgl_terima_user=$date;
+		$invoice->status="1";
+		$invoice->tgl_input=$date;
 		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "1";
+
+		if ($history->status = '1') {
+			$history->name_status 	= "Waiting Approval by User";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
 		return redirect('invoice/user/newlist');
@@ -227,9 +264,27 @@ class HomeController extends Controller {
 		$invoice->status="2";
 		$invoice->tgl_terima_user=$date;
 		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "2";
+
+		if ($history->status = '2') {
+			$history->name_status 	= "Checked by User";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
-		return redirect('invoice/user/check');
+		return redirect('invoice/user/list');
 	}
 
 	public function invoice_pending_user($id)
@@ -237,8 +292,19 @@ class HomeController extends Controller {
 		$user 		= \Auth::user();
 		$invoice 	= Invoice::where('id',$id)
 								->where('dept_code',$user->dept_code)
-								->where('status','9')->get();
+								->where('status','1')
+								->get();
 		return view('invoice.user_pending_view', compact('invoice'));
+	}
+
+	public function invoice_pending_user1($id)
+	{
+		$user 		= \Auth::user();
+		$invoice 	= Invoice::where('id',$id)
+								->where('dept_code',$user->dept_code)
+								->where('status','9')
+								->get();
+		return view('invoice.user1_pending_view', compact('invoice'));
 	}
 
 	public function invoice_reject_user($id)
@@ -286,11 +352,65 @@ class HomeController extends Controller {
 		$user 		= \Auth::user();
 		$id 		= $input['id'];
 		$invoice 					= Invoice::findOrFail($id);
+		$invoice->status 			= "20";
+		$invoice->user 				= $user->id;
+		$invoice->tgl_pending_user 	= $date;
+		$invoice->remark 			= $input['remark'];
+		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "20";
+
+		if ($history->status = '20') {
+			$history->name_status 	= "Reject by User";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Sukses, invoice berhasil di reject');
+		return redirect('/invoice/user/list');
+	}
+
+	public function invoice_pending_user1_save()
+	{
+		date_default_timezone_set('Asia/Jakarta');
+		$date = date('Y-m-d H:i:s');
+		$input 		= \Input::all();
+		$user 		= \Auth::user();
+		$id 		= $input['id'];
+		$invoice 					= Invoice::findOrFail($id);
 		$invoice->status 			= "5";
 		$invoice->user 				= $user->id;
 		$invoice->tgl_pending_user 	= $date;
 		$invoice->remark 			= $input['remark'];
 		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "5";
+
+		if ($history->status = '5') {
+			$history->name_status 	= "Reject by Purch";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice berhasil di reject');
 		return redirect('/invoice/user/list');
@@ -304,11 +424,29 @@ class HomeController extends Controller {
 		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="6";
+		$invoice->status="1";
 		$invoice->act=$user->id;
 		$invoice->tgl_pending_act=$date;
 		$invoice->remark_act=$input['remark'];
 		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "1";
+
+		if ($history->status = '1') {
+			$history->name_status 	= "Reject by Accounting";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di reject');
 		return redirect('home');
@@ -316,7 +454,7 @@ class HomeController extends Controller {
 
 	public function invoice_pending_list()
 	{
-		$invoice = Invoice::where('status','5')->get();
+		$invoice = Invoice::whereIn('status', ['5', '20'])->get();
 		return view('invoice.pending_list', compact('invoice'));
 	}
 
@@ -381,6 +519,24 @@ class HomeController extends Controller {
 		$invoice->status="3";
 		$invoice->tgl_terima_act=$date;
 		$invoice->save();
+
+		//dev-3.7.0, 20180202, by Fahrul Sudarusman input ke tabel history invoice
+		date_default_timezone_set('Asia/Jakarta');
+		$date    				= date('Y-m-d H:i:s');
+		$invoice 				= Invoice::findOrFail($id);
+
+		$history                = new history_invoice;
+		$history->no_penerimaan = $invoice->no_penerimaan;
+		$history->dept_code     = $invoice->dept_code;
+		$history->status 		= "3";
+
+		if ($history->status = '3') {
+			$history->name_status 	= "Approved by Accounting";
+		}
+
+		$history->tanggal 		= $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di approve');
 		return redirect('invoice/act/list');
@@ -717,9 +873,34 @@ class HomeController extends Controller {
 		$user =\Auth::user();
 		date_default_timezone_set('Asia/Jakarta');
 		$date = date('Y-m-d H:i:s');
-		$invoice->status="1";
+		if ($invoice->dept_code == '1') {
+			$invoice->status	= "9";
+		}else{
+			$invoice->status	= "1";
+		}
 		$invoice->user=$user->name;
 		$invoice->save();
+
+		$input 		= \Input::all();
+        date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+
+		//dev-3.7.0, 20180201, by Farul Sudarusman, Input beberapa data ke table history invoice sebagai acuan history 
+        $history 					= new history_invoice;
+        $history->no_penerimaan		= $invoice->no_penerimaan;
+        $history->dept_code 		= $invoice->dept_code;
+
+        if ($history->dept_code == '1') {
+			$history->status 		= "9";
+			$history->name_status   = "Waiting Purch Received";
+		}else{
+			$history->status 	    = "1";
+			$history->name_status 	= "Waiting Approval by User";
+		}
+
+		$history->tanggal		    = $date;
+		$history->save();
+
 		\Session::flash('flash_type','alert-success');
         \Session::flash('flash_message','Sukses, invoice telah berhasil di check');
 		return redirect('invoice/pending/list');
@@ -728,7 +909,7 @@ class HomeController extends Controller {
 	public function upload_master() {
 		$date 		= date('y');
 		$nomor 		= '';
-		$invoice 	= DB::select('select no_penerimaan as nomor from invoice');
+		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
 		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
 		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
 		foreach ($invoice as $invoice) {
@@ -736,14 +917,15 @@ class HomeController extends Controller {
 		}
 		$getNomor = substr($nomor, 0,2);
 		if ($nomor == '' || $nomor == null){
-			$nomor = $date.''.'00000001';
+			$nomor = $date+'00000001';
 		} else {
 			if($getNomor == $date) {
 				$nomor = $nomor+1;
 			} else {
-				$nomor = $date.''.'00000001';
+				$nomor = $date+'00000001';
 			}
 		}
+		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
 		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 
@@ -1137,13 +1319,38 @@ class HomeController extends Controller {
 		$invoice->amount 			= $string;
 		// $invoice->doc_no_2 			= $input['doc_no_2'];
 		$invoice->tgl_input 		= $date;
-		$invoice->status 			= "1";
+		$invoice->tgl_approve_user 	= $date;
+		
+		if ($input['dept_code'] == '1') {
+			$invoice->status 			= "9";
+		}else{
+			$invoice->status 			= "1";
+		}
+
 		$invoice->no_po 			= $input['no_po'];
 		$invoice->code_bank_data	= $code_bank_data;
-
-		
-
         $invoice->save();
+
+        $input 		= \Input::all();
+        date_default_timezone_set('Asia/Jakarta');
+		$date 		= date('Y-m-d H:i:s');
+
+		//dev-3.7.0, 20180201, by Farul Sudarusman, Input beberapa data ke table history invoice sebagai acuan history 
+        $history 					= new history_invoice;
+        $history->no_penerimaan		= $input['no_penerimaan'];
+        $history->dept_code 		= $input['dept_code'];
+
+        if ($input['dept_code'] == '1') {
+			$history->status 		= "9";
+			$history->name_status   = "Waiting Purch Received";
+		}else{
+			$history->status 	    = "1";
+			$history->name_status 	= "Waiting Approval by User";
+		}
+
+		$history->tanggal		    = $date;
+		$history->save();
+
         $latestId 	= DB::select('select MAX(id) as id from invoice');
        
 		foreach ($latestId as $latestId) {
@@ -1156,10 +1363,11 @@ class HomeController extends Controller {
         return redirect('invoice/op');
 	}
 
-	public function invoice_approval_detail($id)
+	public function invoice_approval_detail($id,$no_penerimaan)
 	{
-		$invoice = Invoice::where('id',$id)->get();
-		return view('invoice.invoice_approval_detail', compact('invoice'));
+		$invoice         = Invoice::where('id',$id)->get();
+		$history 		 = history_invoice::select('name_status','tanggal')->where('no_penerimaan',$no_penerimaan)->orderby('tanggal','ASC')->get();
+		return view('invoice.invoice_approval_detail', compact('invoice','history'));
 	}
 
 	public function data() {
