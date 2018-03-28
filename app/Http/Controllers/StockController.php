@@ -263,9 +263,9 @@ class StockController extends Controller {
 	 {
 	 	$user 			= \Auth::user();	
 	 	if ($user->role == '7') {
-	 		$m_area 		= m_area::where('pic_name','=',$user->name)->get();
+	 		$m_areas 		= m_area::where('pic_name','=',$user->name)->get();
 	 	} else {
-	 		$m_area 		= m_area::all();	
+	 		$m_areas 		= m_area::all();	
 	 	}
 	 	if ($user->role == '7') {
 	 		$t_transaction 	= t_transaction::join('m_areas','m_areas.id_area','=','t_transactions.id_area')
@@ -273,7 +273,7 @@ class StockController extends Controller {
 	 	} else {
 	 		$t_transaction 	= t_transaction::all();
 	 	}
-	 	return view('stock.view_transaction',compact('t_transaction','m_area'));
+	 	return view('stock.view_transaction',compact('t_transaction','m_areas'));
 	 }
 
 	 public function view_transaction_inventory()
@@ -430,6 +430,7 @@ class StockController extends Controller {
 	       	$t_transaction  			= t_transaction::findOrFail($id);
 			$t_transaction->amount_pcs	= $b;
 			$t_transaction->total_pcs   = $b;
+			$t_transaction->operator	= \Auth::user()->name;
 			$t_transaction->save();
         } else {
         	$a 			 = $input['amount_box'];
@@ -442,6 +443,7 @@ class StockController extends Controller {
 			$t_transaction->amount_box  = $a;
 			$t_transaction->amount_pcs	= $b;
 			$t_transaction->total_pcs   = $total_pcs;
+			$t_transaction->operator	= \Auth::user()->name;
 			$t_transaction->save();
         }
 		\Session::flash('flash_type','alert-success');
@@ -687,5 +689,60 @@ public function upload_sto() { //by ario, 20170925
     	
 	}
 
+
+	//CHECKER
+	public function view_list_checker()
+	{  
+	 	$input 			= \Input::all();
+	 	$id_area 		= $input['id_area_c'];
+	 	$check 			= m_area::where('id_area',$id_area)->get();
+	 	$t_transaction 	= t_transaction::where('id_area',$id_area)->get();
+	 	return view('stock.view_list_checker', compact('t_transaction','check')); 
+	}
+
+	public function input_transaction_checker($id) {    
+        $m_part 		= m_part::all();
+	 	$t_transaction 	= t_transaction::where('id',$id)->get(); 	      
+	 		 	// return \Auth::user()->dept_code;            
+     	return view('stock.input_transaction_checker',compact('t_transaction','m_part'));
+	}
+
+	public function save_transaction_checker()
+	 {
+        $input 		 = \Input::all();
+        $id 		 = $input['id'];
+        $id_area 	 = $input['id_area'];
+        $qty_box 	 = $input['qty_box'];
+        $part_number = $input['part_number'];
+        if ($input['amount_box'] == 'null') {
+        	$b 			 = $input['amount_pcs'];
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_pcs_checker	= $b;
+			$t_transaction->total_pcs_checker   = $b;
+			$t_transaction->checker	= \Auth::user()->name;
+			$t_transaction->save();
+        } else {
+        	$a 			 = $input['amount_box'];
+       		$b 			 = $input['amount_pcs'];
+	       	$total1 	 = $a*$qty_box;
+	       	$total_pcs 	 = $total1+$b;
+	       	$t_transaction  			= t_transaction::findOrFail($id);
+			$t_transaction->amount_box_checker  = $a;
+			$t_transaction->amount_pcs_checker	= $b;
+			$t_transaction->total_pcs_checker   = $total_pcs;
+			$t_transaction->checker	= \Auth::user()->name;
+			$t_transaction->save();
+        }
+		\Session::flash('flash_type','alert-success');
+        \Session::flash('flash_message','Sukses, data stock berhasil disimpan ke dalam sistem');
+	 	return redirect('stock/view_list_checker/2/'.$id_area.'');  
+	 }
+
+	 public function view_list_checker2($id)
+	{  
+	 	$check 			= m_area::where('id_area','=',$id)->get();
+	 	$t_transaction 	= t_transaction::where('t_transactions.id_area',$id)->get();
+	 	return view('stock.view_list_checker',compact('t_transaction','check')); 
+	}
 
 }
