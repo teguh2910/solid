@@ -90,6 +90,12 @@ Route::get('stock/view_list/2/{id}','StockController@view_list2');
 Route::get('stock/input_transaction/{id}','StockController@input_transaction');
 Route::post('stock/save_transaction','StockController@save_transaction');
 
+//CHECKER
+Route::post('stock/view_list_checker','StockController@view_list_checker');
+Route::get('stock/input_transaction_checker/{id}','StockController@input_transaction_checker');
+Route::post('stock/save_transaction_checker','StockController@save_transaction_checker');
+Route::get('stock/view_list_checker/2/{id}','StockController@view_list_checker2');
+
 Route::get('stock/print_report','StockController@print_report');
 Route::post('stock/print_result','StockController@print_result');
 Route::get('stock/print_report_plant','StockController@print_report_plant');

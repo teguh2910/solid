@@ -125,21 +125,21 @@ class HomeController extends Controller {
 		}else if ($user->role == "5"){
 			
 	        $user=\Auth::user();	
-		 	$m_area=m_area::all();
+		 	$m_areas=m_area::all();
 		 	$t_transaction=t_transaction::all();
-		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
+		 	return view('stock.view_transaction',compact('t_transaction','m_areas'));
 
 		}else if ($user->role == "6"){
 	        $user=\Auth::user();	
-		 	$m_area=m_area::where('pic_name','=',$user->name)->get();
+		 	$m_areas=m_area::where('pic_name','=',$user->name)->get();
 		 	$t_transaction=t_transaction::all();
-		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
+		 	return view('stock.view_transaction',compact('t_transaction','m_areas'));
 	 	}else if($user->role == "7"){
 	        $user=\Auth::user();
 	        if ($user->role == '7') {	
-		 	$m_area=m_area::where('pic_name','=',$user->name)->get();
+		 	$m_areas=m_area::where('pic_name','=',$user->name)->get();
 		 	} else {
-		 	$m_area=m_area::all();
+		 	$m_areas=m_area::all();
 		 	}
 		 	if ($user->role == '7') {
 		 	$t_transaction 	= t_transaction::join('m_areas','m_areas.id_area','=','t_transactions.id_area')
@@ -147,7 +147,7 @@ class HomeController extends Controller {
 		 	} else {
 		 	$t_transaction 	= t_transaction::all();
 		 	}
-		 	return view('stock.view_transaction',compact('t_transaction','m_area'));
+		 	return view('stock.view_transaction',compact('t_transaction','m_areas'));
 	 	}
 			return redirect('auth/logout') ;
 		}
