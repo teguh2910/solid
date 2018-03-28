@@ -7,7 +7,7 @@ class t_transaction extends Model {
 	protected $fillable=[
     'id_area','type_plant', 
     'part_number','back_number','part_name','v_class','kind','qty_box','unit','ending_pcs','ending_amount', 
-    'amount_box','amount_pcs','total_pcs', 'harga','total_amount'
+    'amount_box','amount_pcs','total_pcs', 'harga','total_amount','amount_box_checker','amount_pcs_checker','total_pcs_checker'
     ];
 
     public static function array_to_db($array_data){
