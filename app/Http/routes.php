@@ -96,6 +96,12 @@ Route::get('stock/input_transaction_checker/{id}','StockController@input_transac
 Route::post('stock/save_transaction_checker','StockController@save_transaction_checker');
 Route::get('stock/view_list_checker/2/{id}','StockController@view_list_checker2');
 
+//DASHBOARD
+Route::get('/view_dashboard','DashboardController@view_dashboard');
+Route::get('/view_save_dashboard/{id}','DashboardController@view_save_dashboard');
+Route::post('/save_dashboard','DashboardController@save_dashboard');
+
+
 Route::get('stock/print_report','StockController@print_report');
 Route::post('stock/print_result','StockController@print_result');
 Route::get('stock/print_report_plant','StockController@print_report_plant');
