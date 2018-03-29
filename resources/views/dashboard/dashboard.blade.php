@@ -21,12 +21,12 @@
                                     <th ><font face='calibri' color='white'>AUDITOR</font></th>
                                     <!-- <th colspan="3"><font face='calibri' color='white'>PERHITUNGAN</font></th>  
                                     <th colspan="3"><font face='calibri' color='white'>DATA ENTRY</font></th> -->
-                                    <th><font face='calibri' color='black'>8-9</font></th>  
-                                    <th><font face='calibri' color='black'>9-10</font></th>
-                                    <th><font face='calibri' color='black'>10-11</font></th>
-                                    <th><font face='calibri' color='black'>9-10</font></th>
-                                    <th><font face='calibri' color='black'>10-11</font></th>
-                                    <th><font face='calibri' color='black'>11-12</font></th>
+                                    <th><font face='calibri' color='white'>Perhitungan <br>8-9</font></th>  
+                                    <th><font face='calibri' color='white'>Perhitungan <br>9-10</font></th>
+                                    <th><font face='calibri' color='white'>Perhitungan <br>10-11</font></th>
+                                    <th><font face='calibri' color='white'>Entry <br> 9-10</font></th>
+                                    <th><font face='calibri' color='white'>Entry <br> 10-11</font></th>
+                                    <th><font face='calibri' color='white'>Entry <br> 11-12</font></th>
                                     <th><font face='calibri' color='white'>ISI</font></th>
                                 </tr>
                             </thead>
@@ -94,8 +94,8 @@ $(document).ready(function(){
 
     var table = $('#tableku').DataTable({
         pageLength: 10,
-        // "searching":false,
-        // "ordering":false
+        "searching":false,
+        "ordering":false
     });
 
         // Get the page info, so we know what the last is
