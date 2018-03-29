@@ -15,9 +15,9 @@
                                     <th><font face='calibri' color='white'>No</font></th>
                                     <th ><font face='calibri' color='white'>KODE AREA</font></th>
                                     <th ><font face='calibri' color='white'>NAMA AREA</font></th>
-                                    <th ><font face='calibri' color='white'>LEADER</font></th>
+                                    <!-- <th ><font face='calibri' color='white'>LEADER</font></th>
                                     <th ><font face='calibri' color='white'>SPV</font></th>
-                                    <th ><font face='calibri' color='white'>MANAGER</font></th>
+                                     --><th ><font face='calibri' color='white'>MANAGER</font></th>
                                     <th ><font face='calibri' color='white'>AUDITOR</font></th>
                                     <!-- <th colspan="3"><font face='calibri' color='white'>PERHITUNGAN</font></th>  
                                     <th colspan="3"><font face='calibri' color='white'>DATA ENTRY</font></th> -->
@@ -37,8 +37,7 @@
                                   <td>{{$x->id}}</td> 
                                   <td>{{$x->kode_area}}</td> 
                                   <td>{{$x->nama_area}}</td> 
-                                  <td>{{$x->leader}}</td> 
-                                  <td>{{$x->supervisor}}</td>
+                                  
                                   <td>{{$x->manager}}</td> 
                                   <td>{{$x->auditor}}</td>
                                   <td>{{$x->hitung_8}}</td> 
