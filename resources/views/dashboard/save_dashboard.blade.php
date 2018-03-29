@@ -52,37 +52,37 @@
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>PERHITUNGAN JAM 8 ~ 9</b></font><br/>
-                    <input type="number" name="hitung_8" id="hitung_8" value="{{ $data->hitung_8 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="hitung_8" id="hitung_8" value="{{ $data->hitung_8 }}" class="form-control" >
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>PERHITUNGAN JAM 9 ~ 10</b></font><br/>
-                    <input type="number" name="hitung_9" id="hitung_9" value="{{ $data->hitung_9 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="hitung_9" id="hitung_9" value="{{ $data->hitung_9 }}" class="form-control" >
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>PERHITUNGAN JAM 10 ~ 11</b></font><br/>
-                    <input type="number" name="hitung_10" id="hitung_10" value="{{ $data->hitung_10 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="hitung_10" id="hitung_10" value="{{ $data->hitung_10 }}" class="form-control" >
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>DATA ENTRY JAM 9 ~ 10</b></font><br/>
-                    <input type="number" name="entry_9" id="entry_9" value="{{ $data->entry_9 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="entry_9" id="entry_9" value="{{ $data->entry_9 }}" class="form-control" >
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>DATA ENTRY JAM 10 ~ 11</b></font><br/>
-                    <input type="number" name="entry_10" id="entry_10" value="{{ $data->entry_10 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="entry_10" id="entry_10" value="{{ $data->entry_10 }}" class="form-control" >
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-9">
                   <font face='calibri'><b>DATA ENTRY JAM 11 ~ 12</b></font><br/>
-                    <input type="number" name="entry_11" id="entry_11" value="{{ $data->entry_11 }}" class="form-control" min="0" max="100">
+                    <input type="text" name="entry_11" id="entry_11" value="{{ $data->entry_11 }}" class="form-control" >
                 </div>
               </div>
               
@@ -92,10 +92,6 @@
                     <span class='glyphicon glyphicon-floppy-saved'></span>&nbsp;
                     <font face='calibri'><b>SUBMIT</b></font>
                   </button>&nbsp;&nbsp;
-                  <button type="reset" class="btn btn-sm btn-danger">
-                    <span class='glyphicon glyphicon-repeat'></span>&nbsp;
-                    <font face='calibri'><b>RESET</b></font>
-                  </button>
                 </div>
               </div>
             </form>
