@@ -47,12 +47,12 @@
 				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-heart'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v3.9.0</small></small></small></span>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v3.10.0</small></small></small></span>
 				</a>
 				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.9.0</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.10.0</small></small></small></span>
 
 				</a>
 				@endif
