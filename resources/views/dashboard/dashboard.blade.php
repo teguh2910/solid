@@ -110,11 +110,15 @@ $(document).ready(function(){
         // setTimeout(function() {i=i+1; }, 1000);
         i++;
         if(i==3){
-          table.page('first').draw(true);
+          // table.page('first').draw(true);
+           location.reload();
           i=-1;
         }
 
         }, 3000); // 3 seconds
 
+// setInterval(function(){
+//     location.reload();
+// },2000)
 </script>
 @endsection
