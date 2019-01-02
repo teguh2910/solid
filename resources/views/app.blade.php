@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 
-	<title>ELNA v3.10.1</title>
+	<title>ELNA {{ env('APP_VER','VER NOT FOUND') }}</title>
 	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-	<title>SOLID v3.10.1</title>
+	<title>SOLID {{ env('APP_VER','VER NOT FOUND') }}</title>
 	@else
 	<title>Welcome</title>
 	@endif
@@ -47,12 +47,12 @@
 				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-heart'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>v3.10.1</small></small></small></span>
+					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>{{ env('APP_VER','VER NOT FOUND') }}</small></small></small></span>
 				</a>
 				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>v3.10.1</small></small></small></span>
+					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>{{ env('APP_VER','VER NOT FOUND') }}</small></small></small></span>
 
 				</a>
 				@endif

@@ -909,23 +909,12 @@ class HomeController extends Controller {
 	public function upload_master() {
 		$date 		= date('y');
 		$nomor 		= '';
-		$invoice 	= DB::select('select max(no_penerimaan) as nomor from invoice');
+		
 		$bank_datas = DB::select('select * from m_vendors group by vendor_name');
-		// $part_bank 	= DB::select('select part_bank from t_bank_datas group by part_bank');
-		foreach ($invoice as $invoice) {
-			$nomor = $invoice->nomor;
-		}
-		$getNomor = substr($nomor, 0,2);
-		if ($nomor == '' || $nomor == null){
-			$nomor = $date+'00000001';
-		} else {
-			if($getNomor == $date) {
-				$nomor = $nomor+1;
-			} else {
-				$nomor = $date+'00000001';
-			}
-		}
-		// return view('invoice.upload', compact('nomor','bank_datas','part_bank'));
+		//hotfix-3.10.2 by AUDI, aotogenerate nomor penerimaan
+		$invoice = Invoice::selectRaw('max(no_penerimaan) as nomor')->whereRaw('LEFT(no_penerimaan,2)='.$date)->first();
+		$nomor = $invoice->nomor ? ($invoice->nomor + 1) : $date.'00000001';
+		
 		return view('invoice.upload', compact('nomor','bank_datas'));
 	}
 

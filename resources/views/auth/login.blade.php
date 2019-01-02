@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID v3.10.1 & ELNA v3.10.1</title>
+    <title>SOLID {{ env('APP_VER','VER NOT FOUND') }} & ELNA {{ env('APP_VER','VER NOT FOUND') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
@@ -71,11 +71,11 @@
 					<center>
 						<font face='calibri'>
 
-							<big><big><big><big><b>WELCOME</b></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
+							<big><big><big><big><b>WELCOME</b></big></big></big></big>
 							<!-- Aisin Operational Invoice Document -->
 
-							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> <!-- <small>v.1.1.1</small> --><!-- <br/> -->
-							&nbsp;<small><b>v3.10.1</b></small>
+							<big><big><big><big><big><b>SOLID</b></big></big></big></big></big> 
+							&nbsp;<small><b>{{ env('APP_VER','VER NOT FOUND') }}</b></small>
 
 						</font><br/><br/>
 					</center>
