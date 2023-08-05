@@ -213,11 +213,12 @@ class HomeController extends Controller {
 			status="2" and dept_code='.$user->dept_code.'');
         $result3 = new Collection($queries3);
         $queries4 = DB::select('select count(id) as d from invoice where 
-			status="9" and dept_code='.$user->dept_code.'');
+			status="1" and dept_code='.$user->dept_code.'');
         $result4 = new Collection($queries4);
 		$invoice = Invoice::where('status','1')
 							->where('dept_code',$user->dept_code)
 							->get();
+		//dd($invoice);
 		return view('invoice.user_list', compact('invoice','result','result2','result3','result4'));
 	}
 
@@ -1311,7 +1312,7 @@ class HomeController extends Controller {
 		$invoice->tgl_approve_user 	= $date;
 		
 		if ($input['dept_code'] == '1') {
-			$invoice->status 			= "9";
+			$invoice->status 			= "1";
 		}else{
 			$invoice->status 			= "1";
 		}

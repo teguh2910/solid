@@ -111,6 +111,9 @@
                          @if (Auth::user()->role == "4")
                             <td class='warning'>
                                 <center>
+                                    <a href="{{ url('invoice/send/'.$invoice->id) }}" class="btn btn-warning btn-xs" target="_blank">
+                                        <i class="glyphicon">Kirim</i>
+                                    </a>&nbsp;
                                     <a href="{{ url('invoice/update/'.$invoice->id) }}" class="btn btn-primary btn-xs" target="_blank">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </a>&nbsp;
