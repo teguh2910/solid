@@ -321,11 +321,9 @@
   					<b>ELNA</b></font> <font face='calibri' color='grey'>(Electronic Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
     				</font>
   					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-  					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department & <b>BAYMAX TEAM</b>)
-    				</font>
-    				@else
-    				<font face='calibri' color='grey'>Finance Accounting Project ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
+  					<font face='calibri' color='grey'>Kolaborasi Finance & Accounting Aii & AiiA ©2023 All Rights Reserved, PT Aisin Indonesia (Developed by MIS Department) & PT Aisin Indonesia Automotive (Developed by ITD Department)
+    				</font>@else
+    				<font face='calibri' color='grey'>Kolaborasi Finance & Accounting Aii & AiiA ©2023 All Rights Reserved, PT Aisin Indonesia (Developed by MIS Department) & PT Aisin Indonesia Automotive (Developed by ITD Department)
     				</font>
     				@endif
     			</li>

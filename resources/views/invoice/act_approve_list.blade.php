@@ -39,6 +39,7 @@
                         <th><small><font face='calibri'>AMOUNT</font></small></th>
                         <th><small><font face='calibri'>DOC NO</font></small></th>
                         <th><small><font face='calibri'>NO PO</font></small></th>
+                        <th><small><font face='calibri'>Action</font></small></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,6 +80,11 @@
                     <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
+                    <td>
+                    <a href="{{ url('invoice/send/'.$invoice->id) }}" class="btn btn-warning btn-xs" target="_blank">
+                    <i class="glyphicon">Kirim</i>
+                    </a>&nbsp;
+                    </td>
                 </tr>
                 @endforeach
             @else
