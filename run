@@ -1,0 +1,17 @@
+#!/bin/bash
+
+docker network create solid_network
+
+docker run -d --name mariadb-container \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_DATABASE=solid \
+-e MYSQL_USER=admin \
+-e MYSQL_PASSWORD=password \
+-v $(pwd)/db:/var/lib/mysql \
+--network solid_network  \
+mariadb:latest
+
+docker run -d -p 8080:80 --name solid \
+--volume $(pwd):/var/www/html \
+--network solid_network \
+solid
