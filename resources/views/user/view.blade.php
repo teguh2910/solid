@@ -138,6 +138,7 @@
                 <font face='calibri'><b>Access Role</b></font><br/>
                 <select class="form-control select2" name="role" id="role" style="width: 100%;">
                      <option value="1">User</option>
+                     <option value="8">Purchasing</option>
                      <option value="2">Accounting</option>
                      <option value="3">Finance</option>
                      <option value="4">Cashier</option>
