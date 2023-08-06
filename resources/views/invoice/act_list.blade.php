@@ -83,7 +83,7 @@
                     <td class='warning'>
                         <a href="{{ url('invoice/checked/act/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                             onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
-                            <font face='calibri'><b>Approve</b></font>
+                            <font face='calibri'><b>Terima Document</b></font>
                         </a>&nbsp;
                         <a href="{{ url('invoice/pending/act/'.$invoice->id) }}" class="btn btn-danger btn-xs" target='\blank'>
                             <font face='calibri'><b>Reject</b></font>

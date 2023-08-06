@@ -5,7 +5,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li>
-                        <a  href="{{ url('invoice/act/list') }}">
+                        <a  href="{{ url('/') }}">
                             <font face='calibri' color='grey'><b>INVOICE LIST
                             <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
                         </a>
@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('invoice/act/reject/list') }}">
+                        <a href="{{ url('invoice/tax/reject/list') }}">
                             <font face='calibri' color='grey'><b>INVOICE REJECTED
                             <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                         </a>
@@ -80,7 +80,7 @@
                     <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td>
                     <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
-                    <td><a href="{{ url('invoice/send/tax/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
+                    <td><a href="{{ url('invoice/send/fin/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                         onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
                         <font face='calibri'><b>Kirim Doc</b></font>
                     </a>&nbsp;

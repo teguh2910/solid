@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder {
 
 		// v1.0, by Ferry, Generates Seeder
 		$this->call('EntrustClassSeeder');
-		$this->call('UserClassSeeder');
+		//$this->call('UserClassSeeder');
 		$this->command->info('My Seeder says : Entrus class tables seeded!'); 
 	}
 

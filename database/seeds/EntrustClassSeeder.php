@@ -47,7 +47,15 @@ class EntrustClassSeeder extends Seeder {
 		}
 
         // Attach admin roles
-        if (!$admin->hasRole('admin')) {
+		// Get the admin user instance
+		$admin = User::find(1); // Replace 1 with the actual admin user ID
+        // Get the 'admin' role instance
+		$role_admin = Role::where('name', 'admin')->first(); // Assuming 'admin' is the role name
+
+		// Get the 'permit_all' permission instance
+		$permit_all = Permission::where('name', 'permit_all')->first(); // Assuming 'permit_all' is the permission name
+
+		if (!$admin->hasRole('admin')) {
         	$admin->attachRole($role_admin);
         }
 

@@ -32,9 +32,16 @@ Route::post('invoice/pending/act/save', 'HomeController@invoice_pending_act_save
 Route::get('invoice/pending/user/checked/{id}', 'HomeController@invoice_pending_user_checked');
 Route::get('invoice/act/list', 'HomeController@invoice_act_list');
 Route::get('invoice/act/approve/list', 'HomeController@invoice_act_approve_list');
+//add teguh
+Route::get('invoice/tax/approve/list', 'HomeController@invoice_tax_approve_list');
+
 Route::get('invoice/act/reject/list', 'HomeController@invoice_act_reject_list');
 Route::get('invoice/pending/list', 'HomeController@invoice_pending_list');
 Route::get('invoice/checked/act/{id}', 'HomeController@invoice_checked_act');
+
+//add teguh
+Route::get('invoice/checked/tax/{id}', 'HomeController@invoice_checked_tax');
+
 Route::get('invoice/fa/list', 'HomeController@invoice_fa_list');
 Route::get('invoice/checked/fa/{id}', 'HomeController@invoice_checked_fa');
 Route::get('invoice/finish/fa/{id}', 'HomeController@invoice_finish_fa');
@@ -156,6 +163,9 @@ Route::get('bank/edit_bank/{id}', 'bankController@edit');
 Route::get('bank/delete/{id}', 'bankController@destroy');
 Route::post('bank/save_edit', 'bankController@save_edit');
 
+//additional by teguh
+Route::get('invoice/send/tax/{id}', 'HomeController@invoice_send_to_tax');
+Route::get('invoice/send/fin/{id}', 'HomeController@invoice_send_to_fin');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

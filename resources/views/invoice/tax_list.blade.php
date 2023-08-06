@@ -4,20 +4,20 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li>
-                        <a  href="{{ url('invoice/act/list') }}">
-                            <font face='calibri' color='grey'><b>INVOICE LIST
-                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font>
-                        </a>
-                    </li>
                     <li class="active">
                         <a>
-                            <big><big><big><font face='calibri' color='grey'><b>INVOICE APPROVED
-                            <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font></big></big></big>
+                            <big><big><big><font face='calibri' color='grey'><b>INVOICE LIST
+                            <span class='badge badge-info'>@foreach ($result as $result) {{ $result->a }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('invoice/act/reject/list') }}">
+                        <a href="{{ url('invoice/tax/approve/list') }}">
+                            <font face='calibri' color='grey'><b>INVOICE APPROVED
+                            <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('invoice/tax/reject/list') }}">
                             <font face='calibri' color='grey'><b>INVOICE REJECTED
                             <span class='badge badge-info'>@foreach ($result2 as $result2) {{ $result2->b }} @endforeach</span></b></font>
                         </a>
@@ -37,9 +37,9 @@
                         <th><small><font face='calibri'>DUE DATE</font></small></th>
                         <th><small><font face='calibri'>CURR</font></small></th>
                         <th><small><font face='calibri'>AMOUNT</font></small></th>
-                        <th><small><font face='calibri'>DOC NO</font></small></th>
+                        <!-- <th><small><font face='calibri'>DOC NO</font></small></th> -->
                         <th><small><font face='calibri'>NO PO</font></small></th>
-                        <th><small><font face='calibri'>Action</font></small></th>
+                        <th><small><font face='calibri'></font></small></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,19 +77,23 @@
                     <td><center><font face='calibri'>{{ $invoice->doc_date }}</font></center></td>
                     <td><center><font face='calibri'>{{ $invoice->due_date }}</font></center></td>
                     <td><font face='calibri'>{{ $invoice->curr }}</font></td>
-                    <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td>
-                    <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td>
+                    <td><font face='calibri'>{{ number_format((float)$invoice->amount) }}</font></td> <!-- hotfix-3.0.7, by yudo, 20170508, number format -->
+                    <!-- <td><font face='calibri'>{{ $invoice->doc_no_2 }}</font></td> -->
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
-                    <td><a href="{{ url('invoice/send/tax/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
-                        onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
-                        <font face='calibri'><b>Kirim Doc</b></font>
-                    </a>&nbsp;
+                    <td class='warning'>
+                        <a href="{{ url('invoice/checked/tax/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
+                            onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
+                            <font face='calibri'><b>Terima Document</b></font>
+                        </a>&nbsp;
+                        <a href="{{ url('invoice/pending/tax/'.$invoice->id) }}" class="btn btn-danger btn-xs" target='\blank'>
+                            <font face='calibri'><b>Reject</b></font>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
             @else
                 <tr bgcolor='#FFFFFF'>
-                    <td colspan="11"><center><font face='calibri'>No record to display</font></center></td>
+                    <td colspan="12"><center><font face='calibri'>No record to display</font></center></td>
                 </tr>
             @endif
                 </tbody>
@@ -110,7 +114,8 @@
     });
 
     $('table').dataTable({
-        "searching": true
+        "searching": true,
+        "iDisplayLength": 100
     });
 </script>
 @endif

@@ -209,6 +209,8 @@
 		                    }    
 		                    elseif ($role == '2') {
 		                        $a = 'Accounting';
+		                    }elseif ($role == '10') {
+		                        $a = 'Tax';
 		                    }
 		                    elseif ($role == '3') {
 		                        $a = 'Finance';
@@ -321,9 +323,11 @@
   					<b>ELNA</b></font> <font face='calibri' color='grey'>(Electronic Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
     				</font>
   					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-  					<font face='calibri' color='grey'>Kolaborasi Finance & Accounting Aii & AiiA ©2023 All Rights Reserved, PT Aisin Indonesia (Developed by MIS Department) & PT Aisin Indonesia Automotive (Developed by ITD Department)
-    				</font>@else
-    				<font face='calibri' color='grey'>Kolaborasi Finance & Accounting Aii & AiiA ©2023 All Rights Reserved, PT Aisin Indonesia (Developed by MIS Department) & PT Aisin Indonesia Automotive (Developed by ITD Department)
+  					<font face='calibri' color='grey'>
+  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2023 All Rights Reserved, PT Aisin Indonesia Automotive & PT Aisin Indonesia (Developed by ITD Department & <b>TEGUH TEAM</b>)
+    				</font>
+    				@else
+    				<font face='calibri' color='grey'>Finance Accounting Project ©2023 All Rights Reserved, PT Aisin Indonesia Automotive & PT Aisin Indonesia (Developed by ITD Department & Teguh Team)
     				</font>
     				@endif
     			</li>
