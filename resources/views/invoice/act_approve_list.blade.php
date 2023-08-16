@@ -82,7 +82,11 @@
                     <td><font face='calibri'>{{ $invoice->no_po }}</font></td>
                     <td><a href="{{ url('invoice/send/tax/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                         onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
-                        <font face='calibri'><b>Kirim Doc</b></font>
+                        <font face='calibri'><b>Kirim Doc Ke Tax</b></font>
+                    </a>&nbsp;
+                    <a href="{{ url('invoice/send/fin/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
+                        onclick="return confirm('Apakah anda yakin akan melakukan approve untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
+                        <font face='calibri'><b>Kirim Doc Ke Finance</b></font>
                     </a>&nbsp;
                     </td>
                 </tr>

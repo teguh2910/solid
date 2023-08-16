@@ -31,7 +31,7 @@
                     @endif
                     <li>
                         <a href="{{ url('/invoice/user/check') }}">
-                            <font face='calibri' color='grey'><b>INVOICE CHECKED
+                            <font face='calibri' color='grey'><b>INVOICE DIKIRIM
                             <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font>
                         </a>
                     </li>
@@ -106,7 +106,7 @@
                     <td class='warning'>
                         <a href="{{ url('invoice/checked/user/'.$invoice->id) }}" class="btn btn-primary btn-xs" 
                             onclick="return confirm('Apakah anda yakin akan melakukan check untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\' ?')">
-                            <font face='calibri'><b>Check</b></font>
+                            <font face='calibri'><b>Kirim</b></font>
                         </a>&nbsp;
                         <a href="{{ url('invoice/reject/user/'.$invoice->id) }}" class="btn btn-danger btn-xs" target='\blank'>
                             <font face='calibri'><b>Reject</b></font>

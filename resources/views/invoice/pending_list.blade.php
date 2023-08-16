@@ -67,7 +67,7 @@
                             <td class='warning'>
                                 <center>
                                     <a href="{{ url('invoice/pending/user/checked/'.$invoice->id) }}" class="btn btn-primary btn-xs" onclick="return confirm('Apakah anda yakin akan melakukan check untuk invoice dengan no penerimaan \'{{$invoice->no_penerimaan}}\'?')">
-                                        <font face='calibri'><b>Checked</b></font>
+                                        <font face='calibri'><b>Kirim</b></font>
                                     </a>
                                 </center>
                             </td>

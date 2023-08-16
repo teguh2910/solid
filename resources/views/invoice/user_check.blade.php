@@ -30,7 +30,7 @@
                     @endif
                     <li class="active">
                         <a href="{{ url('/invoice/user/check') }}">
-                            <big><big><big><font face='calibri' color='grey'><b>INVOICE CHECKED
+                            <big><big><big><font face='calibri' color='grey'><b>INVOICE DIKIRIM
                             <span class='badge badge-info'>@foreach ($result3 as $result3) {{ $result3->c }} @endforeach</span></b></font></big></big></big>
                         </a>
                     </li>
