@@ -200,12 +200,21 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Department</b></font>
                    <select class="form-control" name="dept_code" id="dept_code">
-                          <option value="1">Purchasing & Exim</option>
-                          <option value="2">General Affair</option>
-                          <option value="3">BOD</option>
-                          <option value="6">HR</option>
-                          <option value="5">IT Development</option>
-                          <option value="11">IRL</option>
+                   <option value="1">Purchasing Local</option>
+                   <option value="4">Finance&Accounting</option>
+                    <option value="2">GA Secretary</option>
+                    <option value="2">GA/GS</option>
+                    <option value="6">HRD Training</option>
+                    <option value="6">HRD Recruitment</option>
+                    <option value="6">HRD Medical</option>
+                    <option value="6">HRD(tagih an astek,bpjs)</option>
+                    <option value="6">HRD(tagihan asuransi)</option>
+                    <option value="11">IRL</option>                    
+                    <option value="1">Purchasing MRP</option>
+                    <option value="1">Marketing</option>
+                    <option value="1">Import</option>
+                    <option value="9">MSU</option>
+                    <option value="10">ENGINEERING</option>
                     </select>
                   </div>
                 </div>
