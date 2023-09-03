@@ -21,14 +21,9 @@ class UserClassSeeder extends Seeder {
             [
             'name' => 'Admin','email' => 'administrator@aiia.co.id',
             'password' => bcrypt('aiia')],
-            'role'=>'4',
-            'dept_code'=>'3'
+            'role'=>'0',
+            'dept_code'=>'0'
             ];
-        //for empty table asset
-        DB::table('users')->truncate();
-        foreach ($user as $users){
-            User::create($users);
-        }
     
 	}
 }

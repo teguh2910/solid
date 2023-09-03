@@ -4,10 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-
-	<title>ELNA {{ env('APP_VER','VER NOT FOUND') }}</title>
-	@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
+	@if (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4" or Auth::user()->role == "5")
 	<title>SOLID {{ env('APP_VER','VER NOT FOUND') }}</title>
 	@else
 	<title>Welcome</title>
@@ -19,15 +16,10 @@
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
 	
-   	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
-   	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
+   	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
-
-
-
 	<script>
       $(function () {
         $(".select2").select2();
@@ -44,26 +36,19 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-				<a class="navbar-brand">
-					<font color='grey'><i class='glyphicon glyphicon-heart'></i>&nbsp;</font>
-					<span class="logo-lg"><big><b>ELNA</b></big> <small><small><small>{{ env('APP_VER','VER NOT FOUND') }}</small></small></small></span>
-				</a>
-				@else 
 				<a class="navbar-brand">
 					<font color='grey'><i class='glyphicon glyphicon-comment'></i>&nbsp;</font>
 					<span class="logo-lg"><big><b>SOLID</b></big> <small><small><small>{{ env('APP_VER','VER NOT FOUND') }}</small></small></small></span>
 
-				</a>
-				@endif
+				</a>				
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				@if (Auth::guest())
-				@elseif (Auth::user()->role == "1" or Auth::user()->role == "8")
+				@elseif (Auth::user()->role != "0")
 				<!-- < 1 = user 8 = renni> -->
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/user/list') }}">
+					<li><a href="{{ url('/') }}">
 							<font face='calibri'><b>INVOICE LIST</b></font>
 					</a></li>
 				</ul>
@@ -77,29 +62,7 @@
 							<font face='calibri'><b>INVOICE READY TO PAY</b></font>
 					</a></li>
 				</ul>
-				@elseif (Auth::user()->role == "2")
-				<!-- < 2 = acoounting team> -->
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/act/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
-				</ul>
-				@elseif (Auth::user()->role == "3")
-				<!-- < 3 = cashier> -->
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/fa/list') }}"><font face='calibri'><b>INVOICE LIST</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
-				</ul>
-				@elseif (Auth::user()->role == "4")
+				@elseif (Auth::user()->role == "0")
 				<!-- < 4 = administrator> -->
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>MASTER USER</b></font></a></li>
@@ -123,69 +86,18 @@
 					<li><a href="{{ url('/master/upload') }}"><font face='calibri'><b>INPUT INVOICE</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/pending/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
+					<li><a href="{{ url('/invoice/reject/list') }}"><font face='calibri'><b>INVOICE REJECT</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/op') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
+					<li><a href="{{ url('/invoice/op/user') }}"><font face='calibri'><b>INVOICE ON PROGRESS</b></font></a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/invoice/rtp') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
+					<li><a href="{{ url('/invoice/rtp/user') }}"><font face='calibri'><b>INVOICE READY TO PAY</b></font></a></li>
 				</ul>
 				
-				@elseif (Auth::user()->role == "5")	 
-				<!-- < 5 = inventory> -->
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/user/view') }}"><font face='calibri'><b>USER</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_part') }}"><font face='calibri'><b>PART</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_transaction/inventory') }}"><font face='calibri'><b>TRANSACTION ALL</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/sto/report') }}"><font face='calibri'><b>STO REPORT</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/sto/report_2') }}"><font face='calibri'><b>STO REPORT 2</b></font></a></li>
-				</ul>
-				<!-- <ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/print_report') }}"><font face='calibri'><b>PRINT REPORT</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/print_report_plant') }}"><font face='calibri'><b>PRINT PLANT REPORT</b></font></a></li>
-				</ul> -->
-				@elseif (Auth::user()->role == "6")	
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
-				</ul>
-				@elseif (Auth::user()->role == "7")
-				<!-- < 7 = spv area> -->
-				<!--  <ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_area') }}"><font face='calibri'><b>AREA</b></font></a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_part') }}"><font face='calibri'><b>PART</b></font></a></li>
-				</ul> -->
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/stock/view_transaction') }}"><font face='calibri'><b>TRANSACTION</b></font></a></li>
-				</ul>
 				@endif
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-					<ul class="nav navbar-nav">
-						<li><a href="//172.18.3.7/sinta/public">
-							<button class="btn btn-primary btn-flat btn-sm">
-							<i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;NEED HELP?
-						</button>
-                  	</a></li>
-					</ul>
 					@else
 						<?php
 							date_default_timezone_set('Asia/Jakarta');
@@ -204,34 +116,25 @@
 							} 
 
 							$role=Auth::user()->role;
-							if ($role == '1' || $role == '8') {
+							if ($role == '1') {
 		                        $a = 'User';
 		                    }    
 		                    elseif ($role == '2') {
 		                        $a = 'Accounting';
-		                    }elseif ($role == '10') {
+		                    }elseif ($role == '3') {
 		                        $a = 'Tax';
 		                    }
-		                    elseif ($role == '3') {
+		                    elseif ($role == '4') {
 		                        $a = 'Finance';
 		                    }
-		                    elseif ($role == '4') {
-		                        $a = 'Cashier';
-		                    }
-		                    elseif ($role == '5') {
-		                        $a = 'Inventory';  
-		                    }
-		                    elseif ($role == '6') {
-		                        $a = 'Leader';
-		                    }
-		                    elseif ($role == '7') {
-		                        $a = 'Supervisor'; 
-		                    }    
+		                    elseif ($role == '0') {
+		                        $a = 'Admin';
+		                    }		                        
 
 						?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<font face='calibri'><b>{{ Auth::user()->name }}</b> ({{$a}})</font>
+								<font face='calibri'><b>{{ Auth::user()->name }}</b> </font>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
@@ -318,18 +221,8 @@
     		<center>
     			<ol class="breadcrumb">
   				<li>
-  					@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-  					<font face='calibri' color='grey'>
-  					<b>ELNA</b></font> <font face='calibri' color='grey'>(Electronic Ledger Stock Opname AiiA) ©2015 All Rights Reserved, PT Aisin Indonesia Automotive (Developed by ITD Department)
-    				</font>
-  					@elseif (Auth::user()->role == "1" or Auth::user()->role == "2" or Auth::user()->role == "3" or Auth::user()->role == "4")
-  					<font face='calibri' color='grey'>
-  					<b>SOLID</b></font> <font face='calibri' color='grey'>(Aisin Operational Invoice Document) ©2023 All Rights Reserved, PT Aisin Indonesia Automotive & PT Aisin Indonesia (Developed by ITD Department & <b>TEGUH TEAM</b>)
-    				</font>
-    				@else
-    				<font face='calibri' color='grey'>Finance Accounting Project ©2023 All Rights Reserved, PT Aisin Indonesia Automotive & PT Aisin Indonesia (Developed by ITD Department & Teguh Team)
-    				</font>
-    				@endif
+  					<font face='calibri' color='grey'>Finance Accounting Project ©2023 All Rights Reserved, PT Aisin Indonesia Automotive & PT Aisin Indonesia (Developed by ITD Department & Teguh Team)
+    				</font>    				
     			</li>
 				</ol>
     		</center>
@@ -339,19 +232,10 @@
 </html>
 
 <head>
-@if (Auth::user()->role == "7" or Auth::user()->role == "5" or Auth::user()->role == "6")
-<style>
-body{
-background-image: url('{{ asset("img/img_elna.png") }}');
-background-repeat: repeat-x repeat-y;
-}
-</style>
-@else 
 <style>
 body{
 background-image: url('{{ asset("img/school.png") }}');
 background-repeat: repeat-x repeat-y;
 }
 </style>
-@endif
 </head>

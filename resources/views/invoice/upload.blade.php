@@ -199,22 +199,10 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Department</b></font>
-                   <select class="form-control" name="dept_code" id="dept_code">
-                   <option value="1">Purchasing Local</option>
-                   <option value="4">Finance&Accounting</option>
-                    <option value="2">GA Secretary</option>
-                    <option value="2">GA/GS</option>
-                    <option value="6">HRD Training</option>
-                    <option value="6">HRD Recruitment</option>
-                    <option value="6">HRD Medical</option>
-                    <option value="6">HRD(tagih an astek,bpjs)</option>
-                    <option value="6">HRD(tagihan asuransi)</option>
-                    <option value="11">IRL</option>                    
-                    <option value="1">Purchasing MRP</option>
-                    <option value="1">Marketing</option>
-                    <option value="1">Import</option>
-                    <option value="9">MSU</option>
-                    <option value="10">ENGINEERING</option>
+                   <select class="form-control select2" name="dept_code" id="dept_code">
+                    @foreach($dept as $dept)
+                    <option value="{{$dept->dept_code}}">{{$dept->keterangan}}</option>
+                    @endforeach
                     </select>
                   </div>
                 </div>
@@ -238,7 +226,7 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>DOC No.</b></font>
-                    <input type="text" class="form-control" name="doc_no" id="doc_no">
+                    <input type="text" class="form-control" name="doc_no" required id="doc_no">
                   </div>
                 </div>
 
@@ -261,7 +249,7 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Tanggal Terima</b></font>
                     <div class='input-group date mypicker' id='en_date'>
-                      <input type='text' class="form-control" name="tgl_terima" id="tgl_terima" readonly/>
+                      <input type='text' class="form-control tgl_terima" required name="tgl_terima" id="tgl_terima" readonly/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -274,7 +262,7 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>DOC Date</b></font>
                     <div class='input-group date mypicker' id='en_date'>
-                      <input type='text' class="form-control" name="doc_date" id="doc_date"  readonly/>
+                      <input type='text' class="form-control tgl_terima" required name="doc_date" id="doc_date" readonly/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -287,7 +275,7 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Due Date</b></font>
                     <div class='input-group date mypicker' id='en_date'>
-                      <input type='text' class="form-control" name="due_date" id="due_date"  readonly/>
+                      <input type='text' class="form-control tgl_terima" required name="due_date" id="due_date"  readonly/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -313,7 +301,7 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Amount</b></font>
-                    <input class="form-control" name="amount" id="amount"  required>
+                    <input class="form-control" require name="amount" id="amount"  required>
                   </div>
                 </div>
 
@@ -321,7 +309,7 @@
                   <label class="col-md-1 control-label"></label>
                   <div class="col-md-12">
                     <font face='calibri'><b>Keterangan</b></font>
-                    <input type="text" class="form-control" name="description" id="description">
+                    <input type="text" class="form-control" require name="description" id="description">
                   </div>
                 </div>
 
@@ -407,7 +395,7 @@
     var today = new Date();
     var nowDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
  
-    $('#tgl_terima').val(nowDate);
+    $('.tgl_terima').val(nowDate);
     $('.mypicker').datepicker({
       format: "yyyy-m-d",
       autoclose: true,

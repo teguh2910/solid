@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SOLID {{ env('APP_VER','VER NOT FOUND') }} & ELNA {{ env('APP_VER','VER NOT FOUND') }}</title>
+    <title>SOLID {{ env('APP_VER','VER NOT FOUND') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='{{ asset("css/bootstrap.min.css") }}' rel="stylesheet" id="bootstrap-css">
     <style type="text/css">
     body{
     background: url('{{ asset("img/back.png") }}');
 	background-color: #444;
-    background: url('{{ asset("img/pinlayer2.png") }}'),url('{{ asset("img/pinlayer1.png") }}'),url('{{ asset("img/back.png") }}');    
+    background: url('{{ asset("img/back.png") }}');    
 }
 
 .vertical-offset-100{
@@ -38,14 +38,12 @@
 	<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('/css/select2.min.css') }}">
 	
-   	<script src="{{asset('/js/jquery-latest.min.js')}}"></script>
    	<script src="{{asset('/js/script.js')}}"></script>
 	<script src="{{asset('/js/jquery-2.1.3.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/js/select2.full.min.js') }}"></script>
 <body>
 
-<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 
 
 

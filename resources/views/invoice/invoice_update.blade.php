@@ -6,70 +6,10 @@
       <div class="box box-primary">
         <div class="box-body">
         <div class="col-md-12">
-            <a href="{{ url('/invoice/op') }}"><button class='btn btn-info btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>
-            <br/>
-          <div class="clearfix">&nbsp;</div>
-                <table class="table table-hover table-bordered table-condensed">
-                <thead>
-                    <tr class='success'>
-                        <th><small><font face='calibri'>NO PENERIMAAN</font></small></th>
-                        <th><small><font face='calibri'>DEPT CODE </font></small></th>
-                        <th><small><font face='calibri'>VENDOR</font></small></th>
-                        <th><small><font face='calibri'>TGL TERIMA</font></small></th>
-                        <th><small><font face='calibri'>DOC NO</font></small></th>
-                        <th><small><font face='calibri'>DOC DATE</font></small></th>
-                        <th><small><font face='calibri'>DUE DATE</font></small></th>
-                        <th><small><font face='calibri'>CURR</font></small></th>
-                        <th><small><font face='calibri'>AMOUNT</font></small></th>
-                        <!-- <th><small><font face='calibri'>DOC NO</font></small></th> -->
-                        <th><small><font face='calibri'>NO PO</font></small></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($invoice as $invoice_master)
-                <?php 
-                    date_default_timezone_set('Asia/Jakarta');
-                    $date = date('Y-m-d');
-                    if ($invoice_master->due_date < $date) {
-                        echo"<tr class='danger'>";
-                    } else {
-                        echo"<tr class='info'>";
-                    }
-                    ?>
-                    <td><font face='calibri'>{{ $invoice_master->no_penerimaan }}</font></td>
-                    <td><font face='calibri'>
-                    @if ($invoice_master->dept_code == '1')
-                        Purchasing
-                    @elseif ($invoice_master->dept_code == '2')
-                        General Affair
-                    @elseif ($invoice_master->dept_code == '3')
-                        BOD
-                    @elseif ($invoice_master->dept_code == '5')
-                        MIS
-                    @elseif ($invoice_master->dept_code == '6')
-                        HRD
-                    @elseif ($invoice_master->dept_code == '11')
-                        IRL
-                    @endif
-                    </font></td>
-                    <td><font face='calibri'>{{ $invoice_master->vendor }}</font></td>
-                    <td><center><font face='calibri'>{{ $invoice_master->tgl_terima }}</font></center></td>
-                    <td><font face='calibri'>{{ $invoice_master->doc_no }}</font></td>
-                    <td><center><font face='calibri'>{{ $invoice_master->doc_date }}</font></center></td>
-                    <td><center><font face='calibri'>{{ $invoice_master->due_date }}</font></center></td>
-                    <td><font face='calibri'>{{ (float)$invoice_master->curr }}</font></td>
-                    <td><font face='calibri'>{{ number_format($invoice_master->amount) }}</font></td>
-                    <!-- <td><font face='calibri'>{{ $invoice_master->doc_no_2 }}</font></td> -->
-                    <td><font face='calibri'>{{ $invoice_master->no_po }}</font></td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+            <a href="{{ url('/invoice/op') }}"><button class='btn btn-info btn-sm'><i class='glyphicon glyphicon-chevron-left'></i> <font face='calibri'><b>BACK</b></font></button></a>                      
     </div>
     <div class="row">
     <div class="col-md-7 col-md-offset-3">
-      <div class="box box-info">
       <div class="box-body">
         <div class="col-md-12">
           <div class="panel panel-success">
@@ -111,13 +51,12 @@
                   <div class="col-md-12">
                     <font face='calibri'><b>Department</b></font>
                     <input name="hidden_dept" id="hidden_dept" value="{{$invoice_basic->dept_code}}" type="hidden">
-                   <select class="form-control" name="dept_code" id="dept_code">
-                          <option value="1">Purchasing & Exim</option>
-                          <option value="2">General Affair</option>
-                          <option value="3">BOD</option>
-                          <option value="6">HR</option>
-                          <option value="5">IT Development</option>
-                          <option value="11">IRL</option>
+                   <select class="form-control select2" name="dept_code" id="dept_code">
+                   @foreach ($dept as $deptItem)
+                      <option value="{{ $deptItem->dept_code }}" {{ $invoice_basic->dept_code == $deptItem->dept_code ? 'selected' : '' }}>
+                          {{ $deptItem->keterangan }}
+                      </option>
+                    @endforeach                   
                     </select>
                   </div>
                 </div>
